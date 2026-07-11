@@ -1,0 +1,319 @@
+<script>
+  const pages = Array.from(document.querySelectorAll<HTMLElement>(".page"));
+  const pageLinks = Array.from(document.querySelectorAll<HTMLElement>("[data-page]:not([data-page=''])"))
+    .filter((link) => Number.isFinite(Number(link.dataset.page)));
+  const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>(".nav-link[data-page]"));
+  const mobileNavLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>(".mobile-menu-link[data-page]"));
+  const mobileCurrentPage = document.querySelector<HTMLElement>(".mobile-current-page");
+  const transitionLine = document.querySelector<HTMLElement>(".page-transition-line");
+  const edgeCue = document.querySelector<HTMLElement>(".edge-page-cue");
+  const heroVideo = document.querySelector<HTMLVideoElement>(".hero-video");
+  const heroFreezeFrame = document.querySelector<HTMLCanvasElement>(".hero-freeze-frame");
+  const heroPlayToggle = document.querySelector<HTMLButtonElement>(".hero-play-toggle");
+  const heroPlayIcon = heroPlayToggle?.querySelector<HTMLElement>("[aria-hidden='true']");
+  const heroPlayLabel = heroPlayToggle?.querySelector<HTMLElement>(".hero-control-label");
+  const heroSpeedToggle = document.querySelector<HTMLButtonElement>(".hero-speed-toggle");
+  const heroSpeedValue = heroSpeedToggle?.querySelector<HTMLElement>(".hero-speed-value");
+  const pageCount = pages.length;
+  const transitionDuration = 800;
+  const wheelGestureGap = 42;
+  const minimumEdgeHold = 60;
+  const pageHashes = ["#home", "#about", "#support", "#outfits", "#timeline", "#stickers", "#gallery", "#fiction", "#corner", "#space"];
+  let currentPage = Math.max(0, pageHashes.indexOf(window.location.hash));
+  let transitionLocked = false;
+  let armedEdge: "next" | "previous" | null = null;
+  let armedGestureId = -1;
+  let edgeArmedAt = 0;
+  let wheelGestureId = 0;
+  let lastWheelEventAt = 0;
+  let lastWheelMagnitude = 0;
+  let userPausedHero = false;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchStartedAt = 0;
+  let touchScrollSurface: HTMLElement | null = null;
+  let touchStartedAtTop = false;
+  let touchStartedAtBottom = false;
+  const playbackRates = [1, 1.25, 1.5, 2, 0.75];
+
+  const freezeHeroVideo = () => {
+    if (!heroVideo || !heroFreezeFrame || heroVideo.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
+    const width = heroVideo.videoWidth;
+    const height = heroVideo.videoHeight;
+    if (!width || !height) return;
+
+    if (heroFreezeFrame.width !== width) heroFreezeFrame.width = width;
+    if (heroFreezeFrame.height !== height) heroFreezeFrame.height = height;
+    const context = heroFreezeFrame.getContext("2d");
+    if (!context) return;
+    context.drawImage(heroVideo, 0, 0, width, height);
+    heroFreezeFrame.classList.add("is-visible");
+  };
+
+  const revealLiveHeroAfterFrame = () => {
+    if (!heroVideo || !heroFreezeFrame || !heroFreezeFrame.classList.contains("is-visible")) return;
+    const reveal = () => heroFreezeFrame.classList.remove("is-visible");
+    if ("requestVideoFrameCallback" in heroVideo) {
+      heroVideo.requestVideoFrameCallback(() => requestAnimationFrame(reveal));
+    } else {
+      requestAnimationFrame(() => requestAnimationFrame(reveal));
+    }
+  };
+
+  const clearEdgeState = () => {
+    armedEdge = null;
+    armedGestureId = -1;
+    edgeArmedAt = 0;
+    edgeCue?.classList.remove("is-visible", "points-next", "points-previous");
+  };
+
+  const armEdge = (direction: "next" | "previous", gestureId: number) => {
+    armedEdge = direction;
+    armedGestureId = gestureId;
+    edgeArmedAt = performance.now();
+    edgeCue?.classList.remove("points-next", "points-previous");
+    edgeCue?.classList.add("is-visible", direction === "next" ? "points-next" : "points-previous");
+  };
+
+  const updateNavigation = () => {
+    navLinks.forEach((link) => {
+      const isCurrent = Number(link.dataset.page) === currentPage;
+      link.classList.toggle("is-active", isCurrent);
+      if (isCurrent) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+    mobileNavLinks.forEach((link) => {
+      const isCurrent = Number(link.dataset.page) === currentPage;
+      link.classList.toggle("is-active", isCurrent);
+      if (isCurrent) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+    const activeMobileLink = mobileNavLinks.find((link) => Number(link.dataset.page) === currentPage);
+    if (mobileCurrentPage && activeMobileLink?.dataset.pageLabel) {
+      mobileCurrentPage.textContent = activeMobileLink.dataset.pageLabel;
+    }
+  };
+
+  const playHeroVideo = () => {
+    if (!heroVideo || userPausedHero) return;
+    if (!heroVideo.paused) {
+      revealLiveHeroAfterFrame();
+      return;
+    }
+    void heroVideo.play().then(() => {
+      revealLiveHeroAfterFrame();
+    }).catch(() => {
+      // Browsers may still reject scripted playback despite the muted video.
+    });
+  };
+
+  const updateHeroPlayControl = () => {
+    if (!heroVideo || !heroPlayToggle || !heroPlayIcon || !heroPlayLabel) return;
+    const isPaused = heroVideo.paused;
+    heroPlayIcon.textContent = isPaused ? "▶" : "Ⅱ";
+    heroPlayLabel.textContent = isPaused ? "播放" : "暂停";
+    heroPlayToggle.setAttribute("aria-label", `${isPaused ? "播放" : "暂停"}首页视频`);
+  };
+
+  heroPlayToggle?.addEventListener("click", () => {
+    if (!heroVideo) return;
+    if (heroVideo.paused) {
+      userPausedHero = false;
+      playHeroVideo();
+    } else {
+      userPausedHero = true;
+      freezeHeroVideo();
+      heroVideo.pause();
+    }
+  });
+
+  heroSpeedToggle?.addEventListener("click", () => {
+    if (!heroVideo) return;
+    const currentIndex = playbackRates.findIndex((rate) => Math.abs(rate - heroVideo.playbackRate) < 0.01);
+    const nextRate = playbackRates[(currentIndex + 1) % playbackRates.length];
+    heroVideo.playbackRate = nextRate;
+    if (heroSpeedValue) heroSpeedValue.textContent = `${nextRate}×`;
+    heroSpeedToggle.setAttribute("aria-label", `视频播放速度 ${nextRate} 倍，点击切换`);
+  });
+
+  heroVideo?.addEventListener("play", updateHeroPlayControl);
+  heroVideo?.addEventListener("pause", updateHeroPlayControl);
+  updateHeroPlayControl();
+
+  const syncSettledHeroVideo = () => {
+    if (currentPage === 0) playHeroVideo();
+    else heroVideo?.pause();
+  };
+
+  const settlePages = () => {
+    pages.forEach((page, index) => {
+      page.classList.toggle("is-current", index === currentPage);
+      page.classList.remove("is-entering", "is-entering-next", "is-entering-previous", "is-leaving");
+    });
+    transitionLine?.classList.remove("is-active", "moves-next", "moves-previous");
+    syncSettledHeroVideo();
+  };
+
+  const showPage = (nextPage: number) => {
+    const clampedPage = Math.max(0, Math.min(pageCount - 1, nextPage));
+    if (transitionLocked || clampedPage === currentPage) return;
+
+    clearEdgeState();
+
+    const outgoing = pages[currentPage];
+    const incoming = pages[clampedPage];
+    const movesNext = clampedPage > currentPage;
+    transitionLocked = true;
+
+    if (currentPage === 0) {
+      freezeHeroVideo();
+      heroVideo?.pause();
+    }
+
+    window.dispatchEvent(new CustomEvent("bella:pagewillchange", {
+      detail: {
+        fromPage: currentPage,
+        fromHash: pageHashes[currentPage],
+        toPage: clampedPage,
+        toHash: pageHashes[clampedPage],
+      },
+    }));
+
+    outgoing.classList.add("is-leaving");
+    incoming.classList.add("is-entering", movesNext ? "is-entering-next" : "is-entering-previous");
+    transitionLine?.classList.add("is-active", movesNext ? "moves-next" : "moves-previous");
+
+    currentPage = clampedPage;
+    updateNavigation();
+    history.replaceState(null, "", pageHashes[currentPage]);
+    window.dispatchEvent(new CustomEvent("bella:pagechange", {
+      detail: { page: currentPage, hash: pageHashes[currentPage] },
+    }));
+
+    window.setTimeout(() => {
+      settlePages();
+      transitionLocked = false;
+    }, transitionDuration);
+  };
+
+  const moveForward = () => showPage(currentPage + 1);
+
+  const getCurrentScrollSurface = () => {
+    const surface = pages[currentPage]?.querySelector<HTMLElement>(
+      ".page-scroll-surface, .gallery-scroll-surface, .mobile-page-scroll-surface",
+    ) ?? null;
+    if (!surface) return null;
+
+    const overflowY = window.getComputedStyle(surface).overflowY;
+    return overflowY === "auto" || overflowY === "scroll" ? surface : null;
+  };
+
+  settlePages();
+  updateNavigation();
+
+  window.addEventListener("wheel", (event) => {
+    if (document.querySelector("dialog[open]")) return;
+    const wheelEventAt = performance.now();
+    const wheelGap = wheelEventAt - lastWheelEventAt;
+    const wheelMagnitude = Math.abs(event.deltaY);
+    const strongWheelStep = wheelMagnitude >= 48;
+    const renewedInput = wheelGap > 16
+      && lastWheelMagnitude > 0
+      && wheelMagnitude >= 12
+      && wheelMagnitude > lastWheelMagnitude * 1.7;
+    if (wheelGap > wheelGestureGap || strongWheelStep || renewedInput) wheelGestureId += 1;
+    lastWheelEventAt = wheelEventAt;
+    lastWheelMagnitude = wheelMagnitude;
+
+    const scrollSurface = getCurrentScrollSurface();
+    const usesEdgeGate = scrollSurface?.classList.contains("page-scroll-surface") ?? false;
+    const hasInternalScroll = Boolean(
+      scrollSurface && scrollSurface.scrollHeight > scrollSurface.clientHeight + 2,
+    );
+
+    if (scrollSurface && hasInternalScroll) {
+      const canScrollDown = scrollSurface.scrollTop + scrollSurface.clientHeight < scrollSurface.scrollHeight - 2;
+      const canScrollUp = scrollSurface.scrollTop > 2;
+      if ((event.deltaY > 0 && canScrollDown) || (event.deltaY < 0 && canScrollUp)) {
+        if (armedEdge && wheelGestureId === armedGestureId) {
+          event.preventDefault();
+          return;
+        }
+        clearEdgeState();
+        return;
+      }
+
+      if (usesEdgeGate) {
+        event.preventDefault();
+        if (transitionLocked || Math.abs(event.deltaY) < 10) return;
+
+        const direction = event.deltaY > 0 ? "next" : "previous";
+        const targetPage = currentPage + (direction === "next" ? 1 : -1);
+        if (targetPage < 0 || targetPage >= pageCount) {
+          clearEdgeState();
+          return;
+        }
+        if (armedEdge !== direction) {
+          armEdge(direction, wheelGestureId);
+          return;
+        }
+
+        if (wheelGestureId === armedGestureId || wheelEventAt - edgeArmedAt < minimumEdgeHold) return;
+        showPage(targetPage);
+        return;
+      }
+    }
+
+    clearEdgeState();
+    if (transitionLocked || Math.abs(event.deltaY) < 10) return;
+    event.preventDefault();
+    if (event.deltaY > 0) moveForward();
+    else showPage(currentPage - 1);
+  }, { passive: false });
+
+  window.addEventListener("pointerdown", (event) => {
+    if (event.pointerType !== "touch" || !event.isPrimary || transitionLocked) return;
+    if (document.querySelector("dialog[open]") || document.documentElement.classList.contains("mobile-menu-open")) return;
+    const target = event.target as Element | null;
+    if (target?.closest("a,button,input,select,textarea,summary,[contenteditable='true'],.timeline-panel")) return;
+    touchStartX = event.clientX;
+    touchStartY = event.clientY;
+    touchStartedAt = performance.now();
+    touchScrollSurface = getCurrentScrollSurface();
+    touchStartedAtTop = !touchScrollSurface || touchScrollSurface.scrollTop <= 2;
+    touchStartedAtBottom = !touchScrollSurface
+      || touchScrollSurface.scrollTop + touchScrollSurface.clientHeight >= touchScrollSurface.scrollHeight - 2;
+  }, { passive: true });
+
+  window.addEventListener("pointerup", (event) => {
+    if (event.pointerType !== "touch" || !event.isPrimary || touchStartedAt === 0) return;
+    const deltaX = event.clientX - touchStartX;
+    const deltaY = event.clientY - touchStartY;
+    const elapsed = performance.now() - touchStartedAt;
+    touchStartedAt = 0;
+    if (transitionLocked || elapsed > 900 || Math.abs(deltaY) < 64 || Math.abs(deltaY) < Math.abs(deltaX) * 1.25) return;
+
+    if (touchScrollSurface) {
+      if (deltaY < 0 && !touchStartedAtBottom) return;
+      if (deltaY > 0 && !touchStartedAtTop) return;
+    }
+    if (deltaY < 0) moveForward();
+    else showPage(currentPage - 1);
+  }, { passive: true });
+
+  window.addEventListener("pointercancel", () => { touchStartedAt = 0; }, { passive: true });
+
+  pageLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const page = Number(link.dataset.page);
+      if (!Number.isFinite(page)) return;
+      event.preventDefault();
+      showPage(page);
+    });
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (["ArrowDown", "ArrowRight", "PageDown"].includes(event.key)) moveForward();
+    if (["ArrowUp", "ArrowLeft", "PageUp"].includes(event.key)) showPage(currentPage - 1);
+  });
+</script>

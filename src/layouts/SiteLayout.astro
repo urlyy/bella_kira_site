@@ -1,0 +1,36 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Bella Kira",
+  description = "贝拉·克拉的非官方粉丝应援站",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#080713" />
+    <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-32.png?v=2" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-16.png?v=2" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png?v=2" sizes="180x180" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      document.addEventListener("dragstart", (event) => {
+        if (event.target instanceof HTMLImageElement) event.preventDefault();
+      });
+    </script>
+  </body>
+</html>

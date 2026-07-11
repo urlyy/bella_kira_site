@@ -1,0 +1,13 @@
+export const interactiveExperiences = [
+  { slug: "model-stage", title: "贝拉的舞台", eyebrow: "PMX MODEL STAGE", description: "在独立舞台中近距离查看贝拉，转动视角，寻找喜欢的角度。", mark: "✧", tone: "pink", action: "进入舞台" },
+  { slug: "memory-match", title: "星间记忆", eyebrow: "MEMORY MATCH", description: "翻开散落在星光里的应援记忆，找出彼此呼应的一对。", mark: "✦", tone: "violet" },
+  { slug: "star-hit", title: "星光速递", eyebrow: "30 SECOND CHALLENGE", description: "接住舞台应援物，避开突然冒出的土豆雷。", mark: "★", tone: "coral" },
+  { slug: "hair-stop", title: "飞发暂停", eyebrow: "HAIR FREEZE", description: "让飞驰的发型停在贝拉身边，留下刚刚好的截图。", mark: "⌁", tone: "blue" },
+  { slug: "stage-puzzle", title: "舞台复原", eyebrow: "SLIDING PUZZLE", description: "移动散落的画面碎片，让舞台上的这一刻重新完整。", mark: "▦", tone: "gold" },
+  { slug: "jigsaw-puzzle", title: "星光碎片", eyebrow: "JIGSAW PUZZLE", description: "拖动不规则拼图，把散落的光影放回正确位置。", mark: "◇", tone: "pink" },
+  { slug: "merge-watermelon", title: "星光合成", eyebrow: "MERGE", description: "投下相同的应援物，让它们碰撞成更闪耀的星光。", mark: "◎", tone: "mint" },
+  { slug: "link-match", title: "星轨连线", eyebrow: "LINK MATCH", description: "连接相同的星光印记，路径最多转弯两次。", mark: "⌘", tone: "violet" },
+  { slug: "bubble-shooter", title: "星泡舞台", eyebrow: "BUBBLE STAGE", description: "瞄准同色星泡，三颗相连便会一起坠落。", mark: "○", tone: "blue" },
+  { slug: "listen-stars", title: "聆听星星", eyebrow: "STAR INSTRUMENT", description: "轻触夜空中的星星，让它们替你弹出一段旋律。", mark: "♫", tone: "gold" },
+  { slug: "pet-pet", title: "摸摸贝拉", eyebrow: "PETPET GIF MAKER", description: "选择贝拉图片或上传自己的图片，在浏览器里生成摸头 GIF。", mark: "♡", tone: "coral", action: "制作 GIF" },
+] as const;

@@ -1,0 +1,31 @@
+:root { color-scheme: dark; }
+html:has(.pet-pet-app), body:has(.pet-pet-app) { overflow: auto; }
+.pet-pet-app { --ink:#fbf9ff; --muted:#aaa5bd; --line:rgba(255,255,255,.13); min-height:100vh; padding:42px max(14px,calc((100% - 980px)/2)) 70px; color:var(--ink); background:#080617; }
+.pet-pet-app::before { content:""; position:fixed; inset:0; z-index:0; background:linear-gradient(90deg,rgba(8,6,23,.97),rgba(18,12,42,.78),rgba(8,6,23,.97)),url("/assets/91FB39CFE72B76E6E7FF7A5576E2334E.jpg") center/cover; filter:blur(5px) saturate(.65); }
+.pet-pet-app::after { content:""; position:fixed; inset:0; z-index:0; background:radial-gradient(circle at 20% 20%,rgba(174,126,255,.18),transparent 30%),radial-gradient(circle at 82% 76%,rgba(230,105,166,.12),transparent 28%); pointer-events:none; }
+.pet-pet-app > * { position:relative; z-index:1; }
+.pet-pet-app header { margin:0 6px 25px; }
+.pet-pet-kicker { margin:0 0 7px; color:#cdbfff; font-size:9px; font-weight:800; letter-spacing:.24em; }
+.pet-pet-app h1 { margin:0; font:500 clamp(44px,8vw,70px)/1 Georgia,"Songti SC",serif; letter-spacing:-.045em; text-shadow:0 0 30px rgba(169,126,255,.3); }
+.pet-pet-app header > p:last-child { margin:10px 0 0; color:var(--muted); font-size:12px; }
+.pet-pet-maker { display:grid; grid-template-columns:minmax(320px,1fr) 310px; gap:22px; padding:24px; border:1px solid var(--line); border-radius:28px; background:rgba(15,11,39,.82); box-shadow:0 35px 100px rgba(0,0,0,.45); backdrop-filter:blur(24px); }
+.preview-panel { display:grid; place-content:center; min-height:530px; border:1px solid rgba(255,255,255,.09); border-radius:21px; background:radial-gradient(circle at 50% 42%,rgba(148,108,226,.15),transparent 45%),rgba(5,4,17,.55); text-align:center; }
+.canvas-shell { position:relative; width:min(360px,80vw); aspect-ratio:1; margin:auto; padding:20px; }
+.canvas-shell::before { content:""; position:absolute; inset:0; border:1px solid rgba(255,255,255,.12); border-radius:28%; transform:rotate(5deg); background:rgba(255,255,255,.025); }
+.canvas-shell canvas { position:relative; display:block; width:100%; height:100%; border-radius:22%; background-image:linear-gradient(45deg,#201a37 25%,transparent 25%),linear-gradient(-45deg,#201a37 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#201a37 75%),linear-gradient(-45deg,transparent 75%,#201a37 75%); background-position:0 0,0 8px,8px -8px,-8px 0; background-size:16px 16px; }
+.canvas-shell span { position:absolute; right:28px; bottom:27px; padding:5px 8px; border-radius:7px; background:rgba(8,6,20,.72); font-size:8px; letter-spacing:.15em; }
+#status { min-height:18px; margin:18px 0 0; color:var(--muted); font-size:10px; }
+.control-panel { padding:19px; border:1px solid rgba(255,255,255,.1); border-radius:20px; background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015)); }
+.field { display:grid; gap:7px; }
+.field label { color:var(--muted); font-size:9px; letter-spacing:.12em; }
+.field select, .upload { width:100%; padding:11px; border:1px solid var(--line); border-radius:11px; color:inherit; background:#21183f; cursor:pointer; font:inherit; }
+.upload { display:block; margin-top:10px; color:#ded3f4; font-size:10px; text-align:center; background:rgba(255,255,255,.055); }
+.control-panel > button, .download { display:block; width:100%; margin-top:14px; padding:12px; border:0; border-radius:12px; text-align:center; text-decoration:none; cursor:pointer; }
+#generate { color:#fff; background:linear-gradient(135deg,#9272e5,#d66fa5); font:800 12px/1.3 inherit; box-shadow:0 10px 28px rgba(157,91,190,.22); }
+.download { color:#24173f; background:#f4edff; font-size:12px; font-weight:800; }
+.source-note, .privacy { margin:15px 0 0; color:#77718b; font-size:9px; line-height:1.6; text-align:center; }
+.source-note { color:#9690aa; }
+.control-panel button:disabled { opacity:.55; cursor:wait; }
+.pet-pet-app .site-return { position:fixed; z-index:3; top:24px; left:24px; color:#fff; text-decoration:none; }
+@media (max-width:760px) { .pet-pet-app { padding-top:78px; } .pet-pet-maker { grid-template-columns:1fr; padding:12px; } .preview-panel { min-height:390px; } .canvas-shell { width:min(330px,86vw); } .control-panel { padding:15px; } }
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }

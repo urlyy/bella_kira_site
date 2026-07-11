@@ -1,0 +1,472 @@
+---
+import { readdir, readFile } from "node:fs/promises";
+import { imageSize } from "image-size";
+import stickerData from "../../content/stickers.json";
+
+const looseStickerDirectory = new URL("../../../public/assets/stickers/fan-made/", import.meta.url);
+const supportedStickerExtensions = new Set([".avif", ".gif", ".jpeg", ".jpg", ".png", ".webp"]);
+const looseFanMadeFiles = (await readdir(looseStickerDirectory, { withFileTypes: true }))
+  .filter((entry) => {
+    if (!entry.isFile()) return false;
+    const extension = entry.name.slice(entry.name.lastIndexOf(".")).toLowerCase();
+    return supportedStickerExtensions.has(extension);
+  })
+  .sort((a, b) => a.name.localeCompare(b.name, "zh-CN", { numeric: true }));
+const looseFanMade = await Promise.all(looseFanMadeFiles.map(async (entry) => {
+  const dimensions = imageSize(await readFile(new URL(entry.name, looseStickerDirectory)));
+  if (!dimensions.width || !dimensions.height) {
+    throw new Error(`Cannot determine sticker dimensions: ${entry.name}`);
+  }
+  return {
+    src: `/assets/stickers/fan-made/${entry.name}`,
+    width: dimensions.width,
+    height: dimensions.height,
+  };
+}));
+
+const officialCount = stickerData.officialGroups.reduce((total, group) => total + group.items.length, 0);
+const fanGroupCount = stickerData.fanMadeGroups.reduce((total, group) => total + group.items.length, 0);
+const fanCount = fanGroupCount + looseFanMade.length;
+const loosePageSize = 20;
+const loosePages = Array.from(
+  { length: Math.ceil(looseFanMade.length / loosePageSize) },
+  (_, index) => looseFanMade.slice(index * loosePageSize, (index + 1) * loosePageSize),
+);
+---
+
+<section class="page stickers-page" data-page-name="stickers" aria-label="表情包">
+  <div class="page-visual page-scroll-surface stickers-visual">
+    <header class="stickers-heading">
+      <p>MEMES · STICKERS</p>
+      <h1>表情包</h1>
+      <span>收藏贝拉的每一种可爱，也收藏贝极星们分享的灵感。</span>
+    </header>
+
+    <section class="sticker-section official-stickers" aria-labelledby="official-sticker-title">
+      <div class="sticker-section-heading">
+        <h2 id="official-sticker-title">官方表情</h2>
+        <span>{officialCount}</span>
+      </div>
+      <div class="official-sticker-groups" data-official-sticker-groups>
+        {stickerData.officialGroups.map((group) => (
+          <details class="official-sticker-group" data-sticker-group>
+            <summary>
+              <span>{group.name}</span>
+              <small>{group.items.length > 0 ? `${group.items.length} 张` : "图片待补充"}</small>
+              <i aria-hidden="true"></i>
+            </summary>
+            <div class="official-sticker-group-content" data-sticker-group-content></div>
+            <template data-sticker-group-template>
+              {"purchaseUrl" in group && group.purchaseUrl && (
+                <a
+                  class="official-sticker-purchase"
+                  href={group.purchaseUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span>
+                    <small>OFFICIAL COLLECTION</small>
+                    {"actionLabel" in group && group.actionLabel ? group.actionLabel : "前往B站装扮页面"}
+                  </span>
+                  <i aria-hidden="true">↗</i>
+                </a>
+              )}
+              <div class="official-sticker-grid">
+                {group.items.map((src, index) => (
+                  <figure class="official-sticker">
+                    <img
+                      data-src={src}
+                      alt={`贝拉官方表情 · ${group.name} ${index + 1}`}
+                      decoding="async"
+                      draggable="false"
+                    />
+                    <span aria-hidden="true">点击复制</span>
+                  </figure>
+                ))}
+              </div>
+            </template>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="sticker-section fan-stickers" aria-labelledby="fan-sticker-title">
+      <div class="sticker-section-heading">
+        <h2 id="fan-sticker-title">贝极星创作</h2>
+        <span>{fanCount}</span>
+      </div>
+      <div class="fan-sticker-groups">
+        {stickerData.fanMadeGroups.map((group) => (
+          <details class="official-sticker-group fan-sticker-group" data-sticker-group>
+            <summary>
+              <span>{group.name}</span>
+              <small>{group.items.length > 0 ? `${group.items.length} 张` : "暂不展示"}</small>
+              <i aria-hidden="true"></i>
+            </summary>
+            <div class="official-sticker-group-content" data-sticker-group-content></div>
+            <template data-sticker-group-template>
+              <p class="fan-sticker-credit">
+                {"byline" in group && group.byline && (
+                  <>By <strong>{group.byline}</strong><span aria-hidden="true">·</span></>
+                )}
+                {"artist" in group && group.artist && (
+                  <>画师 <strong>{group.artist}</strong><span aria-hidden="true">·</span></>
+                )}
+                来源：<a href={group.sourceUrl} target="_blank" rel="noreferrer">{group.sourceTitle}</a>
+              </p>
+              {group.items.length === 0 && (
+                <p class="fan-sticker-pending">
+                  {"notice" in group && group.notice ? group.notice : "该系列暂不直接展示。"}
+                </p>
+              )}
+              <div class="fan-sticker-grid">
+                {group.items.map((src, index) => (
+                  <figure class="fan-sticker fan-sticker-series-item">
+                    <img
+                      data-src={src}
+                      alt={`贝极星创作表情 · ${group.name} ${index + 1}`}
+                      decoding="async"
+                      draggable="false"
+                    />
+                    <span aria-hidden="true">点击复制</span>
+                  </figure>
+                ))}
+              </div>
+            </template>
+          </details>
+        ))}
+        {looseFanMade.length > 0 && (
+          <details class="official-sticker-group fan-sticker-group fan-sticker-loose-group" data-sticker-group>
+            <summary>
+              <span>散图</span>
+              <small>{looseFanMade.length} 张</small>
+              <i aria-hidden="true"></i>
+            </summary>
+            <div class="official-sticker-group-content" data-sticker-group-content></div>
+            <template data-sticker-group-template>
+              <div class="loose-sticker-browser" data-loose-sticker-browser>
+                {loosePages.map((page, pageIndex) => (
+                  <div class="loose-sticker-page" data-loose-page={pageIndex + 1} hidden={pageIndex !== 0}>
+                    <div class="fan-sticker-waterfall">
+                      {page.map((sticker, itemIndex) => {
+                        const index = pageIndex * loosePageSize + itemIndex;
+                        return (
+                          <figure
+                            class="fan-sticker fan-sticker-loose-item"
+                            data-aspect-ratio={sticker.width / sticker.height}
+                          >
+                            <img
+                              src={sticker.src}
+                              width={sticker.width}
+                              height={sticker.height}
+                              alt={`贝极星创作散图 ${String(index + 1).padStart(2, "0")}`}
+                              loading="lazy"
+                              decoding="async"
+                              draggable="false"
+                            />
+                            <span aria-hidden="true">点击复制</span>
+                          </figure>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+                <nav class="loose-sticker-pagination" aria-label="散图分页">
+                  <button type="button" data-loose-page-previous>上一页</button>
+                  <div class="loose-sticker-page-numbers">
+                    {loosePages.map((_, index) => (
+                      <button type="button" data-loose-page-target={index + 1} aria-label={`散图第 ${index + 1} 页`}>
+                        {String(index + 1).padStart(2, "0")}
+                      </button>
+                    ))}
+                  </div>
+                  <button type="button" data-loose-page-next>下一页</button>
+                </nav>
+              </div>
+            </template>
+          </details>
+        )}
+      </div>
+      {looseFanMade.length === 0 && stickerData.fanMadeGroups.length === 0 ? (
+        <div class="fan-sticker-empty">
+          <img src="/assets/贝极星.png" alt="" loading="lazy" decoding="async" draggable="false" />
+          <p>贝极星们的表情包正在赶来的路上。</p>
+        </div>
+      ) : null}
+    </section>
+
+    <span class="stickers-page-number" aria-hidden="true">06 / STICKERS</span>
+  </div>
+
+  <div class="sticker-toast" data-sticker-toast role="status" aria-live="polite" aria-atomic="true">
+    <img src="/assets/贝极星.png" alt="" draggable="false" />
+    <span data-sticker-toast-message></span>
+  </div>
+</section>
+
+<script>
+  const groupAnimations = new WeakMap<HTMLDetailsElement, Animation>();
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const stickerScrollSurface = document.querySelector<HTMLElement>(".stickers-visual");
+  const stickerImageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const image = entry.target as HTMLImageElement;
+        const src = image.dataset.src;
+        if (src) {
+          image.addEventListener("load", () => image.classList.add("is-loaded"), { once: true });
+          image.src = src;
+          delete image.dataset.src;
+        }
+        observer.unobserve(image);
+      });
+    },
+    { root: stickerScrollSurface, rootMargin: "320px 0px", threshold: 0.01 },
+  );
+
+  const observeDeferredImages = (root: HTMLElement) => {
+    root.querySelectorAll<HTMLImageElement>("img[data-src]").forEach((image) => stickerImageObserver.observe(image));
+  };
+
+  const looseStateKey = "bella-kira-loose-stickers";
+  const readLooseState = () => {
+    try {
+      return JSON.parse(sessionStorage.getItem(looseStateKey) || "null") as { open?: boolean; page?: number } | null;
+    } catch {
+      return null;
+    }
+  };
+  const writeLooseState = (state: { open: boolean; page: number }) => {
+    try {
+      sessionStorage.setItem(looseStateKey, JSON.stringify(state));
+    } catch {
+      // The accordion still works when storage is unavailable.
+    }
+  };
+
+  const preparedWaterfalls = new WeakSet<HTMLElement>();
+
+  const setupLooseStickerWaterfall = (root: HTMLElement) => {
+    const waterfall = root.querySelector<HTMLElement>(".fan-sticker-waterfall");
+    if (!waterfall || preparedWaterfalls.has(waterfall)) return;
+    preparedWaterfalls.add(waterfall);
+
+    const layout = () => {
+      const styles = window.getComputedStyle(waterfall);
+      const rowHeight = Number.parseFloat(styles.gridAutoRows);
+      const rowGap = Number.parseFloat(styles.rowGap);
+      if (!rowHeight || !Number.isFinite(rowGap)) return;
+
+      waterfall.querySelectorAll<HTMLElement>(".fan-sticker-loose-item").forEach((sticker) => {
+        const aspectRatio = Number(sticker.dataset.aspectRatio);
+        if (!aspectRatio) return;
+        const renderedHeight = sticker.getBoundingClientRect().width / aspectRatio;
+        sticker.style.gridRowEnd = `span ${Math.ceil((renderedHeight + rowGap) / (rowHeight + rowGap))}`;
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(layout);
+    resizeObserver.observe(waterfall);
+    layout();
+  };
+
+  const setupLooseStickerBrowser = (root: HTMLElement) => {
+    const browser = root.querySelector<HTMLElement>("[data-loose-sticker-browser]");
+    if (!browser || browser.dataset.ready === "true") return;
+    browser.dataset.ready = "true";
+    const pages = Array.from(browser.querySelectorAll<HTMLElement>("[data-loose-page]"));
+    const pageButtons = Array.from(browser.querySelectorAll<HTMLButtonElement>("[data-loose-page-target]"));
+    const previous = browser.querySelector<HTMLButtonElement>("[data-loose-page-previous]");
+    const next = browser.querySelector<HTMLButtonElement>("[data-loose-page-next]");
+    let currentPage = Math.max(1, Math.min(pages.length, Number(readLooseState()?.page) || 1));
+
+    const showLoosePage = (page: number) => {
+      currentPage = Math.max(1, Math.min(pages.length, page));
+      pages.forEach((pageElement) => {
+        const isCurrent = Number(pageElement.dataset.loosePage) === currentPage;
+        pageElement.hidden = !isCurrent;
+        if (isCurrent) setupLooseStickerWaterfall(pageElement);
+      });
+      pageButtons.forEach((button) => {
+        const isCurrent = Number(button.dataset.loosePageTarget) === currentPage;
+        button.classList.toggle("is-current", isCurrent);
+        if (isCurrent) button.setAttribute("aria-current", "page");
+        else button.removeAttribute("aria-current");
+      });
+      if (previous) previous.disabled = currentPage === 1;
+      if (next) next.disabled = currentPage === pages.length;
+      writeLooseState({ open: true, page: currentPage });
+      root.scrollIntoView({ block: "nearest" });
+    };
+
+    previous?.addEventListener("click", () => showLoosePage(currentPage - 1));
+    next?.addEventListener("click", () => showLoosePage(currentPage + 1));
+    pageButtons.forEach((button) => {
+      button.addEventListener("click", () => showLoosePage(Number(button.dataset.loosePageTarget)));
+    });
+    showLoosePage(currentPage);
+  };
+
+  const ensureGroupContent = (group: HTMLDetailsElement) => {
+    const content = group.querySelector<HTMLElement>("[data-sticker-group-content]");
+    const template = group.querySelector<HTMLTemplateElement>("[data-sticker-group-template]");
+
+    if (content && template && content.childElementCount === 0) {
+      content.append(template.content.cloneNode(true));
+      observeDeferredImages(content);
+      setupLooseStickerBrowser(content);
+    }
+
+    return content;
+  };
+
+  document.querySelectorAll<HTMLDetailsElement>("[data-sticker-group]").forEach((group) => {
+    const summary = group.querySelector<HTMLElement>("summary");
+    if (!summary) return;
+
+    summary.addEventListener("click", (event) => {
+      event.preventDefault();
+      groupAnimations.get(group)?.cancel();
+
+      if (group.open) {
+        const content = ensureGroupContent(group);
+        if (!content || reduceMotion.matches) {
+          group.open = false;
+          if (group.classList.contains("fan-sticker-loose-group")) {
+            writeLooseState({ open: false, page: readLooseState()?.page || 1 });
+          }
+          return;
+        }
+
+        group.dataset.motion = "closing";
+        const animation = content.animate(
+          [
+            { opacity: 1, clipPath: "inset(0 0 0 0)" },
+            { opacity: 0, clipPath: "inset(0 0 4% 0)" },
+          ],
+          { duration: 140, easing: "cubic-bezier(0.4, 0, 1, 1)" },
+        );
+
+        groupAnimations.set(group, animation);
+        animation.onfinish = () => {
+          group.open = false;
+          if (group.classList.contains("fan-sticker-loose-group")) {
+            writeLooseState({ open: false, page: readLooseState()?.page || 1 });
+          }
+          delete group.dataset.motion;
+          groupAnimations.delete(group);
+        };
+        return;
+      }
+
+      group.open = true;
+      const content = ensureGroupContent(group);
+      if (group.classList.contains("fan-sticker-loose-group")) {
+        writeLooseState({ open: true, page: readLooseState()?.page || 1 });
+      }
+      if (!content || reduceMotion.matches) return;
+
+      group.dataset.motion = "opening";
+      const animation = content.animate(
+        [
+          { height: "0px", opacity: 0 },
+          { height: `${content.scrollHeight}px`, opacity: 1 },
+        ],
+        { duration: 280, easing: "cubic-bezier(0.22, 1, 0.36, 1)" },
+      );
+
+      groupAnimations.set(group, animation);
+      animation.onfinish = () => {
+        delete group.dataset.motion;
+        groupAnimations.delete(group);
+      };
+    });
+  });
+
+  const looseStickerGroup = document.querySelector<HTMLDetailsElement>(".fan-sticker-loose-group");
+  if (window.location.hash === "#stickers" && looseStickerGroup && readLooseState()?.open) {
+    looseStickerGroup.open = true;
+    ensureGroupContent(looseStickerGroup);
+  }
+
+  const stickerPage = document.querySelector<HTMLElement>("[data-page-name='stickers']");
+  if (stickerPage) observeDeferredImages(stickerPage);
+  const toast = stickerPage?.querySelector<HTMLElement>("[data-sticker-toast]");
+  const toastMessage = toast?.querySelector<HTMLElement>("[data-sticker-toast-message]");
+  let toastTimer: number | undefined;
+
+  const showToast = (message: string, state: "success" | "error") => {
+    if (!toast || !toastMessage) return;
+
+    window.clearTimeout(toastTimer);
+    toastMessage.textContent = message;
+    toast.dataset.state = state;
+    toast.classList.remove("is-visible");
+    void toast.offsetWidth;
+    toast.classList.add("is-visible");
+
+    toastTimer = window.setTimeout(() => {
+      toast.classList.remove("is-visible");
+    }, 2200);
+  };
+
+  const copySticker = async (sticker: HTMLElement) => {
+    const image = sticker.querySelector<HTMLImageElement>("img");
+    if (!image || sticker.dataset.copying === "true") return;
+
+    sticker.dataset.copying = "true";
+
+    try {
+      if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") {
+        throw new Error("Image clipboard is unavailable");
+      }
+
+      const response = await fetch(image.currentSrc || image.src);
+      if (!response.ok) throw new Error("Sticker request failed");
+      const blob = await response.blob();
+      await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
+      showToast("表情包已复制，快去粘贴吧！", "success");
+    } catch {
+      showToast("复制失败，请检查浏览器剪贴板权限", "error");
+    } finally {
+      delete sticker.dataset.copying;
+    }
+  };
+
+  stickerPage?.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+    const sticker = target.closest<HTMLElement>(".official-sticker, .fan-sticker");
+    if (sticker) void copySticker(sticker);
+  });
+
+  stickerPage?.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const target = event.target as HTMLElement;
+    const sticker = target.closest<HTMLElement>(".official-sticker, .fan-sticker");
+    if (!sticker) return;
+
+    event.preventDefault();
+    void copySticker(sticker);
+  });
+
+  const prepareSticker = (sticker: HTMLElement) => {
+    sticker.tabIndex = 0;
+    sticker.setAttribute("role", "button");
+    const image = sticker.querySelector<HTMLImageElement>("img");
+    sticker.setAttribute("aria-label", `${image?.alt || "表情包"}，点击复制图片`);
+  };
+
+  stickerPage?.querySelectorAll<HTMLElement>(".fan-sticker").forEach(prepareSticker);
+  const stickerObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (!(node instanceof HTMLElement)) return;
+        if (node.matches(".official-sticker, .fan-sticker")) prepareSticker(node);
+        node.querySelectorAll<HTMLElement>(".official-sticker, .fan-sticker").forEach(prepareSticker);
+      });
+    });
+  });
+
+  if (stickerPage) stickerObserver.observe(stickerPage, { childList: true, subtree: true });
+</script>

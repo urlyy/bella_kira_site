@@ -1,0 +1,76 @@
+{
+  "collections": [
+    {
+      "id": "b",
+      "title": "动漫杂谈",
+      "items": [
+        {
+          "cover": "/assets/recommended-videos/covers/明末.png",
+          "title": "明末败犬如何同时收获眼泪与骂声，林翩翩与哀鸿如何沦落至此【贝拉】",
+          "url": "https://www.bilibili.com/video/BV1gBokB2E5Z/?vd_source=43b6af819307ca6bdad60477a02d8d1c",
+          "publishedAt": "2026-04-27"
+        },
+        {
+          "cover": "/assets/recommended-videos/covers/白色相簿.png",
+          "title": "15年前，这部作品定义了关系性，《白色相簿2》【贝拉】",
+          "url": "https://www.bilibili.com/video/BV1LJB3BXEWo/?vd_source=43b6af819307ca6bdad60477a02d8d1c",
+          "publishedAt": "2025-12-24"
+        },
+         {
+          "cover": "/assets/recommended-videos/covers/辉夜姬.png",
+          "title": "被诟病剧情，为什么《超时空辉夜姬》依旧征服了观众？",
+          "url": "https://www.bilibili.com/video/BV1pFFCzGE4m/?vd_source=43b6af819307ca6bdad60477a02d8d1c",
+          "publishedAt": "2026-02-07"
+        },
+         {
+          "cover": "/assets/recommended-videos/covers/战双.png",
+          "title": "BE美学的全力一击！战双为什么把我击坠了【贝拉】",
+          "url": "https://www.bilibili.com/video/BV1rdTL6vEvk/?vd_source=43b6af819307ca6bdad60477a02d8d1c",
+          "publishedAt": "2026-07-03"
+        },
+         {
+          "cover": "/assets/recommended-videos/covers/恋人不行.png",
+          "title": "曾一集爆火的《恋人不行》它最后到底行不行【贝拉】",
+          "url": "https://www.bilibili.com/video/BV1L44XzfEHo/?vd_source=43b6af819307ca6bdad60477a02d8d1c",
+          "publishedAt": "2025-10-14"
+        }
+        
+      ]
+    },
+     {
+      "id": "f",
+      "title": "跳舞",
+      "items": [
+        
+      ]
+    },
+    {
+      "id": "g",
+      "title": "翻唱",
+      "items": [
+        
+      ]
+    },
+    {
+      "id": "e",
+      "title": "直播神回",
+      "items": [
+        
+      ]
+    },
+    {
+      "id": "h",
+      "title": "早安电台",
+      "items": [
+        
+      ]
+    },
+    {
+      "id": "c",
+      "title": "和贝拉一起看迪迦奥特曼",
+      "items": [
+        
+      ]
+    }
+  ]
+}

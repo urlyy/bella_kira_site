@@ -1,0 +1,105 @@
+---
+const profile = [
+  { label: "年龄", value: "19" },
+  { label: "身高", value: "159cm" },
+  { label: "体重", value: "48kg" },
+  { label: "血型", value: "A型" },
+  { label: "定位", value: "舞蹈担当" },
+  { label: "生日", value: "7月17日" },
+  { label: "印象", value: "喜欢爬山、老钱（伪）、B.King、晕3D", wide: true },
+];
+---
+
+<section class="page profile-page" data-page-name="about" aria-label="关于贝拉">
+  <div class="page-visual profile-visual mobile-page-scroll-surface">
+    <div class="profile-content">
+      <p class="profile-kicker">ABOUT · BELLA KIRA</p>
+      <h1>角色档案</h1>
+      <dl class="profile-list">
+        {profile.map((item) => (
+          <div class:list={{ "profile-item--wide": item.wide }}>
+            <dt>{item.label}</dt>
+            <dd>{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <div class="fan-identity">
+        <img src="/assets/贝极星.png" alt="贝极星粉丝形象" draggable="false" />
+        <span>
+          <small>粉丝名</small>
+          <strong class="fan-names">
+            <span>贝极星</span>
+            <span class="fan-name-separator" aria-hidden="true">、</span>
+            <span
+              class="fan-name-spoiler"
+              tabindex="0"
+              role="note"
+              aria-label="隐藏称呼：笨极星"
+              title="悬停或聚焦查看"
+            >笨极星</span>
+            <span class="fan-name-separator" aria-hidden="true">、</span>
+            <span
+              class="fan-name-spoiler"
+              tabindex="0"
+              role="note"
+              aria-label="隐藏称呼：垃圾星"
+              title="悬停或聚焦查看"
+            >垃圾星</span>
+          </strong>
+        </span>
+      </div>
+
+      <div class="profile-links">
+        <a
+          class="bilibili-card bilibili-card--space"
+          href="https://space.bilibili.com/672353429"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span class="bilibili-image bilibili-logo" aria-hidden="true">
+            <img src="/assets/bilibili-logo.png" alt="" draggable="false" />
+          </span>
+          <span class="bilibili-copy">
+            <small>BILIBILI SPACE</small>
+            <strong>前往B站主页</strong>
+          </span>
+          <span class="bilibili-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          class="bilibili-card bilibili-card--live"
+          href="https://live.bilibili.com/22632424"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span class="bilibili-image bilibili-avatar" aria-hidden="true"></span>
+          <span class="bilibili-copy">
+            <small>LIVE ROOM</small>
+            <strong>前往直播间</strong>
+          </span>
+          <span class="bilibili-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <a
+        class="profile-schedule"
+        href="https://asoul.love/calendar/latest?include=bella"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="前往枝江站查看贝拉直播日程（外部链接）"
+      >
+        <span class="schedule-calendar" aria-hidden="true">
+          <i></i>
+          <b>日程</b>
+        </span>
+        <span class="schedule-copy">
+          <small>EXTERNAL · ASOUL.LOVE</small>
+          <strong>查看贝拉直播日程</strong>
+        </span>
+        <span class="schedule-action">打开枝江日程表 <i aria-hidden="true">↗</i></span>
+      </a>
+    </div>
+    <span class="page-number" aria-hidden="true">02 / PROFILE</span>
+  </div>
+</section>

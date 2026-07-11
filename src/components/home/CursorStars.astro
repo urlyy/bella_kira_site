@@ -1,0 +1,129 @@
+<div class="cursor-stars" aria-hidden="true"></div>
+
+<script>
+  const layer = document.querySelector<HTMLElement>(".cursor-stars");
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  if (layer && finePointer.matches && !reducedMotion.matches) {
+    let lastX = -100;
+    let lastY = -100;
+    let lastTime = 0;
+    let seed = 0;
+
+    const makeStar = (x: number, y: number) => {
+      const star = document.createElement("i");
+      const angle = Math.random() * Math.PI * 2;
+      const drift = 7 + Math.random() * 14;
+
+      const colors = ["is-purple", "is-support", "is-white", "is-gold"];
+      const sizes = seed % 5 === 0 ? "is-large" : seed % 3 === 0 ? "is-small" : "";
+      const shape = seed % 2 === 0 ? "is-four-point" : "is-five-point";
+      star.className = `cursor-star ${shape} ${colors[seed % colors.length]} ${sizes}`;
+      seed++;
+      star.style.setProperty("--star-x", `${x + (Math.random() - 0.5) * 9}px`);
+      star.style.setProperty("--star-y", `${y + (Math.random() - 0.5) * 9}px`);
+      star.style.setProperty("--star-dx", `${Math.cos(angle) * drift}px`);
+      star.style.setProperty("--star-dy", `${Math.sin(angle) * drift - 5}px`);
+      star.style.setProperty("--star-rotate", `${Math.random() * 90 - 45}deg`);
+      layer.append(star);
+      star.addEventListener("animationend", () => star.remove(), { once: true });
+    };
+
+    window.addEventListener("pointermove", (event) => {
+      const distance = Math.hypot(event.clientX - lastX, event.clientY - lastY);
+      const now = performance.now();
+      if (distance < 12 || now - lastTime < 24) return;
+
+      makeStar(event.clientX, event.clientY);
+      lastX = event.clientX;
+      lastY = event.clientY;
+      lastTime = now;
+    }, { passive: true });
+  }
+</script>
+
+<style>
+  .cursor-stars {
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  :global(.cursor-star) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, var(--star-core) 8%, var(--star-mid) 43%, var(--star-edge) 82%);
+    filter: drop-shadow(0 0 4px var(--star-glow)) drop-shadow(0 0 10px var(--star-glow));
+    opacity: 0;
+    transform: translate3d(var(--star-x), var(--star-y), 0) scale(0.25) rotate(0);
+    animation: cursor-star-flight 620ms ease-out forwards;
+    will-change: transform, opacity;
+  }
+
+  :global(.cursor-star.is-small) {
+    width: 9px;
+    height: 9px;
+    animation-duration: 480ms;
+  }
+
+  :global(.cursor-star.is-large) {
+    width: 19px;
+    height: 19px;
+    animation-duration: 720ms;
+  }
+
+  :global(.cursor-star.is-four-point) {
+    clip-path: polygon(50% 0, 61% 38%, 100% 50%, 61% 62%, 50% 100%, 39% 62%, 0 50%, 39% 38%);
+  }
+
+  :global(.cursor-star.is-five-point) {
+    clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 94%, 50% 72%, 21% 94%, 32% 57%, 2% 35%, 39% 35%);
+  }
+
+  :global(.cursor-star.is-purple) {
+    --star-core: #fff8ff;
+    --star-mid: #dfa9ff;
+    --star-edge: #9c67ed;
+    --star-glow: rgba(188, 126, 255, 0.88);
+  }
+
+  :global(.cursor-star.is-white) {
+    --star-core: #fff;
+    --star-mid: #fff8ff;
+    --star-edge: #e8d8ff;
+    --star-glow: rgba(255, 248, 255, 0.92);
+  }
+
+  :global(.cursor-star.is-gold) {
+    --star-core: #fffdf0;
+    --star-mid: #ffe991;
+    --star-edge: #efba4e;
+    --star-glow: rgba(255, 220, 111, 0.9);
+  }
+
+  :global(.cursor-star.is-support) {
+    --star-core: #fff7f5;
+    --star-mid: #e9a09a;
+    --star-edge: #db7d74;
+    --star-glow: rgba(219, 125, 116, 0.9);
+  }
+
+  @keyframes cursor-star-flight {
+    18% { opacity: 0.95; }
+    45% { opacity: 0.78; }
+    100% {
+      opacity: 0;
+      transform: translate3d(calc(var(--star-x) + var(--star-dx)), calc(var(--star-y) + var(--star-dy)), 0) scale(1.15) rotate(var(--star-rotate));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+    .cursor-stars { display: none; }
+  }
+</style>

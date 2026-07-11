@@ -1,0 +1,391 @@
+---
+import { readdir } from "node:fs/promises";
+
+const galleryDirectory = new URL("../../../public/assets/gallery/", import.meta.url);
+const supportedImageExtensions = new Set([".avif", ".gif", ".jpeg", ".jpg", ".png", ".webp"]);
+const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
+  .filter((entry) => {
+    if (!entry.isFile()) return false;
+    const extension = entry.name.slice(entry.name.lastIndexOf(".")).toLowerCase();
+    return supportedImageExtensions.has(extension);
+  })
+  .sort((a, b) => a.name.localeCompare(b.name, "zh-CN", { numeric: true }))
+  .map((entry) => ({
+    originalSrc: `/assets/gallery/${encodeURIComponent(entry.name)}`,
+    previewSrc: `/assets/gallery/previews/${encodeURIComponent(`${entry.name}.webp`)}`,
+    alt: entry.name.replace(/\.[^.]+$/, ""),
+  }));
+---
+
+<section class="page gallery-page" aria-label="画廊">
+  <div class="page-visual gallery-scroll-surface gallery-visual">
+    <header>
+      <p>GALLERY · BELLA KIRA</p>
+      <h1>光影画廊</h1>
+      <span>沿着每一帧，重新遇见贝拉。</span>
+      <small class="gallery-quality-hint">
+        <i aria-hidden="true">✦</i>
+        当前为流畅预览，打开大图后加载原图
+      </small>
+    </header>
+    <div class="gallery-next-row">
+      <a class="gallery-next" href="/#fiction" data-page="7">
+        <span>
+          <small>NEXT · FAN FICTION</small>
+          前往同人文
+        </span>
+        <i aria-hidden="true">→</i>
+      </a>
+    </div>
+    <div class="waterfall" data-gallery-grid>
+      {galleryItems.map((item, index) => (
+        <figure data-gallery-item>
+          <button
+            class="gallery-open"
+            type="button"
+            data-gallery-open
+            data-gallery-index={index}
+            data-original-src={item.originalSrc}
+            aria-label={`放大查看 ${item.alt}`}
+          >
+            <img src={item.previewSrc} alt={item.alt} loading="lazy" decoding="async" draggable="false" />
+          </button>
+        </figure>
+      ))}
+    </div>
+    <i class="number">07 / GALLERY</i>
+  </div>
+  <dialog class="gallery-lightbox" data-gallery-lightbox aria-label="图片放大查看">
+    <button class="lightbox-close" type="button" data-lightbox-close aria-label="关闭图片查看">×</button>
+    <button class="lightbox-nav lightbox-previous" type="button" data-lightbox-previous aria-label="查看上一张图片">←</button>
+    <div class="lightbox-image-wrap" data-lightbox-image-wrap>
+      <img data-lightbox-image src="" alt="" draggable="false" />
+      <span class="lightbox-loading" role="status">正在载入原图</span>
+    </div>
+    <button class="lightbox-nav lightbox-next" type="button" data-lightbox-next aria-label="查看下一张图片">→</button>
+    <span class="lightbox-count" data-lightbox-count aria-live="polite"></span>
+  </dialog>
+</section>
+
+<script>
+  const galleryGrid = document.querySelector<HTMLElement>("[data-gallery-grid]");
+  const galleryItems = Array.from(document.querySelectorAll<HTMLElement>("[data-gallery-item]"));
+
+  const layoutGallery = () => {
+    if (!galleryGrid) return;
+    const styles = getComputedStyle(galleryGrid);
+    const rowHeight = Number.parseFloat(styles.gridAutoRows);
+    const rowGap = Number.parseFloat(styles.rowGap);
+
+    galleryItems.forEach((item) => {
+      const image = item.querySelector<HTMLImageElement>("img");
+      if (!image?.complete || image.naturalWidth === 0) return;
+      const displayedHeight = item.clientWidth * image.naturalHeight / image.naturalWidth;
+      item.style.gridRowEnd = `span ${Math.ceil((displayedHeight + rowGap) / (rowHeight + rowGap))}`;
+    });
+  };
+
+  galleryItems.forEach((item) => {
+    item.querySelector("img")?.addEventListener("load", layoutGallery, { once: true });
+  });
+  new ResizeObserver(layoutGallery).observe(galleryGrid as HTMLElement);
+  layoutGallery();
+
+  const lightbox = document.querySelector<HTMLDialogElement>("[data-gallery-lightbox]");
+  const lightboxImage = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-image]");
+  const lightboxImageWrap = lightbox?.querySelector<HTMLElement>("[data-lightbox-image-wrap]");
+  const lightboxCount = lightbox?.querySelector<HTMLElement>("[data-lightbox-count]");
+  const openButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-gallery-open]"));
+  let activeImageIndex = 0;
+  let imageRequestId = 0;
+
+  const showLightboxImage = (index: number) => {
+    if (!lightboxImage || galleryItems.length === 0) return;
+    activeImageIndex = (index + galleryItems.length) % galleryItems.length;
+    const sourceImage = galleryItems[activeImageIndex]?.querySelector<HTMLImageElement>("img");
+    const openButton = galleryItems[activeImageIndex]?.querySelector<HTMLButtonElement>("[data-gallery-open]");
+    const originalSrc = openButton?.dataset.originalSrc;
+    if (!sourceImage || !originalSrc) return;
+    const requestId = ++imageRequestId;
+    lightboxImage.src = sourceImage.currentSrc || sourceImage.src;
+    lightboxImage.alt = sourceImage.alt;
+    lightboxImageWrap?.setAttribute("data-loading", "true");
+    if (lightboxCount) lightboxCount.textContent = `${activeImageIndex + 1} / ${galleryItems.length}`;
+
+    const originalImage = new Image();
+    originalImage.decoding = "async";
+    originalImage.src = originalSrc;
+    originalImage.decode().then(() => {
+      if (requestId !== imageRequestId || !originalImage.complete || originalImage.naturalWidth === 0) return;
+      lightboxImage.src = originalSrc;
+      lightboxImageWrap?.removeAttribute("data-loading");
+    }).catch(() => {
+      if (requestId !== imageRequestId) return;
+      lightboxImageWrap?.removeAttribute("data-loading");
+    });
+  };
+
+  openButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      showLightboxImage(Number(button.dataset.galleryIndex) || 0);
+      lightbox?.showModal();
+    });
+  });
+
+  lightbox?.querySelector("[data-lightbox-close]")?.addEventListener("click", () => lightbox.close());
+  lightbox?.querySelector("[data-lightbox-previous]")?.addEventListener("click", () => showLightboxImage(activeImageIndex - 1));
+  lightbox?.querySelector("[data-lightbox-next]")?.addEventListener("click", () => showLightboxImage(activeImageIndex + 1));
+  lightbox?.addEventListener("click", (event) => {
+    if (event.target === lightbox) lightbox.close();
+  });
+  lightbox?.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      lightbox.close();
+      return;
+    }
+    if (event.key === "ArrowLeft") showLightboxImage(activeImageIndex - 1);
+    if (event.key === "ArrowRight") showLightboxImage(activeImageIndex + 1);
+  });
+  lightbox?.addEventListener("close", () => {
+    imageRequestId += 1;
+    lightboxImageWrap?.removeAttribute("data-loading");
+    if (lightboxImage) lightboxImage.src = "";
+  });
+</script>
+
+<style>
+  .gallery-visual {
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: clamp(7.5rem, 12vh, 9rem) clamp(1.5rem, 5vw, 5rem) 2rem;
+    color: #fff;
+    background: radial-gradient(circle at 12% 16%, #593562 0, transparent 28%), linear-gradient(135deg, #19121f, #2b1834 55%, #111018);
+  }
+  .gallery-visual > header { max-width: 1200px; margin: 0 auto 1.3rem; }
+  .gallery-visual header p { margin: 0; color: #dba9ed; font: 700 .7rem sans-serif; letter-spacing: .28em; }
+  .gallery-visual h1 { margin: .2rem 0; font-size: clamp(2.3rem, 4vw, 4.4rem); font-weight: 500; letter-spacing: .08em; }
+  .gallery-visual header span { color: #d9cedd; letter-spacing: .12em; }
+  .gallery-quality-hint {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    width: fit-content;
+    margin-top: .8rem;
+    color: #cbb9d0;
+    font: 400 .7rem/1.5 sans-serif;
+    letter-spacing: .08em;
+  }
+  .gallery-quality-hint i {
+    color: #db7d74;
+    font-style: normal;
+    text-shadow: 0 0 10px #db7d7480;
+  }
+  .gallery-next-row {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 1200px;
+    margin: 0 auto 1rem;
+  }
+  .gallery-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.2rem;
+    min-width: min(100%, 240px);
+    padding: .72rem .85rem .72rem 1rem;
+    border: 1px solid #dba9ed4d;
+    border-radius: 4px;
+    color: #f7edf9;
+    background: #ffffff0d;
+    text-decoration: none;
+    box-shadow: inset 0 1px #ffffff12;
+    transition: border-color 180ms ease, background-color 180ms ease, translate 180ms ease;
+  }
+  .gallery-next span { display: grid; gap: .16rem; font-size: .78rem; letter-spacing: .12em; }
+  .gallery-next small { color: #dba9ed; font: 700 .52rem sans-serif; letter-spacing: .2em; }
+  .gallery-next i {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    margin-left: auto;
+    border-radius: 50%;
+    color: #25162b;
+    background: #ead4ee;
+    font-family: sans-serif;
+    font-style: normal;
+    transition: translate 180ms ease;
+  }
+  .gallery-next:hover,
+  .gallery-next:focus-visible {
+    border-color: #e6c4ecaa;
+    background: #ffffff17;
+    outline: none;
+    translate: 0 -2px;
+  }
+  .gallery-next:hover i,
+  .gallery-next:focus-visible i { translate: 3px 0; }
+  .waterfall {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 4px;
+    gap: 12px 16px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  .waterfall figure {
+    position: relative;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    background: #392a41;
+  }
+  .gallery-open {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    cursor: zoom-in;
+  }
+  .waterfall img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 320ms ease, filter 220ms ease;
+  }
+  .waterfall figure:hover img,
+  .gallery-open:focus-visible img { filter: saturate(1.08); transform: scale(1.025); }
+  .gallery-open:focus-visible { outline: 2px solid #f3d9f7; outline-offset: -3px; }
+  .gallery-lightbox {
+    box-sizing: border-box;
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: clamp(1rem, 3vw, 2.5rem);
+    border: 0;
+    overflow: hidden;
+    color: #fff;
+    background: #100b16f2;
+  }
+  .gallery-lightbox[open] {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(.5rem, 2vw, 1.5rem);
+  }
+  .gallery-lightbox::backdrop { background: #07050bd9; backdrop-filter: blur(10px); }
+  .lightbox-image-wrap {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    place-items: center;
+    overflow: hidden;
+  }
+  .lightbox-image-wrap img {
+    display: block;
+    max-width: 100%;
+    max-height: calc(100dvh - 5rem);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 55px #000a);
+  }
+  .lightbox-loading {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(.8rem, 3vh, 1.5rem);
+    padding: .5rem .75rem;
+    border: 1px solid #ffffff24;
+    border-radius: 999px;
+    color: #f1e7f3;
+    background: #160f1dcc;
+    font: .65rem/1 sans-serif;
+    letter-spacing: .12em;
+    opacity: 0;
+    pointer-events: none;
+    translate: -50% .4rem;
+    transition: opacity 160ms ease, translate 160ms ease;
+  }
+  .lightbox-image-wrap[data-loading="true"] .lightbox-loading {
+    opacity: 1;
+    translate: -50% 0;
+  }
+  .lightbox-close,
+  .lightbox-nav {
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    padding: 0;
+    border: 1px solid #ffffff42;
+    border-radius: 50%;
+    color: #fff;
+    background: #ffffff10;
+    cursor: pointer;
+    font: 300 1.15rem/1 sans-serif;
+    transition: border-color 180ms ease, background-color 180ms ease, scale 180ms ease;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: clamp(1rem, 3vw, 2rem);
+    right: clamp(1rem, 3vw, 2rem);
+    font-size: 1.7rem;
+  }
+  .lightbox-close:hover,
+  .lightbox-close:focus-visible,
+  .lightbox-nav:hover,
+  .lightbox-nav:focus-visible {
+    border-color: #efd9f2;
+    background: #ffffff22;
+    outline: none;
+    scale: 1.06;
+  }
+  .lightbox-count {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    color: #e5d4e8b8;
+    font: .65rem sans-serif;
+    letter-spacing: .2em;
+    translate: -50% 0;
+  }
+  .number { position: absolute; right: 2rem; bottom: 1rem; color: #ffffff55; font: normal .7rem sans-serif; letter-spacing: .24em; }
+  @media (max-width: 900px) { .waterfall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 600px) {
+    .gallery-visual { padding: calc(88px + env(safe-area-inset-top, 0px)) 14px calc(28px + env(safe-area-inset-bottom, 0px)); }
+    .gallery-visual h1 { font-size: 2.55rem; }
+    .gallery-visual header span { font-size: .78rem; }
+    .gallery-next-row { justify-content: stretch; }
+    .gallery-next { width: 100%; }
+    .waterfall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gallery-lightbox { padding: calc(3.8rem + env(safe-area-inset-top, 0px)) .75rem calc(3rem + env(safe-area-inset-bottom, 0px)); }
+    .gallery-lightbox[open] { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto; }
+    .lightbox-image-wrap { grid-column: 1 / -1; }
+    .lightbox-image-wrap img { max-height: calc(100dvh - 8.5rem); }
+    .lightbox-nav { justify-self: center; }
+    .lightbox-previous { grid-column: 1; }
+    .lightbox-next { grid-column: 2; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-next,
+    .gallery-next i { transition: none; }
+    .lightbox-close,
+    .lightbox-nav { transition: none; }
+    .lightbox-loading { transition: none; }
+    .waterfall img { transition: none; }
+    .waterfall figure:hover img { transform: none; }
+  }
+</style>

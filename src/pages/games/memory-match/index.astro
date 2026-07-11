@@ -1,0 +1,77 @@
+---
+import shellUrl from "../_shared/game-shell.css?url";
+import styleUrl from "./_assets/style.css?url";
+import gameUrl from "./_assets/game.js?url";
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080b20" />
+    <title>星间记忆 · 贝拉翻牌配对</title>
+    <link rel="stylesheet" href={styleUrl} />
+    <link rel="stylesheet" href={shellUrl} />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">BELLA KIRA · MEMORY GAME</p>
+          <h1>星间记忆</h1>
+          <p class="subtitle">翻开散落在星光里的应援记忆，找到彼此呼应的一对。</p>
+        </div>
+        <button class="sound-button" id="soundButton" type="button" aria-pressed="true" aria-label="关闭音效">
+          <span aria-hidden="true">♫</span>
+        </button>
+      </header>
+
+      <section class="game-shell" aria-label="记忆翻牌游戏">
+        <div class="toolbar">
+          <div class="stats" aria-live="polite">
+            <div><span>时间</span><strong id="time">00:00</strong></div>
+            <div><span>步数</span><strong id="moves">0</strong></div>
+            <div><span>连击</span><strong id="combo">×0</strong></div>
+          </div>
+          <div class="actions">
+            <label>
+              <span class="sr-only">选择难度</span>
+              <select id="difficulty">
+                <option value="easy">轻松 · 8 张</option>
+                <option value="normal" selected>闪耀 · 12 张</option>
+                <option value="hard">挑战 · 16 张</option>
+              </select>
+            </label>
+            <button id="restart" type="button">重新洗牌</button>
+          </div>
+        </div>
+
+        <div class="board" id="board" aria-label="卡牌区域"></div>
+
+        <p class="hint"><span></span> 点击两张卡牌，找出相同图案</p>
+      </section>
+    </main>
+
+    <div class="modal" id="winModal" hidden>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+        <div class="win-star" aria-hidden="true">✦</div>
+        <p class="eyebrow">MEMORY COMPLETE</p>
+        <h2 id="winTitle">今晚的星光被你点亮了</h2>
+        <p id="winSummary"></p>
+        <button id="playAgain" type="button">再玩一次</button>
+      </div>
+    </div>
+
+    <template id="cardTemplate">
+      <button class="card" type="button">
+        <span class="card-inner">
+          <span class="card-face card-back" aria-hidden="true"><i>✦</i></span>
+          <span class="card-face card-front"><b></b><small></small></span>
+        </span>
+      </button>
+    </template>
+
+    <a class="site-return" href="/games/" aria-label="返回互动空间">← 互动空间</a>
+    <script is:inline src={gameUrl}></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+.site-return {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(12, 8, 30, 0.62);
+  box-shadow: 0 10px 30px rgba(4, 2, 15, 0.28);
+  font: 500 13px/1 "PingFang SC", system-ui, sans-serif;
+  text-decoration: none;
+  backdrop-filter: blur(14px);
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.site-return:hover,
+.site-return:focus-visible {
+  border-color: rgba(219, 125, 116, 0.78);
+  background: rgba(90, 55, 120, 0.76);
+  transform: translateX(-2px);
+}
+
+.site-return:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+@media (max-width: 720px) {
+  .site-return {
+    top: 10px;
+    left: 10px;
+    min-height: 34px;
+    padding-inline: 11px;
+    font-size: 12px;
+  }
+}
+

@@ -1,0 +1,42 @@
+---
+import videoData from "../../content/recommended-videos.json";
+---
+
+<section class="page watch-page" data-page-name="watch" aria-label="推荐观看">
+  <div class="page-visual page-scroll-surface watch-visual">
+    <header class="watch-heading">
+      <p>RECOMMENDED · WATCH</p>
+      <h1>推荐观看</h1>
+      <span>从这里开始，遇见舞台上不同模样的贝拉。</span>
+    </header>
+
+    <div class="collection-list">
+      {videoData.collections.map((collection) => (
+        <section class="video-collection" aria-label={collection.title}>
+          <h2>
+            {collection.title}
+            <span> {collection.items.length}</span>
+          </h2>
+          {collection.items.length > 0 ? (
+            <div class="video-grid">
+              {collection.items.map((video) => (
+                <a class="video-card" href={video.url} target="_blank" rel="noreferrer">
+                  <span class="video-cover">
+                    <img src={video.cover} alt="" draggable="false" loading="lazy" />
+                    <i aria-hidden="true">↗</i>
+                  </span>
+                  <strong>{video.title}</strong>
+                  <time>{video.publishedAt}</time>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <p class="empty-collection">这个合集还没有视频。</p>
+          )}
+        </section>
+      ))}
+    </div>
+
+    <span class="watch-page-number" aria-hidden="true">03 / WATCH</span>
+  </div>
+</section>

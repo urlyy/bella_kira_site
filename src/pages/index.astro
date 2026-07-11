@@ -1,0 +1,42 @@
+---
+import HomeHero from "../components/home/HomeHero.astro";
+import PageNavigator from "../components/home/PageNavigator.astro";
+import ProfilePage from "../components/home/ProfilePage.astro";
+import SupportGuidePage from "../components/home/SupportGuidePage.astro";
+import OutfitPage from "../components/home/OutfitPage.astro";
+import SiteHeader from "../components/home/SiteHeader.astro";
+import StickersPage from "../components/home/StickersPage.astro";
+import GalleryPage from "../components/home/GalleryPage.astro";
+import FanFictionPage from "../components/home/FanFictionPage.astro";
+import CursorStars from "../components/home/CursorStars.astro";
+import BeyondOrbitPage from "../components/home/BeyondOrbitPage.astro";
+import TimelinePage from "../components/home/TimelinePage.astro";
+import InteractiveSpacePage from "../components/home/InteractiveSpacePage.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="贝拉Kira">
+  <main class="home-stage">
+    <SiteHeader />
+    <div class="page-track">
+      <HomeHero />
+      <ProfilePage />
+      <SupportGuidePage />
+      <OutfitPage />
+      <TimelinePage />
+      <StickersPage />
+      <GalleryPage />
+      <FanFictionPage />
+      <BeyondOrbitPage />
+      <InteractiveSpacePage />
+    </div>
+    <div class="page-transition-line" aria-hidden="true">
+      <img class="transition-puller" src="/assets/贝极星.png" alt="" draggable="false" />
+    </div>
+    <div class="edge-page-cue" aria-hidden="true">
+      <span>再次滚动</span>
+    </div>
+  </main>
+  <CursorStars />
+  <PageNavigator />
+</SiteLayout>

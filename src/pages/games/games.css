@@ -1,0 +1,315 @@
+.standalone-games-page,
+html:has(.standalone-games-page),
+body:has(.standalone-games-page) {
+  overflow: auto;
+}
+
+.games-page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  color: #fff;
+  background: #090616;
+}
+
+.games-page.interactive-space-visual {
+  height: 100%;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.games-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(110deg, rgba(7, 4, 20, 0.96) 4%, rgba(22, 11, 43, 0.78) 48%, rgba(8, 5, 22, 0.94) 100%),
+    url("/assets/26生日海报-无字.png") center 34% / cover;
+  filter: saturate(0.62);
+}
+
+.games-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(156, 112, 244, 0.2), transparent 30%),
+    radial-gradient(circle at 88% 66%, rgba(219, 125, 116, 0.15), transparent 28%),
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: auto, auto, 52px 52px, 52px 52px;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
+}
+
+.games-page .site-header {
+  position: relative;
+  z-index: 5;
+}
+
+.games-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 58%, #090616 100%);
+}
+
+.games-intro,
+.game-grid,
+.games-footer {
+  position: relative;
+  z-index: 1;
+  width: min(1220px, calc(100% - 64px));
+  margin-inline: auto;
+}
+
+.games-intro {
+  padding: 122px 0 38px;
+}
+
+.games-kicker {
+  margin: 0 0 18px;
+  color: #d9cdff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.27em;
+}
+
+.games-title-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.games-title-row h1 {
+  margin: 0;
+  font: 500 clamp(54px, 8vw, 104px) / 0.92 "LXGW WenKai Mono Lite", "STKaiti", serif;
+  letter-spacing: -0.08em;
+  text-shadow: 0 0 42px rgba(172, 128, 255, 0.28);
+}
+
+.games-title-row p {
+  max-width: 610px;
+  margin: 22px 0 0;
+  color: rgba(245, 241, 255, 0.68);
+  font-size: clamp(13px, 1.25vw, 16px);
+  line-height: 1.8;
+}
+
+.games-count {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-bottom: 8px;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+}
+
+.games-count b {
+  color: #fff;
+  font: 400 36px/1 Georgia, serif;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding-bottom: 32px;
+}
+
+.game-card {
+  --tone: 160, 122, 239;
+  position: relative;
+  isolation: isolate;
+  min-height: 270px;
+  overflow: hidden;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  color: #fff;
+  background:
+    linear-gradient(145deg, rgba(var(--tone), 0.2), rgba(11, 7, 27, 0.76) 58%),
+    rgba(15, 9, 35, 0.66);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.18);
+  text-decoration: none;
+  backdrop-filter: blur(18px);
+  transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 260ms ease, background 260ms ease;
+}
+
+.game-card::before {
+  content: "";
+  position: absolute;
+  inset: -40% -25%;
+  z-index: -1;
+  background: radial-gradient(circle, rgba(var(--tone), 0.38), transparent 57%);
+  opacity: 0;
+  transform: translate(12%, 18%);
+  transition: opacity 280ms ease, transform 480ms ease;
+}
+
+.game-card::after {
+  content: "";
+  position: absolute;
+  right: -22%;
+  bottom: -52%;
+  z-index: -1;
+  width: 82%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(var(--tone), 0.32);
+  border-radius: 50%;
+  box-shadow: 0 0 0 28px rgba(var(--tone), 0.05), 0 0 0 64px rgba(var(--tone), 0.035);
+}
+
+.game-card:hover,
+.game-card:focus-visible {
+  border-color: rgba(var(--tone), 0.66);
+  transform: translateY(-6px);
+}
+
+.game-card:hover::before,
+.game-card:focus-visible::before {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.game-card:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.game-card.featured {
+  grid-column: span 2;
+  background:
+    linear-gradient(90deg, rgba(14, 8, 34, 0.78), rgba(68, 38, 101, 0.28)),
+    url("/assets/10EEE9DB206443E37AB036E5A8150DC6.jpg") center 38% / cover;
+}
+
+.game-card.featured::after {
+  right: 8%;
+  bottom: -82%;
+  width: 54%;
+}
+
+.game-card-number {
+  position: absolute;
+  top: 21px;
+  right: 22px;
+  color: rgba(255, 255, 255, 0.42);
+  font: 12px/1 Georgia, serif;
+  letter-spacing: 0.16em;
+}
+
+.game-card-mark {
+  display: grid;
+  place-items: center;
+  width: 55px;
+  height: 55px;
+  margin-bottom: 34px;
+  border: 1px solid rgba(var(--tone), 0.5);
+  border-radius: 50%;
+  color: rgb(var(--tone));
+  background: rgba(var(--tone), 0.09);
+  font: 25px/1 Georgia, serif;
+  box-shadow: 0 0 32px rgba(var(--tone), 0.14);
+}
+
+.game-card-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.game-card-copy small {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.21em;
+}
+
+.game-card-copy strong {
+  margin-top: 7px;
+  font: 500 30px/1.2 "LXGW WenKai Mono Lite", "STKaiti", serif;
+}
+
+.game-card-copy > span {
+  max-width: 340px;
+  margin-top: 10px;
+  color: rgba(245, 241, 255, 0.62);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.game-card-action {
+  position: absolute;
+  right: 22px;
+  bottom: 21px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.game-card-action i {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  font-style: normal;
+}
+
+.tone-coral { --tone: 219, 125, 116; }
+.tone-blue { --tone: 114, 177, 244; }
+.tone-gold { --tone: 236, 194, 112; }
+.tone-pink { --tone: 225, 123, 177; }
+.tone-mint { --tone: 117, 213, 186; }
+
+.games-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0 46px;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.games-footer a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .game-card.featured { grid-column: span 2; }
+}
+
+@media (max-width: 640px) {
+  .games-intro,
+  .game-grid,
+  .games-footer { width: min(100% - 28px, 520px); }
+  .games-intro { padding-top: calc(88px + env(safe-area-inset-top, 0px)); }
+  .games-title-row { align-items: flex-start; }
+  .games-count { display: none; }
+  .game-grid { grid-template-columns: 1fr; }
+  .game-card,
+  .game-card.featured { grid-column: auto; min-height: 230px; padding: 20px; }
+  .game-card.featured { background-position: 62% 38%; }
+  .games-footer { gap: 16px; padding-bottom: calc(36px + env(safe-area-inset-bottom, 0px)); line-height: 1.6; }
+  .game-card-mark { margin-bottom: 24px; }
+  .game-card-copy strong { font-size: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-card,
+  .game-card::before { transition: none; }
+}

@@ -1,0 +1,109 @@
+---
+const lyricGuides = [
+  {
+    title: "我以灵魂注视你的心",
+    number: "01",
+    note: "抒情段落 · 留意领唱与回应",
+    href: "https://www.bilibili.com/video/BV1YyJizoEH6/",
+  },
+  {
+    title: "一起跳起来",
+    number: "02",
+    note: "明快节拍 · 跟随动作与齐声段",
+    href: "https://www.bilibili.com/video/BV1kPQjBLEDw/",
+  },
+  {
+    title: "Shiny Dancer",
+    number: "03",
+    note: "经典舞台 · 跟随官方应援教学",
+    href: "https://www.bilibili.com/video/BV1aN4y1z7iy/",
+  },
+];
+---
+
+<section class="page support-page" data-page-name="support" aria-label="应援指南">
+  <div class="page-visual support-visual mobile-page-scroll-surface">
+    <div class="support-orbit support-orbit--large" aria-hidden="true"></div>
+    <div class="support-orbit support-orbit--small" aria-hidden="true"></div>
+
+    <div class="support-shell">
+      <header class="support-heading">
+        <div>
+          <p>SUPPORT · BELLA KIRA</p>
+          <h1>应援指南</h1>
+        </div>
+        <span>把喜欢化成同一种颜色、同一个声音，<br />在她望向舞台下时成为彼此的星光。</span>
+      </header>
+
+      <div class="support-layout">
+        <article class="support-card support-color-card">
+          <div class="support-card-index"><span>01</span><b>应援色</b></div>
+          <div class="support-color-body">
+            <div class="support-color-swatch" aria-label="贝拉应援色 DB7D74">
+              <span></span>
+              <img src="/assets/贝极星.png" alt="" draggable="false" />
+            </div>
+            <div class="support-color-copy">
+              <small>BELLA SUPPORT COLOR</small>
+              <strong>贝拉红</strong>
+              <button class="support-color-code" type="button" data-copy-color="#DB7D74" aria-label="复制应援色色值 DB7D74">
+                <span>#DB7D74</span><i aria-hidden="true">复制</i>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="support-card support-slogan-card">
+          <div class="support-card-index"><span>02</span><b>口号</b></div>
+          <div class="support-slogan-body">
+            <small>全员应援</small>
+            <blockquote>“A-SOUL时代，<br />沸腾期待！”</blockquote>
+            <div class="support-promise">
+              <span>贝极星的约定</span>
+              <p>答应贝拉的每一件事情，<br />贝极星都要做到。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="support-card support-lyrics-card">
+          <div class="support-card-index"><span>03</span><b>歌词应援</b></div>
+          <div class="support-lyrics-intro">
+            <p>跟着官方教学熟悉歌词、节拍与回应时机</p>
+            <span>选择曲目，前往完整应援教学</span>
+          </div>
+          <div class="support-song-list">
+            {lyricGuides.map((guide) => (
+              <a href={guide.href} target="_blank" rel="noreferrer">
+                <span class="support-song-number">{guide.number}</span>
+                <span class="support-song-copy">
+                  <strong>{guide.title}</strong>
+                  <small>{guide.note}</small>
+                </span>
+                <span class="support-song-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+                <span class="support-song-arrow" aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        </article>
+      </div>
+
+      <p class="support-footnote">现场版本可能调整，请以当次官方教学与舞台提示为准。</p>
+    </div>
+    <span class="page-number" aria-hidden="true">03 / SUPPORT</span>
+  </div>
+</section>
+
+<script>
+  document.querySelector<HTMLButtonElement>("[data-copy-color]")?.addEventListener("click", async (event) => {
+    const button = event.currentTarget as HTMLButtonElement;
+    const value = button.dataset.copyColor ?? "#DB7D74";
+    const label = button.querySelector<HTMLElement>("i");
+    try {
+      await navigator.clipboard.writeText(value);
+      if (label) label.textContent = "已复制";
+    } catch {
+      if (label) label.textContent = value;
+    }
+    window.setTimeout(() => { if (label) label.textContent = "复制"; }, 1600);
+  });
+</script>
