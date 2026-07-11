@@ -16,6 +16,8 @@ Keep this file focused on confirmed, durable product and implementation decision
 
 ## Concept Notes
 
+- Git validation uses Husky hooks plus GitHub Actions. `pre-commit` runs the fast `gallery:check` preview-integrity check, `pre-push` runs the complete `npm run build`, and CI runs the same complete build for every push and pull request so missing or stale gallery previews cannot pass unnoticed.
+
 - Mobile keeps the site's chapter-based full-screen identity instead of becoming one ordinary continuous document. At widths up to 760px, the persistent header shows only `贝拉Kira`, the current chapter label, and a 44px menu control; the complete chapter index lives in a right-side navigation panel, with standalone destinations visually separated.
 - Touch navigation follows the vertical reading direction. A deliberate vertical swipe changes non-scrollable chapters; internally scrollable chapters retain native vertical scrolling and only change chapter when the gesture begins at the relevant content boundary. Interactive controls, dialogs, the timeline panel, and links/buttons must not accidentally trigger page navigation.
 - Mobile viewport sizing uses `100dvh` with a legacy viewport fallback, `viewport-fit=cover`, and safe-area insets for persistent controls, menus, full-screen readers, and bottom actions. Responsive review must include short screens and landscape height constraints, not only width breakpoints.

@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "husky",
     "dev": "astro dev",
     "gallery:optimize": "node scripts/generate-gallery-previews.mjs",
     "gallery:check": "node scripts/generate-gallery-previews.mjs --check",
@@ -29,6 +30,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/three": "^0.169.0",
+    "husky": "^9.1.7",
     "sharp": "^0.35.3",
     "typescript": "latest"
   }
