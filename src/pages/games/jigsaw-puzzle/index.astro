@@ -13,6 +13,10 @@ import gameUrl from "./_assets/game.js?url";
   <title>星光碎片 · 贝拉不规则拼图</title>
   <link rel="stylesheet" href={styleUrl}>
   <link rel="stylesheet" href={shellUrl}>
+  <style is:inline>
+    body::before { background-image: linear-gradient(90deg, rgba(7,5,20,.97), rgba(15,10,36,.76), rgba(7,5,20,.97)), url("/assets/optimized/game-bg.webp"); }
+    .tile { background-image: url("/assets/optimized/game-bg.webp"); }
+  </style>
 </head>
 <body>
   <main class="app">

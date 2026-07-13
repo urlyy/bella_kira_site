@@ -1,4 +1,4 @@
-# 贝拉Kira
+# 贝拉kira
 
 一个为 A-SOUL 成员贝拉打造的非官方、非商业粉丝应援站。
 
@@ -10,8 +10,8 @@
 
 首页采用全屏章节式浏览，并以贝极星作为页面切换标记。目前包含：
 
-- 首页视频、贝拉介绍、应援指南与服装展示
-- 粉丝时光轨迹、表情包、光影画廊与同人文书架
+- 首页视频、贝拉介绍、应援指南、粉丝时光轨迹与服装展示
+- 推荐视频、表情包、光影画廊与同人文书架
 - 枝江相关主页和站外资源导航
 - 包含模型舞台、拼图、音游与轻量小游戏的互动空间
 - 独立的站点公告、更新记录及素材使用说明
@@ -68,10 +68,17 @@ npm run dev
 | --- | --- |
 | `npm run dev` | 启动 Astro 开发服务器 |
 | `npm run check` | 执行 Astro / TypeScript 检查 |
+| `npm run optimize` | 统一生成或更新全部优化资源 |
+| `npm run optimize:check` | 只读检查全部优化资源是否缺失或过期 |
 | `npm run gallery:optimize` | 为画廊原图生成或更新 WebP 预览图 |
 | `npm run gallery:check` | 检查画廊预览图是否缺失或过期 |
-| `npm run build` | 检查画廊、校验项目并生成静态站点 |
+| `npm run build` | 检查全部优化资源、校验项目并生成静态站点 |
 | `npm run preview` | 本地预览 `dist/` 构建结果 |
+
+预览构建产物时，推荐运行 `npm run preview`。如果使用 VS Code Live
+Server，本仓库已将其站点根目录配置为 `dist/`；请先运行 `npm run build`，
+再启动 Live Server，并访问 `/`，不要以仓库根目录访问 `/dist/index.html`。
+构建页面中的 `/_astro/` 和 `/assets/` 都是相对于站点根目录的绝对路径。
 
 建议提交前至少运行：
 
@@ -117,7 +124,7 @@ public/assets/recommended-videos/covers/
 - 官方资源：`public/assets/stickers/official/`
 - 粉丝创作：`public/assets/stickers/fan-made/`
 
-添加素材时请保留作者、原始页面或授权信息；公开资源目录名应尽量使用 URL 安全的 ASCII 名称。
+受管理的粉丝创作合集应在 JSON 中保留作者、原始页面或授权信息。直接放在 `fan-made/` 根目录的散图会被构建时自动发现，不需要登记进 JSON；散图浏览器每页显示 20 张。公开资源目录名应尽量使用 URL 安全的 ASCII 名称。
 
 ### 画廊
 

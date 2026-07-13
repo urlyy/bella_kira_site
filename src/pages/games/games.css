@@ -26,7 +26,7 @@ body:has(.standalone-games-page) {
   z-index: 0;
   background:
     linear-gradient(110deg, rgba(7, 4, 20, 0.96) 4%, rgba(22, 11, 43, 0.78) 48%, rgba(8, 5, 22, 0.94) 100%),
-    url("/assets/26生日海报-无字.png") center 34% / cover;
+    url("/assets/optimized/game-bg.webp") center 34% / cover;
   filter: saturate(0.62);
 }
 
@@ -91,14 +91,6 @@ body:has(.standalone-games-page) {
   font: 500 clamp(54px, 8vw, 104px) / 0.92 "LXGW WenKai Mono Lite", "STKaiti", serif;
   letter-spacing: -0.08em;
   text-shadow: 0 0 42px rgba(172, 128, 255, 0.28);
-}
-
-.games-title-row p {
-  max-width: 610px;
-  margin: 22px 0 0;
-  color: rgba(245, 241, 255, 0.68);
-  font-size: clamp(13px, 1.25vw, 16px);
-  line-height: 1.8;
 }
 
 .games-count {
@@ -185,9 +177,6 @@ body:has(.standalone-games-page) {
 
 .game-card.featured {
   grid-column: span 2;
-  background:
-    linear-gradient(90deg, rgba(14, 8, 34, 0.78), rgba(68, 38, 101, 0.28)),
-    url("/assets/10EEE9DB206443E37AB036E5A8150DC6.jpg") center 38% / cover;
 }
 
 .game-card.featured::after {
@@ -275,7 +264,7 @@ body:has(.standalone-games-page) {
 
 .games-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 20px 0 46px;
   border-top: 1px solid rgba(255, 255, 255, 0.11);
   color: rgba(255, 255, 255, 0.45);
@@ -303,7 +292,6 @@ body:has(.standalone-games-page) {
   .game-grid { grid-template-columns: 1fr; }
   .game-card,
   .game-card.featured { grid-column: auto; min-height: 230px; padding: 20px; }
-  .game-card.featured { background-position: 62% 38%; }
   .games-footer { gap: 16px; padding-bottom: calc(36px + env(safe-area-inset-bottom, 0px)); line-height: 1.6; }
   .game-card-mark { margin-bottom: 24px; }
   .game-card-copy strong { font-size: 26px; }

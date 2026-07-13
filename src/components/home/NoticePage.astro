@@ -1,0 +1,138 @@
+---
+const notices = [
+	{
+		number: "01",
+		label: "IMAGE · AUDIO · VIDEO",
+		title: "图片与影音",
+		copy: "本站为非官方、非商业性质的粉丝应援项目，与官方运营方不存在隶属关系。角色形象、官方图片、标识、音乐、视频及其他官方素材的相关权利归原权利方所有；站内注明来源的同人作品，其权利仍归各自创作者所有。",
+	},
+	{
+		number: "02",
+		label: "MMD · MODEL ASSETS",
+		title: "模型与三维素材",
+		copy: "站内展示的 MMD 及其他模型资产遵循原作者随附的许可、README 与使用规则。除非获得明确许可，本站不提供模型文件下载、提取、转换或再分发，也不因展示而取得模型资产的所有权或额外授权。",
+	},
+	{
+		number: "03",
+		label: "FAN FICTION",
+		title: "同人文字",
+		copy: "同人文著作权归原作者所有。转载或展示内容保留其原始来源及授权背景；相关权利人可要求补充来源、修正信息或移除内容。站内展示不代表作品与官方存在关联。",
+	},
+];
+---
+
+<section class="page notice-page" id="notice" aria-labelledby="notice-title">
+	<div class="page-visual notice-visual">
+		<div class="notice-atmosphere" aria-hidden="true">
+			<span class="station-light station-light-left"></span>
+			<span class="station-light station-light-right"></span>
+			<span class="rail rail-one"></span>
+			<span class="rail rail-two"></span>
+		</div>
+		<div class="page-scroll-surface notice-scroll-surface">
+			<article class="notice-board">
+				<header class="notice-heading">
+					<div>
+						<p>SITE NOTICE · ABOUT THIS SITE</p>
+						<h1 id="notice-title">站点公告</h1>
+						<span>版权与使用说明 / 建议与反馈</span>
+					</div>
+				</header>
+
+				<section class="notice-section rights-section" aria-labelledby="rights-title">
+					<header class="notice-section-heading">
+						<span>01</span>
+						<div><small>RIGHTS & USAGE</small><h2 id="rights-title">版权与使用说明</h2></div>
+					</header>
+					<div class="notice-list">
+						{notices.map((notice) => (
+							<section class="notice-item">
+								<header class="notice-item-heading">
+									<b>{notice.number}</b><span>{notice.label}</span><h3>{notice.title}</h3>
+								</header>
+								<p>{notice.copy}</p>
+							</section>
+						))}
+						<section class="notice-item">
+							<header class="notice-item-heading">
+								<b>04</b><span>RIGHTS HOLDER REQUESTS</span><h3>权利人请求</h3>
+							</header>
+							<p>如需补充署名、修正来源或移除相关内容，请联系站点维护者处理。收到可核实的信息后，我们会认真核对并及时响应。</p>
+						</section>
+					</div>
+				</section>
+
+				<section class="notice-section feedback-section" aria-labelledby="feedback-title">
+					<header class="notice-section-heading">
+						<span>02</span>
+						<div><small>SUGGESTIONS & FEEDBACK</small><h2 id="feedback-title">建议与反馈</h2></div>
+					</header>
+					<aside class="feedback-card">
+						<div><span>CONTACT</span><strong>Bilibili 私信</strong></div>
+						<p>网站仍在持续建设与改进中。如果你对内容、功能或浏览体验有任何建议，或发现需要修正的问题，都欢迎通过Bilibili私信告诉我，<a target="_blank" rel="noopener noreferrer" href="https://space.bilibili.com/36733462">UID 36733462</a>，每一条认真提出的意见都会被看到。</p>
+					</aside>
+				</section>
+			</article>
+		</div>
+	</div>
+</section>
+
+<style>
+	.notice-page { color: #eee9f1; background: linear-gradient(180deg, #171524 0 43%, #10131e 43% 100%); }
+	.notice-visual { background: linear-gradient(180deg, #171524 0 43%, #10131e 43% 100%); }
+	.notice-scroll-surface { position: absolute; z-index: 2; inset: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; }
+	.notice-atmosphere { position: absolute; inset: 0; pointer-events: none; }
+	.notice-atmosphere::before { position: absolute; inset: 0; background: radial-gradient(circle at 68% 8%, rgba(193,130,185,.18), transparent 28%), repeating-linear-gradient(90deg, transparent 0 12.45vw, rgba(255,255,255,.018) 12.5vw); content: ""; }
+	.notice-atmosphere::after { position: absolute; right: 0; bottom: 0; left: 0; height: 31vh; background: linear-gradient(180deg, rgba(33,29,45,.62), #080b13), repeating-linear-gradient(174deg, transparent 0 21px, rgba(204,156,207,.06) 22px, transparent 24px); content: ""; }
+	.station-light { position: absolute; top: 0; width: 1px; height: 35vh; background: linear-gradient(#d9acd3, transparent); opacity: .22; transform-origin: top; }
+	.station-light::after { position: absolute; top: 0; left: 0; width: 18vw; height: 42vh; background: linear-gradient(90deg, rgba(228,194,225,.14), transparent); clip-path: polygon(0 0,100% 100%,0 83%); content: ""; }
+	.station-light-left { left: 12%; rotate: -4deg; }
+	.station-light-right { right: 13%; rotate: 5deg; scale: -1 1; }
+	.rail { position: absolute; right: -5vw; bottom: 6vh; width: 68vw; height: 1px; background: linear-gradient(90deg, transparent, rgba(219,125,116,.42), transparent); rotate: -5deg; }
+	.rail-two { bottom: 3vh; opacity: .5; }
+	.notice-board { position: relative; width: min(1180px, calc(100% - 64px)); margin: 0 auto; padding: 150px 0 70px; }
+	.notice-heading { display: grid; grid-template-columns: minmax(300px,.72fr) minmax(320px,1fr); align-items: end; gap: 48px; padding-bottom: 34px; border-bottom: 1px solid rgba(214,179,215,.24); }
+	.notice-heading p { margin: 0 0 11px; color: #bc92bf; font: 600 10px/1 system-ui,sans-serif; letter-spacing: .3em; }
+	.notice-heading h1 { margin: 0; font-size: clamp(48px,6vw,82px); font-weight: 400; line-height: .95; letter-spacing: .12em; }
+	.notice-heading span { display: block; margin-top: 15px; color: #b5a9b8; font-size: 13px; letter-spacing: .18em; }
+	.notice-section { padding-top: 42px; }
+	.rights-section { padding-top: 50px; }
+	.notice-section-heading { display: grid; grid-template-columns: 30px minmax(240px,.75fr) minmax(280px,1fr); align-items: end; gap: 10px 14px; margin-bottom: 18px; }
+	.notice-section-heading > span { color: #db7d74; font: 600 11px/1 system-ui,sans-serif; letter-spacing: .12em; }
+	.notice-section-heading > div { display: flex; align-items: baseline; gap: 15px; }
+	.notice-section-heading small { color: #8d748f; font: 600 8px/1 system-ui,sans-serif; letter-spacing: .2em; }
+	.notice-section-heading h2 { margin: 0; color: #e7dce9; font-size: 20px; font-weight: 400; letter-spacing: .14em; }
+	.notice-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid rgba(214,179,215,.2); border-left: 1px solid rgba(214,179,215,.16); }
+	.notice-item { min-height: 300px; padding: 34px clamp(22px,2.6vw,38px) 38px; border-right: 1px solid rgba(214,179,215,.16); border-bottom: 1px solid rgba(214,179,215,.16); background: linear-gradient(180deg,rgba(255,255,255,.025),transparent); }
+	.notice-item-heading { display: flex; min-width: 0; align-items: baseline; gap: 9px; white-space: nowrap; }
+	.notice-item-heading b { flex: none; color: #db7d74; font: 600 11px/1 system-ui,sans-serif; letter-spacing: .14em; }
+	.notice-item-heading span { flex: none; color: #866f8c; font: 600 9px/1 system-ui,sans-serif; letter-spacing: .14em; }
+	.notice-item-heading h3 { min-width: 0; margin: 0; color: #e7dce9; font-size: 20px; font-weight: 400; letter-spacing: .12em; }
+	.notice-item p { margin: 38px 0 0; color: #a9a0ad; font-size: 13px; line-height: 1.9; text-align: justify; }
+	.feedback-card { display: grid; grid-template-columns: 190px minmax(0,1fr); align-items: center; gap: 34px; padding: 28px 4px; }
+	.feedback-card div { display: grid; gap: 6px; }
+	.feedback-card div span { color: #8d748f; font: 600 8px/1 system-ui,sans-serif; letter-spacing: .19em; }
+	.feedback-card div strong { font-size: 15px; font-weight: 400; letter-spacing: .13em; }
+	.feedback-card p { margin: 0; color: #8f8793; font-size: 12px; line-height: 1.8; }
+	.feedback-card a { color: #ddaaa8; text-underline-offset: 3px; }
+	@media (max-width: 900px) {
+		.notice-board { width: min(100% - 40px,720px); padding-top: 142px; }
+		.notice-heading { grid-template-columns: 1fr; gap: 18px; }
+		.notice-section-heading { grid-template-columns: 30px 1fr; }
+		.notice-item { min-height: 0; }
+	}
+	@media (max-width: 560px) {
+		.notice-board { width: calc(100% - 32px); padding-top: calc(108px + env(safe-area-inset-top)); }
+		.notice-heading p, .notice-section-heading small, .notice-item-heading span, .feedback-card div > span { display: none; }
+		.notice-heading h1 { font-size: 46px; }
+		.notice-section { padding-top: 34px; }
+		.notice-section-heading { grid-template-columns: 28px 1fr; gap: 12px; }
+		.notice-section-heading > div { display: block; }
+		.rights-section { padding-top: 42px; }
+		.notice-list { grid-template-columns: 1fr; }
+		.notice-item { padding: 28px 18px 30px; }
+		.notice-item-heading { white-space: normal; }
+		.notice-item-heading h3 { font-size: 18px; letter-spacing: .08em; }
+		.feedback-card { grid-template-columns: 1fr; gap: 16px; padding: 22px 18px calc(32px + env(safe-area-inset-bottom)); }
+	}
+</style>

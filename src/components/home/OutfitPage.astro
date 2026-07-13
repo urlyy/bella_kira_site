@@ -1,14 +1,80 @@
 ---
+import { readFile } from "node:fs/promises";
+
+const clothManifest = JSON.parse(
+  await readFile(new URL("../../../public/assets/optimized/cloth-bg/manifest.json", import.meta.url), "utf8"),
+);
+const versionedBackground = (name: string) => {
+  const entry = Object.values(clothManifest.images).find((image: any) => image.output === name) as any;
+  return `/assets/optimized/cloth-bg/${name}?v=${entry.outputHash.slice(0, 12)}`;
+};
 const outfits = [
   {
-    image: "/assets/clothes/毕方.png",
-    background: "/assets/cloth_bg/毕方.png",
+    image: "/assets/optimized/clothes/毕方.webp",
+    background: versionedBackground("毕方.webp"),
+    backgroundFit: "cover",
+    width: 668,
+    height: 2048,
+  },
+  {
+    image: "/assets/optimized/clothes/常服.webp",
+    background: versionedBackground("常服.webp"),
+    backgroundFit: "cover",
+    width: 613,
+    height: 2048,
+  },
+  {
+    image: "/assets/optimized/clothes/松鼠睡衣.webp",
+    background: versionedBackground("松鼠睡衣.webp"),
+    backgroundFit: "cover",
+    backgroundPosition: "center top",
+    width: 726,
+    height: 2048,
+  },
+  {
+    image: "/assets/optimized/clothes/25年生日服.webp",
+    background: versionedBackground("25生日会.webp"),
+    backgroundFit: "cover",
+    backgroundPosition: "center top",
+    width: 604,
+    height: 2048,
+  },
+  {
+    image: "/assets/optimized/clothes/白拉.webp",
+    background: versionedBackground("白拉.webp"),
+    backgroundFit: "cover",
+    width: 998,
+    height: 2048,
+  },
+  {
+    image: "/assets/optimized/clothes/jk绿.webp",
+    background: versionedBackground("绿jk.webp"),
+    backgroundFit: "cover",
+    backgroundPosition: "center top",
+    width: 596,
+    height: 2048,
+  },
+  {
+    image: "/assets/optimized/clothes/22年生日服.webp",
+    background: versionedBackground("22生日会.webp"),
+    backgroundFit: "cover",
+    backgroundPosition: "center top",
+    width: 690,
+    height: 2048,
+  },
+  {
+    image: "/assets/optimized/clothes/五周年团服.webp",
+    background: versionedBackground("五周年团服.webp"),
+    backgroundFit: "cover",
+    backgroundPosition: "center top",
+    width: 586,
+    height: 2048,
   },
 ];
 
-// Keep enough planes on the ring to make its depth readable while the archive
-// contains only one finished cutout. New outfits can be added to the array above.
-const ringSize = Math.max(9, outfits.length);
+// Keep enough planes on the ring to make its depth readable while the archive is
+// still small. Once there are nine or more outfits, every outfit owns one plane.
+const ringSize = Math.ceil(Math.max(9, outfits.length) / outfits.length) * outfits.length;
 const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
   ...outfits[slot % outfits.length],
   slot,
@@ -18,16 +84,23 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
 
 <section class="page outfit-page" data-page-name="outfits" aria-label="服装展示">
   <div class="outfit-backgrounds" aria-hidden="true">
-    <img class="outfit-background is-active" src={outfits[0].background} alt="" decoding="async" fetchpriority="high" draggable="false" />
-    <img class="outfit-background" src={outfits[0].background} alt="" decoding="async" draggable="false" />
+    <span class="outfit-background is-active" data-source={outfits[0].background} data-fit={outfits[0].backgroundFit} data-position={outfits[0].backgroundPosition ?? "center"} style={`--outfit-bg-position: ${outfits[0].backgroundPosition ?? "center"}`}>
+      <img class="outfit-background-blur" data-src={outfits[0].background} alt="" decoding="async" draggable="false" />
+      <img class="outfit-background-art" data-src={outfits[0].background} alt="" decoding="async" draggable="false" />
+    </span>
+    <span class="outfit-background" data-source={outfits[0].background} data-fit={outfits[0].backgroundFit} data-position={outfits[0].backgroundPosition ?? "center"} style={`--outfit-bg-position: ${outfits[0].backgroundPosition ?? "center"}`}>
+      <img class="outfit-background-blur" data-src={outfits[0].background} alt="" decoding="async" draggable="false" />
+      <img class="outfit-background-art" data-src={outfits[0].background} alt="" decoding="async" draggable="false" />
+    </span>
   </div>
   <div class="outfit-wash" aria-hidden="true"></div>
   <div class="outfit-rays" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="outfit-change-flash" data-outfit-change-flash aria-hidden="true"></div>
 
   <header class="outfit-heading">
     <p>BELLA · OUTFIT ARCHIVE</p>
     <h1>服装展示</h1>
-    <span>沿着光环，遇见每一种贝拉</span>
+    <span>沿着星轨，遇见每一种贝拉</span>
   </header>
 
   <div
@@ -39,7 +112,18 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
     aria-roledescription="循环轮播"
     aria-label="贝拉服装轮播，可左右拖动或使用方向按钮"
   >
-    <div class="outfit-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="outfit-orbit" aria-hidden="true">
+      <i></i><i></i><i></i>
+      <span class="outfit-orbit-stars">
+        {Array.from({ length: 54 }, (_, index) => {
+          const angle = index * 2.399963;
+          const radius = Math.sqrt((index + 0.5) / 54);
+          const x = 50 + Math.cos(angle) * radius * 47;
+          const y = 50 + Math.sin(angle) * radius * 44;
+          return <b style={`--star-index:${index};--star-x:${x.toFixed(2)}%;--star-y:${y.toFixed(2)}%`}></b>;
+        })}
+      </span>
+    </div>
     <div class="outfit-stage" data-outfit-stage>
       {ringItems.map((item) => (
         <button
@@ -49,21 +133,23 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
           data-slot={item.slot}
           data-item-index={item.itemIndex}
           data-outfit-background={item.background}
+          data-outfit-background-fit={item.backgroundFit}
+          data-outfit-background-position={item.backgroundPosition ?? "center"}
           aria-label={`选择第 ${item.itemIndex + 1} 套服装`}
           tabindex="-1"
         >
           <span class="outfit-figure">
             <img
-              src={item.image}
+              data-src={item.image}
               alt=""
-              width="681"
-              height="2048"
+              width={item.width}
+              height={item.height}
               decoding="async"
               draggable="false"
             />
           </span>
           <span class="outfit-reflection" aria-hidden="true">
-            <img src={item.image} alt="" width="681" height="2048" decoding="async" draggable="false" />
+            <img data-src={item.image} alt="" width={item.width} height={item.height} decoding="async" draggable="false" />
           </span>
         </button>
       ))}
@@ -84,7 +170,6 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
   </div>
 
   <p class="outfit-instruction"><i aria-hidden="true"></i> 左右拖动 · 或使用两侧箭头</p>
-  <span class="outfit-page-number" aria-hidden="true">04 / OUTFITS</span>
 </section>
 
 <script>
@@ -94,8 +179,9 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
   const previousButton = carousel?.querySelector<HTMLButtonElement>("[data-outfit-previous]");
   const nextButton = carousel?.querySelector<HTMLButtonElement>("[data-outfit-next]");
   const page = carousel?.closest<HTMLElement>(".outfit-page");
-  const backgrounds = Array.from(page?.querySelectorAll<HTMLImageElement>(".outfit-background") ?? []);
+  const backgrounds = Array.from(page?.querySelectorAll<HTMLElement>(".outfit-background") ?? []);
   const currentNumber = page?.querySelector<HTMLElement>("[data-outfit-number]");
+  const changeFlash = page?.querySelector<HTMLElement>("[data-outfit-change-flash]");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   if (carousel && stage && planes.length) {
@@ -109,29 +195,68 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
     let motionEndAngle = 0;
     let activeItemIndex = -1;
     let activeBackground = 0;
+    let initialized = false;
     let dragging = false;
     let pointerId = -1;
     let pointerStartX = 0;
     let pointerStartAngle = 0;
     let pointerMoved = false;
+    let autoplayTimer = 0;
+    let isOutfitPageActive = window.location.hash === "#outfits";
+    const autoplayDelay = 3200;
 
     const normalizeAngle = (value: number) => Math.atan2(Math.sin(value), Math.cos(value));
     const modulo = (value: number, divisor: number) => ((value % divisor) + divisor) % divisor;
 
-    const setBackground = (src: string) => {
+    const stopAutoplay = () => {
+      if (!autoplayTimer) return;
+      window.clearTimeout(autoplayTimer);
+      autoplayTimer = 0;
+    };
+
+    const scheduleAutoplay = () => {
+      stopAutoplay();
+      if (!initialized || !isOutfitPageActive || reducedMotion.matches || document.hidden) return;
+      autoplayTimer = window.setTimeout(() => {
+        autoplayTimer = 0;
+        if (!frame && !dragging && isOutfitPageActive) moveBy(-1);
+        else scheduleAutoplay();
+      }, autoplayDelay);
+    };
+
+    const setBackground = (src: string, fit: string, position: string) => {
       const current = backgrounds[activeBackground];
-      if (!current || current.dataset.source === src || current.getAttribute("src") === src) {
+      if (!current || current.dataset.source === src) {
         if (current) current.dataset.source = src;
+        if (current) {
+          current.dataset.fit = fit;
+          current.dataset.position = position;
+          current.style.setProperty("--outfit-bg-position", position);
+        }
         return;
       }
       const incomingIndex = activeBackground === 0 ? 1 : 0;
       const incoming = backgrounds[incomingIndex];
       if (!incoming) return;
+      if (changeFlash && !reducedMotion.matches) {
+        changeFlash.getAnimations().forEach((animation) => animation.cancel());
+        changeFlash.animate([
+          { opacity: 0, transform: "translate3d(-48vw,0,0) rotate(10deg)" },
+          { opacity: .72, offset: .46 },
+          { opacity: 0, transform: "translate3d(48vw,0,0) rotate(10deg)" },
+        ], { duration: 860, easing: "cubic-bezier(.28,.05,.18,1)", fill: "both" });
+      }
       incoming.classList.remove("is-ready");
-      incoming.src = src;
       incoming.dataset.source = src;
+      incoming.dataset.fit = fit;
+      incoming.dataset.position = position;
+      incoming.style.setProperty("--outfit-bg-position", position);
+      const incomingImages = Array.from(incoming.querySelectorAll<HTMLImageElement>("img"));
+      incomingImages.forEach((image) => { image.src = src; });
       const reveal = async () => {
-        try { await incoming.decode(); } catch { /* The load fallback can still present a valid image. */ }
+        await Promise.all(incomingImages.map(async (image) => {
+          try { await image.decode(); } catch { /* The load fallback can still present a valid image. */ }
+        }));
         if (incoming.dataset.source !== src) return;
         incoming.classList.add("is-ready");
         backgrounds.forEach((background, index) => background.classList.toggle("is-active", index === incomingIndex));
@@ -148,13 +273,19 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
       if (itemIndex === activeItemIndex) return;
       activeItemIndex = itemIndex;
       if (currentNumber) currentNumber.textContent = String(itemIndex + 1).padStart(2, "0");
-      setBackground(selectedPlane.dataset.outfitBackground ?? "");
+      setBackground(
+        selectedPlane.dataset.outfitBackground ?? "",
+        selectedPlane.dataset.outfitBackgroundFit ?? "cover",
+        selectedPlane.dataset.outfitBackgroundPosition ?? "center",
+      );
     };
 
     const render = () => {
+      if (!initialized) return;
       const bounds = carousel.getBoundingClientRect();
-      const radiusX = Math.min(bounds.width * 0.43, 690);
-      const radiusZ = Math.min(Math.max(bounds.width * 0.17, 130), 270);
+      const isMobile = bounds.width <= 760;
+      const radiusX = Math.min(bounds.width * (isMobile ? 0.44 : 0.34), isMobile ? 310 : 540);
+      const radiusZ = Math.min(Math.max(bounds.width * (isMobile ? 0.2 : 0.18), isMobile ? 115 : 150), isMobile ? 210 : 300);
 
       planes.forEach((plane) => {
         const slot = Number(plane.dataset.slot) || 0;
@@ -164,14 +295,29 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
         const frontness = (depth + 1) / 2;
         const isBack = depth < -0.04;
         const distanceFromFront = Math.abs(theta);
+        const stepDistance = distanceFromFront / stepAngle;
+        const visibleStep = Math.min(stepDistance, 2.85);
         const opacity = isBack
-          ? 0.12 + Math.max(0, frontness) * 0.13
-          : Math.max(0.18, 1 - Math.pow(distanceFromFront / (Math.PI * 0.58), 1.18));
-        const scale = 0.42 + frontness * 0.42;
+          ? 0.06 + Math.max(0, frontness) * 0.08
+          : Math.max(0.1, 1 - visibleStep * 0.38);
+        const scale = stepDistance <= 1
+          ? 0.98 - stepDistance * 0.31
+          : stepDistance <= 2
+            ? 0.67 - (stepDistance - 1) * 0.18
+            : Math.max(0.28, 0.49 - (stepDistance - 2) * 0.14);
         const x = side * radiusX;
-        const y = (1 - frontness) * 54 - 8;
+        const y = Math.min(stepDistance, 3) * (isMobile ? 25 : 30) - 8;
         const z = depth * radiusZ;
         const selected = distanceFromFront < stepAngle * 0.45;
+        plane.classList.toggle("is-lineup", !isBack && stepDistance <= 2.12);
+        if (distanceFromFront < stepAngle * 3.15) {
+          plane.querySelectorAll<HTMLImageElement>("img[data-src]").forEach((image) => {
+            if (!image.getAttribute("src") && image.dataset.src) {
+              image.src = image.dataset.src;
+              void revealDecodedImage(image);
+            }
+          });
+        }
 
         plane.style.setProperty("--outfit-x", `${x.toFixed(2)}px`);
         plane.style.setProperty("--outfit-y", `${y.toFixed(2)}px`);
@@ -195,6 +341,7 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
       carousel.removeAttribute("aria-busy");
       if (previousButton) previousButton.disabled = false;
       if (nextButton) nextButton.disabled = false;
+      scheduleAutoplay();
     };
 
     const playMotion = (time: number) => {
@@ -238,12 +385,18 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
       startMotion(destination);
     };
 
-    previousButton?.addEventListener("click", () => moveBy(1));
-    nextButton?.addEventListener("click", () => moveBy(-1));
+    const moveManually = (direction: number) => {
+      stopAutoplay();
+      moveBy(direction);
+    };
+
+    previousButton?.addEventListener("click", () => moveManually(1));
+    nextButton?.addEventListener("click", () => moveManually(-1));
 
     planes.forEach((plane) => {
       plane.addEventListener("click", () => {
         if (pointerMoved || frame) return;
+        stopAutoplay();
         const slot = Number(plane.dataset.slot) || 0;
         const planeAngle = normalizeAngle(slot * stepAngle + angle);
         startMotion(angle - planeAngle);
@@ -254,11 +407,21 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
       if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
       event.preventDefault();
       event.stopImmediatePropagation();
-      moveBy(event.key === "ArrowLeft" ? 1 : -1);
+      moveManually(event.key === "ArrowLeft" ? 1 : -1);
+    });
+
+    carousel.addEventListener("selectstart", (event) => {
+      event.preventDefault();
+    });
+
+    carousel.addEventListener("dragstart", (event) => {
+      event.preventDefault();
     });
 
     stage.addEventListener("pointerdown", (event) => {
       if (frame || (event.pointerType === "mouse" && event.button !== 0)) return;
+      event.preventDefault();
+      stopAutoplay();
       dragging = true;
       pointerId = event.pointerId;
       pointerStartX = event.clientX;
@@ -296,14 +459,39 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
       try { await image.decode(); } catch { /* Keep the normal load result as a fallback. */ }
       image.classList.add("is-ready");
     };
-    backgrounds.forEach((background) => {
-      background.dataset.source = background.getAttribute("src") ?? "";
-      void revealDecodedImage(background);
+    const initializeOutfits = () => {
+      if (initialized) return;
+      initialized = true;
+      backgrounds.forEach((background) => {
+        const images = Array.from(background.querySelectorAll<HTMLImageElement>("img[data-src]"));
+        images.forEach((image) => {
+          if (image.dataset.src) image.src = image.dataset.src;
+        });
+        void Promise.all(images.map(async (image) => {
+          try { await image.decode(); } catch { /* Keep the normal load result as a fallback. */ }
+        })).then(() => background.classList.add("is-ready"));
+      });
+      render();
+      scheduleAutoplay();
+    };
+
+    window.addEventListener("bella:pagewillchange", (event) => {
+      const detail = (event as CustomEvent<{ toHash?: string }>).detail;
+      isOutfitPageActive = detail?.toHash === "#outfits";
+      if (isOutfitPageActive) {
+        initializeOutfits();
+        scheduleAutoplay();
+      } else stopAutoplay();
     });
-    carousel.querySelectorAll<HTMLImageElement>(".outfit-figure img, .outfit-reflection img").forEach((image) => {
-      void revealDecodedImage(image);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stopAutoplay();
+      else scheduleAutoplay();
     });
-    render();
+    reducedMotion.addEventListener("change", scheduleAutoplay);
+    if (isOutfitPageActive) {
+      initializeOutfits();
+      scheduleAutoplay();
+    }
   }
 </script>
 
@@ -312,25 +500,42 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
     --outfit-coral: #db7d74;
     color: #fff8f4;
     background: #111519;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   .outfit-backgrounds,
   .outfit-background,
+  .outfit-background img,
   .outfit-wash,
   .outfit-rays { position: absolute; inset: 0; }
 
   .outfit-backgrounds { overflow: hidden; background: #162329; }
   .outfit-background {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
     opacity: 0;
     scale: 1.055;
-    filter: saturate(.82) contrast(1.03) brightness(.68);
     transition: opacity 1.15s cubic-bezier(.22,.75,.22,1), scale 1.8s cubic-bezier(.22,.75,.22,1);
   }
   .outfit-background.is-active.is-ready { opacity: 1; scale: 1; }
+  .outfit-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--outfit-bg-position, center);
+    filter: saturate(.82) contrast(1.03) brightness(.68);
+  }
+  .outfit-background-blur { opacity: 0; }
+  .outfit-background[data-fit="portrait"] .outfit-background-blur {
+    opacity: 1;
+    scale: 1.075;
+    filter: blur(22px) saturate(.72) brightness(.52);
+  }
+  .outfit-background[data-fit="portrait"] .outfit-background-art {
+    object-fit: contain;
+    object-position: var(--outfit-bg-position, center top);
+    filter: saturate(.78) contrast(1.02) brightness(.62);
+    box-shadow: 0 0 54px 18px rgba(26,18,31,.42);
+  }
 
   .outfit-wash {
     z-index: 1;
@@ -354,6 +559,40 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
   .outfit-rays i:nth-child(1) { left: 33%; rotate: 18deg; }
   .outfit-rays i:nth-child(2) { left: 51%; rotate: -7deg; opacity: .24; }
   .outfit-rays i:nth-child(3) { left: 70%; rotate: -20deg; }
+  .outfit-orbit-stars { position: absolute; z-index: 2; inset: 2%; overflow: hidden; border-radius: inherit; pointer-events: none; }
+  .outfit-orbit-stars b {
+    position: absolute;
+    top: var(--star-y);
+    left: var(--star-x);
+    width: calc(3px + var(--star-index) * .028px);
+    height: calc(3px + var(--star-index) * .028px);
+    border-radius: 50%;
+    background: rgba(255,247,238,.9);
+    box-shadow: 0 0 9px 3px rgba(255,229,211,.52);
+    opacity: calc(.18 + var(--star-index) * .018);
+    animation: outfit-star-twinkle calc(4.8s + var(--star-index) * .17s) ease-in-out calc(var(--star-index) * -.29s) infinite;
+  }
+  .outfit-orbit-stars b:nth-child(4n) { width: 6px; height: 6px; border-radius: 0; background: #fff; clip-path: polygon(50% 0, 60% 39%, 100% 50%, 60% 61%, 50% 100%, 40% 61%, 0 50%, 40% 39%); box-shadow: none; filter: drop-shadow(0 0 7px rgba(255,226,206,.9)); }
+  .outfit-orbit-stars b:nth-child(5n) { background: #f2c77d; box-shadow: 0 0 8px 2px rgba(242,199,125,.38); }
+  .outfit-orbit-stars b:nth-child(7n) { background: #d9c7ff; box-shadow: 0 0 8px 2px rgba(189,159,255,.32); }
+  @keyframes outfit-star-twinkle {
+    0%, 100% { opacity: .3; transform: scale(.78); }
+    42% { opacity: .96; transform: scale(1.18); }
+    65% { opacity: .48; transform: scale(.92); }
+  }
+  .outfit-change-flash {
+    position: absolute;
+    z-index: 215;
+    top: -20%;
+    left: 50%;
+    width: 2px;
+    height: 140%;
+    opacity: 0;
+    background: #fff;
+    box-shadow: 0 0 13px 3px rgba(255,255,255,.9), 0 0 42px 17px rgba(219,125,116,.55), 0 0 100px 34px rgba(113,202,208,.2);
+    pointer-events: none;
+    transform-origin: center;
+  }
 
   .outfit-heading { position: absolute; z-index: 220; top: clamp(102px, 14vh, 148px); left: clamp(24px, 5.7vw, 92px); pointer-events: none; }
   .outfit-heading p { margin: 0 0 8px; color: rgba(255,231,217,.72); font: 600 9px/1 system-ui,sans-serif; letter-spacing: .31em; }
@@ -368,6 +607,9 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
     perspective: 1200px;
     perspective-origin: 50% 47%;
     touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
     user-select: none;
   }
   .outfit-carousel:focus-visible::after { position: absolute; inset: 4px 18px; border: 1px solid rgba(255,230,216,.48); border-radius: 3px; content: ""; pointer-events: none; }
@@ -375,7 +617,7 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
   .outfit-stage { position: absolute; inset: 0; cursor: grab; transform-style: preserve-3d; }
   .outfit-carousel.is-dragging .outfit-stage { cursor: grabbing; }
 
-  .outfit-orbit { position: absolute; z-index: 0; left: 50%; bottom: -3%; width: min(86vw, 1250px); aspect-ratio: 3.7 / 1; translate: -50% 0; border: 1px solid rgba(255,222,202,.28); border-radius: 50%; transform: rotateX(64deg); box-shadow: inset 0 0 55px rgba(229,112,99,.12), 0 0 50px rgba(255,194,169,.12); }
+  .outfit-orbit { position: absolute; z-index: 0; left: 50%; bottom: -3%; width: min(86vw, 1250px); aspect-ratio: 3.7 / 1; border: 1px solid rgba(255,222,202,.28); border-radius: 50%; transform: translateX(-50%) rotateX(64deg); box-shadow: inset 0 0 55px rgba(229,112,99,.12), 0 0 50px rgba(255,194,169,.12); }
   .outfit-orbit::before,
   .outfit-orbit::after { position: absolute; border: 1px solid rgba(255,228,211,.16); border-radius: inherit; content: ""; }
   .outfit-orbit::before { inset: 13%; }
@@ -391,6 +633,7 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
     --outfit-z: 0px;
     --outfit-scale: 1;
     --outfit-opacity: 1;
+    --outfit-foot-gap: clamp(24px, 3.4vh, 38px);
     position: absolute;
     top: 0;
     left: 50%;
@@ -401,6 +644,11 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
     border: 0;
     outline: none;
     background: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
     opacity: var(--outfit-opacity);
     transform: translate3d(calc(-50% + var(--outfit-x)), var(--outfit-y), var(--outfit-z)) scale(var(--outfit-scale));
     transform-origin: 50% 86%;
@@ -408,22 +656,26 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
     will-change: transform, opacity;
     cursor: pointer;
   }
-  .outfit-figure { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; transform-style: preserve-3d; }
-  .outfit-figure img { display: block; width: auto; height: min(73vh, 100%); max-width: 100%; object-fit: contain; object-position: center bottom; opacity: 0; transform: scaleX(1); transform-origin: center; filter: drop-shadow(0 19px 21px rgba(0,0,0,.48)) drop-shadow(0 0 14px rgba(255,188,159,.12)); transition: filter .42s ease, opacity .38s ease; }
+  .outfit-figure { position: absolute; inset: calc(var(--outfit-foot-gap) * -.5) 0 var(--outfit-foot-gap); display: flex; align-items: flex-end; justify-content: center; transform-style: preserve-3d; }
+  .outfit-figure img { display: block; width: auto; height: min(73vh, 100%); max-width: none; object-fit: contain; object-position: center bottom; opacity: 0; transform: scaleX(1); transform-origin: center; filter: drop-shadow(0 19px 21px rgba(0,0,0,.48)) drop-shadow(0 0 14px rgba(255,188,159,.12)); transition: filter .42s ease, opacity .38s ease; }
   .outfit-figure img.is-ready { opacity: 1; }
   .outfit-plane.is-behind .outfit-figure img { transform: scaleX(-1); filter: brightness(0) saturate(0) drop-shadow(0 18px 18px rgba(0,0,0,.72)); }
   .outfit-plane.is-selected .outfit-figure img { filter: drop-shadow(0 22px 25px rgba(0,0,0,.5)) drop-shadow(0 0 21px rgba(255,207,179,.34)); }
   .outfit-plane:focus-visible .outfit-figure::after { position: absolute; inset: 7% 8% 3%; border: 1px solid rgba(255,225,207,.62); border-radius: 50%; content: ""; box-shadow: 0 0 24px rgba(219,125,116,.25); }
+  .outfit-figure,
+  .outfit-reflection,
+  .outfit-figure img,
+  .outfit-reflection img { -webkit-user-drag: none; -webkit-user-select: none; user-select: none; }
 
-  .outfit-reflection { position: absolute; z-index: -1; top: 88%; left: 50%; width: 100%; height: 32%; translate: -50% 0; overflow: hidden; opacity: .18; transform: scaleY(-1); transform-origin: top; filter: blur(1px); mask-image: linear-gradient(to bottom, rgba(0,0,0,.72), transparent 80%); pointer-events: none; }
-  .outfit-reflection img { display: block; width: auto; height: min(73vh, 313%); max-width: 100%; margin: 0 auto; object-fit: contain; object-position: center bottom; opacity: 0; transform: translateY(-68%); transition: opacity .38s ease; }
+  .outfit-reflection { position: absolute; z-index: -1; top: calc(100% - var(--outfit-foot-gap) + 2px); left: 50%; width: 100%; height: 32%; translate: -50% 0; overflow: hidden; opacity: .18; transform: scaleY(-1); transform-origin: top; filter: blur(1px); mask-image: linear-gradient(to bottom, rgba(0,0,0,.72), transparent 80%); pointer-events: none; }
+  .outfit-reflection img { display: block; width: auto; height: min(73vh, 313%); max-width: none; margin: 0 auto; object-fit: contain; object-position: center bottom; opacity: 0; transform: translateY(-68%); transition: opacity .38s ease; }
   .outfit-reflection img.is-ready { opacity: 1; }
   .outfit-plane.is-behind .outfit-reflection { opacity: 0; }
 
-  .outfit-arrow { position: absolute; z-index: 230; top: 52%; display: flex; min-width: clamp(118px, 12vw, 178px); min-height: 96px; align-items: center; justify-content: center; gap: 13px; padding: 28px 18px; border: 0; color: rgba(255,242,233,.76); background: none; font: 600 11px/1 system-ui,sans-serif; letter-spacing: .24em; cursor: pointer; translate: 0 -50%; transition: color .25s ease, opacity .25s ease, transform .25s ease; }
+  .outfit-arrow { position: absolute; z-index: 230; top: 52%; display: flex; min-width: clamp(142px, 14vw, 208px); min-height: 112px; align-items: center; justify-content: center; gap: 16px; padding: 32px 22px; border: 0; color: rgba(255,242,233,.82); background: none; font: 600 13px/1 system-ui,sans-serif; letter-spacing: .24em; cursor: pointer; translate: 0 -50%; transition: color .25s ease, opacity .25s ease, transform .25s ease; }
   .outfit-arrow-previous { left: clamp(5px, 2vw, 28px); }
   .outfit-arrow-next { right: clamp(5px, 2vw, 28px); }
-  .outfit-arrow i { position: relative; width: clamp(38px, 5vw, 76px); height: 1px; background: currentColor; box-shadow: 0 0 10px currentColor; }
+  .outfit-arrow i { position: relative; width: clamp(46px, 5.8vw, 88px); height: 1px; background: currentColor; box-shadow: 0 0 10px currentColor; }
   .outfit-arrow i::after { position: absolute; top: -3px; width: 7px; height: 7px; border-top: 1px solid currentColor; border-left: 1px solid currentColor; content: ""; }
   .outfit-arrow-previous i::after { left: 0; rotate: -45deg; }
   .outfit-arrow-next i::after { right: 0; rotate: 135deg; }
@@ -443,24 +695,24 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
 
   .outfit-instruction { position: absolute; z-index: 230; right: clamp(26px, 5vw, 78px); bottom: 30px; display: flex; align-items: center; gap: 8px; margin: 0; color: rgba(255,239,230,.48); font: 400 9px/1 system-ui,sans-serif; letter-spacing: .16em; }
   .outfit-instruction i { width: 4px; height: 4px; border-radius: 50%; background: var(--outfit-coral); box-shadow: 0 0 10px var(--outfit-coral); }
-  .outfit-page-number { position: absolute; z-index: 230; bottom: 29px; left: clamp(24px, 5.7vw, 92px); color: rgba(255,235,223,.44); font: 600 8px/1 system-ui,sans-serif; letter-spacing: .25em; }
 
   @media (max-width: 760px) {
+    .outfit-background[data-fit="portrait"] .outfit-background-blur { opacity: .38; filter: blur(16px) saturate(.72) brightness(.52); }
+    .outfit-background[data-fit="portrait"] .outfit-background-art { object-fit: cover; box-shadow: none; }
     .outfit-heading { top: calc(88px + env(safe-area-inset-top, 0px)); left: 18px; }
     .outfit-heading h1 { font-size: 32px; }
     .outfit-heading span { font-size: 9px; }
     .outfit-carousel { inset: calc(132px + env(safe-area-inset-top, 0px)) 0 calc(74px + env(safe-area-inset-bottom, 0px)); perspective: 850px; }
-    .outfit-plane { width: clamp(148px, 44vw, 210px); }
+    .outfit-plane { --outfit-foot-gap: clamp(30px, 5vh, 42px); width: clamp(148px, 44vw, 210px); }
     .outfit-figure img { height: min(64vh, 100%); }
-    .outfit-arrow { top: 55%; gap: 0; min-width: 58px; min-height: 58px; width: 58px; height: 58px; padding: 10px; border: 1px solid rgba(255,230,215,.25); border-radius: 50%; justify-content: center; background: rgba(12,18,20,.34); }
+    .outfit-arrow { top: 55%; gap: 0; min-width: 68px; min-height: 68px; width: 68px; height: 68px; padding: 12px; border: 1px solid rgba(255,230,215,.3); border-radius: 50%; justify-content: center; background: rgba(12,18,20,.4); }
     .outfit-arrow span { display: none; }
-    .outfit-arrow i { width: 19px; }
-    .outfit-arrow-previous { left: 10px; }
-    .outfit-arrow-next { right: 10px; }
+    .outfit-arrow i { width: 24px; }
+    .outfit-arrow-previous { left: 8px; }
+    .outfit-arrow-next { right: 8px; }
     .outfit-current { bottom: calc(29px + env(safe-area-inset-bottom, 0px)); }
     .outfit-current > i { display: none; }
     .outfit-instruction { display: none; }
-    .outfit-page-number { bottom: calc(15px + env(safe-area-inset-bottom, 0px)); left: 16px; }
     .outfit-orbit { width: 116vw; bottom: 3%; }
   }
 
@@ -475,5 +727,6 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
     .outfit-background,
     .outfit-figure img,
     .outfit-arrow { transition: none; }
+    .outfit-orbit-stars b { animation: none; }
   }
 </style>

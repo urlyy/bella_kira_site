@@ -25,7 +25,7 @@ body::before {
   z-index: -2;
   background:
     linear-gradient(90deg, rgba(7, 8, 26, .95) 0%, rgba(7, 8, 26, .66) 48%, rgba(7, 8, 26, .9) 100%),
-    url("/assets/26生日海报-无字.png") center 30% / cover;
+    url("/assets/optimized/game-bg.webp") center 30% / cover;
   filter: saturate(.8);
 }
 

@@ -1,40 +1,40 @@
 ---
 const isHome = Astro.url.pathname === "/";
 const isGames = Astro.url.pathname.startsWith("/games");
-const isNotice = Astro.url.pathname.startsWith("/notice");
 
 const navigation = [
   { label: "首页", href: "/#home", page: 0 },
   { label: "关于贝拉", href: "/#about", page: 1 },
   { label: "应援指南", href: "/#support", page: 2 },
-  { label: "服装展示", href: "/#outfits", page: 3 },
-  { label: "时光", href: "/#timeline", page: 4 },
-  { label: "表情包", href: "/#stickers", page: 5 },
-  { label: "画廊", href: "/#gallery", page: 6 },
-  { label: "同人文", href: "/#fiction", page: 7 },
-  { label: "枝江路标", href: "/#corner", page: 8 },
-  { label: "互动空间", href: isGames ? "/games/" : "/#space", page: 9 },
-  { label: "站点公告", href: "/notice/", route: "notice" },
+  { label: "一路繁花", href: "/#timeline", page: 3 },
+  { label: "服装展示", href: "/#outfits", page: 4 },
+  { label: "推荐视频", href: "/#watch", page: 5 },
+  { label: "表情包", href: "/#stickers", page: 6 },
+  { label: "画廊", href: "/#gallery", page: 7 },
+  { label: "同人文", href: "/#fiction", page: 8 },
+  { label: "枝江路标", href: "/#corner", page: 9 },
+  { label: "互动空间", href: isGames ? "/games/" : "/#space", page: 10 },
+  { label: "站点公告", href: "/#notice", page: 11 },
 ];
 
 const homeNavigation = navigation.filter((item) => Number.isInteger(item.page));
 const routeNavigation = navigation.filter((item) => !Number.isInteger(item.page));
-const initialMobileLabel = isGames ? "互动空间" : isNotice ? "站点公告" : "首页";
+const initialMobileLabel = isGames ? "互动空间" : "首页";
 
 ---
 
 <header class="site-header">
-  <a class="brand page-control" href="/#home" data-page={isHome ? "0" : undefined} aria-label="贝拉Kira 首页">
+  <a class="brand page-control" href="/#home" data-page={isHome ? "0" : undefined} aria-label="贝拉kira 首页">
     <strong>贝拉<span>Kira</span></strong>
   </a>
 
   <nav class="main-nav" aria-label="主导航">
     {navigation.map((item) => (
       <a
-        class:list={["nav-link", { "is-active": isHome ? item.page === 0 : (isGames && item.href === "/games/") || (isNotice && item.route === "notice") }]}
+        class:list={["nav-link", { "is-active": isHome ? item.page === 0 : isGames && item.href === "/games/" }]}
         href={item.href}
         data-page={isHome && Number.isInteger(item.page) ? item.page : undefined}
-        aria-current={isHome ? (item.page === 0 ? "page" : undefined) : ((isGames && item.href === "/games/") || (isNotice && item.route === "notice") ? "page" : undefined)}
+        aria-current={isHome ? (item.page === 0 ? "page" : undefined) : isGames && item.href === "/games/" ? "page" : undefined}
       >
         <span class="nav-link-label">{item.label}</span>
         <span class="nav-link-ornament" aria-hidden="true"><i></i></span>

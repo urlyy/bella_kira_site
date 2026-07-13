@@ -1,7 +1,7 @@
 :root { color-scheme: dark; --pink:#ff79b5; --purple:#9b7bff; --ink:#faf8ff; --muted:#aaa5c4; }
 * { box-sizing:border-box; }
 body { margin:0; min-height:100vh; overflow-x:hidden; color:var(--ink); font-family:Inter,"PingFang SC",system-ui,sans-serif; background:#09071a; }
-body::before { content:""; position:fixed; inset:0; z-index:-2; background:linear-gradient(90deg,rgba(7,5,20,.95),rgba(15,9,36,.65),rgba(7,5,20,.96)),url("/assets/26生日海报-无字.png") center 35%/cover; filter:saturate(.7); }
+body::before { content:""; position:fixed; inset:0; z-index:-2; background:linear-gradient(90deg,rgba(7,5,20,.95),rgba(15,9,36,.65),rgba(7,5,20,.96)),url("/assets/optimized/game-bg.webp") center 35%/cover; filter:saturate(.7); }
 body::after { content:""; position:fixed; inset:0; z-index:-1; opacity:.55; background-image:radial-gradient(circle,rgba(255,255,255,.7) 0 1px,transparent 1.5px); background-size:70px 70px; mask-image:linear-gradient(to bottom,#000,transparent 70%); }
 button { font:inherit; color:inherit; }
 .app { width:min(980px,calc(100% - 28px)); margin:auto; padding:36px 0 48px; }

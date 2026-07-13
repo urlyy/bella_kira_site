@@ -1,37 +1,47 @@
 {
-  "name": "bella-kira-fan-site",
-  "type": "module",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "prepare": "husky",
-    "dev": "astro dev",
-    "gallery:optimize": "node scripts/generate-gallery-previews.mjs",
-    "gallery:check": "node scripts/generate-gallery-previews.mjs --check",
-    "build": "npm run gallery:check && astro check && astro build",
-    "preview": "astro preview",
-    "check": "astro check"
-  },
-  "dependencies": {
-    "@astrojs/react": "latest",
-    "@tonejs/midi": "^2.0.28",
-    "@types/d3": "^7.4.3",
-    "astro": "latest",
-    "d3": "^7.9.0",
-    "gifenc": "^1.0.3",
-    "gsap": "latest",
-    "image-size": "^2.0.2",
-    "react": "latest",
-    "react-dom": "latest",
-    "three": "^0.169.0"
-  },
-  "devDependencies": {
-    "@astrojs/check": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "@types/three": "^0.169.0",
-    "husky": "^9.1.7",
-    "sharp": "^0.35.3",
-    "typescript": "latest"
-  }
+	"name": "bella-kira-fan-site",
+	"type": "module",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"prepare": "husky",
+		"dev": "astro dev",
+		"optimize": "npm run gallery:optimize && npm run cloth-bg:optimize && npm run stickers:optimize",
+		"optimize:check": "npm run gallery:check && npm run cloth-bg:check && npm run stickers:check",
+		"gallery:optimize": "node scripts/generate-gallery-previews.mjs",
+		"gallery:check": "node scripts/generate-gallery-previews.mjs --check",
+		"cloth-bg:optimize": "node scripts/generate-cloth-backgrounds.mjs",
+		"cloth-bg:check": "node scripts/generate-cloth-backgrounds.mjs --check",
+		"stickers:optimize": "node scripts/generate-sticker-previews.mjs",
+		"stickers:check": "node scripts/generate-sticker-previews.mjs --check",
+		"format": "prettier --write \"**/*.{json,js,jsx,mjs,cjs,ts,tsx,mts,cts}\"",
+		"format:check": "prettier --check \"**/*.{json,js,jsx,mjs,cjs,ts,tsx,mts,cts}\"",
+		"build": "npm run optimize:check && astro check && astro build",
+		"preview": "astro preview",
+		"check": "astro check",
+		"stop": "astro dev stop"
+	},
+	"dependencies": {
+		"@astrojs/react": "latest",
+		"@tonejs/midi": "^2.0.28",
+		"@types/d3": "^7.4.3",
+		"astro": "latest",
+		"d3": "^7.9.0",
+		"gifenc": "^1.0.3",
+		"gsap": "latest",
+		"image-size": "^2.0.2",
+		"react": "latest",
+		"react-dom": "latest",
+		"three": "^0.169.0"
+	},
+	"devDependencies": {
+		"@astrojs/check": "latest",
+		"@types/react": "latest",
+		"@types/react-dom": "latest",
+		"@types/three": "^0.169.0",
+		"husky": "^9.1.7",
+		"prettier": "3.9.5",
+		"sharp": "^0.35.3",
+		"typescript": "latest"
+	}
 }

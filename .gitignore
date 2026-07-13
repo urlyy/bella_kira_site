@@ -13,3 +13,6 @@ __pycache__/
 .env
 tools/multiview-gen/outputs/
 bili-fans-worker/data/
+
+upload_dist.sh
+dist.zip

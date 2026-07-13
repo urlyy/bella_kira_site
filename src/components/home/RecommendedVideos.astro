@@ -1,17 +1,46 @@
 ---
 import videoData from "../../content/recommended-videos.json";
+
+interface RecommendedVideo {
+  cover: string;
+  title: string;
+  url: string;
+  publishedAt: string;
+  coverWarning?: string;
+}
+
+const collections = videoData.collections as Array<{
+  id: string;
+  title: string;
+  items: RecommendedVideo[];
+}>;
+
+const optimizedCover = (cover: string) =>
+  cover
+    .replace("/assets/recommended-videos/covers/", "/assets/optimized/recommended-covers/")
+    .replace(/\.(?:png|jpe?g)$/i, ".webp");
 ---
 
-<section class="page watch-page" data-page-name="watch" aria-label="推荐观看">
+<section class="page watch-page" data-page-name="watch" aria-label="推荐视频">
   <div class="page-visual page-scroll-surface watch-visual">
     <header class="watch-heading">
       <p>RECOMMENDED · WATCH</p>
-      <h1>推荐观看</h1>
-      <span>从这里开始，遇见舞台上不同模样的贝拉。</span>
+      <h1>推荐视频</h1>
+      <span>从闪耀舞台到日常絮语，遇见贝拉的每一种模样。</span>
     </header>
 
+    <div class="watch-next-row">
+      <a class="watch-next" href="/#stickers" data-page="6">
+        <span>
+          <small>NEXT · STICKERS</small>
+          前往表情包
+        </span>
+        <i aria-hidden="true">→</i>
+      </a>
+    </div>
+
     <div class="collection-list">
-      {videoData.collections.map((collection) => (
+      {collections.map((collection) => (
         <section class="video-collection" aria-label={collection.title}>
           <h2>
             {collection.title}
@@ -20,12 +49,29 @@ import videoData from "../../content/recommended-videos.json";
           {collection.items.length > 0 ? (
             <div class="video-grid">
               {collection.items.map((video) => (
-                <a class="video-card" href={video.url} target="_blank" rel="noreferrer">
-                  <span class="video-cover">
-                    <img src={video.cover} alt="" draggable="false" loading="lazy" />
-                    <i aria-hidden="true">↗</i>
+                <a
+                  class:list={["video-card", { "video-card--warned": video.coverWarning }]}
+                  href={video.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span class:list={["video-cover", { "video-cover--warned": video.coverWarning }]}>
+                    <img
+                      data-src={optimizedCover(video.cover)}
+                      alt=""
+                      width="640"
+                      height="360"
+                      draggable="false"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    {video.coverWarning ? (
+                      <span class="video-cover-warning">{video.coverWarning}</span>
+                    ) : (
+                      <i aria-hidden="true">↗</i>
+                    )}
                   </span>
-                  <strong>{video.title}</strong>
+                  <strong><span>{video.title}</span></strong>
                   <time>{video.publishedAt}</time>
                 </a>
               ))}
@@ -37,6 +83,28 @@ import videoData from "../../content/recommended-videos.json";
       ))}
     </div>
 
-    <span class="watch-page-number" aria-hidden="true">03 / WATCH</span>
   </div>
 </section>
+
+<script>
+  const watchSurface = document.querySelector<HTMLElement>(".watch-visual");
+  const watchImages = Array.from(watchSurface?.querySelectorAll<HTMLImageElement>("img[data-src]") ?? []);
+  let watchImagesInitialized = false;
+  const watchImageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const image = entry.target as HTMLImageElement;
+      if (image.dataset.src) image.src = image.dataset.src;
+      observer.unobserve(image);
+    });
+  }, { root: watchSurface, rootMargin: "500px 0px", threshold: 0.01 });
+  const initializeWatchImages = () => {
+    if (watchImagesInitialized) return;
+    watchImagesInitialized = true;
+    watchImages.forEach((image) => watchImageObserver.observe(image));
+  };
+  window.addEventListener("bella:pagewillchange", (event) => {
+    if ((event as CustomEvent<{ toHash?: string }>).detail?.toHash === "#watch") initializeWatchImages();
+  });
+  if (window.location.hash === "#watch") initializeWatchImages();
+</script>

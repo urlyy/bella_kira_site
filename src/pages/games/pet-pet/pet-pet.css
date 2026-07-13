@@ -1,7 +1,7 @@
 :root { color-scheme: dark; }
 html:has(.pet-pet-app), body:has(.pet-pet-app) { overflow: auto; }
 .pet-pet-app { --ink:#fbf9ff; --muted:#aaa5bd; --line:rgba(255,255,255,.13); min-height:100vh; padding:42px max(14px,calc((100% - 980px)/2)) 70px; color:var(--ink); background:#080617; }
-.pet-pet-app::before { content:""; position:fixed; inset:0; z-index:0; background:linear-gradient(90deg,rgba(8,6,23,.97),rgba(18,12,42,.78),rgba(8,6,23,.97)),url("/assets/91FB39CFE72B76E6E7FF7A5576E2334E.jpg") center/cover; filter:blur(5px) saturate(.65); }
+.pet-pet-app::before { content:""; position:fixed; inset:0; z-index:0; background:linear-gradient(90deg,rgba(8,6,23,.97),rgba(18,12,42,.78),rgba(8,6,23,.97)),url("/assets/optimized/pet-stage.webp") center/cover; filter:blur(5px) saturate(.65); }
 .pet-pet-app::after { content:""; position:fixed; inset:0; z-index:0; background:radial-gradient(circle at 20% 20%,rgba(174,126,255,.18),transparent 30%),radial-gradient(circle at 82% 76%,rgba(230,105,166,.12),transparent 28%); pointer-events:none; }
 .pet-pet-app > * { position:relative; z-index:1; }
 .pet-pet-app header { margin:0 6px 25px; }

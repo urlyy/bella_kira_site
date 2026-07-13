@@ -3,10 +3,10 @@ const profile = [
   { label: "年龄", value: "19" },
   { label: "身高", value: "159cm" },
   { label: "体重", value: "48kg" },
-  { label: "血型", value: "A型" },
-  { label: "定位", value: "舞蹈担当" },
+  { label: "出道日", value: "2020年11月23日" },
+  { label: "定位", value: "队长兼舞蹈担当" },
   { label: "生日", value: "7月17日" },
-  { label: "印象", value: "喜欢爬山、老钱（伪）、B.King、晕3D", wide: true },
+  { label: "印象", value: "喜欢爬山、老钱(伪)、B.King、晕3D", wide: true },
 ];
 ---
 
@@ -16,6 +16,18 @@ const profile = [
       <p class="profile-kicker">ABOUT · BELLA KIRA</p>
       <h1>角色档案</h1>
       <dl class="profile-list">
+        <div class="profile-item--wide">
+          <dt>外号</dt>
+          <dd class="profile-nicknames">
+            <span>二宝、山药姐、小土妞、</span><span
+              class="fan-name-spoiler"
+              tabindex="0"
+              role="note"
+              aria-label="隐藏外号：老公"
+              title="悬停或聚焦查看"
+            >老公</span>
+          </dd>
+        </div>
         {profile.map((item) => (
           <div class:list={{ "profile-item--wide": item.wide }}>
             <dt>{item.label}</dt>
@@ -25,7 +37,7 @@ const profile = [
       </dl>
 
       <div class="fan-identity">
-        <img src="/assets/贝极星.png" alt="贝极星粉丝形象" draggable="false" />
+        <img src="/assets/optimized/beijixing.webp" alt="贝极星粉丝形象" decoding="async" draggable="false" />
         <span>
           <small>粉丝名</small>
           <strong class="fan-names">
@@ -100,6 +112,5 @@ const profile = [
         <span class="schedule-action">打开枝江日程表 <i aria-hidden="true">↗</i></span>
       </a>
     </div>
-    <span class="page-number" aria-hidden="true">02 / PROFILE</span>
   </div>
 </section>

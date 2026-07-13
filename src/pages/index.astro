@@ -2,6 +2,7 @@
 import HomeHero from "../components/home/HomeHero.astro";
 import PageNavigator from "../components/home/PageNavigator.astro";
 import ProfilePage from "../components/home/ProfilePage.astro";
+import RecommendedVideos from "../components/home/RecommendedVideos.astro";
 import SupportGuidePage from "../components/home/SupportGuidePage.astro";
 import OutfitPage from "../components/home/OutfitPage.astro";
 import SiteHeader from "../components/home/SiteHeader.astro";
@@ -12,29 +13,35 @@ import CursorStars from "../components/home/CursorStars.astro";
 import BeyondOrbitPage from "../components/home/BeyondOrbitPage.astro";
 import TimelinePage from "../components/home/TimelinePage.astro";
 import InteractiveSpacePage from "../components/home/InteractiveSpacePage.astro";
+import NoticePage from "../components/home/NoticePage.astro";
+import SitePreloader from "../components/home/SitePreloader.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 ---
 
-<SiteLayout title="贝拉Kira">
+<SiteLayout title="贝拉kira">
+  <SitePreloader />
   <main class="home-stage">
     <SiteHeader />
     <div class="page-track">
       <HomeHero />
       <ProfilePage />
       <SupportGuidePage />
-      <OutfitPage />
       <TimelinePage />
+      <OutfitPage />
+      <RecommendedVideos />
       <StickersPage />
       <GalleryPage />
       <FanFictionPage />
       <BeyondOrbitPage />
       <InteractiveSpacePage />
+      <NoticePage />
     </div>
     <div class="page-transition-line" aria-hidden="true">
-      <img class="transition-puller" src="/assets/贝极星.png" alt="" draggable="false" />
+      <img class="transition-puller" src="/assets/optimized/beijixing.webp" alt="" draggable="false" />
     </div>
-    <div class="edge-page-cue" aria-hidden="true">
-      <span>再次滚动</span>
+    <div class="scroll-cue" aria-hidden="true">
+      <span class="scroll-cue-label">向下滚动</span>
+      <i class="scroll-cue-mark"></i>
     </div>
   </main>
   <CursorStars />

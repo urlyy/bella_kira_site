@@ -1,23 +1,29 @@
 ---
-import { readdir } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
+import { imageSize } from "image-size";
 
 const galleryDirectory = new URL("../../../public/assets/gallery/", import.meta.url);
 const supportedImageExtensions = new Set([".avif", ".gif", ".jpeg", ".jpg", ".png", ".webp"]);
-const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
+const galleryEntries = (await readdir(galleryDirectory, { withFileTypes: true }))
   .filter((entry) => {
     if (!entry.isFile()) return false;
     const extension = entry.name.slice(entry.name.lastIndexOf(".")).toLowerCase();
     return supportedImageExtensions.has(extension);
   })
-  .sort((a, b) => a.name.localeCompare(b.name, "zh-CN", { numeric: true }))
-  .map((entry) => ({
+  .sort((a, b) => a.name.localeCompare(b.name, "zh-CN", { numeric: true }));
+const galleryItems = await Promise.all(galleryEntries.map(async (entry) => {
+  const dimensions = imageSize(await readFile(new URL(entry.name, galleryDirectory)));
+  return {
     originalSrc: `/assets/gallery/${encodeURIComponent(entry.name)}`,
     previewSrc: `/assets/gallery/previews/${encodeURIComponent(`${entry.name}.webp`)}`,
     alt: entry.name.replace(/\.[^.]+$/, ""),
-  }));
+    width: dimensions.width ?? 1,
+    height: dimensions.height ?? 1,
+  };
+}));
 ---
 
-<section class="page gallery-page" aria-label="画廊">
+<section class="page gallery-page" data-page-name="gallery" aria-label="画廊">
   <div class="page-visual gallery-scroll-surface gallery-visual">
     <header>
       <p>GALLERY · BELLA KIRA</p>
@@ -29,7 +35,7 @@ const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
       </small>
     </header>
     <div class="gallery-next-row">
-      <a class="gallery-next" href="/#fiction" data-page="7">
+      <a class="gallery-next" href="/#fiction" data-page="8">
         <span>
           <small>NEXT · FAN FICTION</small>
           前往同人文
@@ -39,7 +45,7 @@ const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
     </div>
     <div class="waterfall" data-gallery-grid>
       {galleryItems.map((item, index) => (
-        <figure data-gallery-item>
+        <figure data-gallery-item data-aspect-ratio={item.width / item.height}>
           <button
             class="gallery-open"
             type="button"
@@ -48,18 +54,17 @@ const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
             data-original-src={item.originalSrc}
             aria-label={`放大查看 ${item.alt}`}
           >
-            <img src={item.previewSrc} alt={item.alt} loading="lazy" decoding="async" draggable="false" />
+            <img data-src={item.previewSrc} alt={item.alt} width={item.width} height={item.height} loading="lazy" decoding="async" draggable="false" />
           </button>
         </figure>
       ))}
     </div>
-    <i class="number">07 / GALLERY</i>
   </div>
   <dialog class="gallery-lightbox" data-gallery-lightbox aria-label="图片放大查看">
     <button class="lightbox-close" type="button" data-lightbox-close aria-label="关闭图片查看">×</button>
     <button class="lightbox-nav lightbox-previous" type="button" data-lightbox-previous aria-label="查看上一张图片">←</button>
     <div class="lightbox-image-wrap" data-lightbox-image-wrap>
-      <img data-lightbox-image src="" alt="" draggable="false" />
+      <img data-lightbox-image alt="" draggable="false" />
       <span class="lightbox-loading" role="status">正在载入原图</span>
     </div>
     <button class="lightbox-nav lightbox-next" type="button" data-lightbox-next aria-label="查看下一张图片">→</button>
@@ -70,6 +75,28 @@ const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
 <script>
   const galleryGrid = document.querySelector<HTMLElement>("[data-gallery-grid]");
   const galleryItems = Array.from(document.querySelectorAll<HTMLElement>("[data-gallery-item]"));
+  const gallerySurface = document.querySelector<HTMLElement>(".gallery-visual");
+  let galleryImagesInitialized = false;
+  const galleryImageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const image = entry.target as HTMLImageElement;
+      if (image.dataset.src) image.src = image.dataset.src;
+      observer.unobserve(image);
+    });
+  }, { root: gallerySurface, rootMargin: "500px 0px", threshold: 0.01 });
+  const initializeGalleryImages = () => {
+    if (galleryImagesInitialized) return;
+    galleryImagesInitialized = true;
+    galleryItems.forEach((item) => {
+      const image = item.querySelector<HTMLImageElement>("img[data-src]");
+      if (image) galleryImageObserver.observe(image);
+    });
+  };
+  window.addEventListener("bella:pagewillchange", (event) => {
+    if ((event as CustomEvent<{ toHash?: string }>).detail?.toHash === "#gallery") initializeGalleryImages();
+  });
+  if (window.location.hash === "#gallery") initializeGalleryImages();
 
   const layoutGallery = () => {
     if (!galleryGrid) return;
@@ -78,9 +105,9 @@ const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
     const rowGap = Number.parseFloat(styles.rowGap);
 
     galleryItems.forEach((item) => {
-      const image = item.querySelector<HTMLImageElement>("img");
-      if (!image?.complete || image.naturalWidth === 0) return;
-      const displayedHeight = item.clientWidth * image.naturalHeight / image.naturalWidth;
+      const aspectRatio = Number(item.dataset.aspectRatio);
+      if (!aspectRatio) return;
+      const displayedHeight = item.clientWidth / aspectRatio;
       item.style.gridRowEnd = `span ${Math.ceil((displayedHeight + rowGap) / (rowHeight + rowGap))}`;
     });
   };
@@ -107,7 +134,7 @@ const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
     const originalSrc = openButton?.dataset.originalSrc;
     if (!sourceImage || !originalSrc) return;
     const requestId = ++imageRequestId;
-    lightboxImage.src = sourceImage.currentSrc || sourceImage.src;
+    lightboxImage.src = sourceImage.currentSrc || sourceImage.src || sourceImage.dataset.src || "";
     lightboxImage.alt = sourceImage.alt;
     lightboxImageWrap?.setAttribute("data-loading", "true");
     if (lightboxCount) lightboxCount.textContent = `${activeImageIndex + 1} / ${galleryItems.length}`;
@@ -150,7 +177,7 @@ const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
   lightbox?.addEventListener("close", () => {
     imageRequestId += 1;
     lightboxImageWrap?.removeAttribute("data-loading");
-    if (lightboxImage) lightboxImage.src = "";
+    lightboxImage?.removeAttribute("src");
   });
 </script>
 
@@ -362,7 +389,6 @@ const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
     letter-spacing: .2em;
     translate: -50% 0;
   }
-  .number { position: absolute; right: 2rem; bottom: 1rem; color: #ffffff55; font: normal .7rem sans-serif; letter-spacing: .24em; }
   @media (max-width: 900px) { .waterfall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 600px) {
     .gallery-visual { padding: calc(88px + env(safe-area-inset-top, 0px)) 14px calc(28px + env(safe-area-inset-bottom, 0px)); }
@@ -373,9 +399,9 @@ const galleryItems = (await readdir(galleryDirectory, { withFileTypes: true }))
     .waterfall { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .gallery-lightbox { padding: calc(3.8rem + env(safe-area-inset-top, 0px)) .75rem calc(3rem + env(safe-area-inset-bottom, 0px)); }
     .gallery-lightbox[open] { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto; }
-    .lightbox-image-wrap { grid-column: 1 / -1; }
+    .lightbox-image-wrap { grid-column: 1 / -1; grid-row: 1; }
     .lightbox-image-wrap img { max-height: calc(100dvh - 8.5rem); }
-    .lightbox-nav { justify-self: center; }
+    .lightbox-nav { grid-row: 2; justify-self: center; }
     .lightbox-previous { grid-column: 1; }
     .lightbox-next { grid-column: 2; }
   }

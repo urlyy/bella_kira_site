@@ -4,6 +4,15 @@ import { imageSize } from "image-size";
 import stickerData from "../../content/stickers.json";
 
 const looseStickerDirectory = new URL("../../../public/assets/stickers/fan-made/", import.meta.url);
+const optimizedLooseStickerDirectory = new URL("../../../public/assets/optimized/stickers/fan-made/", import.meta.url);
+const stickerManifest = JSON.parse(
+  await readFile(new URL("../../../public/assets/optimized/stickers/manifest.json", import.meta.url), "utf8"),
+);
+const versionedSticker = (sourcePath: string, optimizedPath: string) => {
+  const entry = stickerManifest.images[sourcePath];
+  if (!entry) throw new Error(`Missing optimized sticker manifest entry: ${sourcePath}`);
+  return `${optimizedPath}?v=${entry.outputHash.slice(0, 12)}`;
+};
 const supportedStickerExtensions = new Set([".avif", ".gif", ".jpeg", ".jpg", ".png", ".webp"]);
 const looseFanMadeFiles = (await readdir(looseStickerDirectory, { withFileTypes: true }))
   .filter((entry) => {
@@ -13,12 +22,17 @@ const looseFanMadeFiles = (await readdir(looseStickerDirectory, { withFileTypes:
   })
   .sort((a, b) => a.name.localeCompare(b.name, "zh-CN", { numeric: true }));
 const looseFanMade = await Promise.all(looseFanMadeFiles.map(async (entry) => {
-  const dimensions = imageSize(await readFile(new URL(entry.name, looseStickerDirectory)));
+  const optimizedName = entry.name.replace(/\.(?:gif|png|jpe?g|webp)$/i, ".webp");
+  const dimensions = imageSize(await readFile(new URL(optimizedName, optimizedLooseStickerDirectory)));
   if (!dimensions.width || !dimensions.height) {
     throw new Error(`Cannot determine sticker dimensions: ${entry.name}`);
   }
   return {
-    src: `/assets/stickers/fan-made/${entry.name}`,
+    src: versionedSticker(
+      `fan-made/${entry.name}`,
+      `/assets/optimized/stickers/fan-made/${optimizedName}`,
+    ),
+    originalSrc: `/assets/stickers/fan-made/${entry.name}`,
     width: dimensions.width,
     height: dimensions.height,
   };
@@ -32,6 +46,12 @@ const loosePages = Array.from(
   { length: Math.ceil(looseFanMade.length / loosePageSize) },
   (_, index) => looseFanMade.slice(index * loosePageSize, (index + 1) * loosePageSize),
 );
+const optimizedStickerSrc = (src: string) => {
+  const optimized = src
+    .replace("/assets/stickers/", "/assets/optimized/stickers/")
+    .replace(/\.(?:gif|png|jpe?g|webp)$/i, ".webp");
+  return versionedSticker(src.replace("/assets/stickers/", ""), optimized);
+};
 ---
 
 <section class="page stickers-page" data-page-name="stickers" aria-label="表情包">
@@ -73,14 +93,19 @@ const loosePages = Array.from(
               )}
               <div class="official-sticker-grid">
                 {group.items.map((src, index) => (
-                  <figure class="official-sticker">
+                  <figure
+                    class="official-sticker"
+                    data-sticker-original-src={src}
+                    role="button"
+                    tabindex="0"
+                    aria-label={`查看贝拉官方表情原图 · ${group.name} ${index + 1}`}
+                  >
                     <img
-                      data-src={src}
+                      data-src={optimizedStickerSrc(src)}
                       alt={`贝拉官方表情 · ${group.name} ${index + 1}`}
                       decoding="async"
                       draggable="false"
                     />
-                    <span aria-hidden="true">点击复制</span>
                   </figure>
                 ))}
               </div>
@@ -121,14 +146,19 @@ const loosePages = Array.from(
               )}
               <div class="fan-sticker-grid">
                 {group.items.map((src, index) => (
-                  <figure class="fan-sticker fan-sticker-series-item">
+                  <figure
+                    class="fan-sticker fan-sticker-series-item"
+                    data-sticker-original-src={src}
+                    role="button"
+                    tabindex="0"
+                    aria-label={`查看贝极星创作表情原图 · ${group.name} ${index + 1}`}
+                  >
                     <img
-                      data-src={src}
+                      data-src={optimizedStickerSrc(src)}
                       alt={`贝极星创作表情 · ${group.name} ${index + 1}`}
                       decoding="async"
                       draggable="false"
                     />
-                    <span aria-hidden="true">点击复制</span>
                   </figure>
                 ))}
               </div>
@@ -154,6 +184,10 @@ const loosePages = Array.from(
                           <figure
                             class="fan-sticker fan-sticker-loose-item"
                             data-aspect-ratio={sticker.width / sticker.height}
+                            data-sticker-original-src={sticker.originalSrc}
+                            role="button"
+                            tabindex="0"
+                            aria-label={`查看贝极星创作散图原图 ${String(index + 1).padStart(2, "0")}`}
                           >
                             <img
                               src={sticker.src}
@@ -164,7 +198,6 @@ const loosePages = Array.from(
                               decoding="async"
                               draggable="false"
                             />
-                            <span aria-hidden="true">点击复制</span>
                           </figure>
                         );
                       })}
@@ -189,19 +222,21 @@ const loosePages = Array.from(
       </div>
       {looseFanMade.length === 0 && stickerData.fanMadeGroups.length === 0 ? (
         <div class="fan-sticker-empty">
-          <img src="/assets/贝极星.png" alt="" loading="lazy" decoding="async" draggable="false" />
+          <img src="/assets/optimized/beijixing.webp" alt="" loading="lazy" decoding="async" draggable="false" />
           <p>贝极星们的表情包正在赶来的路上。</p>
         </div>
       ) : null}
     </section>
 
-    <span class="stickers-page-number" aria-hidden="true">06 / STICKERS</span>
   </div>
 
-  <div class="sticker-toast" data-sticker-toast role="status" aria-live="polite" aria-atomic="true">
-    <img src="/assets/贝极星.png" alt="" draggable="false" />
-    <span data-sticker-toast-message></span>
-  </div>
+  <dialog class="sticker-lightbox" data-sticker-lightbox aria-label="表情包原图查看">
+    <button class="sticker-lightbox-close" type="button" data-sticker-lightbox-close aria-label="关闭原图查看">×</button>
+    <div class="sticker-lightbox-image-wrap" data-sticker-lightbox-image-wrap>
+      <img data-sticker-lightbox-image alt="" draggable="false" />
+      <span role="status">正在载入原图</span>
+    </div>
+  </dialog>
 </section>
 
 <script>
@@ -392,81 +427,45 @@ const loosePages = Array.from(
 
   const stickerPage = document.querySelector<HTMLElement>("[data-page-name='stickers']");
   if (stickerPage) observeDeferredImages(stickerPage);
-  const toast = stickerPage?.querySelector<HTMLElement>("[data-sticker-toast]");
-  const toastMessage = toast?.querySelector<HTMLElement>("[data-sticker-toast-message]");
-  let toastTimer: number | undefined;
 
-  const showToast = (message: string, state: "success" | "error") => {
-    if (!toast || !toastMessage) return;
+  const stickerLightbox = document.querySelector<HTMLDialogElement>("[data-sticker-lightbox]");
+  const stickerLightboxImage = stickerLightbox?.querySelector<HTMLImageElement>("[data-sticker-lightbox-image]");
+  const stickerLightboxImageWrap = stickerLightbox?.querySelector<HTMLElement>("[data-sticker-lightbox-image-wrap]");
+  let stickerImageRequestId = 0;
 
-    window.clearTimeout(toastTimer);
-    toastMessage.textContent = message;
-    toast.dataset.state = state;
-    toast.classList.remove("is-visible");
-    void toast.offsetWidth;
-    toast.classList.add("is-visible");
-
-    toastTimer = window.setTimeout(() => {
-      toast.classList.remove("is-visible");
-    }, 2200);
-  };
-
-  const copySticker = async (sticker: HTMLElement) => {
-    const image = sticker.querySelector<HTMLImageElement>("img");
-    if (!image || sticker.dataset.copying === "true") return;
-
-    sticker.dataset.copying = "true";
-
-    try {
-      if (!navigator.clipboard?.write || typeof ClipboardItem === "undefined") {
-        throw new Error("Image clipboard is unavailable");
-      }
-
-      const response = await fetch(image.currentSrc || image.src);
-      if (!response.ok) throw new Error("Sticker request failed");
-      const blob = await response.blob();
-      await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
-      showToast("表情包已复制，快去粘贴吧！", "success");
-    } catch {
-      showToast("复制失败，请检查浏览器剪贴板权限", "error");
-    } finally {
-      delete sticker.dataset.copying;
-    }
+  const openStickerOriginal = (sticker: HTMLElement) => {
+    const src = sticker.dataset.stickerOriginalSrc;
+    if (!src || !stickerLightbox || !stickerLightboxImage) return;
+    const requestId = ++stickerImageRequestId;
+    stickerLightboxImageWrap?.setAttribute("data-loading", "true");
+    stickerLightboxImage.alt = sticker.getAttribute("aria-label") ?? "表情包原图";
+    stickerLightboxImage.src = src;
+    stickerLightbox.showModal();
+    const reveal = () => {
+      if (requestId === stickerImageRequestId) stickerLightboxImageWrap?.removeAttribute("data-loading");
+    };
+    stickerLightboxImage.addEventListener("load", reveal, { once: true });
+    stickerLightboxImage.addEventListener("error", reveal, { once: true });
   };
 
   stickerPage?.addEventListener("click", (event) => {
-    const target = event.target as HTMLElement;
-    const sticker = target.closest<HTMLElement>(".official-sticker, .fan-sticker");
-    if (sticker) void copySticker(sticker);
+    const sticker = (event.target as HTMLElement).closest<HTMLElement>("[data-sticker-original-src]");
+    if (sticker) openStickerOriginal(sticker);
   });
-
   stickerPage?.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" && event.key !== " ") return;
-    const target = event.target as HTMLElement;
-    const sticker = target.closest<HTMLElement>(".official-sticker, .fan-sticker");
+    const sticker = (event.target as HTMLElement).closest<HTMLElement>("[data-sticker-original-src]");
     if (!sticker) return;
-
     event.preventDefault();
-    void copySticker(sticker);
+    openStickerOriginal(sticker);
   });
-
-  const prepareSticker = (sticker: HTMLElement) => {
-    sticker.tabIndex = 0;
-    sticker.setAttribute("role", "button");
-    const image = sticker.querySelector<HTMLImageElement>("img");
-    sticker.setAttribute("aria-label", `${image?.alt || "表情包"}，点击复制图片`);
-  };
-
-  stickerPage?.querySelectorAll<HTMLElement>(".fan-sticker").forEach(prepareSticker);
-  const stickerObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      mutation.addedNodes.forEach((node) => {
-        if (!(node instanceof HTMLElement)) return;
-        if (node.matches(".official-sticker, .fan-sticker")) prepareSticker(node);
-        node.querySelectorAll<HTMLElement>(".official-sticker, .fan-sticker").forEach(prepareSticker);
-      });
-    });
+  stickerLightbox?.querySelector("[data-sticker-lightbox-close]")?.addEventListener("click", () => stickerLightbox.close());
+  stickerLightbox?.addEventListener("click", (event) => {
+    if (event.target === stickerLightbox) stickerLightbox.close();
   });
-
-  if (stickerPage) stickerObserver.observe(stickerPage, { childList: true, subtree: true });
+  stickerLightbox?.addEventListener("close", () => {
+    stickerImageRequestId += 1;
+    stickerLightboxImageWrap?.removeAttribute("data-loading");
+    stickerLightboxImage?.removeAttribute("src");
+  });
 </script>

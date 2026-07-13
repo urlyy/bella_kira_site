@@ -6,9 +6,8 @@
   const mobileNavLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>(".mobile-menu-link[data-page]"));
   const mobileCurrentPage = document.querySelector<HTMLElement>(".mobile-current-page");
   const transitionLine = document.querySelector<HTMLElement>(".page-transition-line");
-  const edgeCue = document.querySelector<HTMLElement>(".edge-page-cue");
+  const scrollCue = document.querySelector<HTMLElement>(".scroll-cue");
   const heroVideo = document.querySelector<HTMLVideoElement>(".hero-video");
-  const heroFreezeFrame = document.querySelector<HTMLCanvasElement>(".hero-freeze-frame");
   const heroPlayToggle = document.querySelector<HTMLButtonElement>(".hero-play-toggle");
   const heroPlayIcon = heroPlayToggle?.querySelector<HTMLElement>("[aria-hidden='true']");
   const heroPlayLabel = heroPlayToggle?.querySelector<HTMLElement>(".hero-control-label");
@@ -16,64 +15,18 @@
   const heroSpeedValue = heroSpeedToggle?.querySelector<HTMLElement>(".hero-speed-value");
   const pageCount = pages.length;
   const transitionDuration = 800;
-  const wheelGestureGap = 42;
-  const minimumEdgeHold = 60;
-  const pageHashes = ["#home", "#about", "#support", "#outfits", "#timeline", "#stickers", "#gallery", "#fiction", "#corner", "#space"];
+  const pageHashes = ["#home", "#about", "#support", "#timeline", "#outfits", "#watch", "#stickers", "#gallery", "#fiction", "#corner", "#space", "#notice"];
   let currentPage = Math.max(0, pageHashes.indexOf(window.location.hash));
   let transitionLocked = false;
-  let armedEdge: "next" | "previous" | null = null;
-  let armedGestureId = -1;
-  let edgeArmedAt = 0;
-  let wheelGestureId = 0;
-  let lastWheelEventAt = 0;
-  let lastWheelMagnitude = 0;
   let userPausedHero = false;
   let touchStartX = 0;
   let touchStartY = 0;
   let touchStartedAt = 0;
+  let touchIdentifier = -1;
   let touchScrollSurface: HTMLElement | null = null;
   let touchStartedAtTop = false;
   let touchStartedAtBottom = false;
   const playbackRates = [1, 1.25, 1.5, 2, 0.75];
-
-  const freezeHeroVideo = () => {
-    if (!heroVideo || !heroFreezeFrame || heroVideo.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return;
-    const width = heroVideo.videoWidth;
-    const height = heroVideo.videoHeight;
-    if (!width || !height) return;
-
-    if (heroFreezeFrame.width !== width) heroFreezeFrame.width = width;
-    if (heroFreezeFrame.height !== height) heroFreezeFrame.height = height;
-    const context = heroFreezeFrame.getContext("2d");
-    if (!context) return;
-    context.drawImage(heroVideo, 0, 0, width, height);
-    heroFreezeFrame.classList.add("is-visible");
-  };
-
-  const revealLiveHeroAfterFrame = () => {
-    if (!heroVideo || !heroFreezeFrame || !heroFreezeFrame.classList.contains("is-visible")) return;
-    const reveal = () => heroFreezeFrame.classList.remove("is-visible");
-    if ("requestVideoFrameCallback" in heroVideo) {
-      heroVideo.requestVideoFrameCallback(() => requestAnimationFrame(reveal));
-    } else {
-      requestAnimationFrame(() => requestAnimationFrame(reveal));
-    }
-  };
-
-  const clearEdgeState = () => {
-    armedEdge = null;
-    armedGestureId = -1;
-    edgeArmedAt = 0;
-    edgeCue?.classList.remove("is-visible", "points-next", "points-previous");
-  };
-
-  const armEdge = (direction: "next" | "previous", gestureId: number) => {
-    armedEdge = direction;
-    armedGestureId = gestureId;
-    edgeArmedAt = performance.now();
-    edgeCue?.classList.remove("points-next", "points-previous");
-    edgeCue?.classList.add("is-visible", direction === "next" ? "points-next" : "points-previous");
-  };
 
   const updateNavigation = () => {
     navLinks.forEach((link) => {
@@ -92,17 +45,13 @@
     if (mobileCurrentPage && activeMobileLink?.dataset.pageLabel) {
       mobileCurrentPage.textContent = activeMobileLink.dataset.pageLabel;
     }
+    if (scrollCue) scrollCue.hidden = currentPage === pageCount - 1;
   };
 
   const playHeroVideo = () => {
     if (!heroVideo || userPausedHero) return;
-    if (!heroVideo.paused) {
-      revealLiveHeroAfterFrame();
-      return;
-    }
-    void heroVideo.play().then(() => {
-      revealLiveHeroAfterFrame();
-    }).catch(() => {
+    if (!heroVideo.paused) return;
+    void heroVideo.play().catch(() => {
       // Browsers may still reject scripted playback despite the muted video.
     });
   };
@@ -122,7 +71,6 @@
       playHeroVideo();
     } else {
       userPausedHero = true;
-      freezeHeroVideo();
       heroVideo.pause();
     }
   });
@@ -155,10 +103,9 @@
   };
 
   const showPage = (nextPage: number) => {
+    if (document.documentElement.classList.contains("is-site-preloading")) return;
     const clampedPage = Math.max(0, Math.min(pageCount - 1, nextPage));
     if (transitionLocked || clampedPage === currentPage) return;
-
-    clearEdgeState();
 
     const outgoing = pages[currentPage];
     const incoming = pages[clampedPage];
@@ -166,7 +113,6 @@
     transitionLocked = true;
 
     if (currentPage === 0) {
-      freezeHeroVideo();
       heroVideo?.pause();
     }
 
@@ -213,20 +159,7 @@
 
   window.addEventListener("wheel", (event) => {
     if (document.querySelector("dialog[open]")) return;
-    const wheelEventAt = performance.now();
-    const wheelGap = wheelEventAt - lastWheelEventAt;
-    const wheelMagnitude = Math.abs(event.deltaY);
-    const strongWheelStep = wheelMagnitude >= 48;
-    const renewedInput = wheelGap > 16
-      && lastWheelMagnitude > 0
-      && wheelMagnitude >= 12
-      && wheelMagnitude > lastWheelMagnitude * 1.7;
-    if (wheelGap > wheelGestureGap || strongWheelStep || renewedInput) wheelGestureId += 1;
-    lastWheelEventAt = wheelEventAt;
-    lastWheelMagnitude = wheelMagnitude;
-
     const scrollSurface = getCurrentScrollSurface();
-    const usesEdgeGate = scrollSurface?.classList.contains("page-scroll-surface") ?? false;
     const hasInternalScroll = Boolean(
       scrollSurface && scrollSurface.scrollHeight > scrollSurface.clientHeight + 2,
     );
@@ -235,49 +168,25 @@
       const canScrollDown = scrollSurface.scrollTop + scrollSurface.clientHeight < scrollSurface.scrollHeight - 2;
       const canScrollUp = scrollSurface.scrollTop > 2;
       if ((event.deltaY > 0 && canScrollDown) || (event.deltaY < 0 && canScrollUp)) {
-        if (armedEdge && wheelGestureId === armedGestureId) {
-          event.preventDefault();
-          return;
-        }
-        clearEdgeState();
-        return;
-      }
-
-      if (usesEdgeGate) {
-        event.preventDefault();
-        if (transitionLocked || Math.abs(event.deltaY) < 10) return;
-
-        const direction = event.deltaY > 0 ? "next" : "previous";
-        const targetPage = currentPage + (direction === "next" ? 1 : -1);
-        if (targetPage < 0 || targetPage >= pageCount) {
-          clearEdgeState();
-          return;
-        }
-        if (armedEdge !== direction) {
-          armEdge(direction, wheelGestureId);
-          return;
-        }
-
-        if (wheelGestureId === armedGestureId || wheelEventAt - edgeArmedAt < minimumEdgeHold) return;
-        showPage(targetPage);
         return;
       }
     }
 
-    clearEdgeState();
     if (transitionLocked || Math.abs(event.deltaY) < 10) return;
     event.preventDefault();
     if (event.deltaY > 0) moveForward();
     else showPage(currentPage - 1);
   }, { passive: false });
 
-  window.addEventListener("pointerdown", (event) => {
-    if (event.pointerType !== "touch" || !event.isPrimary || transitionLocked) return;
+  window.addEventListener("touchstart", (event) => {
+    if (event.touches.length !== 1 || transitionLocked) return;
     if (document.querySelector("dialog[open]") || document.documentElement.classList.contains("mobile-menu-open")) return;
     const target = event.target as Element | null;
     if (target?.closest("a,button,input,select,textarea,summary,[contenteditable='true'],.timeline-panel")) return;
-    touchStartX = event.clientX;
-    touchStartY = event.clientY;
+    const touch = event.touches[0];
+    touchIdentifier = touch.identifier;
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
     touchStartedAt = performance.now();
     touchScrollSurface = getCurrentScrollSurface();
     touchStartedAtTop = !touchScrollSurface || touchScrollSurface.scrollTop <= 2;
@@ -285,12 +194,17 @@
       || touchScrollSurface.scrollTop + touchScrollSurface.clientHeight >= touchScrollSurface.scrollHeight - 2;
   }, { passive: true });
 
-  window.addEventListener("pointerup", (event) => {
-    if (event.pointerType !== "touch" || !event.isPrimary || touchStartedAt === 0) return;
-    const deltaX = event.clientX - touchStartX;
-    const deltaY = event.clientY - touchStartY;
+  window.addEventListener("touchend", (event) => {
+    if (touchStartedAt === 0) return;
+    const touch = Array.from(event.changedTouches).find(
+      (candidate) => candidate.identifier === touchIdentifier,
+    );
+    if (!touch) return;
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
     const elapsed = performance.now() - touchStartedAt;
     touchStartedAt = 0;
+    touchIdentifier = -1;
     if (transitionLocked || elapsed > 900 || Math.abs(deltaY) < 64 || Math.abs(deltaY) < Math.abs(deltaX) * 1.25) return;
 
     if (touchScrollSurface) {
@@ -301,7 +215,10 @@
     else showPage(currentPage - 1);
   }, { passive: true });
 
-  window.addEventListener("pointercancel", () => { touchStartedAt = 0; }, { passive: true });
+  window.addEventListener("touchcancel", () => {
+    touchStartedAt = 0;
+    touchIdentifier = -1;
+  }, { passive: true });
 
   pageLinks.forEach((link) => {
     link.addEventListener("click", (event) => {

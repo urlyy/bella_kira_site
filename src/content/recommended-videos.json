@@ -1,76 +1,293 @@
 {
-  "collections": [
-    {
-      "id": "b",
-      "title": "动漫杂谈",
-      "items": [
-        {
-          "cover": "/assets/recommended-videos/covers/明末.png",
-          "title": "明末败犬如何同时收获眼泪与骂声，林翩翩与哀鸿如何沦落至此【贝拉】",
-          "url": "https://www.bilibili.com/video/BV1gBokB2E5Z/?vd_source=43b6af819307ca6bdad60477a02d8d1c",
-          "publishedAt": "2026-04-27"
-        },
-        {
-          "cover": "/assets/recommended-videos/covers/白色相簿.png",
-          "title": "15年前，这部作品定义了关系性，《白色相簿2》【贝拉】",
-          "url": "https://www.bilibili.com/video/BV1LJB3BXEWo/?vd_source=43b6af819307ca6bdad60477a02d8d1c",
-          "publishedAt": "2025-12-24"
-        },
-         {
-          "cover": "/assets/recommended-videos/covers/辉夜姬.png",
-          "title": "被诟病剧情，为什么《超时空辉夜姬》依旧征服了观众？",
-          "url": "https://www.bilibili.com/video/BV1pFFCzGE4m/?vd_source=43b6af819307ca6bdad60477a02d8d1c",
-          "publishedAt": "2026-02-07"
-        },
-         {
-          "cover": "/assets/recommended-videos/covers/战双.png",
-          "title": "BE美学的全力一击！战双为什么把我击坠了【贝拉】",
-          "url": "https://www.bilibili.com/video/BV1rdTL6vEvk/?vd_source=43b6af819307ca6bdad60477a02d8d1c",
-          "publishedAt": "2026-07-03"
-        },
-         {
-          "cover": "/assets/recommended-videos/covers/恋人不行.png",
-          "title": "曾一集爆火的《恋人不行》它最后到底行不行【贝拉】",
-          "url": "https://www.bilibili.com/video/BV1L44XzfEHo/?vd_source=43b6af819307ca6bdad60477a02d8d1c",
-          "publishedAt": "2025-10-14"
-        }
-        
-      ]
-    },
-     {
-      "id": "f",
-      "title": "跳舞",
-      "items": [
-        
-      ]
-    },
-    {
-      "id": "g",
-      "title": "翻唱",
-      "items": [
-        
-      ]
-    },
-    {
-      "id": "e",
-      "title": "直播神回",
-      "items": [
-        
-      ]
-    },
-    {
-      "id": "h",
-      "title": "早安电台",
-      "items": [
-        
-      ]
-    },
-    {
-      "id": "c",
-      "title": "和贝拉一起看迪迦奥特曼",
-      "items": [
-        
-      ]
-    }
-  ]
+	"collections": [
+		{
+			"id": "a",
+			"title": "动漫杂谈",
+			"items": [
+				{
+					"cover": "/assets/recommended-videos/covers/战双.png",
+					"title": "BE美学的全力一击！战双为什么把我击坠了【贝拉】",
+					"url": "https://www.bilibili.com/video/BV1rdTL6vEvk",
+					"publishedAt": "2026-07-03"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/明末.png",
+					"title": "明末败犬如何同时收获眼泪与骂声，林翩翩与哀鸿如何沦落至此【贝拉】",
+					"url": "https://www.bilibili.com/video/BV1gBokB2E5Z",
+					"publishedAt": "2026-04-27"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/辉夜姬.png",
+					"title": "被诟病剧情，为什么《超时空辉夜姬》依旧征服了观众？",
+					"url": "https://www.bilibili.com/video/BV1pFFCzGE4m",
+					"publishedAt": "2026-02-07"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/白色相簿.png",
+					"title": "15年前，这部作品定义了关系性，《白色相簿2》【贝拉】",
+					"url": "https://www.bilibili.com/video/BV1LJB3BXEWo",
+					"publishedAt": "2025-12-24"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/恋人不行.png",
+					"title": "曾一集爆火的《恋人不行》它最后到底行不行【贝拉】",
+					"url": "https://www.bilibili.com/video/BV1L44XzfEHo",
+					"publishedAt": "2025-10-14"
+				}
+			]
+		},
+		{
+			"id": "b",
+			"title": "歌舞",
+			"items": [
+				{
+					"cover": "/assets/recommended-videos/covers/除夕.png",
+					"title": "除夕人间一岁除，烟花绽后是春初",
+					"url": "https://www.bilibili.com/video/BV1StFpzaEXX",
+					"publishedAt": "2026-02-16"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/gridman.png",
+					"title": "【翻唱】快醒醒有人在入侵我们的世界！丨《Union》",
+					"url": "https://www.bilibili.com/video/BV19hwTzwETN",
+					"publishedAt": "2026-02-13"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/SPAGHETTI.png",
+					"title": "【冰火盛典】一口入魂🍝｜热气腾腾的《SPAGHETTI》来了",
+					"url": "https://www.bilibili.com/festival/2026BH?bvid=BV1uccczvEwT",
+					"publishedAt": "2026-02-08"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/一起跳起来with爱哥.png",
+					"title": "【贝拉&爱哥】让我们「 一起跳起来 」！！ | 贝拉原创曲",
+					"url": "https://www.bilibili.com/video/BV1ZRiMB5EjF",
+					"publishedAt": "2025-12-31"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/EXEC.png",
+					"title": "众神啊，请聆听我神圣的呼唤吧！| 《EXEC_COSMOFLIPS》",
+					"url": "https://www.bilibili.com/video/BV1S6BsB1EMF",
+					"publishedAt": "2025-12-22"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/golden.png",
+					"title": "属于我们的『Golden』时刻将再次来临",
+					"url": "https://www.bilibili.com/video/BV1B1qkBGED4",
+					"publishedAt": "2025-12-21"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/万千花蕊.png",
+					"title": "【万千花蕊慈母悲哀】翻唱",
+					"url": "https://www.bilibili.com/video/BV1U1SYBeE9v",
+					"publishedAt": "2025-12-03"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/演唱会maria.png",
+					"title": "【贝拉演唱会】Maria | 你已经足够美丽了",
+					"url": "https://www.bilibili.com/video/BV1bspQzqE4q",
+					"publishedAt": "2025-09-22"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/我以灵魂.png",
+					"title": "《我以灵魂注视你的心》｜贝拉个人单曲原创PV",
+					"url": "https://www.bilibili.com/video/BV1CtkbYvERW",
+					"publishedAt": "2024-12-28"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/snow_dancing.png",
+					"title": "【Snow Dancing】 | 有你在一起，就是每个冬日的奇迹",
+					"url": "https://www.bilibili.com/video/BV1nEk8YhEEU",
+					"publishedAt": "2024-12-22"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/若月亮没来.png",
+					"title": "温柔女声合唱「若月亮没来🌙」说唱催泪！“为何在如花似玉的年纪，经历那么多的不容易...”",
+					"url": "https://www.bilibili.com/video/BV1gykFYwE7o",
+					"publishedAt": "2024-12-18"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/蓓蕾.png",
+					"title": "『蓓蕾』现场版丨星星月亮颠倒，落入我的圈套吧~",
+					"url": "https://www.bilibili.com/video/BV1xe411y79n",
+					"publishedAt": "2023-12-14"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/一镜到底.png",
+					"title": "一镜到底！舞动吧，枝江！",
+					"url": "https://www.bilibili.com/video/BV1bu4y1H7F7",
+					"publishedAt": "2023-12-12"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/屋顶着火.png",
+					"title": "「屋顶着火」🔥警报拉响，即刻燃烧🔥 【贝拉翻跳】",
+					"url": "https://www.bilibili.com/video/BV11C4y1w7Qp",
+					"publishedAt": "2023-11-27"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/末路狂花.png",
+					"title": "V圈最狂！杀疯了！危险又迷人的「末路狂花」",
+					"url": "https://www.bilibili.com/video/BV1Sx4y1R7JS",
+					"publishedAt": "2023-07-16"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/除夕5人.png",
+					"title": "【原创音乐】《Re-sonance》MV正式版+初舞台",
+					"url": "https://www.bilibili.com/video/BV1K24y1X757?p=2",
+					"publishedAt": "2022-12-14"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/群青.png",
+					"title": "【PV】群青，但贝拉翻唱版",
+					"url": "https://www.bilibili.com/video/BV1FB4y187ZT",
+					"publishedAt": "2022-08-03"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/除夕5人.png",
+					"title": "【原创音乐】《除夕》A-SOUL全新团曲MV【2022拜年纪单品】",
+					"url": "https://www.bilibili.com/festival/2022bnj?bvid=BV1Ga41127eH",
+					"publishedAt": "2022-01-31"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/小城故事.png",
+					"title": "【翻唱】贝拉《小城故事》| 贝极星们新年快乐~（直播剪辑）",
+					"url": "https://www.bilibili.com/video/BV1BS4y1V7zA",
+					"publishedAt": "2022-01-28"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/走过咖啡屋.png",
+					"title": "【翻唱】贝拉《走过咖啡屋》❤【直播剪辑】",
+					"url": "https://www.bilibili.com/video/BV1Va411r7jp",
+					"publishedAt": "2021-12-28"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/shiny_dancer.png",
+					"title": "【全新单曲】《Shiny Dancer》完整版MV",
+					"url": "https://www.bilibili.com/video/BV1JM4y137qB",
+					"publishedAt": "2021-09-25"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/maria.png",
+					"title": "【a-soul/贝拉kira】她太会扭了，HSO 【maria】",
+					"url": "https://www.bilibili.com/video/BV1Hf4y1e7Yy",
+					"publishedAt": "2020-12-22"
+				}
+			]
+		},
+		{
+			"id": "d",
+			"title": "直播神回",
+			"items": [
+				{
+					"cover": "/assets/recommended-videos/covers/羞死.png",
+					"title": "【A-SOUL双播】贝拉&乃琳 2026.1.16 羞死了【直播录像】",
+					"url": "https://www.bilibili.com/video/BV1y2rCBNEdh",
+					"publishedAt": "2026-01-16"
+				}
+			]
+		},
+		{
+			"id": "e",
+			"title": "名场面",
+			"items": [
+				{
+					"cover": "/assets/recommended-videos/covers/土豆雷.png",
+					"title": "这是谁家小土豆雷没人要啊，先到先得",
+					"url": "https://www.bilibili.com/video/BV1h6Q2YXEjk",
+					"publishedAt": "2025-03-15"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/你也配.png",
+					"title": "大胆！你竟然想当我的___？",
+					"url": "https://www.bilibili.com/video/BV1j64y1n7kR",
+					"publishedAt": "2023-12-31"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/我不会直播.png",
+					"title": "“我不会直播，我只会跳跳舞唱唱歌，但是大家一直跟我说加油，所以我也就坚持下来了”",
+					"url": "https://www.bilibili.com/video/BV1Zg411T7mq",
+					"publishedAt": "2021-07-17"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/勇敢牛牛.png",
+					"title": "这口号可真是越喊越上头，今天你勇敢了吗？",
+					"url": "https://www.douyin.com/video/6980246688816532744",
+					"publishedAt": "2021-07-02",
+					"coverWarning": "此视频已被標記為重口。如閣下仍然執意決定要觀看，請閣下自行承受觀看後的後果。若有任何不適症狀，請立刻停止觀看並及時向醫師尋求幫助。"
+				}
+			]
+		},
+		{
+			"id": "f",
+			"title": "早安电台",
+			"items": [
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251110.png",
+					"title": "【贝拉/早安电台】2025.11.10【突击】早间KTV 直播录像",
+					"url": "https://www.bilibili.com/video/BV1LwCFBPEhx",
+					"publishedAt": "2025-11-10"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251014.png",
+					"title": "【贝拉/早安突击】2025.10.14 hello贝极星！直播录像",
+					"url": "https://www.bilibili.com/video/BV1xm4DzqEzF",
+					"publishedAt": "2025-10-14"
+				}
+			]
+		},
+		{
+			"id": "g",
+			"title": "和贝拉一起看迪迦奥特曼",
+			"items": [
+				{
+					"cover": "/assets/recommended-videos/covers/迪迦day3.png",
+					"title": "【A-SOUL】贝拉 2026.1.15 【突击】一起看迪迦day3！【直播录像】",
+					"url": "https://www.bilibili.com/video/BV1tmrfBSEFj",
+					"publishedAt": "2026-01-15"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/迪迦day2.png",
+					"title": "【A-SOUL】贝拉 2026.1.14 【突击】一起看迪迦day2！【直播录像】",
+					"url": "https://www.bilibili.com/video/BV1f5rnBZER7",
+					"publishedAt": "2026-01-14"
+				}
+			]
+		},
+		{
+			"id": "h",
+			"title": "歌单",
+			"items": [
+				{
+					"cover": "/assets/recommended-videos/covers/playlist1.png",
+					"title": "【Playlist】贝丽君金曲歌单🎧 | 更适合贝极星体质的经典老歌🥰 工作/治愈/放松",
+					"url": "https://www.bilibili.com/video/BV1b8fABiEu3",
+					"publishedAt": "2026-02-23"
+				}
+			]
+		},
+		{
+			"id": "i",
+			"title": "其他",
+			"items": [
+				{
+					"cover": "/assets/recommended-videos/covers/战双全录制.png",
+					"title": "【全对话配音】贝拉过战双帕弥什剧情合集",
+					"url": "https://www.bilibili.com/video/BV138516nED6",
+					"publishedAt": "2026"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/壁纸2.png",
+					"title": "请停止你的浏览！然后下载并且使用这一款风格多变的动态壁纸！！2.0",
+					"url": "https://www.bilibili.com/video/BV13CHZzREvp",
+					"publishedAt": "2025-09-14"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/壁纸1.png",
+					"title": "请停止你的浏览！然后下载并且使用这一款风格多变的动态壁纸！！",
+					"url": "https://www.bilibili.com/video/BV1XfKUzZEU7",
+					"publishedAt": "2025-06-28"
+				}
+			]
+		}
+	]
 }

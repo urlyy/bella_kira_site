@@ -1,0 +1,54 @@
+{
+  "settings": {
+    "version": 1,
+    "quality": 84,
+    "effort": 5
+  },
+  "images": {
+    "22生日会.png": {
+      "sourceHash": "0fe6a4ad53f5859c5cf86178b2af7a8631665cec7a2a00dd6994d9f360f4ec18",
+      "output": "22生日会.webp",
+      "outputHash": "83cf0226be4fd883b3e34a3432456bc10cb7b2fc954d8aba48e4c093fed0385f"
+    },
+    "25生日会.png": {
+      "sourceHash": "02fed9c5b6b17eadd85aee1782056b29d24da9c3ebe5b0dceec83673a34881ac",
+      "output": "25生日会.webp",
+      "outputHash": "4327bb100be6606227dad3a06dccde8c60047505d395d25fc9228d2a8b21d91c"
+    },
+    "白拉.jpg": {
+      "sourceHash": "b1eeb3030c452bf2fa5a610199491414353a4ec232d28505a7eb6b66d864f937",
+      "output": "白拉.webp",
+      "outputHash": "9120cd969734a1e9c19d58509ec9bbd2175b40af4db3f43b0438b37a9557d47c"
+    },
+    "毕方.png": {
+      "sourceHash": "6adbe316344aa5b0f17fb4adb272ca21de88bb41f7c9a3d412a4d5938c8dfee4",
+      "output": "毕方.webp",
+      "outputHash": "2a4f5d7a6435af8f13a1df0d0e8afed076f451d34a351ec088b154e74e55adbc"
+    },
+    "常服.png": {
+      "sourceHash": "d52b5f0a8e0e036ef616343102b67ff206030652af4871593ee97302a1167450",
+      "output": "常服.webp",
+      "outputHash": "8f0f5db1d3e1c900ede963cb05cb8ed7870fbc289db2a4f26a38fc2bac35daba"
+    },
+    "绿jk.png": {
+      "sourceHash": "5e360eeb451cd049db829ffc889157a0ac9f094216b80d1c45592b58cb6fe4f0",
+      "output": "绿jk.webp",
+      "outputHash": "575e9d7e03f66544bc450d7e5ad5388e7459a120f26a2e123f434ff107005154"
+    },
+    "松鼠睡衣.png": {
+      "sourceHash": "8452a342113df7234821d47261b97c94260867bb1ee2adbcac19cf07cb30e94b",
+      "output": "松鼠睡衣.webp",
+      "outputHash": "fc43c3882c975b6a1829a13ea2b2ff700a026dff8a24b1b5554572f4306b6fc7"
+    },
+    "五周年团服.png": {
+      "sourceHash": "07e9e0eed4d760cb1c7006008784f90fca50e283192c0dfb5200672c7c2e9958",
+      "output": "五周年团服.webp",
+      "outputHash": "e687f8ea7a64d298ccae4ce69a9d5fc804bc79bc6ec3c662c8b8f1af68d4634f"
+    },
+    "Snipaste_2026-07-11_03-34-17.png": {
+      "sourceHash": "f49f271b9e46158981764a92d9a23e74a2522968c0c0f8760d67b3e605f6b37a",
+      "output": "Snipaste_2026-07-11_03-34-17.webp",
+      "outputHash": "d57c1054cc70441734ad62dd0565d8330029667565c73a63d1174fab27634d4f"
+    }
+  }
+}

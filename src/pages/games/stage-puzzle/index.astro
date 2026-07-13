@@ -13,6 +13,10 @@ import gameUrl from "./_assets/game.js?url";
   <title>舞台复原 · 贝拉滑块拼图</title>
   <link rel="stylesheet" href={styleUrl}>
   <link rel="stylesheet" href={shellUrl}>
+  <style is:inline>
+    body::before { background-image: linear-gradient(90deg, rgba(7,5,20,.96), rgba(14,9,34,.73), rgba(7,5,20,.96)), url("/assets/optimized/game-bg.webp"); }
+    .tile { background-image: url("/assets/optimized/game-bg.webp"); }
+  </style>
 </head>
 <body>
   <main class="app">
@@ -49,7 +53,7 @@ import gameUrl from "./_assets/game.js?url";
       <div class="board-wrap">
         <div class="board" id="board" aria-label="拼图区域"></div>
         <div class="original" id="original" hidden>
-          <img id="originalImage" src="/assets/26生日海报-无字.png" alt="拼图完整原图" draggable="false">
+          <img id="originalImage" src="/assets/optimized/game-bg.webp" alt="拼图完整原图" decoding="async" draggable="false">
           <span>ORIGINAL</span>
         </div>
       </div>
