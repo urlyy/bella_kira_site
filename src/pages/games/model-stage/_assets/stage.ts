@@ -6,6 +6,24 @@ const canvas = document.querySelector<HTMLCanvasElement>("#model-canvas");
 const loading = document.querySelector<HTMLElement>("#model-loading");
 const progress = document.querySelector<HTMLElement>("#model-progress");
 const error = document.querySelector<HTMLElement>("#model-error");
+const capture = document.querySelector<HTMLButtonElement>("#stage-capture");
+const stageToast = document.querySelector<HTMLElement>("#stage-toast");
+const stageToastMessage = stageToast?.querySelector<HTMLElement>("span");
+let stageToastTimer: number | undefined;
+
+const showStageToast = (message: string, state: "success" | "error") => {
+	if (!stageToast || !stageToastMessage) return;
+	window.clearTimeout(stageToastTimer);
+	stageToastMessage.textContent = message;
+	stageToast.dataset.state = state;
+	stageToast.classList.remove("is-visible");
+	void stageToast.offsetWidth;
+	stageToast.classList.add("is-visible");
+	stageToastTimer = window.setTimeout(
+		() => stageToast.classList.remove("is-visible"),
+		2200,
+	);
+};
 
 type Axis = "x" | "y" | "z";
 type Angles = Record<Axis, number>;
@@ -362,7 +380,9 @@ if (canvas) {
 		canvas,
 		antialias: true,
 		alpha: true,
+		preserveDrawingBuffer: true,
 	});
+	renderer.setClearColor(0x000000, 0);
 	renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 	renderer.outputColorSpace = THREE.SRGBColorSpace;
 	renderer.shadowMap.enabled = true;
@@ -493,6 +513,7 @@ if (canvas) {
 			selectedBoneAxes.renderOrder = 52;
 			scene.add(selectedBoneAxes);
 			updateSkeletonVisibility();
+			if (capture) capture.disabled = false;
 			loading?.classList.add("is-done");
 			document.querySelector("#pose-panel")?.classList.add("is-ready");
 			applyPose(presets.natural);
@@ -581,6 +602,42 @@ if (canvas) {
 			}
 		}
 		renderer.render(scene, camera);
+	});
+
+	capture?.addEventListener("click", () => {
+		if (!model || capture.disabled) return;
+		capture.disabled = true;
+		const hiddenObjects = [
+			floor,
+			skeletonHelper,
+			skeletonNodes,
+			selectedBoneMarker,
+			selectedBoneLinks,
+			selectedBoneAxes,
+		].filter((object) => object !== null) as THREE.Object3D[];
+		const visibility = hiddenObjects.map((object) => object.visible);
+		const fog = scene.fog;
+		hiddenObjects.forEach((object) => (object.visible = false));
+		scene.fog = null;
+		renderer.render(scene, camera);
+		canvas.toBlob((blob) => {
+			hiddenObjects.forEach(
+				(object, index) => (object.visible = visibility[index]),
+			);
+			scene.fog = fog;
+			capture.disabled = false;
+			if (!blob) {
+				showStageToast("拍摄失败，请稍后再试", "error");
+				return;
+			}
+			const url = URL.createObjectURL(blob);
+			const link = document.createElement("a");
+			link.href = url;
+			link.download = `贝拉kira-透明模型-${new Date().toISOString().slice(0, 10)}.png`;
+			link.click();
+			window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+			showStageToast("透明背景模型照片已保存！", "success");
+		}, "image/png");
 	});
 }
 

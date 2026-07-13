@@ -19,6 +19,9 @@ import "./stage.css";
       <span class="camera-shortcut camera-shortcut-touch">单指旋转 · 双指捏合缩放 · 双指拖动平移</span>
     </div>
     <button class="pose-toggle" id="pose-toggle" type="button" aria-controls="pose-panel" aria-expanded="true">姿态编辑</button>
+    <button class="stage-capture" id="stage-capture" type="button" disabled>
+      <span aria-hidden="true">◎</span><b>拍摄模型</b>
+    </button>
     <aside class="pose-panel" id="pose-panel" aria-label="姿态编辑面板">
       <div class="pose-panel-head">
         <div><small>POSE STUDIO</small><strong>姿态编辑</strong></div>
@@ -111,6 +114,10 @@ import "./stage.css";
       <i></i><span>正在准备舞台</span><b id="model-progress">0%</b>
     </div>
     <div class="stage-error" id="model-error" hidden>模型加载失败，请刷新页面重试。</div>
+    <div class="stage-toast" id="stage-toast" role="status" aria-live="polite" aria-atomic="true">
+      <img src="/assets/optimized/beijixing.webp" alt="" decoding="async" draggable="false" />
+      <span></span>
+    </div>
     <a class="site-return" href="/games/" aria-label="返回互动空间">← 互动空间</a>
   </main>
   <CursorStars />
