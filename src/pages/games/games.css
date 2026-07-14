@@ -351,7 +351,7 @@ body:has(.standalone-games-page) {
   .games-intro { padding-top: calc(88px + env(safe-area-inset-top, 0px)); }
   .games-title-row { align-items: center; gap: 8px; }
   .games-title-row h1 { font-size: clamp(46px, 14vw, 54px); }
-  .games-head-model { flex: 0 0 120px; width: 120px; height: 112px; margin: -22px 0 -14px auto; }
+  .games-head-model { display: none; }
   .games-count { display: none; }
   .game-grid { grid-template-columns: 1fr; }
   .game-card,
@@ -367,4 +367,3 @@ body:has(.standalone-games-page) {
   .games-head-model canvas { transition: none; }
   .games-head-model-loading { animation: none; }
 }
-

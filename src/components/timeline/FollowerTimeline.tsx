@@ -188,7 +188,7 @@ export default function FollowerTimeline() {
 		[],
 	);
 	const showEvent = useCallback(
-		(event: EventMarker) => {
+		(event: EventMarker, syncSummary = false) => {
 			const chartState = chartStateRef.current;
 			if (!chartState || !points.length) return;
 			const pointBisect = d3.bisector<Point, Date>((d) => d.date).center;
@@ -202,7 +202,7 @@ export default function FollowerTimeline() {
 			);
 			const placeAbove = eventY > chartState.innerHeight * 0.68;
 			const placeLeft = eventX > chartState.innerWidth * 0.58;
-			setHovered(null);
+			setHovered(syncSummary ? nearest : null);
 			if (svgRef.current) {
 				d3.select(svgRef.current)
 					.select(".timeline-hover-focus")
@@ -646,10 +646,10 @@ export default function FollowerTimeline() {
 						: 0.12,
 				)
 				.on("pointerenter focus", (_pointerEvent, d) => {
-					showEvent(d);
+					showEvent(d, true);
 				})
 				.on("click", (_pointerEvent, d) => {
-					showEvent(d);
+					showEvent(d, true);
 				})
 				.on("keydown", (keyboardEvent, d) => {
 					if (
@@ -658,7 +658,7 @@ export default function FollowerTimeline() {
 					)
 						return;
 					keyboardEvent.preventDefault();
-					showEvent(d);
+					showEvent(d, true);
 				});
 			eventNodes
 				.append("circle")
@@ -830,7 +830,10 @@ export default function FollowerTimeline() {
 									<button
 										type="button"
 										className="timeline-event-close"
-										onClick={() => setActiveEvent(null)}
+										onClick={() => {
+											setActiveEvent(null);
+											setHovered(null);
+										}}
 										aria-label="关闭事件卡片"
 									>
 										×
@@ -910,6 +913,18 @@ export default function FollowerTimeline() {
 					</>
 				)}
 			</div>
+			<p className="timeline-footnote">
+				原始数据来源：
+				<a
+					href="https://zeroroku.com/bilibili/author/672353429"
+					target="_blank"
+					rel="noreferrer"
+				>
+					ZeroRoku
+				</a>
+				<span aria-hidden="true"> · </span>
+				当前增量数据来源：自制爬虫每日23时爬取
+			</p>
 		</section>
 	);
 }

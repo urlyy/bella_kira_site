@@ -14,6 +14,14 @@ export type TimelineEvent = {
 
 export const timelineEvents: TimelineEvent[] = [
 	{
+		id: "reach-10w-followers",
+		date: "2021-05-03",
+		title: "达成10万粉丝",
+		description:
+			"",
+		links: [],
+	},
+	{
 		id: "first-birthday-live",
 		date: "2021-07-16",
 		title: "一周年生日会",
@@ -111,6 +119,54 @@ export const timelineEvents: TimelineEvent[] = [
 		],
 	},
 	{
+		id: "smile",
+		date: "2022-09-30",
+		title: "与GSAS联合出品“粘土人 贝拉 A-SOUL“",
+		description: "",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://t.bilibili.com/711543787553292291",
+			},
+		],
+	},
+	{
+		id: "naodongbo",
+		date: "2023-05-09",
+		title: "上线脑洞波主题个性装扮",
+		description: "",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://www.bilibili.com/opus/793303652651499606",
+			},
+		],
+	},
+	{
+		id: "yinsheng",
+		date: "2023-05-22",
+		title: "贝拉·初夏伊始主题音声发售",
+		description: "",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://t.bilibili.com/798397483875041285",
+			},
+		],
+	},
+	{
+		id: "shanxin",
+		date: "2023-06-21",
+		title: "与山新联动直播：《舞担贝拉，来认识新朋友啦！》",
+		description: "",
+		links: [
+			{
+				label: "观看视频",
+				url: "https://www.bilibili.com/video/BV1xh411K7ep",
+			},
+		],
+	},
+	{
 		id: "third-birthday-live",
 		date: "2023-07-16",
 		title: "三周年生日会《向着星的方向》",
@@ -173,7 +229,7 @@ export const timelineEvents: TimelineEvent[] = [
 	{
 		id: "spring-festival-gala",
 		date: "2025-01-22",
-		title: "上网络春晚",
+		title: "登上网络春晚",
 		description: "A-SOUL登上网络春晚舞台，表演《寄明月》。",
 		links: [
 			{

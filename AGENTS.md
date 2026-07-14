@@ -10,7 +10,7 @@ The canonical user-facing name is `贝拉kira`. The current header wordmark rend
 
 - Treat the implementation in `src/` and the content files in `src/content/` as the source of truth. Update this document only with durable architecture, behavior, content, and maintenance rules; do not use it as a research log or brainstorm backlog.
 - Preserve the modular page structure. `src/pages/index.astro` is a thin home-page assembly surface; each chapter, the persistent header, and page navigation live in focused components.
-- After visual changes, inspect the rendered result at desktop and mobile sizes, including short and landscape viewports. Review composition, contrast, hierarchy, spacing, proportions, and readability over changing media—not only whether the project builds.
+- After visual changes, inspect the rendered result at desktop and mobile sizes in both dark and light themes, including short and landscape viewports. Review composition, contrast, hierarchy, spacing, proportions, and readability over changing media—not only whether the project builds.
 - Do not display decorative full-page labels in the `数字 / ENGLISH NAME` format. Functional pagination, content indices, and section numbers are allowed.
 - Reuse the Bella-themed toast treatment for actions that copy, generate, unlock, obtain, succeed, or fail. Do not rely only on silent completion or temporary button text.
 
@@ -19,11 +19,11 @@ The canonical user-facing name is `贝拉kira`. The current header wordmark rend
 - The site is a static Astro project. Astro owns routes and content assembly; React is used for stateful islands such as the D3 timeline; Three.js handles the PMX model stage; native DOM, Canvas, Web Audio, and GSAP support the remaining interactions.
 - Source code lives in `src/`; deployable media and models live in `public/assets/`; browser experiences live at `src/pages/games/<slug>/`. Do not recreate retired `research/` or `prototypes/` directories.
 - Content is maintained in:
-  - `src/content/recommended-videos.json`
-  - `src/content/stickers.json`
-  - `src/content/fan-fiction.json`
-  - `src/content/timeline-events.ts`
-  - `src/content/interactive-experiences.ts`
+    - `src/content/recommended-videos.json`
+    - `src/content/stickers.json`
+    - `src/content/fan-fiction.json`
+    - `src/content/timeline-events.ts`
+    - `src/content/interactive-experiences.ts`
 - JSON, JavaScript, and TypeScript use Prettier with tabs and a tab width of four. Run `npm run format` and `npm run format:check` as appropriate.
 - Every `*:optimize` command must have a corresponding read-only `*:check` command. Optimize scripts use source-content hashes and committed manifests for incremental generation and validation, not filesystem timestamps. Pages append manifest-derived output hashes to optimized asset URLs for automatic browser/CDN cache invalidation. `npm run optimize` generates all optimized assets, while `npm run optimize:check` validates them without modifying files.
 - `npm run build` runs `optimize:check`, Astro/TypeScript checks, and the static build. Husky runs `gallery:check` before commits and the complete build before pushes; GitHub Actions runs the same build on pushes and pull requests.

@@ -759,11 +759,29 @@
 		sans-serif;
 }
 .timeline-footnote {
+	position: relative;
+	z-index: 1;
 	margin: 13px 0 0;
 	text-align: center;
 	color: #a08ba4;
-	font-size: 9px;
-	letter-spacing: 0.22em;
+	font-size: clamp(10px, 0.75vw, 12px);
+	line-height: 1.55;
+	letter-spacing: 0.08em;
+}
+.timeline-footnote a {
+	color: #b36470;
+	text-decoration-color: rgba(179, 100, 112, 0.42);
+	text-underline-offset: 3px;
+}
+.timeline-footnote a:hover,
+.timeline-footnote a:focus-visible {
+	color: #8b4d5b;
+	text-decoration-color: currentColor;
+}
+.timeline-footnote a:focus-visible {
+	border-radius: 2px;
+	outline: 2px solid rgba(134, 98, 161, 0.7);
+	outline-offset: 3px;
 }
 
 .timeline-state {
@@ -1176,9 +1194,23 @@
 .timeline-page .timeline-context p,
 .timeline-page .timeline-summary > span,
 .timeline-page .timeline-summary em,
-.timeline-page .timeline-controls > span,
-.timeline-page .timeline-footnote {
+.timeline-page .timeline-controls > span {
 	color: rgba(215, 194, 220, 0.55);
+}
+
+.timeline-page .timeline-footnote {
+	color: rgba(225, 210, 229, 0.72);
+}
+
+.timeline-page .timeline-footnote a {
+	color: #e6a39d;
+	text-decoration-color: rgba(230, 163, 157, 0.4);
+}
+
+.timeline-page .timeline-footnote a:hover,
+.timeline-page .timeline-footnote a:focus-visible {
+	color: #ffd0ca;
+	text-decoration-color: currentColor;
 }
 
 .timeline-page .timeline-summary strong {
@@ -1381,7 +1413,7 @@
 
 @media (max-width: 720px) {
 	.timeline-page .follower-timeline {
-		padding: calc(84px + env(safe-area-inset-top, 0px)) 12px calc(10px + env(safe-area-inset-bottom, 0px));
+		padding: calc(84px + env(safe-area-inset-top, 0px)) 12px calc(16px + env(safe-area-inset-bottom, 0px));
 	}
 
 	.timeline-page .timeline-header {

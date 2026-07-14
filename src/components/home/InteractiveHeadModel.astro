@@ -10,6 +10,7 @@
 
 	const modelUrl = "/assets/3dmodel/tuanzi-web.glb?v=006306677e87852c";
 	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	const mobileViewport = window.matchMedia("(max-width: 640px)");
 
 	document.querySelectorAll<HTMLElement>("[data-head-model]").forEach((root) => {
 		if (root.dataset.initialized === "true") return;
@@ -22,15 +23,34 @@
 		let camera: THREE.PerspectiveCamera | undefined;
 		let scene: THREE.Scene | undefined;
 		let pivot: THREE.Group | undefined;
+		let hemisphereLight: THREE.HemisphereLight | undefined;
+		let keyLight: THREE.DirectionalLight | undefined;
+		let rimLight: THREE.DirectionalLight | undefined;
 		let frame = 0;
 		let loaded = false;
-		let active = !root.closest(".page");
+		let pageActive = !root.closest(".page");
+		let active = pageActive && !mobileViewport.matches;
 		let targetPitch = 0;
 		let targetYaw = 0;
 
 		const render = () => {
 			if (!renderer || !camera || !scene) return;
 			renderer.render(scene, camera);
+		};
+
+		const applyThemeLighting = (theme = document.documentElement.dataset.theme) => {
+			if (!renderer || !hemisphereLight || !keyLight || !rimLight) return;
+			const isLight = theme === "light";
+
+			renderer.toneMappingExposure = isLight ? 0.94 : 0.82;
+			hemisphereLight.color.setHex(isLight ? 0xfff8f3 : 0xfff3f7);
+			hemisphereLight.groundColor.setHex(isLight ? 0xa99bb7 : 0x251537);
+			hemisphereLight.intensity = isLight ? 1.15 : 0.85;
+			keyLight.color.setHex(isLight ? 0xffe9df : 0xffeadf);
+			keyLight.intensity = isLight ? 1.65 : 1.45;
+			rimLight.color.setHex(isLight ? 0x8f82ad : 0xb794ff);
+			rimLight.intensity = isLight ? 0.48 : 0.72;
+			render();
 		};
 
 		const animate = () => {
@@ -64,6 +84,7 @@
 		};
 
 		const load = () => {
+			if (mobileViewport.matches) return;
 			if (renderer) {
 				active = true;
 				syncAnimation();
@@ -79,18 +100,19 @@
 
 			renderer.outputColorSpace = THREE.SRGBColorSpace;
 			renderer.toneMapping = THREE.ACESFilmicToneMapping;
-			renderer.toneMappingExposure = 0.82;
 			scene = new THREE.Scene();
 			camera = new THREE.PerspectiveCamera(28, 1, 0.01, 20);
 			camera.position.set(0, 0, 2);
 
-			scene.add(new THREE.HemisphereLight(0xfff3f7, 0x251537, 0.85));
-			const keyLight = new THREE.DirectionalLight(0xffeadf, 1.45);
+			hemisphereLight = new THREE.HemisphereLight();
+			scene.add(hemisphereLight);
+			keyLight = new THREE.DirectionalLight();
 			keyLight.position.set(2.4, 3, 4);
 			scene.add(keyLight);
-			const rimLight = new THREE.DirectionalLight(0xb794ff, 0.72);
+			rimLight = new THREE.DirectionalLight();
 			rimLight.position.set(-3, 1.5, -2);
 			scene.add(rimLight);
+			applyThemeLighting();
 
 			resize();
 			const loader = new GLTFLoader();
@@ -122,7 +144,14 @@
 		};
 
 		const updateActiveState = (isActive: boolean) => {
-			active = isActive;
+			pageActive = isActive;
+			active = pageActive && !mobileViewport.matches;
+			if (active) load();
+			syncAnimation();
+		};
+
+		const updateViewportMode = () => {
+			active = pageActive && !mobileViewport.matches;
 			if (active) load();
 			syncAnimation();
 		};
@@ -140,7 +169,11 @@
 			updateActiveState(event.detail.hash === "#space");
 		}) as EventListener);
 		document.addEventListener("visibilitychange", syncAnimation);
+		document.addEventListener("bella:themechange", ((event: CustomEvent<{ theme: string }>) => {
+			applyThemeLighting(event.detail.theme);
+		}) as EventListener);
 		reducedMotion.addEventListener("change", syncAnimation);
+		mobileViewport.addEventListener("change", updateViewportMode);
 		new ResizeObserver(resize).observe(root);
 
 		if (!root.closest(".page") || window.location.hash === "#space") {
