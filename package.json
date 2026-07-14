@@ -5,7 +5,7 @@
 	"private": true,
 	"scripts": {
 		"prepare": "husky",
-		"dev": "astro dev",
+		"dev": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev",
 		"optimize": "npm run gallery:optimize && npm run cloth-bg:optimize && npm run stickers:optimize",
 		"optimize:check": "npm run gallery:check && npm run cloth-bg:check && npm run stickers:check",
 		"gallery:optimize": "node scripts/generate-gallery-previews.mjs",
@@ -16,10 +16,10 @@
 		"stickers:check": "node scripts/generate-sticker-previews.mjs --check",
 		"format": "prettier --write \"**/*.{json,js,jsx,mjs,cjs,ts,tsx,mts,cts}\"",
 		"format:check": "prettier --check \"**/*.{json,js,jsx,mjs,cjs,ts,tsx,mts,cts}\"",
-		"build": "npm run optimize:check && astro check && astro build",
-		"preview": "astro preview",
-		"check": "astro check",
-		"stop": "astro dev stop"
+		"build": "npm run optimize:check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
+		"preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
+		"check": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check",
+		"stop": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev stop"
 	},
 	"dependencies": {
 		"@astrojs/react": "latest",
@@ -36,9 +36,11 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "latest",
+		"@types/node": "^26.1.1",
 		"@types/react": "latest",
 		"@types/react-dom": "latest",
 		"@types/three": "^0.169.0",
+		"cross-env": "^10.1.0",
 		"husky": "^9.1.7",
 		"prettier": "3.9.5",
 		"sharp": "^0.35.3",

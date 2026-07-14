@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import "../styles/themes.css";
 
 interface Props {
   title?: string;
@@ -7,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = "Bella Kira",
-  description = "贝拉·克拉的非官方粉丝应援站",
+  title = "贝拉kira",
+  description = "贝拉kira 的非官方粉丝应援站",
 } = Astro.props;
 ---
 
@@ -18,7 +19,38 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#080713" />
+    <meta name="theme-color" content="#0d090c" />
+    <script is:inline>
+      (() => {
+        const storageKey = "bella-kira-theme";
+        const root = document.documentElement;
+        const colors = { dark: "#0d090c", light: "#f5f2f7" };
+        const getStoredTheme = () => {
+          try {
+            const value = window.localStorage.getItem(storageKey);
+            return value === "dark" || value === "light" ? value : null;
+          } catch {
+            return null;
+          }
+        };
+        const applyTheme = (theme, persist = false) => {
+          const nextTheme = theme === "light" ? "light" : "dark";
+          root.dataset.theme = nextTheme;
+          root.style.colorScheme = nextTheme;
+          document.querySelector('meta[name="theme-color"]')?.setAttribute("content", colors[nextTheme]);
+          if (persist) {
+            try {
+              window.localStorage.setItem(storageKey, nextTheme);
+            } catch {}
+          }
+          document.dispatchEvent(new CustomEvent("bella:themechange", { detail: { theme: nextTheme } }));
+          return nextTheme;
+        };
+        const storedTheme = getStoredTheme();
+        window.__bellaTheme = { apply: applyTheme, getStored: getStoredTheme };
+        applyTheme(storedTheme ?? "dark");
+      })();
+    </script>
     <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
     <link rel="icon" type="image/png" href="/assets/favicon/favicon-32.png?v=2" sizes="32x32" />
     <link rel="icon" type="image/png" href="/assets/favicon/favicon-16.png?v=2" sizes="16x16" />

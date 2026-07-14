@@ -23,7 +23,7 @@ const initialMobileLabel = isGames ? "互动空间" : "首页";
 
 ---
 
-<header class="site-header">
+<header class="site-header" data-home-route={isHome ? "true" : undefined}>
   <a class="brand page-control" href="/#home" data-page={isHome ? "0" : undefined} aria-label="贝拉kira 首页">
     <strong>贝拉<span>Kira</span></strong>
   </a>
@@ -42,8 +42,21 @@ const initialMobileLabel = isGames ? "互动空间" : "首页";
     ))}
   </nav>
 
+  <div class="desktop-header-tools">
+    <button class="theme-switch" type="button" role="switch" aria-checked="false">
+      <span class="theme-switch-track" aria-hidden="true">
+        <i class="theme-switch-gem"></i>
+      </span>
+    </button>
+  </div>
+
   <div class="mobile-header-actions">
     <span class="mobile-current-page" aria-live="polite">{initialMobileLabel}</span>
+    <button class="theme-switch theme-switch--mobile" type="button" role="switch" aria-checked="false">
+      <span class="theme-switch-track" aria-hidden="true">
+        <i class="theme-switch-gem"></i>
+      </span>
+    </button>
     <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-site-menu" aria-label="打开网站导航">
       <span></span><span></span>
     </button>
@@ -73,6 +86,45 @@ const initialMobileLabel = isGames ? "互动空间" : "首页";
 </div>
 
 <script is:inline>
+  const siteHeader = document.querySelector(".site-header");
+  const themeControls = [...document.querySelectorAll(".theme-switch")];
+  const syncThemeControls = () => {
+    const theme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+    const isLight = theme === "light";
+    themeControls.forEach((control) => {
+      control.setAttribute("aria-checked", String(isLight));
+      control.setAttribute("aria-label", isLight ? "当前为浅色主题，切换到深色主题" : "当前为深色主题，切换到浅色主题");
+      control.setAttribute("title", isLight ? "切换到深色主题" : "切换到浅色主题");
+    });
+  };
+  const syncThemeVisibility = (page) => {
+    const isHomeChapter = siteHeader?.dataset.homeRoute === "true" && page === 0;
+    themeControls.forEach((control) => { control.hidden = isHomeChapter; });
+  };
+
+  themeControls.forEach((control) => {
+    control.addEventListener("click", () => {
+      const root = document.documentElement;
+      const nextTheme = root.dataset.theme === "light" ? "dark" : "light";
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        root.classList.add("theme-is-changing");
+        window.setTimeout(() => root.classList.remove("theme-is-changing"), 360);
+      }
+      window.__bellaTheme?.apply(nextTheme, true);
+    });
+  });
+  document.addEventListener("bella:themechange", syncThemeControls);
+  window.addEventListener("bella:pagechange", (event) => {
+    syncThemeVisibility(Number(event.detail?.page));
+  });
+  window.addEventListener("storage", (event) => {
+    if (event.key !== "bella-kira-theme" || (event.newValue !== "dark" && event.newValue !== "light")) return;
+    window.__bellaTheme?.apply(event.newValue);
+  });
+  syncThemeControls();
+  const homeHashes = ["#home", "#about", "#support", "#timeline", "#outfits", "#watch", "#stickers", "#gallery", "#fiction", "#corner", "#space", "#notice"];
+  syncThemeVisibility(Math.max(0, homeHashes.indexOf(window.location.hash)));
+
   const currentNavLink = document.querySelector(".site-header .nav-link.is-active");
   const currentNav = currentNavLink?.closest(".main-nav");
   if (currentNavLink instanceof HTMLElement && currentNav instanceof HTMLElement) {

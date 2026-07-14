@@ -400,7 +400,24 @@ const optimizedStickerSrc = (src: string) => {
       if (group.classList.contains("fan-sticker-loose-group")) {
         writeLooseState({ open: true, page: readLooseState()?.page || 1 });
       }
-      if (!content || reduceMotion.matches) return;
+      if (!content) return;
+
+      const staggerStickers = () => {
+        if (reduceMotion.matches) return;
+        const stickers = Array.from(
+          content.querySelectorAll<HTMLElement>(
+            ".official-sticker, .fan-sticker-series-item, .fan-sticker-loose-item",
+          ),
+        );
+        stickers.forEach((sticker, index) => {
+          sticker.style.setProperty("--sticker-stagger", `${Math.min(index, 24) * 28}ms`);
+          sticker.classList.remove("is-stagger-in");
+          void sticker.offsetWidth;
+          sticker.classList.add("is-stagger-in");
+        });
+      };
+
+      if (reduceMotion.matches) return;
 
       group.dataset.motion = "opening";
       const animation = content.animate(
@@ -412,6 +429,7 @@ const optimizedStickerSrc = (src: string) => {
       );
 
       groupAnimations.set(group, animation);
+      requestAnimationFrame(staggerStickers);
       animation.onfinish = () => {
         delete group.dataset.motion;
         groupAnimations.delete(group);
@@ -469,3 +487,32 @@ const optimizedStickerSrc = (src: string) => {
     stickerLightboxImage?.removeAttribute("src");
   });
 </script>
+
+<style is:global>
+  .official-sticker.is-stagger-in,
+  .fan-sticker-series-item.is-stagger-in,
+  .fan-sticker-loose-item.is-stagger-in {
+    animation: sticker-stagger-in 520ms cubic-bezier(0.22, 1, 0.36, 1) var(--sticker-stagger, 0ms) both;
+  }
+
+  @keyframes sticker-stagger-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 14px, 0) scale(0.92);
+      filter: blur(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .official-sticker.is-stagger-in,
+    .fan-sticker-series-item.is-stagger-in,
+    .fan-sticker-loose-item.is-stagger-in {
+      animation: none;
+    }
+  }
+</style>
