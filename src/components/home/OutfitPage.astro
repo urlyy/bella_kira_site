@@ -87,7 +87,7 @@ const outfits = [
   },
   {
     image: versionedOutfit("军装.webp"),
-    background: versionedBackground("五周年团服.webp"),
+    background: versionedBackground("军装.webp"),
     backgroundFit: "cover",
     backgroundPosition: "center top",
     width: 681,
@@ -147,6 +147,7 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
     <p>BELLA · OUTFIT ARCHIVE</p>
     <h1>服装展示</h1>
     <span>沿着星轨，遇见每一种贝拉</span>
+    <small>立绘图片均为AI自制，非官图</small>
   </header>
 
   <div
@@ -644,6 +645,7 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
   .outfit-heading p { margin: 0 0 8px; color: rgba(255,231,217,.72); font: 600 9px/1 system-ui,sans-serif; letter-spacing: .31em; }
   .outfit-heading h1 { margin: 0; font-size: clamp(30px, 3.8vw, 57px); font-weight: 400; line-height: 1; letter-spacing: .13em; text-shadow: 0 4px 28px rgba(0,0,0,.4); }
   .outfit-heading span { display: block; margin-top: 12px; color: rgba(255,244,238,.66); font-size: 11px; letter-spacing: .16em; }
+  .outfit-heading small { display: table; margin-top: 10px; padding: 5px 8px; border: 1px solid rgba(219,125,116,.45); border-radius: 999px; color: rgba(255,244,238,.9); background: rgba(16,12,18,.5); box-shadow: 0 5px 18px rgba(0,0,0,.16); font: 500 9px/1.4 system-ui,sans-serif; letter-spacing: .08em; }
 
   .outfit-carousel {
     position: absolute;
@@ -748,6 +750,7 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
     .outfit-heading { top: calc(88px + env(safe-area-inset-top, 0px)); left: 18px; }
     .outfit-heading h1 { font-size: 32px; }
     .outfit-heading span { font-size: 9px; }
+    .outfit-heading small { margin-top: 8px; padding: 4px 7px; font-size: 8px; }
     .outfit-carousel { inset: calc(132px + env(safe-area-inset-top, 0px)) 0 calc(74px + env(safe-area-inset-bottom, 0px)); perspective: 850px; }
     .outfit-plane { --outfit-foot-gap: clamp(30px, 5vh, 42px); width: clamp(148px, 44vw, 210px); }
     .outfit-figure img { height: min(64vh, 100%); }
