@@ -96,6 +96,7 @@ When chapter order changes, update all of these together: `src/pages/index.astro
 - The outfit archive is a closed horizontal ring. The active full-body cutout is dominant at center with two visible neighbors on each side, nonlinear depth falloff, raised foot baseline, attached reflection, and a star-filled elliptical stage.
 - Dragging or previous/next controls rotate the ring without reusing the page wipe. The selected wallpaper crossfades independently. Portrait wallpapers use a complete clear artwork layer over a dim blurred cover-fill backing; landscape entries remain full bleed.
 - Outfit names are not shown. Each entry needs only a character cutout plus its background and fit metadata. The current implementation repeats a small archive to maintain at least nine ring planes and lazy-loads distant character/reflection images through `data-src`.
+- Outfit cutouts under `public/assets/clothes/` are converted to versioned WebP assets by `npm run clothes:optimize`; commit the source images, optimized files, and manifest together.
 
 ### 推荐视频、表情包、画廊与同人文
 

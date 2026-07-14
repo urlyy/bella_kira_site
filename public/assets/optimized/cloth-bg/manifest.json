@@ -30,10 +30,30 @@
       "output": "常服.webp",
       "outputHash": "8f0f5db1d3e1c900ede963cb05cb8ed7870fbc289db2a4f26a38fc2bac35daba"
     },
+    "黑拉.png": {
+      "sourceHash": "527cf6a7519ffba229315b8af1f5573341a1c4beb90bba3504bec151340d5929",
+      "output": "黑拉.webp",
+      "outputHash": "b176a9cffb93ce78532725c99ed3ab1d552a2834435ef221290bf905b520518e"
+    },
+    "军装.png": {
+      "sourceHash": "1a21154de335a931148e5e6c8fa8c0ae0acbc0fe61ac73a5ff19e1b32c69bb81",
+      "output": "军装.webp",
+      "outputHash": "1b39d7299264ed4c188e3f05f673d3de8bfaa67bf89c40dd9ac675aacf1873fd"
+    },
     "绿jk.png": {
       "sourceHash": "5e360eeb451cd049db829ffc889157a0ac9f094216b80d1c45592b58cb6fe4f0",
       "output": "绿jk.webp",
       "outputHash": "575e9d7e03f66544bc450d7e5ad5388e7459a120f26a2e123f434ff107005154"
+    },
+    "青苹果.png": {
+      "sourceHash": "b0b2e7c37bc8038825846d574cfe0283998e8ecc02c3cb71ebe7687d08a88952",
+      "output": "青苹果.webp",
+      "outputHash": "268da5189abb87f1486876157fc3eaa1aafd38cb41ec9b94dc70e2937940ec06"
+    },
+    "三周年团服.png": {
+      "sourceHash": "ad44edd0518f41fa849e81b57c9d28eb9374b6ec604b93fa0ea175706eaad3be",
+      "output": "三周年团服.webp",
+      "outputHash": "8841a790b6dff2ac51b0d6a805b0f09d95dbd568976b56d0fd5be0be8b4821da"
     },
     "松鼠睡衣.png": {
       "sourceHash": "8452a342113df7234821d47261b97c94260867bb1ee2adbcac19cf07cb30e94b",
@@ -44,6 +64,11 @@
       "sourceHash": "07e9e0eed4d760cb1c7006008784f90fca50e283192c0dfb5200672c7c2e9958",
       "output": "五周年团服.webp",
       "outputHash": "e687f8ea7a64d298ccae4ce69a9d5fc804bc79bc6ec3c662c8b8f1af68d4634f"
+    },
+    "pico.png": {
+      "sourceHash": "209738128e79d7c5f41c0559c2d8f05b8fc0a4ed9908e421b8bfc016a1c41a9f",
+      "output": "pico.webp",
+      "outputHash": "446afdc8d5a2bf864ba329abb5d9552b0241fdfb704838acd8a4078d2953581a"
     },
     "Snipaste_2026-07-11_03-34-17.png": {
       "sourceHash": "f49f271b9e46158981764a92d9a23e74a2522968c0c0f8760d67b3e605f6b37a",

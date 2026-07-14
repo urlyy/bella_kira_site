@@ -191,6 +191,12 @@
 			"title": "名场面",
 			"items": [
 				{
+					"cover": "/assets/recommended-videos/covers/我不会直播.png",
+					"title": "拉姐超绝唐笑",
+					"url": "https://www.bilibili.com/video/BV14Uy3BsEjz",
+					"publishedAt": "todo"
+				},
+				{
 					"cover": "/assets/recommended-videos/covers/土豆雷.png",
 					"title": "这是谁家小土豆雷没人要啊，先到先得",
 					"url": "https://www.bilibili.com/video/BV1h6Q2YXEjk",
@@ -201,6 +207,12 @@
 					"title": "大胆！你竟然想当我的___？",
 					"url": "https://www.bilibili.com/video/BV1j64y1n7kR",
 					"publishedAt": "2023-12-31"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/我不会直播.png",
+					"title": "因为逆天晚晚军的弹幕蚌埠住发出石矶娘娘笑声的贝拉 todotodo",
+					"url": "https://www.bilibili.com/video/BV1244y1i75Q",
+					"publishedAt": "2021-11-03"
 				},
 				{
 					"cover": "/assets/recommended-videos/covers/我不会直播.png",
@@ -219,17 +231,114 @@
 		},
 		{
 			"id": "f",
-			"title": "早安电台",
+			"title": "早安电台(超绝老公音~)",
 			"items": [
 				{
+					"cover": "/assets/recommended-videos/covers/早安电台20260511.png",
+					"title": "【贝拉/早安电台】早上好啊 直播录像",
+					"url": "https://www.bilibili.com/video/BV1v8546BE7s",
+					"publishedAt": "2026-05-11"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20260325.jpg",
+					"title": "【贝拉/早安电台】【突击】早上坏！贝极星 直播录像",
+					"url": "https://www.bilibili.com/video/BV1BxQ1BQEQK",
+					"publishedAt": "2026-03-25"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20260106.png",
+					"title": "【贝拉/早安电台】【突击】终于... 直播录像",
+					"url": "https://www.bilibili.com/video/BV1FHqFBfEBu",
+					"publishedAt": "2026-01-06"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251218.jpg",
+					"title": "【贝拉/早安电台】【突击】早上好！贝极星！ 直播录像",
+					"url": "https://www.bilibili.com/video/BV1QeqEBaEMg",
+					"publishedAt": "2025-12-18"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251216.jpg",
+					"title": "【贝拉/早安电台】【突击】早上坏！贝极星！ 直播录像",
+					"url": "https://www.bilibili.com/video/BV1ZHq8BgEqy",
+					"publishedAt": "2025-12-16"
+				},
+
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251212.jpg",
+					"title": "【贝拉/早安电台】【突击】早上好坏贝极星！直播录像",
+					"url": "https://www.bilibili.com/video/BV1BAm7BcEwz",
+					"publishedAt": "2025-12-12"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251205.jpg",
+					"title": "【贝拉/早安电台】【突击】早上好啊！ 直播录像",
+					"url": "https://www.bilibili.com/video/BV17223ByEzT",
+					"publishedAt": "2025-12-05"
+				},
+
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251203.jpg",
+					"title": "【贝拉/早安电台】【突击】我早起我超棒！ 直播录像",
+					"url": "https://www.bilibili.com/video/BV1zkSaBmESK",
+					"publishedAt": "2025-12-03"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251127.jpg",
+					"title": "【贝拉/早安电台】【突击】究竟是谁一大早直播啊！ 直播录像",
+					"url": "https://www.bilibili.com/video/BV1uxUzBUEmw",
+					"publishedAt": "2025-11-27"
+				},
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251121.png",
+					"title": "【贝拉/早安电台】【突击】好困啊！直播录像",
+					"url": "https://www.bilibili.com/video/BV1myyuBJEo3",
+					"publishedAt": "2025-11-21"
+				},
+
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251114.png",
+					"title": "【贝拉/早安电台】【突击】情人节快乐 直播录像",
+					"url": "https://www.bilibili.com/video/BV1DKCTBCEP2",
+					"publishedAt": "2025-11-14"
+				},
+				{
 					"cover": "/assets/recommended-videos/covers/早安电台20251110.png",
-					"title": "【贝拉/早安电台】2025.11.10【突击】早间KTV 直播录像",
+					"title": "【贝拉/早安电台】【突击】早间KTV 直播录像",
 					"url": "https://www.bilibili.com/video/BV1LwCFBPEhx",
 					"publishedAt": "2025-11-10"
 				},
+
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251107.png",
+					"title": "【贝拉/早安电台】【突击】小土妞历险记 直播录像",
+					"url": "https://www.bilibili.com/video/BV1jB2TBYEBF",
+					"publishedAt": "2025-11-07"
+				},
+
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251106.png",
+					"title": "【贝拉/早安电台】【突击】早上好贝极星 直播录像",
+					"url": "https://www.bilibili.com/video/BV1LK2FBGEq9",
+					"publishedAt": "2025-11-06"
+				},
+
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251024.jpg",
+					"title": "【贝拉/早安电台】早安贝极星 直播录像",
+					"url": "https://www.bilibili.com/video/BV1yXs7zTEtV",
+					"publishedAt": "2025-10-24"
+				},
+
+				{
+					"cover": "/assets/recommended-videos/covers/早安电台20251017.jpg",
+					"title": "【贝拉/早安电台】大家一起学剪辑 直播录像",
+					"url": "https://www.bilibili.com/video/BV1QGWkzmEzT",
+					"publishedAt": "2025-10-17"
+				},
 				{
 					"cover": "/assets/recommended-videos/covers/早安电台20251014.png",
-					"title": "【贝拉/早安突击】2025.10.14 hello贝极星！直播录像",
+					"title": "【贝拉/早安突击】hello贝极星！直播录像",
 					"url": "https://www.bilibili.com/video/BV1xm4DzqEzF",
 					"publishedAt": "2025-10-14"
 				}

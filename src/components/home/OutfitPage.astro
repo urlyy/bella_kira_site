@@ -4,27 +4,33 @@ import { readFile } from "node:fs/promises";
 const clothManifest = JSON.parse(
   await readFile(new URL("../../../public/assets/optimized/cloth-bg/manifest.json", import.meta.url), "utf8"),
 );
-const versionedBackground = (name: string) => {
-  const entry = Object.values(clothManifest.images).find((image: any) => image.output === name) as any;
-  return `/assets/optimized/cloth-bg/${name}?v=${entry.outputHash.slice(0, 12)}`;
+const clothesManifest = JSON.parse(
+  await readFile(new URL("../../../public/assets/optimized/clothes/manifest.json", import.meta.url), "utf8"),
+);
+const versionedAsset = (manifest: any, directory: string, name: string) => {
+  const entry = Object.values(manifest.images).find((image: any) => image.output === name) as any;
+  if (!entry) throw new Error(`Missing optimized asset manifest entry: ${directory}/${name}`);
+  return `/assets/optimized/${directory}/${name}?v=${entry.outputHash.slice(0, 12)}`;
 };
+const versionedBackground = (name: string) => versionedAsset(clothManifest, "cloth-bg", name);
+const versionedOutfit = (name: string) => versionedAsset(clothesManifest, "clothes", name);
 const outfits = [
   {
-    image: "/assets/optimized/clothes/毕方.webp",
+    image: versionedOutfit("毕方.webp"),
     background: versionedBackground("毕方.webp"),
     backgroundFit: "cover",
     width: 668,
     height: 2048,
   },
   {
-    image: "/assets/optimized/clothes/常服.webp",
+    image: versionedOutfit("常服.webp"),
     background: versionedBackground("常服.webp"),
     backgroundFit: "cover",
     width: 613,
     height: 2048,
   },
   {
-    image: "/assets/optimized/clothes/松鼠睡衣.webp",
+    image: versionedOutfit("松鼠睡衣.webp"),
     background: versionedBackground("松鼠睡衣.webp"),
     backgroundFit: "cover",
     backgroundPosition: "center top",
@@ -32,7 +38,7 @@ const outfits = [
     height: 2048,
   },
   {
-    image: "/assets/optimized/clothes/25年生日服.webp",
+    image: versionedOutfit("25年生日服.webp"),
     background: versionedBackground("25生日会.webp"),
     backgroundFit: "cover",
     backgroundPosition: "center top",
@@ -40,14 +46,14 @@ const outfits = [
     height: 2048,
   },
   {
-    image: "/assets/optimized/clothes/白拉.webp",
+    image: versionedOutfit("白拉.webp"),
     background: versionedBackground("白拉.webp"),
     backgroundFit: "cover",
     width: 998,
     height: 2048,
   },
   {
-    image: "/assets/optimized/clothes/jk绿.webp",
+    image: versionedOutfit("jk绿.webp"),
     background: versionedBackground("绿jk.webp"),
     backgroundFit: "cover",
     backgroundPosition: "center top",
@@ -55,19 +61,59 @@ const outfits = [
     height: 2048,
   },
   {
-    image: "/assets/optimized/clothes/22年生日服.webp",
+    image: versionedOutfit("22年生日服.webp"),
     background: versionedBackground("22生日会.webp"),
     backgroundFit: "cover",
     backgroundPosition: "center top",
     width: 690,
     height: 2048,
   },
+
   {
-    image: "/assets/optimized/clothes/五周年团服.webp",
+    image: versionedOutfit("五周年团服.webp"),
     background: versionedBackground("五周年团服.webp"),
     backgroundFit: "cover",
     backgroundPosition: "center top",
     width: 586,
+    height: 2048,
+  },
+  {
+    image: versionedOutfit("青苹果.webp"),
+    background: versionedBackground("青苹果.webp"),
+    backgroundFit: "cover",
+    backgroundPosition: "center top",
+    width: 763,
+    height: 2048,
+  },
+  {
+    image: versionedOutfit("军装.webp"),
+    background: versionedBackground("五周年团服.webp"),
+    backgroundFit: "cover",
+    backgroundPosition: "center top",
+    width: 681,
+    height: 2048,
+  },
+  {
+    image: versionedOutfit("pico.webp"),
+    background: versionedBackground("pico.webp"),
+    backgroundFit: "cover",
+    backgroundPosition: "center top",
+    width: 725,
+    height: 2048,
+  },
+  {
+    image: versionedOutfit("三周年团服.webp"),
+    background: versionedBackground("三周年团服.webp"),
+    backgroundFit: "cover",
+    backgroundPosition: "center top",
+    width: 1529,
+    height: 2048,
+  },
+  {
+    image: versionedOutfit("黑拉.webp"),
+    background: versionedBackground("黑拉.webp"),
+    backgroundFit: "cover",
+    width: 1143,
     height: 2048,
   },
 ];
