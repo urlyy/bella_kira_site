@@ -1,0 +1,23 @@
+src/components/home/SiteHeader.astro
+  s_0540ffbc9d5168::t_8a5bc8f88c44be 26,45-52,55-59,89-127
+src/layouts/SiteLayout.astro
+  s_0540ffbc9d5168::t_5f7afa5deafe0d 3,11-12,22-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "ee1d4e3b24dc108f357842ad2c61d6787df10eb9",
+  "prompts": {},
+  "sessions": {
+    "s_0540ffbc9d5168": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f6040-5b2c-79f3-9143-0323fc5e5704",
+        "model": "unknown"
+      },
+      "human_author": "liuyuyang <liuyuyang.urlyy@BYTEDANCE.COM>"
+    }
+  },
+  "attestation_metadata": {},
+  "remote_transcripts": {}
+}
