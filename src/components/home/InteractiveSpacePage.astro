@@ -1,5 +1,6 @@
 ---
 import { interactiveExperiences as experiences } from "../../content/interactive-experiences";
+import InteractiveHeadModel from "./InteractiveHeadModel.astro";
 import "../../pages/games/games.css";
 ---
 
@@ -10,6 +11,7 @@ import "../../pages/games/games.css";
       <p class="games-kicker">STARRY DREAMS · INTERACTIVE SPACE</p>
       <div class="games-title-row">
         <h1 id="interactive-space-title">互动空间</h1>
+        <InteractiveHeadModel />
         <span class="games-count"><b>{String(experiences.length).padStart(2, "0")}</b> 项体验</span>
       </div>
     </section>
