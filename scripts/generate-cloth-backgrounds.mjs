@@ -112,7 +112,7 @@ if (checkOnly) {
 } else {
 	await writeFile(
 		manifestPath,
-		`${JSON.stringify({ settings, images: nextImages }, null, 2)}\n`,
+		`${JSON.stringify({ settings, images: nextImages }, null, "\t")}\n`,
 	);
 	console.log(
 		`Cloth background optimization complete: ${generated} generated, ${entries.length - generated} unchanged.`,

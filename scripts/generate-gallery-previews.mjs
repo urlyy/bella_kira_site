@@ -129,7 +129,10 @@ if (checkOnly) {
 	}
 } else {
 	const nextManifest = { settings: previewSettings, images: nextImages };
-	await writeFile(manifestPath, `${JSON.stringify(nextManifest, null, 2)}\n`);
+	await writeFile(
+		manifestPath,
+		`${JSON.stringify(nextManifest, null, "\t")}\n`,
+	);
 	console.log(
 		`Gallery preview generation complete: ${generatedCount} generated, ${entries.length - generatedCount} unchanged.`,
 	);

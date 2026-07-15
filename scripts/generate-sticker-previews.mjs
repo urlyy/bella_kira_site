@@ -125,7 +125,7 @@ if (checkOnly) {
 } else {
 	await writeFile(
 		manifestPath,
-		`${JSON.stringify({ settings, images: nextImages }, null, 2)}\n`,
+		`${JSON.stringify({ settings, images: nextImages }, null, "\t")}\n`,
 	);
 	console.log(
 		`Sticker optimization complete: ${generated} generated, ${files.length - generated} unchanged.`,
