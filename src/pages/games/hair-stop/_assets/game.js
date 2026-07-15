@@ -82,6 +82,7 @@ let instances = [];
 let instanceSequence = 0;
 let history = [];
 let toastTimer = 0;
+let desktopLibraryDrag = null;
 
 function showToast(message, state = "success") {
 	window.clearTimeout(toastTimer);
@@ -543,11 +544,118 @@ function renderParts() {
 		button.style.setProperty("--delay", `${Math.min(index * 12, 180)}ms`);
 		button.setAttribute(
 			"aria-label",
-			`加入${entry.character.name}的${entry.part.label}`,
+			`拖动${entry.character.name}的${entry.part.label}到画布`,
 		);
-		button.innerHTML = `<span><img src="${entry.part.src}" alt="" draggable="false" loading="lazy" decoding="async" /></span><b>${entry.part.label}</b><small>${entry.character.name}</small><i aria-hidden="true">＋</i>`;
-		button.addEventListener("click", () => addPiece(entry));
+		button.innerHTML = `<span><img src="${entry.part.src}" alt="" draggable="false" loading="lazy" decoding="async" /></span><b>${entry.part.label}</b><small>${entry.character.name}</small><i class="part-drag-handle" aria-hidden="true">↗</i>`;
+		bindLibraryDrag(button, entry);
 		partsList.append(button);
+	});
+}
+
+function isPointInsideBoard(clientX, clientY) {
+	const rect = board.getBoundingClientRect();
+	return (
+		clientX >= rect.left &&
+		clientX <= rect.right &&
+		clientY >= rect.top &&
+		clientY <= rect.bottom
+	);
+}
+
+function dropPosition(entry, clientX, clientY) {
+	const rect = board.getBoundingClientRect();
+	return {
+		x:
+			((clientX - rect.left) / rect.width) * CANVAS_SIZE -
+			entry.part.width / 2,
+		y:
+			((clientY - rect.top) / rect.height) * CANVAS_SIZE -
+			entry.part.height / 2,
+	};
+}
+
+function bindLibraryDrag(button, entry) {
+	let drag = null;
+	let ignoreClickUntil = 0;
+	button.draggable = true;
+
+	button.addEventListener("dragstart", (event) => {
+		desktopLibraryDrag = { button, entry };
+		button.classList.add("is-library-dragging");
+		event.dataTransfer.effectAllowed = "copy";
+		event.dataTransfer.setData("text/plain", entry.part.id);
+	});
+
+	button.addEventListener("dragend", () => {
+		const missedBoard = desktopLibraryDrag?.button === button;
+		button.classList.remove("is-library-dragging");
+		board.classList.remove("is-drop-target");
+		desktopLibraryDrag = null;
+		if (missedBoard) showToast("请把组件放进限定拼装区域", "error");
+	});
+
+	const updateDrag = (clientX, clientY) => {
+		if (!drag) return;
+		drag.preview.style.left = `${clientX}px`;
+		drag.preview.style.top = `${clientY}px`;
+		const inside = isPointInsideBoard(clientX, clientY);
+		drag.preview.classList.toggle("is-over-board", inside);
+		board.classList.toggle("is-drop-target", inside);
+	};
+
+	button.addEventListener("pointerdown", (event) => {
+		if (event.pointerType === "mouse") return;
+		if (!event.target.closest(".part-drag-handle")) return;
+		event.preventDefault();
+		const preview = document.createElement("div");
+		preview.className = "part-drag-preview";
+		preview.innerHTML = `<img src="${entry.part.src}" alt="" draggable="false" /><span>${entry.character.name} · ${entry.part.label}</span>`;
+		document.body.append(preview);
+		button.setPointerCapture(event.pointerId);
+		drag = {
+			pointerId: event.pointerId,
+			preview,
+			startX: event.clientX,
+			startY: event.clientY,
+			moved: false,
+		};
+		button.classList.add("is-library-dragging");
+		updateDrag(event.clientX, event.clientY);
+	});
+
+	button.addEventListener("pointermove", (event) => {
+		if (!drag || drag.pointerId !== event.pointerId) return;
+		drag.moved =
+			drag.moved ||
+			Math.hypot(
+				event.clientX - drag.startX,
+				event.clientY - drag.startY,
+			) > 5;
+		updateDrag(event.clientX, event.clientY);
+	});
+
+	const endDrag = (event, cancelled = false) => {
+		if (!drag || drag.pointerId !== event.pointerId) return;
+		const droppedInside =
+			!cancelled && isPointInsideBoard(event.clientX, event.clientY);
+		const moved = drag.moved;
+		drag.preview.remove();
+		drag = null;
+		button.classList.remove("is-library-dragging");
+		board.classList.remove("is-drop-target");
+		if (droppedInside && moved) {
+			ignoreClickUntil = performance.now() + 350;
+			addPiece(entry, dropPosition(entry, event.clientX, event.clientY));
+		} else if (moved) {
+			showToast("请把组件放进限定拼装区域", "error");
+		}
+	};
+	button.addEventListener("pointerup", endDrag);
+	button.addEventListener("pointercancel", (event) => endDrag(event, true));
+	button.addEventListener("click", (event) => {
+		event.preventDefault();
+		if (performance.now() < ignoreClickUntil) return;
+		showToast("请拖动组件到拼装区域内");
 	});
 }
 
@@ -684,9 +792,9 @@ function undo() {
 	showToast("已撤销上一步操作");
 }
 
-function addPiece(entry) {
+function addPiece(entry, position = null) {
 	pushHistory();
-	const instance = createInstance(entry);
+	const instance = createInstance(entry, position ?? {});
 
 	let insertAt = instances.findIndex(
 		(item) => item.entry.part.z > entry.part.z,
@@ -1100,6 +1208,26 @@ async function boot() {
 	}
 }
 
+board.addEventListener("dragover", (event) => {
+	if (!desktopLibraryDrag) return;
+	event.preventDefault();
+	event.dataTransfer.dropEffect = "copy";
+	board.classList.add("is-drop-target");
+});
+board.addEventListener("dragleave", (event) => {
+	if (!board.contains(event.relatedTarget)) {
+		board.classList.remove("is-drop-target");
+	}
+});
+board.addEventListener("drop", (event) => {
+	if (!desktopLibraryDrag) return;
+	event.preventDefault();
+	const { button, entry } = desktopLibraryDrag;
+	button.classList.remove("is-library-dragging");
+	board.classList.remove("is-drop-target");
+	desktopLibraryDrag = null;
+	addPiece(entry, dropPosition(entry, event.clientX, event.clientY));
+});
 board.addEventListener("pointerdown", (event) => {
 	if (!event.target.closest?.(".assembly-piece, .mesh-handle"))
 		setSelection([]);

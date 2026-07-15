@@ -439,6 +439,13 @@ h1 {
 	pointer-events: none;
 }
 
+.assembly-board.is-drop-target {
+	border-color: rgba(232, 200, 139, 0.9);
+	box-shadow:
+		inset 0 0 58px rgba(219, 125, 116, 0.2),
+		0 0 0 3px rgba(232, 200, 139, 0.18);
+}
+
 .mesh-editor[hidden] {
 	display: none;
 }
@@ -654,7 +661,7 @@ h1 {
 	border: 1px solid var(--soft-line);
 	border-radius: 12px;
 	background: rgba(255, 255, 255, 0.035);
-	cursor: pointer;
+	cursor: grab;
 	opacity: 0;
 	animation: part-in 280ms ease var(--delay) forwards;
 	transition:
@@ -723,6 +730,62 @@ h1 {
 	border-color: rgba(219, 125, 116, 0.68);
 	background: rgba(219, 125, 116, 0.11);
 	transform: translateY(-1px);
+}
+
+.part-option.is-library-dragging {
+	border-color: var(--gold);
+	cursor: grabbing;
+	opacity: 0.55;
+	transform: scale(0.97);
+}
+
+.part-drag-handle {
+	cursor: grab;
+	touch-action: none;
+}
+
+.part-drag-preview {
+	position: fixed;
+	z-index: 1500;
+	display: grid;
+	place-items: center;
+	width: 112px;
+	height: 132px;
+	padding: 8px;
+	border: 1px solid rgba(219, 125, 116, 0.72);
+	border-radius: 16px;
+	color: #fff8ed;
+	background: rgba(25, 15, 43, 0.9);
+	box-shadow: 0 16px 42px rgba(4, 2, 14, 0.48);
+	pointer-events: none;
+	transform: translate(-50%, -50%) scale(0.92);
+	transition:
+		border-color 120ms ease,
+		box-shadow 120ms ease,
+		transform 120ms ease;
+}
+
+.part-drag-preview img {
+	max-width: 88px;
+	max-height: 92px;
+	object-fit: contain;
+	filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.42));
+}
+
+.part-drag-preview span {
+	max-width: 100%;
+	overflow: hidden;
+	font-size: 9px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.part-drag-preview.is-over-board {
+	border-color: var(--gold);
+	box-shadow:
+		0 0 0 4px rgba(232, 200, 139, 0.16),
+		0 18px 48px rgba(4, 2, 14, 0.52);
+	transform: translate(-50%, -50%) scale(1);
 }
 
 .game-toast {
