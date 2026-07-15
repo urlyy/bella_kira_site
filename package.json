@@ -18,8 +18,8 @@
 		"recommended-covers:check": "node scripts/generate-recommended-covers.mjs --check",
 		"stickers:optimize": "node scripts/generate-sticker-previews.mjs",
 		"stickers:check": "node scripts/generate-sticker-previews.mjs --check",
-		"format": "prettier --write \"**/*.{json,js,jsx,mjs,cjs,ts,tsx,mts,cts}\"",
-		"format:check": "prettier --check \"**/*.{json,js,jsx,mjs,cjs,ts,tsx,mts,cts}\"",
+		"format": "prettier --write \"**/*.{astro,json,js,jsx,mjs,cjs,ts,tsx,mts,cts}\"",
+		"format:check": "prettier --check \"**/*.{astro,json,js,jsx,mjs,cjs,ts,tsx,mts,cts}\"",
 		"build": "npm run optimize:check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
 		"preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
 		"check": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check",
@@ -47,6 +47,7 @@
 		"cross-env": "^10.1.0",
 		"husky": "^9.1.7",
 		"prettier": "3.9.5",
+		"prettier-plugin-astro": "^0.14.1",
 		"sharp": "^0.35.3",
 		"typescript": "latest"
 	}

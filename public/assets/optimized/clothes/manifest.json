@@ -21,11 +21,6 @@
       "output": "白拉.webp",
       "outputHash": "c4f80a0c63b3d5c798375823a99706e6c2ca036b800f8bc559bf4932b78b778c"
     },
-    "贝拉仙剑.png": {
-      "sourceHash": "a7ac56401110d9736907e18ad0560e7bddf9babfbcdfa90db99f53bc5d843c6b",
-      "output": "贝拉仙剑.webp",
-      "outputHash": "202f5d1cd1c31c13da985e89baecab2714d8f7a06221305dab6163f4baa765fb"
-    },
     "毕方.png": {
       "sourceHash": "da7a84c7094a4ab20c5e010143d8e20da803c46246d1554112f7ba5e785c98d7",
       "output": "毕方.webp",
@@ -35,6 +30,11 @@
       "sourceHash": "5f6aaf10b723d98483d70ff271f6551de013f554fd4064c1010627918630a608",
       "output": "常服.webp",
       "outputHash": "f89c77331b668523b5e117414cab13a223677d1862dcf3cb4c2bbef35deddae4"
+    },
+    "黑白运动服.png": {
+      "sourceHash": "b1688d8720d86fc501736aedec756aa589f02e97087f24517b6846f414870ceb",
+      "output": "黑白运动服.webp",
+      "outputHash": "1bc476f5447fff70017d1b32d67d0f2c8f621e06d9a3d8bfb4f862db2a6733c8"
     },
     "黑拉.png": {
       "sourceHash": "b1459f231c1f959f8c2ce8668edc35ba8f619d5c22539e05d15896cc9a586a4f",
@@ -52,9 +52,9 @@
       "outputHash": "939d6e7d6936be3f7254958aa480cdfa238633718ec26673ce8e6596680c9dfb"
     },
     "三周年团服.png": {
-      "sourceHash": "4dfbef9ed7d1b7dd01657053be9665e6673da1e9a5c0121512c6f5688a92bead",
+      "sourceHash": "6484a64bf6599661c13ca38d99b69f33bc2792b6ec272a1b5608936483bec6c9",
       "output": "三周年团服.webp",
-      "outputHash": "119b280b615595ef609c91730b462b68f7ac5e7662c0d58082c75b580dc823dc"
+      "outputHash": "41c45472d35f28510d5445a5923770e4827c64b1cf8f4635c0b151fb7a73f556"
     },
     "松鼠睡衣.png": {
       "sourceHash": "29986c90424cd99494a6cef5c762179294bce5b902eece3d8c254ae0a963720c",
@@ -66,10 +66,20 @@
       "output": "五周年团服.webp",
       "outputHash": "d79f8a860c6844f32e78667715536eb0cce2d35813d605a135eba13ba1baceb2"
     },
+    "仙剑紫色.png": {
+      "sourceHash": "a7ac56401110d9736907e18ad0560e7bddf9babfbcdfa90db99f53bc5d843c6b",
+      "output": "仙剑紫色.webp",
+      "outputHash": "202f5d1cd1c31c13da985e89baecab2714d8f7a06221305dab6163f4baa765fb"
+    },
     "训练服.png": {
       "sourceHash": "ce8e1ea8f7e908e95fa29d40ed2c7c3744cdebf047443c857edc6689f62e54f3",
       "output": "训练服.webp",
       "outputHash": "6c7f39b9ac2a43aaaf093e1614fc0119c1779bdbce21ac9c6274425a91134d6c"
+    },
+    "泳装.png": {
+      "sourceHash": "bb8b8f3a813fa401b739c5b4de56e2efdb88b972774e7b73a558fe11b31676a9",
+      "output": "泳装.webp",
+      "outputHash": "871d6f29b371dc87e29619c8f0dee6cdc8d0702f452d28eeea213434768e0cf8"
     },
     "jk绿.png": {
       "sourceHash": "2d53c6b4cb5c9467da293d488780c81046cc91dfc4833dbbd650b37138422b5a",

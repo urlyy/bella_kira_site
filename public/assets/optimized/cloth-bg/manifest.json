@@ -6,9 +6,9 @@
   },
   "images": {
     "22生日会.png": {
-      "sourceHash": "0fe6a4ad53f5859c5cf86178b2af7a8631665cec7a2a00dd6994d9f360f4ec18",
+      "sourceHash": "52011300038264f0f76c79eba8c40b6027dbe78021e7adafb79bd0bf3937d6a6",
       "output": "22生日会.webp",
-      "outputHash": "83cf0226be4fd883b3e34a3432456bc10cb7b2fc954d8aba48e4c093fed0385f"
+      "outputHash": "1f278df93ceace0a0bfe8281509b7a8f34454cbe493a7fc3157fe029765a24fe"
     },
     "25生日会.png": {
       "sourceHash": "02fed9c5b6b17eadd85aee1782056b29d24da9c3ebe5b0dceec83673a34881ac",
@@ -29,6 +29,11 @@
       "sourceHash": "d52b5f0a8e0e036ef616343102b67ff206030652af4871593ee97302a1167450",
       "output": "常服.webp",
       "outputHash": "8f0f5db1d3e1c900ede963cb05cb8ed7870fbc289db2a4f26a38fc2bac35daba"
+    },
+    "黑白运动服.png": {
+      "sourceHash": "d929368362c0776bb463e7edba197e50ac703c8d93bfd055993d23ae1a39252d",
+      "output": "黑白运动服.webp",
+      "outputHash": "841fdeece75a4610b905251f6dda9b8e98c98e5e8591d0de137311639e1522b2"
     },
     "黑拉.png": {
       "sourceHash": "527cf6a7519ffba229315b8af1f5573341a1c4beb90bba3504bec151340d5929",
@@ -51,9 +56,9 @@
       "outputHash": "268da5189abb87f1486876157fc3eaa1aafd38cb41ec9b94dc70e2937940ec06"
     },
     "三周年团服.png": {
-      "sourceHash": "ad44edd0518f41fa849e81b57c9d28eb9374b6ec604b93fa0ea175706eaad3be",
+      "sourceHash": "f49f271b9e46158981764a92d9a23e74a2522968c0c0f8760d67b3e605f6b37a",
       "output": "三周年团服.webp",
-      "outputHash": "8841a790b6dff2ac51b0d6a805b0f09d95dbd568976b56d0fd5be0be8b4821da"
+      "outputHash": "d57c1054cc70441734ad62dd0565d8330029667565c73a63d1174fab27634d4f"
     },
     "松鼠睡衣.png": {
       "sourceHash": "8452a342113df7234821d47261b97c94260867bb1ee2adbcac19cf07cb30e94b",
@@ -65,15 +70,20 @@
       "output": "五周年团服.webp",
       "outputHash": "e687f8ea7a64d298ccae4ce69a9d5fc804bc79bc6ec3c662c8b8f1af68d4634f"
     },
+    "仙剑紫色.png": {
+      "sourceHash": "8b2c02a8df06d4254237e1b3def70b0f26df6e1b0826d8112ca6fa8f1e0a448f",
+      "output": "仙剑紫色.webp",
+      "outputHash": "70fe39904e0d0572123b26d157cc838ab844e64081abb060524168d0dc850e92"
+    },
+    "泳装.png": {
+      "sourceHash": "0ec25aca73670079f54870f8001d521513f550c65c1beeb27e6050ac079996d3",
+      "output": "泳装.webp",
+      "outputHash": "5892df01c014f92c43454b89e5d311d3cca44b24e1f7706ceda4c409728abf5a"
+    },
     "pico.png": {
       "sourceHash": "209738128e79d7c5f41c0559c2d8f05b8fc0a4ed9908e421b8bfc016a1c41a9f",
       "output": "pico.webp",
       "outputHash": "446afdc8d5a2bf864ba329abb5d9552b0241fdfb704838acd8a4078d2953581a"
-    },
-    "Snipaste_2026-07-11_03-34-17.png": {
-      "sourceHash": "f49f271b9e46158981764a92d9a23e74a2522968c0c0f8760d67b3e605f6b37a",
-      "output": "Snipaste_2026-07-11_03-34-17.webp",
-      "outputHash": "d57c1054cc70441734ad62dd0565d8330029667565c73a63d1174fab27634d4f"
     }
   }
 }

@@ -5,10 +5,6 @@
     "quality": 80
   },
   "images": {
-    "22生日会.png": {
-      "sourceHash": "0e604d2b543b4eb0e2b36f1cded8f6e8be956eef2c717aa34c3351b2a01e6a84",
-      "preview": "22生日会.png.webp"
-    },
     "23生日会.png": {
       "sourceHash": "f93c74b99a32849b21d71315df048b93c0bddce90a910c90e968a0d31c7fb50d",
       "preview": "23生日会.png.webp"
@@ -92,14 +88,6 @@
     "gallery-019.jpg": {
       "sourceHash": "0a400b6fcf539d993cb18dd843c80323e7806634af9ba201d47bf124dc648be7",
       "preview": "gallery-019.jpg.webp"
-    },
-    "gallery-020.jpg": {
-      "sourceHash": "9f33d885b8081c48db7f717572ab6dd6f8b9d5bbcf225d91ba4b8450adef1064",
-      "preview": "gallery-020.jpg.webp"
-    },
-    "gallery-021.jpg": {
-      "sourceHash": "b1eeb3030c452bf2fa5a610199491414353a4ec232d28505a7eb6b66d864f937",
-      "preview": "gallery-021.jpg.webp"
     },
     "gallery-022.jpg": {
       "sourceHash": "6f5073d6749084bc1c59e5085edb4b6199b9ee5aa558820c5d71ce71bd0c2a19",
