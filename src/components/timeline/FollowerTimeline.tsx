@@ -165,15 +165,6 @@ export default function FollowerTimeline() {
 		void load();
 	}, [load]);
 
-	const visibleIndex = useMemo(() => {
-		if (!points.length) return 0;
-		return Math.min(
-			points.length - 1,
-			Math.max(0, Math.round(progress * (points.length - 1))),
-		);
-	}, [points, progress]);
-	const currentPoint = hovered ?? points[visibleIndex] ?? null;
-	const latestPoint = points.at(-1) ?? null;
 	const eventMarkers = useMemo(
 		() =>
 			timelineEvents
@@ -187,6 +178,29 @@ export default function FollowerTimeline() {
 				),
 		[],
 	);
+	const timelineDomain = useMemo<[Date, Date] | null>(() => {
+		if (!points.length) return null;
+		const firstPoint = points[0].date;
+		const lastPoint = points[points.length - 1].date;
+		const firstEvent = eventMarkers[0]?.dateObject;
+		const lastEvent = eventMarkers[eventMarkers.length - 1]?.dateObject;
+		return [
+			firstEvent && firstEvent < firstPoint ? firstEvent : firstPoint,
+			lastEvent && lastEvent > lastPoint ? lastEvent : lastPoint,
+		];
+	}, [eventMarkers, points]);
+	const visibleIndex = useMemo(() => {
+		if (!points.length || !timelineDomain) return 0;
+		const [start, end] = timelineDomain;
+		const playheadDate = new Date(
+			start.getTime() + (end.getTime() - start.getTime()) * progress,
+		);
+		return d3
+			.bisector<Point, Date>((d) => d.date)
+			.center(points, playheadDate);
+	}, [points, progress, timelineDomain]);
+	const currentPoint = hovered ?? points[visibleIndex] ?? null;
+	const latestPoint = points.at(-1) ?? null;
 	const showEvent = useCallback(
 		(event: EventMarker, syncSummary = false) => {
 			const chartState = chartStateRef.current;
@@ -349,23 +363,11 @@ export default function FollowerTimeline() {
 				1,
 				height - margin.top - margin.bottom,
 			);
-			const pointExtent = d3.extent(points, (d) => d.date) as [
-				Date,
-				Date,
-			];
-			const eventExtent = d3.extent(
-				eventMarkers,
-				(d) => d.dateObject,
-			) as [Date | undefined, Date | undefined];
-			const xDomain: [Date, Date] = [
-				eventExtent[0] && eventExtent[0] < pointExtent[0]
-					? eventExtent[0]
-					: pointExtent[0],
-				eventExtent[1] && eventExtent[1] > pointExtent[1]
-					? eventExtent[1]
-					: pointExtent[1],
-			];
-			const x = d3.scaleTime().domain(xDomain).range([0, innerWidth]);
+			if (!timelineDomain) return;
+			const x = d3
+				.scaleTime()
+				.domain(timelineDomain)
+				.range([0, innerWidth]);
 			const countExtent = d3.extent(points, (d) => d.count) as [
 				number,
 				number,
@@ -687,7 +689,7 @@ export default function FollowerTimeline() {
 		const observer = new ResizeObserver(render);
 		observer.observe(container);
 		return () => observer.disconnect();
-	}, [eventMarkers, points, showEvent]);
+	}, [eventMarkers, points, showEvent, timelineDomain]);
 
 	useEffect(() => {
 		if (!svgRef.current || !points.length || !chartStateRef.current) return;

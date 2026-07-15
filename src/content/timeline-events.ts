@@ -14,6 +14,32 @@ export type TimelineEvent = {
 
 export const timelineEvents: TimelineEvent[] = [
 	{
+		id: "beijixing_name",
+		date: "2021-01-06",
+		title: "粉丝名确定为“贝极星“",
+		description:
+			"",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://www.bilibili.com/opus/477130631333310169"
+			}
+		],
+	},
+	{
+		id: "introduction",
+		date: "2021-02-10",
+		title: "首个个人视频发布【自我介绍】简 简 单 单 跳 个 芭 蕾！",
+		description:
+			"",
+		links: [
+			{
+				label: "观看视频",
+				url: "https://www.bilibili.com/video/BV1ry4y1Y71t"
+			}
+		],
+	},
+	{
 		id: "reach-10w-followers",
 		date: "2021-05-03",
 		title: "达成10万粉丝",
@@ -35,10 +61,23 @@ export const timelineEvents: TimelineEvent[] = [
 		],
 	},
 	{
+		id: "keep-green",
+		date: "2021-08-14",
+		title: "Keep联动课程【绿野仙踪·A-SOUL贝拉定制语音版】课程上线",
+		description:
+			"",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://www.bilibili.com/opus/558758859912566116"
+			}
+		],
+	},
+	{
 		id: "keep-course",
 		date: "2021-09-15",
-		title: "Keep上线专属课程",
-		description: "《虚拟女团燃脂舞·A-SOUL贝拉》上线。",
+		title: "Keep联动课程【虚拟女团燃脂舞·A-SOUL贝拉】课程上线",
+		description: "",
 		links: [
 			{
 				label: "查看动态",

@@ -1,5 +1,6 @@
 ---
 import videoData from "../../content/recommended-videos.json";
+import coverManifestData from "../../../public/assets/optimized/recommended-covers/manifest.json";
 
 interface RecommendedVideo {
   cover: string;
@@ -15,10 +16,18 @@ const collections = videoData.collections as Array<{
   items: RecommendedVideo[];
 }>;
 
-const optimizedCover = (cover: string) =>
-  cover
+const coverManifest = coverManifestData as {
+  images: Record<string, { outputHash: string }>;
+};
+
+const optimizedCover = (cover: string) => {
+  const sourceName = cover.split("/").at(-1) ?? "";
+  const optimizedPath = cover
     .replace("/assets/recommended-videos/covers/", "/assets/optimized/recommended-covers/")
     .replace(/\.(?:png|jpe?g)$/i, ".webp");
+  const outputHash = coverManifest.images[sourceName]?.outputHash;
+  return outputHash ? `${optimizedPath}?v=${outputHash.slice(0, 12)}` : optimizedPath;
+};
 ---
 
 <section class="page watch-page" data-page-name="watch" aria-label="推荐视频">

@@ -1,0 +1,296 @@
+{
+	"settings": {
+		"version": 1,
+		"width": 640,
+		"height": 360,
+		"quality": 82,
+		"effort": 5
+	},
+	"images": {
+		"白色相簿.png": {
+			"sourceHash": "fcadf135e2f958103677eb0c2b80e24bc52b715a10579bb516481df9a311f2e8",
+			"output": "白色相簿.webp",
+			"outputHash": "467706d08cc637e960da0590c05d234ed1cfa933181d7794293256e1c50dd2c1"
+		},
+		"蓓蕾.png": {
+			"sourceHash": "3824734764110c279c37af2b438cd15254707f19afc5d8660450de5871c31de1",
+			"output": "蓓蕾.webp",
+			"outputHash": "298573b54229aa83232b70ecfc86475152fbcd4cd115bb9bb13cac84f4b78dad"
+		},
+		"壁纸1.png": {
+			"sourceHash": "b78afe0aa0fe22b73b7ed52096a91f04d616a92416409aa3ce5497507dcd914a",
+			"output": "壁纸1.webp",
+			"outputHash": "2cdcb11a86d20cbaf0e31352c9a220ecdd699f21b1a391005829e800220242ea"
+		},
+		"壁纸2.png": {
+			"sourceHash": "7e3b902fa54377c8ef7fb15046e2b3017d2ae136971533e0d3fecc5c2812e99e",
+			"output": "壁纸2.webp",
+			"outputHash": "bfb2a1c481a93ba66e12b881e9f7043ff14c4fbfb0e3f347d16cf8e7911ac30c"
+		},
+		"除夕.png": {
+			"sourceHash": "7a3b0d3fd65af5fde408f6eca467a0a8888664a1901995377bc031c70e32cdc8",
+			"output": "除夕.webp",
+			"outputHash": "13c930a1efdc9b9438e617c9d543f4c610d1ab067a06c9c80d9004bc1b6bc82e"
+		},
+		"除夕5人.png": {
+			"sourceHash": "a66818c74ca4354743d7569ee109a46c7039c252fc6ae85adbfa3d1560a120a9",
+			"output": "除夕5人.webp",
+			"outputHash": "ef38c99211e6e34293c954a2d6a8a1359c35825aaf38022e30b42af76bca99be"
+		},
+		"迪迦day2.png": {
+			"sourceHash": "fb19bab41c1d8d8e30eec75e22c5cd354563df7521f01cdb3f08404d3f670c06",
+			"output": "迪迦day2.webp",
+			"outputHash": "e1afa8ec4603ed02b56b44e2d0fc501f780a82f471dfbc32286e29a239986fc6"
+		},
+		"迪迦day3.png": {
+			"sourceHash": "1e6527a5456876ebdf8008c1d1e1f716dd6ac9d0bfcd4e13e507849f755ed291",
+			"output": "迪迦day3.webp",
+			"outputHash": "f754f04c68b9e2eb5c47e5a40c403e39066bdfccfd26ec28ce9a3d12325d4b10"
+		},
+		"辉夜姬.png": {
+			"sourceHash": "30e1de9afa618a59328b615d5499d832ec5b9b1a23f436f6bcc31b6a08f48985",
+			"output": "辉夜姬.webp",
+			"outputHash": "d75cddfc676aeb88e11b6f355dd346276b333e079cbd3f7c584ce91454b6dfff"
+		},
+		"恋人不行.png": {
+			"sourceHash": "0753f76a2e8a043e281bd27c4851de0db5284e0f5420b6365f408bf9d3cd5e82",
+			"output": "恋人不行.webp",
+			"outputHash": "89c86e5378914ef4f81ca7d967503951f1f6ac73feb48148cb5af5fa3b343b42"
+		},
+		"明末.png": {
+			"sourceHash": "23ba11ca089781dca1541630d8cb0fae4c91613286b07b52fa8cb1014f28d8d5",
+			"output": "明末.webp",
+			"outputHash": "f4d58ba47ed06be0847070e323908a0ee6aa630acaf57308496bc3f44e560939"
+		},
+		"末路狂花.png": {
+			"sourceHash": "019369b5b950169c72ab993291f4fa7b24c8f2875f8364af253f29ad81e14b94",
+			"output": "末路狂花.webp",
+			"outputHash": "31ed7997164e1929eeb4d0891a3f7fafa8ba5bb7354ed6621103989e7a3c41b2"
+		},
+		"你也配.png": {
+			"sourceHash": "5d454a7455a19c2ef0d9d70cb58fb9631e1a6b8676fb426f0a09a6bc3cd095a5",
+			"output": "你也配.webp",
+			"outputHash": "a4ccf1b29cc405536e507dee1bd4c3b9592bde72dd0c6cc52395a2ac504a2d57"
+		},
+		"群青.png": {
+			"sourceHash": "97774a2ebf7185e703c6fa431c224e8b4cea2633e8d40d25c3ec35c65994390e",
+			"output": "群青.webp",
+			"outputHash": "3d982c5da6c7a6d00b05a7922b807d18983c3a9cec68be649997937fd5d5f2ed"
+		},
+		"若月亮没来.png": {
+			"sourceHash": "d1f3ef4608958d9fe378f5884ddb2120a3b24ba55f7f55c7ae841ba5361f66e0",
+			"output": "若月亮没来.webp",
+			"outputHash": "144e6ef36a11f729e7934cd61da9688968665b4a0c840c37d3dd38c2e9744767"
+		},
+		"土豆雷.png": {
+			"sourceHash": "cfa79eb320cb99bf11353b95ea479e57dcab548fea9cc06169e7a6903f461c6e",
+			"output": "土豆雷.webp",
+			"outputHash": "230d4e5a168ba657a32d5effe6feeb14b9e0534c9ca2ac03f842343184d6bb08"
+		},
+		"万千花蕊.png": {
+			"sourceHash": "493b1a158cc3436f0b55347d0b8b468819fa9e628cf97d9b8b3f63e1d6df4d81",
+			"output": "万千花蕊.webp",
+			"outputHash": "d70f5faf8133ebdfbf5d46c097623af7e32e8472a6a8e7e612c06527459a181c"
+		},
+		"我不会直播.png": {
+			"sourceHash": "aa1bfaf975b49c546b3816d3b6732f2f469017a37d615bc4327fbd0b997c93fc",
+			"output": "我不会直播.webp",
+			"outputHash": "21cee10f325d1c681ce67ab700da032fed2ec5b1958a7be7b5c2d09cc733f4f3"
+		},
+		"我以灵魂.png": {
+			"sourceHash": "27556eaf4df66f90921f05109190c3a35fd307397f1c79057005f74fe1d2fdf6",
+			"output": "我以灵魂.webp",
+			"outputHash": "c7b349a24661f79a31f2c563f59fee987cd3965ca4fe2a9686f5ff5dffd177f8"
+		},
+		"屋顶着火.png": {
+			"sourceHash": "587b28fb9a1fd55dfb1540fb4c7d829f7d764789927a74dfc05e73e57008963a",
+			"output": "屋顶着火.webp",
+			"outputHash": "761e0a34151f5c75f4f9a0215a2cc868427a1273a4241e3a01f340a36c706ad5"
+		},
+		"小城故事.png": {
+			"sourceHash": "10f72ddaba5772e19621b50b5cf8bbcfd57f8cd7286acd9e794aeb9aaa6b4c5d",
+			"output": "小城故事.webp",
+			"outputHash": "b842bf0c5ce6d340e7bd28b26e2bdfb149033f7baabf5c74b780d80641e3ec82"
+		},
+		"羞死.png": {
+			"sourceHash": "e9a3b79c110ac80ad7d5c59f394c98c336ce0c56dc1baa4783b50ac2a46c42a0",
+			"output": "羞死.webp",
+			"outputHash": "e95b61078583d820bd1fe8407e1f1101e24615fbba111df19589111baff1f65b"
+		},
+		"演唱会maria.png": {
+			"sourceHash": "fafcaff39f82118e2e53919cc862baf5d121a69666073f5ed0c9b008a379f729",
+			"output": "演唱会maria.webp",
+			"outputHash": "7cca08e37eb1f496d59e08a9e1147c57764cb874432486412e399e55c5ad5667"
+		},
+		"一镜到底.png": {
+			"sourceHash": "03434f827ded064f9319831456453460baff69fc665c47b226fb3c3e73e7e27c",
+			"output": "一镜到底.webp",
+			"outputHash": "4b1a40a0701bc0a7cf0ef6316ba3308cce78d5f32776a26d234e276ff152977f"
+		},
+		"一起跳起来with爱哥.png": {
+			"sourceHash": "bd15a19969e38af1238aa37d1f8ad3a241e933ab751dc0fd5528f214fad18a76",
+			"output": "一起跳起来with爱哥.webp",
+			"outputHash": "d1dc7e9d615132ad5b87de2dae287a22503fc4d712471736c1954ac353412ad6"
+		},
+		"勇敢牛牛.png": {
+			"sourceHash": "da3481022e001793b9fc8b6d3ffe22f6239969762839d066d409c6d475dd0cad",
+			"output": "勇敢牛牛.webp",
+			"outputHash": "dcf3a709867514ac9fe0e83b67c8f3c18f221ea149b01b76ed6de35482011094"
+		},
+		"早安电台20251014.png": {
+			"sourceHash": "7d3dac86db92b2352ecfae4ed751b0674745ea62ad27554fa07a4299f542cda2",
+			"output": "早安电台20251014.webp",
+			"outputHash": "c555299b30242abef69ba88e3ad406b8a395fec0d53e046fe184d16164893a95"
+		},
+		"早安电台20251017.jpg": {
+			"sourceHash": "65c3e44edda3c0daa951ce8ac7b7f0f57357139fa89cda553c609139b690a26f",
+			"output": "早安电台20251017.webp",
+			"outputHash": "c4505d34e84d6fa157e2513fe37db1590629b65530e10ed686e8673cf943205c"
+		},
+		"早安电台20251024.jpg": {
+			"sourceHash": "b9967ac689afee7ab44b0cc59b590b43d985144a8cffd6cbdebe83a4c3ec5f48",
+			"output": "早安电台20251024.webp",
+			"outputHash": "3c742eecd82042c498517cb6074e0ee6fc172f201edc244c89878797333464c0"
+		},
+		"早安电台20251106.png": {
+			"sourceHash": "08bcc1714b67bffd8a6132cf33aa2ef55a9986d07736722fcc63dbc638c831c2",
+			"output": "早安电台20251106.webp",
+			"outputHash": "8d677c28cb35246428bd2686bf5bb3c3f9143f4905439d1cfc23cfa3fce6fd19"
+		},
+		"早安电台20251107.png": {
+			"sourceHash": "e8d3dc9c5a97c56e402afb57a24c230109e912bcd4f05e71774ee8f94ca4586e",
+			"output": "早安电台20251107.webp",
+			"outputHash": "1f310761abddecd82df272085098ac519493c57cbbf8587ec8902bd49b50e13a"
+		},
+		"早安电台20251110.png": {
+			"sourceHash": "f0fbee0d2ae0b18f03f9f42ff1f080f10a06418db97c62eb11e9d56d66ea79b8",
+			"output": "早安电台20251110.webp",
+			"outputHash": "fb9773aba70d0c416ac46451ba47678b8da7696345869426891271dbb8f1827f"
+		},
+		"早安电台20251114.png": {
+			"sourceHash": "0fc9df5f140d1df0e2004ecc220d08e9ab57f157b850f264512ecf080f226377",
+			"output": "早安电台20251114.webp",
+			"outputHash": "db6186c5ff39935cbc66e5a666d4b8e1e9d677f7547b08da39db1a3983d3f77a"
+		},
+		"早安电台20251121.png": {
+			"sourceHash": "84b02c29324174f6c05987de8a6fc9592113f74786b74f04c9707fd0e64cee3c",
+			"output": "早安电台20251121.webp",
+			"outputHash": "e8af41717b20afdacb1fe57acb88f4e77c8f9aca243a96901fa7399619643219"
+		},
+		"早安电台20251127.jpg": {
+			"sourceHash": "9cadb34798a0203dd55a9e58d641c68f60dbc8a4ea9f916578e3ca4e84399102",
+			"output": "早安电台20251127.webp",
+			"outputHash": "f60aa147cdcda67616089ef15eefefe6a936211378b76a1da8e2810485f9a085"
+		},
+		"早安电台20251203.jpg": {
+			"sourceHash": "f63cc3b03bd2f8fd9949e4e546861292a8ea0f1e05cdb80e1d94172294be1aa4",
+			"output": "早安电台20251203.webp",
+			"outputHash": "f4cedb10327c9d1c4acfca77075da895b3bc3730768d1eaf06d5621fdb477f2f"
+		},
+		"早安电台20251205.jpg": {
+			"sourceHash": "046d38c4772eb99acc7d1029e67092c70d32a7cfbb67bc323fa1fb1bd4c74342",
+			"output": "早安电台20251205.webp",
+			"outputHash": "3aecdd7c12bbc587515454b73c56519ee7872fa3ca255c00baf4984f96105d9e"
+		},
+		"早安电台20251212.jpg": {
+			"sourceHash": "ead446be3226b82b91340a82f17fa7a29d49b0425280edc5e0c6213b8c7882c5",
+			"output": "早安电台20251212.webp",
+			"outputHash": "ab9b00153b7e05f5cc0d661a71009292321dc02049a84fe46a72bdb7c7647120"
+		},
+		"早安电台20251216.jpg": {
+			"sourceHash": "9db63e299403a7b3c2ebc7014a3b4885ef13ce9b47028e736547505e462e92f6",
+			"output": "早安电台20251216.webp",
+			"outputHash": "61c4b52c22f91497d0e533e0f06f50139adc9f8900e4c2253408f385996233de"
+		},
+		"早安电台20251218.jpg": {
+			"sourceHash": "0e3995728ef3c85b274d29726ae6f02d467d5ec8b61b403bc3c559df011fd441",
+			"output": "早安电台20251218.webp",
+			"outputHash": "925bced275697593e0084de813a944a95055db38a61ab63f3fbd455a2bee1671"
+		},
+		"早安电台20260106.png": {
+			"sourceHash": "ed1fe394579db64d872dddc0588db8be0d806d38d58ec3ac1d9633b492b2ccc1",
+			"output": "早安电台20260106.webp",
+			"outputHash": "1f760289eac758ffc1a8ba1610bb2c8a98af999f673ae9e234a073d76d505357"
+		},
+		"早安电台20260325.jpg": {
+			"sourceHash": "d2a5d761c69db6e55fb1ff3501e5aad9065574d0badb12694bf7157f039c252b",
+			"output": "早安电台20260325.webp",
+			"outputHash": "8bc5382602e924423c23c8705b0075a7649055ea8b3d830dcda1b469d222c083"
+		},
+		"早安电台20260511.png": {
+			"sourceHash": "fe91a040b40edfd5a714d96161aa1e6725e425870e9c2d5b3e3239d91291a130",
+			"output": "早安电台20260511.webp",
+			"outputHash": "5442b1ff7eeb29d9b5a5273bc23a69d00d8068d73ff16b7d4f75e8f5ad5ac5df"
+		},
+		"战双.png": {
+			"sourceHash": "1e97064d7a139faa43eebceddbd90f84ac31662a7a5d2a70735352618b6e5c38",
+			"output": "战双.webp",
+			"outputHash": "c0579ac67d088edf2cc9f823d4c542a90460f832c4bdff72eb93c9374aed08e8"
+		},
+		"战双全录制.png": {
+			"sourceHash": "b4c375da00de35e211a819cb9eeea5c5e52e4de18d4376f61d5bdcc8c53bf6ac",
+			"output": "战双全录制.webp",
+			"outputHash": "ca93550e98e5e47de99d10eb60e98542fbdc40af6df9429897696df3b73f80a5"
+		},
+		"走过咖啡屋.png": {
+			"sourceHash": "501e1275ef5b4ba7f72d74463bf677d1d8e871578d07dca7ca141b8facdca691",
+			"output": "走过咖啡屋.webp",
+			"outputHash": "432acc96912f60c67623b6a4cbb3e8c310f6b09e20cd68252dc9cb9d509b1dfc"
+		},
+		"EXEC.png": {
+			"sourceHash": "583d0195eb7809ab7b951f026578f302bd715209d8f2ed413c0ec079eeefaacf",
+			"output": "EXEC.webp",
+			"outputHash": "8be9bd2907209ba51348dbbb6476af81252b0030b76b8dd1d8ce103ca8622a34"
+		},
+		"golden.png": {
+			"sourceHash": "5eec4483693492402e4ee21c00d90c1a30626e96db8374ee13fd650fa1b9cdf6",
+			"output": "golden.webp",
+			"outputHash": "fa0b824b6905f09e0b55933af656ba64fca0ff9b4a5a7cf9e15dd2cf9214dcb2"
+		},
+		"gridman.png": {
+			"sourceHash": "655a72de7ab0751cd81ef9b32cdfdfeb65970b5886865f886df530c23ffa32b8",
+			"output": "gridman.webp",
+			"outputHash": "00ee6aa89e33543892e8409de24fb820f4d1930e3d76975c7a445f5aeee423d8"
+		},
+		"maria.png": {
+			"sourceHash": "45791ccff8dfb4267050f9f0220b47c343a7d8461c768f941340b08c46822d15",
+			"output": "maria.webp",
+			"outputHash": "7d42301b95fb4724a9e54203c904cc227279e3d3257da8094bc6ca4fb61eb000"
+		},
+		"playlist1.png": {
+			"sourceHash": "7c78834572b923bd0b79a9b57850e3380fc91f6a85dd41cf237ade4944f35457",
+			"output": "playlist1.webp",
+			"outputHash": "1a06ab669f3915f450ba2fddeea51cb70a2276fd583a018194ceb729a717374f"
+		},
+		"reason.png": {
+			"sourceHash": "59ab42bfed45923ef267a094774530d8673a064489965755a6931170bce9619f",
+			"output": "reason.webp",
+			"outputHash": "3c73bee273b01ddd40bb8c84b2aa95ea7611aedf379390fcb3f012f67fd24d19"
+		},
+		"shiji.png": {
+			"sourceHash": "36b49901ccece5992d9e28f40077670ce8783b726b8742a8732a782ff6ff2dbd",
+			"output": "shiji.webp",
+			"outputHash": "27c81437f84b9f8b63b09b38b7b2c3d6c04e73f85498c91984d8c0281d618d80"
+		},
+		"shiny_dancer.png": {
+			"sourceHash": "e7559bfb45d7e4536158649dfa3b739ca63b709dd588fe74c8644e04fe6c3baf",
+			"output": "shiny_dancer.webp",
+			"outputHash": "317b2f2daffbfa28c816fd90b125eaae196d2d5ac27e5ee1ba320cc8308a7d62"
+		},
+		"snow_dancing.png": {
+			"sourceHash": "6ef4c92280f1d12719a4cb1e85375972aa37e381790f57819187c79488baf65e",
+			"output": "snow_dancing.webp",
+			"outputHash": "00d396793feb065958530d57739e11f7bb6bf3c7ba695583cf5d6fe96c6bad75"
+		},
+		"SPAGHETTI.png": {
+			"sourceHash": "9baaa71e6ac7fcafebd14dbd9796fdbaf244e8bc0c216c2f7c62686bcfab77e0",
+			"output": "SPAGHETTI.webp",
+			"outputHash": "bda372aebc8216118076158652a9b636485f4510cd93df4d9afa5f536bb121c9"
+		},
+		"tangxiao.png": {
+			"sourceHash": "e8db7d1c98196b30c6d7e05e7f484fee8b0d2a848075c3c72bc484c35cff1b20",
+			"output": "tangxiao.webp",
+			"outputHash": "3751724b5b01f40c3de6c3c8626feb8f2b45229bbe4bd67c7d038ecb5cfa0953"
+		}
+	}
+}
