@@ -4,73 +4,116 @@ import styleUrl from "./_assets/style.css?url";
 import splitterUrl from "./_assets/image-splitter.js?url";
 import gameUrl from "./_assets/game.js?url";
 ---
+
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0c0921">
-  <title>舞台复原 · 贝拉滑块拼图</title>
-  <link rel="stylesheet" href={styleUrl}>
-  <link rel="stylesheet" href={shellUrl}>
-  <style is:inline>
-    body::before { background-image: linear-gradient(90deg, rgba(7,5,20,.96), rgba(14,9,34,.73), rgba(7,5,20,.96)), url("/assets/optimized/game-bg.webp"); }
-    .tile { background-image: url("/assets/optimized/game-bg.webp"); }
-  </style>
-</head>
-<body>
-  <main class="app">
-    <header>
-      <div>
-        <p class="kicker">BELLA KIRA · STAGE PUZZLE</p>
-        <h1>舞台复原</h1>
-        <p>移动散落的画面碎片，让这一刻重新完整。</p>
-      </div>
-      <button id="preview" class="preview-button" type="button" aria-pressed="false">查看原图</button>
-    </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#0c0921" />
+		<title>舞台复原 · 贝拉滑块拼图</title>
+		<link rel="stylesheet" href={styleUrl} />
+		<link rel="stylesheet" href={shellUrl} />
+		<style is:inline>
+			body::before {
+				background-image:
+					linear-gradient(
+						90deg,
+						rgba(7, 5, 20, 0.96),
+						rgba(14, 9, 34, 0.73),
+						rgba(7, 5, 20, 0.96)
+					),
+					url("/assets/optimized/game-bg.webp");
+			}
+			.tile {
+				background-image: url("/assets/optimized/game-bg.webp");
+			}
+		</style>
+	</head>
+	<body>
+		<main class="app">
+			<header>
+				<div>
+					<p class="kicker">BELLA KIRA · STAGE PUZZLE</p>
+					<h1>舞台复原</h1>
+					<p>移动散落的画面碎片，让这一刻重新完整。</p>
+				</div>
+				<button
+					id="preview"
+					class="preview-button"
+					type="button"
+					aria-pressed="false">查看原图</button
+				>
+			</header>
 
-    <section class="game-shell" aria-label="贝拉滑块拼图">
-      <aside class="side-panel">
-        <p class="kicker">CURRENT RUN</p>
-        <div class="stat"><span>步数</span><strong id="moves">0</strong></div>
-        <div class="stat"><span>时间</span><strong id="time">00:00</strong></div>
-        <div class="stat"><span>最佳</span><strong id="best">—</strong></div>
-        <div class="controls">
-          <label for="imageSelect">选择图片</label>
-          <select id="imageSelect"></select>
-          <label class="upload-button" for="imageUpload">＋ 上传自己的图片</label>
-          <input id="imageUpload" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
-          <label for="difficulty">拼图难度</label>
-          <select id="difficulty">
-            <option value="3" selected>轻松 · 3 × 3</option>
-            <option value="4">挑战 · 4 × 4</option>
-          </select>
-          <button id="shuffle" type="button">重新打乱</button>
-        </div>
-        <p class="rule"><i></i> 点击空位旁边的碎片进行移动</p>
-      </aside>
+			<section class="game-shell" aria-label="贝拉滑块拼图">
+				<aside class="side-panel">
+					<p class="kicker">CURRENT RUN</p>
+					<div class="stat">
+						<span>步数</span><strong id="moves">0</strong>
+					</div>
+					<div class="stat">
+						<span>时间</span><strong id="time">00:00</strong>
+					</div>
+					<div class="stat">
+						<span>最佳</span><strong id="best">—</strong>
+					</div>
+					<div class="controls">
+						<label for="imageSelect">选择图片</label>
+						<select id="imageSelect"></select>
+						<label class="upload-button" for="imageUpload"
+							>＋ 上传自己的图片</label
+						>
+						<input
+							id="imageUpload"
+							type="file"
+							accept="image/png,image/jpeg,image/webp,image/gif"
+							hidden
+						/>
+						<label for="difficulty">拼图难度</label>
+						<select id="difficulty">
+							<option value="3" selected>轻松 · 3 × 3</option>
+							<option value="4">挑战 · 4 × 4</option>
+						</select>
+						<button id="shuffle" type="button">重新打乱</button>
+					</div>
+					<p class="rule"><i></i> 点击空位旁边的碎片进行移动</p>
+				</aside>
 
-      <div class="board-wrap">
-        <div class="board" id="board" aria-label="拼图区域"></div>
-        <div class="original" id="original" hidden>
-          <img id="originalImage" src="/assets/optimized/game-bg.webp" alt="拼图完整原图" decoding="async" draggable="false">
-          <span>ORIGINAL</span>
-        </div>
-      </div>
-    </section>
-  </main>
+				<div class="board-wrap">
+					<div class="board" id="board" aria-label="拼图区域"></div>
+					<div class="original" id="original" hidden>
+						<img
+							id="originalImage"
+							src="/assets/optimized/game-bg.webp"
+							alt="拼图完整原图"
+							decoding="async"
+							draggable="false"
+						/>
+						<span>ORIGINAL</span>
+					</div>
+				</div>
+			</section>
+		</main>
 
-  <div class="modal" id="winModal" hidden>
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="winTitle">
-      <span class="spark">✦</span>
-      <p class="kicker">STAGE RESTORED</p>
-      <h2 id="winTitle">这一刻，重新完整</h2>
-      <p id="summary"></p>
-      <button id="again" type="button">再拼一次</button>
-    </div>
-  </div>
-  <a class="site-return" href="/games/" aria-label="返回互动空间">← 互动空间</a>
-  <script is:inline src={splitterUrl}></script>
-  <script is:inline src={gameUrl}></script>
-</body>
+		<div class="modal" id="winModal" hidden>
+			<div
+				class="modal-card"
+				role="dialog"
+				aria-modal="true"
+				aria-labelledby="winTitle"
+			>
+				<span class="spark">✦</span>
+				<p class="kicker">STAGE RESTORED</p>
+				<h2 id="winTitle">这一刻，重新完整</h2>
+				<p id="summary"></p>
+				<button id="again" type="button">再拼一次</button>
+			</div>
+		</div>
+		<a class="site-return" href="/games/" aria-label="返回互动空间"
+			>← 互动空间</a
+		>
+		<script is:inline src={splitterUrl}></script>
+		<script is:inline src={gameUrl}></script>
+	</body>
 </html>

@@ -20,7 +20,7 @@
 		"stickers:check": "node scripts/generate-sticker-previews.mjs --check",
 		"format": "prettier --write \"**/*.{astro,json,js,jsx,mjs,cjs,ts,tsx,mts,cts}\"",
 		"format:check": "prettier --check \"**/*.{astro,json,js,jsx,mjs,cjs,ts,tsx,mts,cts}\"",
-		"build": "npm run optimize:check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
+		"build": "npm run format && npm run optimize:check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
 		"preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
 		"check": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check",
 		"stop": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev stop"

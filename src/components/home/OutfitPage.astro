@@ -235,7 +235,7 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
 	<header class="outfit-heading">
 		<p>BELLA · OUTFIT ARCHIVE</p>
 		<h1>服装展示</h1>
-		<span>沿着星轨，遇见每一种贝拉</span>
+		<span>沿着星轨，细数贝拉的万千风采</span>
 		<small>立绘图片均为AI自制，非官图</small>
 	</header>
 
@@ -972,9 +972,10 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
 	.outfit-heading p {
 		margin: 0 0 8px;
 		color: rgba(255, 231, 217, 0.72);
-		font:
-			600 9px/1 system-ui,
-			sans-serif;
+		font-family: var(--chapter-kicker-font-family);
+		font-size: var(--chapter-kicker-font-size);
+		font-weight: 600;
+		line-height: 1.4;
 		letter-spacing: 0.31em;
 	}
 	.outfit-heading h1 {
@@ -989,7 +990,8 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
 		display: block;
 		margin-top: 12px;
 		color: rgba(255, 244, 238, 0.66);
-		font-size: 11px;
+		font-family: var(--chapter-subtitle-font-family);
+		font-size: var(--chapter-subtitle-font-size);
 		letter-spacing: 0.16em;
 	}
 	.outfit-heading small {
@@ -1373,7 +1375,7 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
 			font-size: 32px;
 		}
 		.outfit-heading span {
-			font-size: 9px;
+			font-size: var(--chapter-subtitle-font-size);
 		}
 		.outfit-heading small {
 			margin-top: 8px;

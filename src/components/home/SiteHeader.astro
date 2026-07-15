@@ -3,172 +3,304 @@ const isHome = Astro.url.pathname === "/";
 const isGames = Astro.url.pathname.startsWith("/games");
 
 const navigation = [
-  { label: "首页", href: "/#home", page: 0 },
-  { label: "关于贝拉", href: "/#about", page: 1 },
-  { label: "应援指南", href: "/#support", page: 2 },
-  { label: "一路繁花", href: "/#timeline", page: 3 },
-  { label: "服装展示", href: "/#outfits", page: 4 },
-  { label: "推荐视频", href: "/#watch", page: 5 },
-  { label: "表情包", href: "/#stickers", page: 6 },
-  { label: "画廊", href: "/#gallery", page: 7 },
-  { label: "同人文", href: "/#fiction", page: 8 },
-  { label: "枝江路标", href: "/#corner", page: 9 },
-  { label: "互动空间", href: isGames ? "/games/" : "/#space", page: 10 },
-  { label: "站点公告", href: "/#notice", page: 11 },
+	{ label: "首页", href: "/#home", page: 0 },
+	{ label: "关于贝拉", href: "/#about", page: 1 },
+	{ label: "应援指南", href: "/#support", page: 2 },
+	{ label: "一路繁花", href: "/#timeline", page: 3 },
+	{ label: "服装展示", href: "/#outfits", page: 4 },
+	{ label: "推荐视频", href: "/#watch", page: 5 },
+	{ label: "表情包", href: "/#stickers", page: 6 },
+	{ label: "画廊", href: "/#gallery", page: 7 },
+	{ label: "同人文", href: "/#fiction", page: 8 },
+	{ label: "枝江路标", href: "/#corner", page: 9 },
+	{ label: "互动空间", href: isGames ? "/games/" : "/#space", page: 10 },
+	{ label: "站点公告", href: "/#notice", page: 11 },
 ];
 
 const homeNavigation = navigation.filter((item) => Number.isInteger(item.page));
-const routeNavigation = navigation.filter((item) => !Number.isInteger(item.page));
+const routeNavigation = navigation.filter(
+	(item) => !Number.isInteger(item.page),
+);
 const initialMobileLabel = isGames ? "互动空间" : "首页";
-
 ---
 
 <header class="site-header" data-home-route={isHome ? "true" : undefined}>
-  <a class="brand page-control" href="/#home" data-page={isHome ? "0" : undefined} aria-label="贝拉kira 首页">
-    <strong>贝拉<span>Kira</span></strong>
-  </a>
+	<a
+		class="brand page-control"
+		href="/#home"
+		data-page={isHome ? "0" : undefined}
+		aria-label="贝拉kira 首页"
+	>
+		<strong>贝拉<span>Kira</span></strong>
+	</a>
 
-  <nav class="main-nav" aria-label="主导航">
-    {navigation.map((item) => (
-      <a
-        class:list={["nav-link", { "is-active": isHome ? item.page === 0 : isGames && item.href === "/games/" }]}
-        href={item.href}
-        data-page={isHome && Number.isInteger(item.page) ? item.page : undefined}
-        aria-current={isHome ? (item.page === 0 ? "page" : undefined) : isGames && item.href === "/games/" ? "page" : undefined}
-      >
-        <span class="nav-link-label">{item.label}</span>
-        <span class="nav-link-ornament" aria-hidden="true"><i></i></span>
-      </a>
-    ))}
-  </nav>
+	<nav class="main-nav" aria-label="主导航">
+		{
+			navigation.map((item) => (
+				<a
+					class:list={[
+						"nav-link",
+						{
+							"is-active": isHome
+								? item.page === 0
+								: isGames && item.href === "/games/",
+						},
+					]}
+					href={item.href}
+					data-page={
+						isHome && Number.isInteger(item.page)
+							? item.page
+							: undefined
+					}
+					aria-current={
+						isHome
+							? item.page === 0
+								? "page"
+								: undefined
+							: isGames && item.href === "/games/"
+								? "page"
+								: undefined
+					}
+				>
+					<span class="nav-link-label">{item.label}</span>
+					<span class="nav-link-ornament" aria-hidden="true">
+						<i />
+					</span>
+				</a>
+			))
+		}
+	</nav>
 
-  <div class="desktop-header-tools">
-    <button class="theme-switch" type="button" role="switch" aria-checked="false">
-      <span class="theme-switch-track" aria-hidden="true">
-        <i class="theme-switch-gem"></i>
-      </span>
-    </button>
-  </div>
+	<div class="desktop-header-tools">
+		<button
+			class="theme-switch"
+			type="button"
+			role="switch"
+			aria-checked="false"
+		>
+			<span class="theme-switch-track" aria-hidden="true">
+				<i class="theme-switch-gem"></i>
+			</span>
+		</button>
+	</div>
 
-  <div class="mobile-header-actions">
-    <span class="mobile-current-page" aria-live="polite">{initialMobileLabel}</span>
-    <button class="theme-switch theme-switch--mobile" type="button" role="switch" aria-checked="false">
-      <span class="theme-switch-track" aria-hidden="true">
-        <i class="theme-switch-gem"></i>
-      </span>
-    </button>
-    <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-site-menu" aria-label="打开网站导航">
-      <span></span><span></span>
-    </button>
-  </div>
+	<div class="mobile-header-actions">
+		<span class="mobile-current-page" aria-live="polite"
+			>{initialMobileLabel}</span
+		>
+		<button
+			class="theme-switch theme-switch--mobile"
+			type="button"
+			role="switch"
+			aria-checked="false"
+		>
+			<span class="theme-switch-track" aria-hidden="true">
+				<i class="theme-switch-gem"></i>
+			</span>
+		</button>
+		<button
+			class="mobile-menu-toggle"
+			type="button"
+			aria-expanded="false"
+			aria-controls="mobile-site-menu"
+			aria-label="打开网站导航"
+		>
+			<span></span><span></span>
+		</button>
+	</div>
 </header>
 
 <div class="mobile-site-menu" id="mobile-site-menu" hidden>
-  <button class="mobile-menu-backdrop" type="button" aria-label="关闭网站导航"></button>
-  <div class="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="网站导航">
-    <div class="mobile-menu-heading"><small>BELLA KIRA · INDEX</small><strong>浏览章节</strong></div>
-    <nav class="mobile-chapter-nav" aria-label="首页章节">
-      {homeNavigation.map((item, index) => (
-        <a
-          class:list={["mobile-menu-link", { "is-active": isHome ? item.page === 0 : false }]}
-          href={item.href}
-          data-page={isHome ? item.page : undefined}
-          data-page-label={item.label}
-        >
-          <span>{String(index + 1).padStart(2, "0")}</span><strong>{item.label}</strong><i aria-hidden="true">→</i>
-        </a>
-      ))}
-    </nav>
-    <nav class="mobile-route-nav" aria-label="其他页面">
-      {routeNavigation.map((item) => <a href={item.href}>{item.label}<i aria-hidden="true">↗</i></a>)}
-    </nav>
-  </div>
+	<button class="mobile-menu-backdrop" type="button" aria-label="关闭网站导航"
+	></button>
+	<div
+		class="mobile-menu-panel"
+		role="dialog"
+		aria-modal="true"
+		aria-label="网站导航"
+	>
+		<div class="mobile-menu-heading">
+			<small>BELLA KIRA · INDEX</small><strong>浏览章节</strong>
+		</div>
+		<nav class="mobile-chapter-nav" aria-label="首页章节">
+			{
+				homeNavigation.map((item, index) => (
+					<a
+						class:list={[
+							"mobile-menu-link",
+							{ "is-active": isHome ? item.page === 0 : false },
+						]}
+						href={item.href}
+						data-page={isHome ? item.page : undefined}
+						data-page-label={item.label}
+					>
+						<>
+							<span>{String(index + 1).padStart(2, "0")}</span>
+							<strong>{item.label}</strong>
+							<i aria-hidden="true">→</i>
+						</>
+					</a>
+				))
+			}
+		</nav>
+		<nav class="mobile-route-nav" aria-label="其他页面">
+			{
+				routeNavigation.map((item) => (
+					<a href={item.href}>
+						{item.label}
+						<i aria-hidden="true">↗</i>
+					</a>
+				))
+			}
+		</nav>
+	</div>
 </div>
 
 <script is:inline>
-  const siteHeader = document.querySelector(".site-header");
-  const themeControls = [...document.querySelectorAll(".theme-switch")];
-  const syncThemeControls = () => {
-    const theme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
-    const isLight = theme === "light";
-    themeControls.forEach((control) => {
-      control.setAttribute("aria-checked", String(isLight));
-      control.setAttribute("aria-label", isLight ? "当前为浅色主题，切换到深色主题" : "当前为深色主题，切换到浅色主题");
-      control.setAttribute("title", isLight ? "切换到深色主题" : "切换到浅色主题");
-    });
-  };
-  const syncThemeVisibility = (page) => {
-    const isHomeChapter = siteHeader?.dataset.homeRoute === "true" && page === 0;
-    themeControls.forEach((control) => { control.hidden = isHomeChapter; });
-  };
+	const siteHeader = document.querySelector(".site-header");
+	const themeControls = [...document.querySelectorAll(".theme-switch")];
+	const syncThemeControls = () => {
+		const theme =
+			document.documentElement.dataset.theme === "light"
+				? "light"
+				: "dark";
+		const isLight = theme === "light";
+		themeControls.forEach((control) => {
+			control.setAttribute("aria-checked", String(isLight));
+			control.setAttribute(
+				"aria-label",
+				isLight
+					? "当前为浅色主题，切换到深色主题"
+					: "当前为深色主题，切换到浅色主题",
+			);
+			control.setAttribute(
+				"title",
+				isLight ? "切换到深色主题" : "切换到浅色主题",
+			);
+		});
+	};
+	const syncThemeVisibility = (page) => {
+		const isHomeChapter =
+			siteHeader?.dataset.homeRoute === "true" && page === 0;
+		themeControls.forEach((control) => {
+			control.hidden = isHomeChapter;
+		});
+	};
 
-  themeControls.forEach((control) => {
-    control.addEventListener("click", () => {
-      const root = document.documentElement;
-      const nextTheme = root.dataset.theme === "light" ? "dark" : "light";
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        root.classList.add("theme-is-changing");
-        window.setTimeout(() => root.classList.remove("theme-is-changing"), 360);
-      }
-      window.__bellaTheme?.apply(nextTheme, true);
-    });
-  });
-  document.addEventListener("bella:themechange", syncThemeControls);
-  window.addEventListener("bella:pagechange", (event) => {
-    syncThemeVisibility(Number(event.detail?.page));
-  });
-  window.addEventListener("storage", (event) => {
-    if (event.key !== "bella-kira-theme" || (event.newValue !== "dark" && event.newValue !== "light")) return;
-    window.__bellaTheme?.apply(event.newValue);
-  });
-  syncThemeControls();
-  const homeHashes = ["#home", "#about", "#support", "#timeline", "#outfits", "#watch", "#stickers", "#gallery", "#fiction", "#corner", "#space", "#notice"];
-  syncThemeVisibility(Math.max(0, homeHashes.indexOf(window.location.hash)));
+	themeControls.forEach((control) => {
+		control.addEventListener("click", () => {
+			const root = document.documentElement;
+			const nextTheme = root.dataset.theme === "light" ? "dark" : "light";
+			if (
+				!window.matchMedia("(prefers-reduced-motion: reduce)").matches
+			) {
+				root.classList.add("theme-is-changing");
+				window.setTimeout(
+					() => root.classList.remove("theme-is-changing"),
+					360,
+				);
+			}
+			window.__bellaTheme?.apply(nextTheme, true);
+		});
+	});
+	document.addEventListener("bella:themechange", syncThemeControls);
+	window.addEventListener("bella:pagechange", (event) => {
+		syncThemeVisibility(Number(event.detail?.page));
+	});
+	window.addEventListener("storage", (event) => {
+		if (
+			event.key !== "bella-kira-theme" ||
+			(event.newValue !== "dark" && event.newValue !== "light")
+		)
+			return;
+		window.__bellaTheme?.apply(event.newValue);
+	});
+	syncThemeControls();
+	const homeHashes = [
+		"#home",
+		"#about",
+		"#support",
+		"#timeline",
+		"#outfits",
+		"#watch",
+		"#stickers",
+		"#gallery",
+		"#fiction",
+		"#corner",
+		"#space",
+		"#notice",
+	];
+	syncThemeVisibility(Math.max(0, homeHashes.indexOf(window.location.hash)));
 
-  const currentNavLink = document.querySelector(".site-header .nav-link.is-active");
-  const currentNav = currentNavLink?.closest(".main-nav");
-  if (currentNavLink instanceof HTMLElement && currentNav instanceof HTMLElement) {
-    const linkCenter = currentNavLink.offsetLeft + currentNavLink.offsetWidth / 2;
-    currentNav.scrollLeft = Math.max(0, linkCenter - currentNav.clientWidth / 2);
-  }
+	const currentNavLink = document.querySelector(
+		".site-header .nav-link.is-active",
+	);
+	const currentNav = currentNavLink?.closest(".main-nav");
+	if (
+		currentNavLink instanceof HTMLElement &&
+		currentNav instanceof HTMLElement
+	) {
+		const linkCenter =
+			currentNavLink.offsetLeft + currentNavLink.offsetWidth / 2;
+		currentNav.scrollLeft = Math.max(
+			0,
+			linkCenter - currentNav.clientWidth / 2,
+		);
+	}
 
-  const mobileMenu = document.querySelector(".mobile-site-menu");
-  const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
-  const mobileMenuPanel = document.querySelector(".mobile-menu-panel");
-  const mobileMenuBackdrop = document.querySelector(".mobile-menu-backdrop");
-  let menuCloseTimer;
+	const mobileMenu = document.querySelector(".mobile-site-menu");
+	const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+	const mobileMenuPanel = document.querySelector(".mobile-menu-panel");
+	const mobileMenuBackdrop = document.querySelector(".mobile-menu-backdrop");
+	let menuCloseTimer;
 
-  const closeMobileMenu = () => {
-    if (!(mobileMenu instanceof HTMLElement) || !(mobileMenuToggle instanceof HTMLButtonElement)) return;
-    mobileMenu.classList.remove("is-open");
-    mobileMenuToggle.setAttribute("aria-expanded", "false");
-    mobileMenuToggle.setAttribute("aria-label", "打开网站导航");
-    document.documentElement.classList.remove("mobile-menu-open");
-    window.clearTimeout(menuCloseTimer);
-    menuCloseTimer = window.setTimeout(() => { mobileMenu.hidden = true; }, 260);
-  };
+	const closeMobileMenu = () => {
+		if (
+			!(mobileMenu instanceof HTMLElement) ||
+			!(mobileMenuToggle instanceof HTMLButtonElement)
+		)
+			return;
+		mobileMenu.classList.remove("is-open");
+		mobileMenuToggle.setAttribute("aria-expanded", "false");
+		mobileMenuToggle.setAttribute("aria-label", "打开网站导航");
+		document.documentElement.classList.remove("mobile-menu-open");
+		window.clearTimeout(menuCloseTimer);
+		menuCloseTimer = window.setTimeout(() => {
+			mobileMenu.hidden = true;
+		}, 260);
+	};
 
-  const openMobileMenu = () => {
-    if (!(mobileMenu instanceof HTMLElement) || !(mobileMenuToggle instanceof HTMLButtonElement)) return;
-    window.clearTimeout(menuCloseTimer);
-    mobileMenu.hidden = false;
-    requestAnimationFrame(() => mobileMenu.classList.add("is-open"));
-    mobileMenuToggle.setAttribute("aria-expanded", "true");
-    mobileMenuToggle.setAttribute("aria-label", "关闭网站导航");
-    document.documentElement.classList.add("mobile-menu-open");
-    mobileMenuPanel?.querySelector("a")?.focus({ preventScroll: true });
-  };
+	const openMobileMenu = () => {
+		if (
+			!(mobileMenu instanceof HTMLElement) ||
+			!(mobileMenuToggle instanceof HTMLButtonElement)
+		)
+			return;
+		window.clearTimeout(menuCloseTimer);
+		mobileMenu.hidden = false;
+		requestAnimationFrame(() => mobileMenu.classList.add("is-open"));
+		mobileMenuToggle.setAttribute("aria-expanded", "true");
+		mobileMenuToggle.setAttribute("aria-label", "关闭网站导航");
+		document.documentElement.classList.add("mobile-menu-open");
+		mobileMenuPanel?.querySelector("a")?.focus({ preventScroll: true });
+	};
 
-  mobileMenuToggle?.addEventListener("click", () => {
-    if (mobileMenuToggle.getAttribute("aria-expanded") === "true") closeMobileMenu();
-    else openMobileMenu();
-  });
-  mobileMenuBackdrop?.addEventListener("click", closeMobileMenu);
-  mobileMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMobileMenu));
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && mobileMenuToggle?.getAttribute("aria-expanded") === "true") {
-      closeMobileMenu();
-      mobileMenuToggle.focus();
-    }
-  });
+	mobileMenuToggle?.addEventListener("click", () => {
+		if (mobileMenuToggle.getAttribute("aria-expanded") === "true")
+			closeMobileMenu();
+		else openMobileMenu();
+	});
+	mobileMenuBackdrop?.addEventListener("click", closeMobileMenu);
+	mobileMenu
+		?.querySelectorAll("a")
+		.forEach((link) => link.addEventListener("click", closeMobileMenu));
+	window.addEventListener("keydown", (event) => {
+		if (
+			event.key === "Escape" &&
+			mobileMenuToggle?.getAttribute("aria-expanded") === "true"
+		) {
+			closeMobileMenu();
+			mobileMenuToggle.focus();
+		}
+	});
 </script>

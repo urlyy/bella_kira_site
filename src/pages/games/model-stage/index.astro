@@ -6,120 +6,269 @@ import "./stage.css";
 ---
 
 <SiteLayout title="贝拉的舞台 · 贝拉kira粉丝站">
-  <main class="model-stage">
-    <canvas id="model-canvas" aria-label="贝拉 PMX 模型姿态编辑器"></canvas>
-    <div class="selected-bone-label" id="selected-bone-label" aria-live="polite" hidden>
-      <i aria-hidden="true"></i><span>頭</span><small>#018</small>
-    </div>
-    <div class="stage-copy">
-      <p>BELLA KIRA · PMX STAGE</p>
-      <h1>贝拉的舞台</h1>
-      <span>选择预设，或亲手调整她的姿态</span>
-      <span class="camera-shortcut camera-shortcut-desktop">左键拖动旋转 · 滚轮拉近拉远 · 右键拖动平移</span>
-      <span class="camera-shortcut camera-shortcut-touch">单指旋转 · 双指捏合缩放 · 双指拖动平移</span>
-    </div>
-    <button class="pose-toggle" id="pose-toggle" type="button" aria-controls="pose-panel" aria-expanded="true">姿态编辑</button>
-    <button class="stage-capture" id="stage-capture" type="button" disabled>
-      <span aria-hidden="true">◎</span><b>拍摄模型</b>
-    </button>
-    <aside class="pose-panel" id="pose-panel" aria-label="姿态编辑面板">
-      <div class="pose-panel-head">
-        <div><small>POSE STUDIO</small><strong>姿态编辑</strong></div>
-        <button id="help-open" type="button" aria-label="打开使用说明">?</button>
-      </div>
+	<main class="model-stage">
+		<canvas id="model-canvas" aria-label="贝拉 PMX 模型姿态编辑器"></canvas>
+		<div
+			class="selected-bone-label"
+			id="selected-bone-label"
+			aria-live="polite"
+			hidden
+		>
+			<i aria-hidden="true"></i><span>頭</span><small>#018</small>
+		</div>
+		<div class="stage-copy">
+			<p>BELLA KIRA · PMX STAGE</p>
+			<h1>贝拉的舞台</h1>
+			<span>选择预设，或亲手调整她的姿态</span>
+			<span class="camera-shortcut camera-shortcut-desktop"
+				>左键拖动旋转 · 滚轮拉近拉远 · 右键拖动平移</span
+			>
+			<span class="camera-shortcut camera-shortcut-touch"
+				>单指旋转 · 双指捏合缩放 · 双指拖动平移</span
+			>
+		</div>
+		<button
+			class="pose-toggle"
+			id="pose-toggle"
+			type="button"
+			aria-controls="pose-panel"
+			aria-expanded="true">姿态编辑</button
+		>
+		<button class="stage-capture" id="stage-capture" type="button" disabled>
+			<span aria-hidden="true">◎</span><b>拍摄模型</b>
+		</button>
+		<aside class="pose-panel" id="pose-panel" aria-label="姿态编辑面板">
+			<div class="pose-panel-head">
+				<div><small>POSE STUDIO</small><strong>姿态编辑</strong></div>
+				<button id="help-open" type="button" aria-label="打开使用说明"
+					>?</button
+				>
+			</div>
 
-      <div class="editor-modes" aria-label="编辑模式">
-        <button class="is-active" type="button" data-mode="easy">便捷模式</button>
-        <button type="button" data-mode="advanced">高级骨骼</button>
-      </div>
+			<div class="editor-modes" aria-label="编辑模式">
+				<button class="is-active" type="button" data-mode="easy"
+					>便捷模式</button
+				>
+				<button type="button" data-mode="advanced">高级骨骼</button>
+			</div>
 
-      <section class="pose-section quick-only">
-        <div class="section-title"><span>一键姿势</span><small>点一下即可更换</small></div>
-        <div class="preset-grid" id="pose-presets">
-          <button type="button" data-preset="natural"><i>◇</i>自然站立</button>
-          <button type="button" data-preset="wave"><i>⌁</i>挥手问好</button>
-          <button type="button" data-preset="cheer"><i>✦</i>元气应援</button>
-          <button type="button" data-preset="dance"><i>♫</i>舞步定格</button>
-        </div>
-      </section>
+			<section class="pose-section quick-only">
+				<div class="section-title">
+					<span>一键姿势</span><small>点一下即可更换</small>
+				</div>
+				<div class="preset-grid" id="pose-presets">
+					<button type="button" data-preset="natural"
+						><i>◇</i>自然站立</button
+					>
+					<button type="button" data-preset="wave"
+						><i>⌁</i>挥手问好</button
+					>
+					<button type="button" data-preset="cheer"
+						><i>✦</i>元气应援</button
+					>
+					<button type="button" data-preset="dance"
+						><i>♫</i>舞步定格</button
+					>
+				</div>
+			</section>
 
-      <section class="pose-section joint-editor quick-only">
-        <div class="section-title"><span>精细调整</span><small>先选部位，再拖滑杆</small></div>
-        <div class="body-parts" id="body-parts">
-          <button type="button" data-bone="頭">头部</button>
-          <button type="button" data-bone="上半身2">上身</button>
-          <button type="button" data-bone="左腕">左上臂</button>
-          <button type="button" data-bone="右腕">右上臂</button>
-          <button type="button" data-bone="左ひじ">左小臂</button>
-          <button type="button" data-bone="右ひじ">右小臂</button>
-          <button type="button" data-bone="左手首">左手腕</button>
-          <button type="button" data-bone="右手首">右手腕</button>
-          <button type="button" data-bone="左足">左腿</button>
-          <button type="button" data-bone="右足">右腿</button>
-          <button type="button" data-bone="左ひざ">左膝</button>
-          <button type="button" data-bone="右ひざ">右膝</button>
-        </div>
-      </section>
+			<section class="pose-section joint-editor quick-only">
+				<div class="section-title">
+					<span>精细调整</span><small>先选部位，再拖滑杆</small>
+				</div>
+				<div class="body-parts" id="body-parts">
+					<button type="button" data-bone="頭">头部</button>
+					<button type="button" data-bone="上半身2">上身</button>
+					<button type="button" data-bone="左腕">左上臂</button>
+					<button type="button" data-bone="右腕">右上臂</button>
+					<button type="button" data-bone="左ひじ">左小臂</button>
+					<button type="button" data-bone="右ひじ">右小臂</button>
+					<button type="button" data-bone="左手首">左手腕</button>
+					<button type="button" data-bone="右手首">右手腕</button>
+					<button type="button" data-bone="左足">左腿</button>
+					<button type="button" data-bone="右足">右腿</button>
+					<button type="button" data-bone="左ひざ">左膝</button>
+					<button type="button" data-bone="右ひざ">右膝</button>
+				</div>
+			</section>
 
-      <section class="pose-section advanced-only" aria-labelledby="advanced-title">
-        <div class="section-title"><span id="advanced-title">全部骨骼</span><small id="bone-count">模型加载后可用</small></div>
-        <div class="skeleton-status"><i aria-hidden="true"></i><span>骨架与XYZ轴已显示</span><small>三色轴跟随当前骨骼</small></div>
-        <label class="bone-search"><span class="sr-only">搜索骨骼</span><input id="bone-search" type="search" placeholder="搜索：手、髪、Skirt…" autocomplete="off"></label>
-        <p class="advanced-note">名称与顺序直接来自 PMX。裙摆、头发、饰品等技术骨也可以单独调整。</p>
-        <div class="bone-list" id="bone-list" role="listbox" aria-label="模型骨骼"></div>
-      </section>
+			<section
+				class="pose-section advanced-only"
+				aria-labelledby="advanced-title"
+			>
+				<div class="section-title">
+					<span id="advanced-title">全部骨骼</span><small
+						id="bone-count">模型加载后可用</small
+					>
+				</div>
+				<div class="skeleton-status">
+					<i aria-hidden="true"></i><span>骨架与XYZ轴已显示</span
+					><small>三色轴跟随当前骨骼</small>
+				</div>
+				<label class="bone-search"
+					><span class="sr-only">搜索骨骼</span><input
+						id="bone-search"
+						type="search"
+						placeholder="搜索：手、髪、Skirt…"
+						autocomplete="off"
+					/></label
+				>
+				<p class="advanced-note">
+					名称与顺序直接来自
+					PMX。裙摆、头发、饰品等技术骨也可以单独调整。
+				</p>
+				<div
+					class="bone-list"
+					id="bone-list"
+					role="listbox"
+					aria-label="模型骨骼"
+				>
+				</div>
+			</section>
 
-      <section class="rotation-controls" id="rotation-controls">
-        <div class="selected-part"><span id="selected-kind">当前部位</span><strong id="selected-part">头部</strong><button id="reset-part" type="button">还原此处</button></div>
-        <label><span data-easy="前后" data-advanced="X轴">前后</span><input data-axis="x" type="range" min="-120" max="120" value="0"><output>0°</output></label>
-        <label><span data-easy="左右" data-advanced="Y轴">左右</span><input data-axis="y" type="range" min="-120" max="120" value="0"><output>0°</output></label>
-        <label><span data-easy="侧倾" data-advanced="Z轴">侧倾</span><input data-axis="z" type="range" min="-120" max="120" value="0"><output>0°</output></label>
-      </section>
+			<section class="rotation-controls" id="rotation-controls">
+				<div class="selected-part">
+					<span id="selected-kind">当前部位</span><strong
+						id="selected-part">头部</strong
+					><button id="reset-part" type="button">还原此处</button>
+				</div>
+				<label
+					><span data-easy="前后" data-advanced="X轴">前后</span
+					><input
+						data-axis="x"
+						type="range"
+						min="-120"
+						max="120"
+						value="0"
+					/><output>0°</output></label
+				>
+				<label
+					><span data-easy="左右" data-advanced="Y轴">左右</span
+					><input
+						data-axis="y"
+						type="range"
+						min="-120"
+						max="120"
+						value="0"
+					/><output>0°</output></label
+				>
+				<label
+					><span data-easy="侧倾" data-advanced="Z轴">侧倾</span
+					><input
+						data-axis="z"
+						type="range"
+						min="-120"
+						max="120"
+						value="0"
+					/><output>0°</output></label
+				>
+			</section>
 
-      <section class="pose-section expression-row quick-only">
-        <div class="section-title"><span>表情</span><small>可与姿势组合</small></div>
-        <div id="expressions">
-          <button type="button" data-expression="smile">微笑</button>
-          <button type="button" data-expression="wink">眨眼</button>
-          <button type="button" data-expression="surprise">惊喜</button>
-          <button type="button" data-expression="clear">自然</button>
-        </div>
-      </section>
-      <button class="reset-all" id="reset-all" type="button">全部恢复默认</button>
-    </aside>
+			<section class="pose-section expression-row quick-only">
+				<div class="section-title">
+					<span>表情</span><small>可与姿势组合</small>
+				</div>
+				<div id="expressions">
+					<button type="button" data-expression="smile">微笑</button>
+					<button type="button" data-expression="wink">眨眼</button>
+					<button type="button" data-expression="surprise"
+						>惊喜</button
+					>
+					<button type="button" data-expression="clear">自然</button>
+				</div>
+			</section>
+			<button class="reset-all" id="reset-all" type="button"
+				>全部恢复默认</button
+			>
+		</aside>
 
-    <dialog class="stage-help" id="stage-help">
-      <button class="help-close" id="help-close" type="button" aria-label="关闭说明">×</button>
-      <p class="help-kicker">第一次也能马上会</p>
-      <h2>三步摆好一个姿势</h2>
-      <ol>
-        <li><b>先点一个预设</b><span>“挥手问好”“元气应援”都能直接作为起点。</span></li>
-        <li><b>想微调，就选身体部位</b><span>例如选择“左小臂”，再拖动前后、左右、侧倾。</span></li>
-        <li><b>转动镜头看看</b><span>摆好后可以改变观察角度、距离和画面位置。</span></li>
-      </ol>
-      <section class="camera-help" aria-labelledby="camera-help-title">
-        <div class="camera-help-title"><small>CAMERA CONTROL</small><h3 id="camera-help-title">镜头怎么移动</h3></div>
-        <div class="camera-help-grid">
-          <div><i aria-hidden="true">↻</i><b>改变角度</b><span>鼠标左键按住拖动<br>触屏单指拖动</span></div>
-          <div><i aria-hidden="true">⌕</i><b>拉近 / 拉远</b><span>上下滚动鼠标滚轮<br>触屏双指捏合</span></div>
-          <div><i aria-hidden="true">✥</i><b>平移画面</b><span>鼠标右键按住拖动<br>触屏双指一起拖动</span></div>
-        </div>
-        <p>镜头操作请从舞台空白处开始，避免误触右侧的姿态滑杆。</p>
-      </section>
-      <p class="help-tip">调乱了也没关系：可以还原当前部位，或用面板底部的“全部恢复默认”。</p>
-      <p class="help-advanced"><b>熟悉骨骼？</b>切换到“高级骨骼”，可以搜索并直接旋转 PMX 中的任意一根骨骼。</p>
-      <button class="help-start" id="help-start" type="button">知道了，开始摆姿势</button>
-    </dialog>
-    <div class="loading" id="model-loading" role="status">
-      <i></i><span>正在准备舞台</span><b id="model-progress">0%</b>
-    </div>
-    <div class="stage-error" id="model-error" hidden>模型加载失败，请刷新页面重试。</div>
-    <div class="stage-toast" id="stage-toast" role="status" aria-live="polite" aria-atomic="true">
-      <img src="/assets/optimized/beijixing.webp" alt="" decoding="async" draggable="false" />
-      <span></span>
-    </div>
-    <a class="site-return" href="/games/" aria-label="返回互动空间">← 互动空间</a>
-  </main>
-  <CursorStars />
-  <script src="./_assets/stage.ts"></script>
+		<dialog class="stage-help" id="stage-help">
+			<button
+				class="help-close"
+				id="help-close"
+				type="button"
+				aria-label="关闭说明">×</button
+			>
+			<p class="help-kicker">第一次也能马上会</p>
+			<h2>三步摆好一个姿势</h2>
+			<ol>
+				<li>
+					<b>先点一个预设</b><span
+						>“挥手问好”“元气应援”都能直接作为起点。</span
+					>
+				</li>
+				<li>
+					<b>想微调，就选身体部位</b><span
+						>例如选择“左小臂”，再拖动前后、左右、侧倾。</span
+					>
+				</li>
+				<li>
+					<b>转动镜头看看</b><span
+						>摆好后可以改变观察角度、距离和画面位置。</span
+					>
+				</li>
+			</ol>
+			<section class="camera-help" aria-labelledby="camera-help-title">
+				<div class="camera-help-title">
+					<small>CAMERA CONTROL</small><h3 id="camera-help-title">
+						镜头怎么移动
+					</h3>
+				</div>
+				<div class="camera-help-grid">
+					<div>
+						<i aria-hidden="true">↻</i><b>改变角度</b><span
+							>鼠标左键按住拖动<br />触屏单指拖动</span
+						>
+					</div>
+					<div>
+						<i aria-hidden="true">⌕</i><b>拉近 / 拉远</b><span
+							>上下滚动鼠标滚轮<br />触屏双指捏合</span
+						>
+					</div>
+					<div>
+						<i aria-hidden="true">✥</i><b>平移画面</b><span
+							>鼠标右键按住拖动<br />触屏双指一起拖动</span
+						>
+					</div>
+				</div>
+				<p>镜头操作请从舞台空白处开始，避免误触右侧的姿态滑杆。</p>
+			</section>
+			<p class="help-tip">
+				调乱了也没关系：可以还原当前部位，或用面板底部的“全部恢复默认”。
+			</p>
+			<p class="help-advanced">
+				<b>熟悉骨骼？</b>切换到“高级骨骼”，可以搜索并直接旋转 PMX
+				中的任意一根骨骼。
+			</p>
+			<button class="help-start" id="help-start" type="button"
+				>知道了，开始摆姿势</button
+			>
+		</dialog>
+		<div class="loading" id="model-loading" role="status">
+			<i></i><span>正在准备舞台</span><b id="model-progress">0%</b>
+		</div>
+		<div class="stage-error" id="model-error" hidden>
+			模型加载失败，请刷新页面重试。
+		</div>
+		<div
+			class="stage-toast"
+			id="stage-toast"
+			role="status"
+			aria-live="polite"
+			aria-atomic="true"
+		>
+			<img
+				src="/assets/optimized/beijixing.webp"
+				alt=""
+				decoding="async"
+				draggable="false"
+			/>
+			<span></span>
+		</div>
+		<a class="site-return" href="/games/" aria-label="返回互动空间"
+			>← 互动空间</a
+		>
+	</main>
+	<CursorStars />
+	<script src="./_assets/stage.ts"></script>
 </SiteLayout>

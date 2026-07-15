@@ -1,89 +1,89 @@
 {
-  "settings": {
-    "version": 1,
-    "quality": 84,
-    "effort": 5
-  },
-  "images": {
-    "22生日会.png": {
-      "sourceHash": "52011300038264f0f76c79eba8c40b6027dbe78021e7adafb79bd0bf3937d6a6",
-      "output": "22生日会.webp",
-      "outputHash": "1f278df93ceace0a0bfe8281509b7a8f34454cbe493a7fc3157fe029765a24fe"
-    },
-    "25生日会.png": {
-      "sourceHash": "02fed9c5b6b17eadd85aee1782056b29d24da9c3ebe5b0dceec83673a34881ac",
-      "output": "25生日会.webp",
-      "outputHash": "4327bb100be6606227dad3a06dccde8c60047505d395d25fc9228d2a8b21d91c"
-    },
-    "白拉.jpg": {
-      "sourceHash": "b1eeb3030c452bf2fa5a610199491414353a4ec232d28505a7eb6b66d864f937",
-      "output": "白拉.webp",
-      "outputHash": "9120cd969734a1e9c19d58509ec9bbd2175b40af4db3f43b0438b37a9557d47c"
-    },
-    "毕方.png": {
-      "sourceHash": "6adbe316344aa5b0f17fb4adb272ca21de88bb41f7c9a3d412a4d5938c8dfee4",
-      "output": "毕方.webp",
-      "outputHash": "2a4f5d7a6435af8f13a1df0d0e8afed076f451d34a351ec088b154e74e55adbc"
-    },
-    "常服.png": {
-      "sourceHash": "d52b5f0a8e0e036ef616343102b67ff206030652af4871593ee97302a1167450",
-      "output": "常服.webp",
-      "outputHash": "8f0f5db1d3e1c900ede963cb05cb8ed7870fbc289db2a4f26a38fc2bac35daba"
-    },
-    "黑白运动服.png": {
-      "sourceHash": "d929368362c0776bb463e7edba197e50ac703c8d93bfd055993d23ae1a39252d",
-      "output": "黑白运动服.webp",
-      "outputHash": "841fdeece75a4610b905251f6dda9b8e98c98e5e8591d0de137311639e1522b2"
-    },
-    "黑拉.png": {
-      "sourceHash": "527cf6a7519ffba229315b8af1f5573341a1c4beb90bba3504bec151340d5929",
-      "output": "黑拉.webp",
-      "outputHash": "b176a9cffb93ce78532725c99ed3ab1d552a2834435ef221290bf905b520518e"
-    },
-    "军装.png": {
-      "sourceHash": "1a21154de335a931148e5e6c8fa8c0ae0acbc0fe61ac73a5ff19e1b32c69bb81",
-      "output": "军装.webp",
-      "outputHash": "1b39d7299264ed4c188e3f05f673d3de8bfaa67bf89c40dd9ac675aacf1873fd"
-    },
-    "绿jk.png": {
-      "sourceHash": "5e360eeb451cd049db829ffc889157a0ac9f094216b80d1c45592b58cb6fe4f0",
-      "output": "绿jk.webp",
-      "outputHash": "575e9d7e03f66544bc450d7e5ad5388e7459a120f26a2e123f434ff107005154"
-    },
-    "青苹果.png": {
-      "sourceHash": "b0b2e7c37bc8038825846d574cfe0283998e8ecc02c3cb71ebe7687d08a88952",
-      "output": "青苹果.webp",
-      "outputHash": "268da5189abb87f1486876157fc3eaa1aafd38cb41ec9b94dc70e2937940ec06"
-    },
-    "三周年团服.png": {
-      "sourceHash": "f49f271b9e46158981764a92d9a23e74a2522968c0c0f8760d67b3e605f6b37a",
-      "output": "三周年团服.webp",
-      "outputHash": "d57c1054cc70441734ad62dd0565d8330029667565c73a63d1174fab27634d4f"
-    },
-    "松鼠睡衣.png": {
-      "sourceHash": "8452a342113df7234821d47261b97c94260867bb1ee2adbcac19cf07cb30e94b",
-      "output": "松鼠睡衣.webp",
-      "outputHash": "fc43c3882c975b6a1829a13ea2b2ff700a026dff8a24b1b5554572f4306b6fc7"
-    },
-    "五周年团服.png": {
-      "sourceHash": "07e9e0eed4d760cb1c7006008784f90fca50e283192c0dfb5200672c7c2e9958",
-      "output": "五周年团服.webp",
-      "outputHash": "e687f8ea7a64d298ccae4ce69a9d5fc804bc79bc6ec3c662c8b8f1af68d4634f"
-    },
-    "仙剑紫色.png": {
-      "sourceHash": "8b2c02a8df06d4254237e1b3def70b0f26df6e1b0826d8112ca6fa8f1e0a448f",
-      "output": "仙剑紫色.webp",
-      "outputHash": "70fe39904e0d0572123b26d157cc838ab844e64081abb060524168d0dc850e92"
-    },
-    "泳装.png": {
-      "sourceHash": "0ec25aca73670079f54870f8001d521513f550c65c1beeb27e6050ac079996d3",
-      "output": "泳装.webp",
-      "outputHash": "5892df01c014f92c43454b89e5d311d3cca44b24e1f7706ceda4c409728abf5a"
-    },
-    "pico.png": {
-      "sourceHash": "209738128e79d7c5f41c0559c2d8f05b8fc0a4ed9908e421b8bfc016a1c41a9f",
-      "output": "pico.webp",
-      "outputHash": "446afdc8d5a2bf864ba329abb5d9552b0241fdfb704838acd8a4078d2953581a"
-    }
-  }
+	"settings": {
+		"version": 1,
+		"quality": 84,
+		"effort": 5
+	},
+	"images": {
+		"22生日会.png": {
+			"sourceHash": "52011300038264f0f76c79eba8c40b6027dbe78021e7adafb79bd0bf3937d6a6",
+			"output": "22生日会.webp",
+			"outputHash": "1f278df93ceace0a0bfe8281509b7a8f34454cbe493a7fc3157fe029765a24fe"
+		},
+		"25生日会.png": {
+			"sourceHash": "02fed9c5b6b17eadd85aee1782056b29d24da9c3ebe5b0dceec83673a34881ac",
+			"output": "25生日会.webp",
+			"outputHash": "4327bb100be6606227dad3a06dccde8c60047505d395d25fc9228d2a8b21d91c"
+		},
+		"白拉.jpg": {
+			"sourceHash": "b1eeb3030c452bf2fa5a610199491414353a4ec232d28505a7eb6b66d864f937",
+			"output": "白拉.webp",
+			"outputHash": "9120cd969734a1e9c19d58509ec9bbd2175b40af4db3f43b0438b37a9557d47c"
+		},
+		"毕方.png": {
+			"sourceHash": "6adbe316344aa5b0f17fb4adb272ca21de88bb41f7c9a3d412a4d5938c8dfee4",
+			"output": "毕方.webp",
+			"outputHash": "2a4f5d7a6435af8f13a1df0d0e8afed076f451d34a351ec088b154e74e55adbc"
+		},
+		"常服.png": {
+			"sourceHash": "d52b5f0a8e0e036ef616343102b67ff206030652af4871593ee97302a1167450",
+			"output": "常服.webp",
+			"outputHash": "8f0f5db1d3e1c900ede963cb05cb8ed7870fbc289db2a4f26a38fc2bac35daba"
+		},
+		"黑白运动服.png": {
+			"sourceHash": "d929368362c0776bb463e7edba197e50ac703c8d93bfd055993d23ae1a39252d",
+			"output": "黑白运动服.webp",
+			"outputHash": "841fdeece75a4610b905251f6dda9b8e98c98e5e8591d0de137311639e1522b2"
+		},
+		"黑拉.png": {
+			"sourceHash": "527cf6a7519ffba229315b8af1f5573341a1c4beb90bba3504bec151340d5929",
+			"output": "黑拉.webp",
+			"outputHash": "b176a9cffb93ce78532725c99ed3ab1d552a2834435ef221290bf905b520518e"
+		},
+		"军装.png": {
+			"sourceHash": "1a21154de335a931148e5e6c8fa8c0ae0acbc0fe61ac73a5ff19e1b32c69bb81",
+			"output": "军装.webp",
+			"outputHash": "1b39d7299264ed4c188e3f05f673d3de8bfaa67bf89c40dd9ac675aacf1873fd"
+		},
+		"绿jk.png": {
+			"sourceHash": "5e360eeb451cd049db829ffc889157a0ac9f094216b80d1c45592b58cb6fe4f0",
+			"output": "绿jk.webp",
+			"outputHash": "575e9d7e03f66544bc450d7e5ad5388e7459a120f26a2e123f434ff107005154"
+		},
+		"青苹果.png": {
+			"sourceHash": "b0b2e7c37bc8038825846d574cfe0283998e8ecc02c3cb71ebe7687d08a88952",
+			"output": "青苹果.webp",
+			"outputHash": "268da5189abb87f1486876157fc3eaa1aafd38cb41ec9b94dc70e2937940ec06"
+		},
+		"三周年团服.png": {
+			"sourceHash": "f49f271b9e46158981764a92d9a23e74a2522968c0c0f8760d67b3e605f6b37a",
+			"output": "三周年团服.webp",
+			"outputHash": "d57c1054cc70441734ad62dd0565d8330029667565c73a63d1174fab27634d4f"
+		},
+		"松鼠睡衣.png": {
+			"sourceHash": "8452a342113df7234821d47261b97c94260867bb1ee2adbcac19cf07cb30e94b",
+			"output": "松鼠睡衣.webp",
+			"outputHash": "fc43c3882c975b6a1829a13ea2b2ff700a026dff8a24b1b5554572f4306b6fc7"
+		},
+		"五周年团服.png": {
+			"sourceHash": "07e9e0eed4d760cb1c7006008784f90fca50e283192c0dfb5200672c7c2e9958",
+			"output": "五周年团服.webp",
+			"outputHash": "e687f8ea7a64d298ccae4ce69a9d5fc804bc79bc6ec3c662c8b8f1af68d4634f"
+		},
+		"仙剑紫色.png": {
+			"sourceHash": "8b2c02a8df06d4254237e1b3def70b0f26df6e1b0826d8112ca6fa8f1e0a448f",
+			"output": "仙剑紫色.webp",
+			"outputHash": "70fe39904e0d0572123b26d157cc838ab844e64081abb060524168d0dc850e92"
+		},
+		"泳装.png": {
+			"sourceHash": "0ec25aca73670079f54870f8001d521513f550c65c1beeb27e6050ac079996d3",
+			"output": "泳装.webp",
+			"outputHash": "5892df01c014f92c43454b89e5d311d3cca44b24e1f7706ceda4c409728abf5a"
+		},
+		"pico.png": {
+			"sourceHash": "209738128e79d7c5f41c0559c2d8f05b8fc0a4ed9908e421b8bfc016a1c41a9f",
+			"output": "pico.webp",
+			"outputHash": "446afdc8d5a2bf864ba329abb5d9552b0241fdfb704838acd8a4078d2953581a"
+		}
+	}
 }

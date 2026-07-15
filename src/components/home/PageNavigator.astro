@@ -1,236 +1,375 @@
 <script>
-  const pages = Array.from(document.querySelectorAll<HTMLElement>(".page"));
-  const pageLinks = Array.from(document.querySelectorAll<HTMLElement>("[data-page]:not([data-page=''])"))
-    .filter((link) => Number.isFinite(Number(link.dataset.page)));
-  const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>(".nav-link[data-page]"));
-  const mobileNavLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>(".mobile-menu-link[data-page]"));
-  const mobileCurrentPage = document.querySelector<HTMLElement>(".mobile-current-page");
-  const transitionLine = document.querySelector<HTMLElement>(".page-transition-line");
-  const scrollCue = document.querySelector<HTMLElement>(".scroll-cue");
-  const heroVideo = document.querySelector<HTMLVideoElement>(".hero-video");
-  const heroPlayToggle = document.querySelector<HTMLButtonElement>(".hero-play-toggle");
-  const heroPlayIcon = heroPlayToggle?.querySelector<HTMLElement>("[aria-hidden='true']");
-  const heroPlayLabel = heroPlayToggle?.querySelector<HTMLElement>(".hero-control-label");
-  const heroSpeedToggle = document.querySelector<HTMLButtonElement>(".hero-speed-toggle");
-  const heroSpeedValue = heroSpeedToggle?.querySelector<HTMLElement>(".hero-speed-value");
-  const pageCount = pages.length;
-  const transitionDuration = 800;
-  const pageHashes = ["#home", "#about", "#support", "#timeline", "#outfits", "#watch", "#stickers", "#gallery", "#fiction", "#corner", "#space", "#notice"];
-  let currentPage = Math.max(0, pageHashes.indexOf(window.location.hash));
-  let transitionLocked = false;
-  let userPausedHero = false;
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let touchStartedAt = 0;
-  let touchIdentifier = -1;
-  let touchScrollSurface: HTMLElement | null = null;
-  let touchStartedAtTop = false;
-  let touchStartedAtBottom = false;
-  const playbackRates = [1, 1.25, 1.5, 2, 0.75];
+	const pages = Array.from(document.querySelectorAll<HTMLElement>(".page"));
+	const pageLinks = Array.from(
+		document.querySelectorAll<HTMLElement>(
+			"[data-page]:not([data-page=''])",
+		),
+	).filter((link) => Number.isFinite(Number(link.dataset.page)));
+	const navLinks = Array.from(
+		document.querySelectorAll<HTMLAnchorElement>(".nav-link[data-page]"),
+	);
+	const mobileNavLinks = Array.from(
+		document.querySelectorAll<HTMLAnchorElement>(
+			".mobile-menu-link[data-page]",
+		),
+	);
+	const mobileCurrentPage = document.querySelector<HTMLElement>(
+		".mobile-current-page",
+	);
+	const transitionLine = document.querySelector<HTMLElement>(
+		".page-transition-line",
+	);
+	const scrollCue = document.querySelector<HTMLElement>(".scroll-cue");
+	const heroVideo = document.querySelector<HTMLVideoElement>(".hero-video");
+	const heroPlayToggle =
+		document.querySelector<HTMLButtonElement>(".hero-play-toggle");
+	const heroPlayIcon = heroPlayToggle?.querySelector<HTMLElement>(
+		"[aria-hidden='true']",
+	);
+	const heroPlayLabel = heroPlayToggle?.querySelector<HTMLElement>(
+		".hero-control-label",
+	);
+	const heroSpeedToggle =
+		document.querySelector<HTMLButtonElement>(".hero-speed-toggle");
+	const heroSpeedValue =
+		heroSpeedToggle?.querySelector<HTMLElement>(".hero-speed-value");
+	const pageCount = pages.length;
+	const transitionDuration = 800;
+	const pageHashes = [
+		"#home",
+		"#about",
+		"#support",
+		"#timeline",
+		"#outfits",
+		"#watch",
+		"#stickers",
+		"#gallery",
+		"#fiction",
+		"#corner",
+		"#space",
+		"#notice",
+	];
+	let currentPage = Math.max(0, pageHashes.indexOf(window.location.hash));
+	let transitionLocked = false;
+	let userPausedHero = false;
+	let touchStartX = 0;
+	let touchStartY = 0;
+	let touchStartedAt = 0;
+	let touchIdentifier = -1;
+	let touchScrollSurface: HTMLElement | null = null;
+	let touchStartedAtTop = false;
+	let touchStartedAtBottom = false;
+	let heroRateChangeToken = 0;
+	let heroRateResumeFrame = 0;
+	let isChangingHeroRate = false;
+	const playbackRates = [1, 1.25, 1.5, 2, 0.75];
 
-  const updateNavigation = () => {
-    navLinks.forEach((link) => {
-      const isCurrent = Number(link.dataset.page) === currentPage;
-      link.classList.toggle("is-active", isCurrent);
-      if (isCurrent) link.setAttribute("aria-current", "page");
-      else link.removeAttribute("aria-current");
-    });
-    mobileNavLinks.forEach((link) => {
-      const isCurrent = Number(link.dataset.page) === currentPage;
-      link.classList.toggle("is-active", isCurrent);
-      if (isCurrent) link.setAttribute("aria-current", "page");
-      else link.removeAttribute("aria-current");
-    });
-    const activeMobileLink = mobileNavLinks.find((link) => Number(link.dataset.page) === currentPage);
-    if (mobileCurrentPage && activeMobileLink?.dataset.pageLabel) {
-      mobileCurrentPage.textContent = activeMobileLink.dataset.pageLabel;
-    }
-    if (scrollCue) scrollCue.hidden = currentPage === pageCount - 1;
-  };
+	const cancelHeroRateChange = () => {
+		heroRateChangeToken += 1;
+		if (heroRateResumeFrame) cancelAnimationFrame(heroRateResumeFrame);
+		heroRateResumeFrame = 0;
+		isChangingHeroRate = false;
+	};
 
-  const playHeroVideo = () => {
-    if (!heroVideo || userPausedHero) return;
-    if (!heroVideo.paused) return;
-    void heroVideo.play().catch(() => {
-      // Browsers may still reject scripted playback despite the muted video.
-    });
-  };
+	const updateNavigation = () => {
+		navLinks.forEach((link) => {
+			const isCurrent = Number(link.dataset.page) === currentPage;
+			link.classList.toggle("is-active", isCurrent);
+			if (isCurrent) link.setAttribute("aria-current", "page");
+			else link.removeAttribute("aria-current");
+		});
+		mobileNavLinks.forEach((link) => {
+			const isCurrent = Number(link.dataset.page) === currentPage;
+			link.classList.toggle("is-active", isCurrent);
+			if (isCurrent) link.setAttribute("aria-current", "page");
+			else link.removeAttribute("aria-current");
+		});
+		const activeMobileLink = mobileNavLinks.find(
+			(link) => Number(link.dataset.page) === currentPage,
+		);
+		if (mobileCurrentPage && activeMobileLink?.dataset.pageLabel) {
+			mobileCurrentPage.textContent = activeMobileLink.dataset.pageLabel;
+		}
+		if (scrollCue) scrollCue.hidden = currentPage === pageCount - 1;
+	};
 
-  const updateHeroPlayControl = () => {
-    if (!heroVideo || !heroPlayToggle || !heroPlayIcon || !heroPlayLabel) return;
-    const isPaused = heroVideo.paused;
-    heroPlayIcon.textContent = isPaused ? "▶" : "Ⅱ";
-    heroPlayLabel.textContent = isPaused ? "播放" : "暂停";
-    heroPlayToggle.setAttribute("aria-label", `${isPaused ? "播放" : "暂停"}首页视频`);
-  };
+	const playHeroVideo = () => {
+		if (!heroVideo || userPausedHero) return;
+		if (!heroVideo.paused) return;
+		void heroVideo.play().catch(() => {
+			// Browsers may still reject scripted playback despite the muted video.
+		});
+	};
 
-  heroPlayToggle?.addEventListener("click", () => {
-    if (!heroVideo) return;
-    if (heroVideo.paused) {
-      userPausedHero = false;
-      playHeroVideo();
-    } else {
-      userPausedHero = true;
-      heroVideo.pause();
-    }
-  });
+	const updateHeroPlayControl = () => {
+		if (!heroVideo || !heroPlayToggle || !heroPlayIcon || !heroPlayLabel)
+			return;
+		if (isChangingHeroRate) return;
+		const isPaused = heroVideo.paused;
+		heroPlayIcon.textContent = isPaused ? "▶" : "Ⅱ";
+		heroPlayLabel.textContent = isPaused ? "播放" : "暂停";
+		heroPlayToggle.setAttribute(
+			"aria-label",
+			`${isPaused ? "播放" : "暂停"}首页视频`,
+		);
+	};
 
-  heroSpeedToggle?.addEventListener("click", () => {
-    if (!heroVideo) return;
-    const currentIndex = playbackRates.findIndex((rate) => Math.abs(rate - heroVideo.playbackRate) < 0.01);
-    const nextRate = playbackRates[(currentIndex + 1) % playbackRates.length];
-    heroVideo.playbackRate = nextRate;
-    if (heroSpeedValue) heroSpeedValue.textContent = `${nextRate}×`;
-    heroSpeedToggle.setAttribute("aria-label", `视频播放速度 ${nextRate} 倍，点击切换`);
-  });
+	heroPlayToggle?.addEventListener("click", () => {
+		if (!heroVideo) return;
+		if (heroVideo.paused) {
+			cancelHeroRateChange();
+			userPausedHero = false;
+			playHeroVideo();
+		} else {
+			userPausedHero = true;
+			cancelHeroRateChange();
+			heroVideo.pause();
+		}
+	});
 
-  heroVideo?.addEventListener("play", updateHeroPlayControl);
-  heroVideo?.addEventListener("pause", updateHeroPlayControl);
-  updateHeroPlayControl();
+	heroSpeedToggle?.addEventListener("click", () => {
+		if (!heroVideo) return;
+		const currentIndex = playbackRates.findIndex(
+			(rate) => Math.abs(rate - heroVideo.playbackRate) < 0.01,
+		);
+		const nextRate =
+			playbackRates[(currentIndex + 1) % playbackRates.length];
+		const changeToken = ++heroRateChangeToken;
+		const shouldResume =
+			!userPausedHero && (!heroVideo.paused || isChangingHeroRate);
+		if (heroRateResumeFrame) cancelAnimationFrame(heroRateResumeFrame);
+		isChangingHeroRate = shouldResume;
+		if (shouldResume && !heroVideo.paused) heroVideo.pause();
+		heroVideo.playbackRate = nextRate;
+		if (heroSpeedValue) heroSpeedValue.textContent = `${nextRate}×`;
+		heroSpeedToggle.setAttribute(
+			"aria-label",
+			`视频播放速度 ${nextRate} 倍，点击切换`,
+		);
 
-  const syncSettledHeroVideo = () => {
-    if (currentPage === 0) playHeroVideo();
-    else heroVideo?.pause();
-  };
+		if (!shouldResume) return;
+		heroRateResumeFrame = requestAnimationFrame(() => {
+			heroRateResumeFrame = 0;
+			void heroVideo.play().finally(() => {
+				if (changeToken !== heroRateChangeToken) return;
+				isChangingHeroRate = false;
+				updateHeroPlayControl();
+			});
+		});
+	});
 
-  const settlePages = () => {
-    pages.forEach((page, index) => {
-      page.classList.toggle("is-current", index === currentPage);
-      page.classList.remove("is-entering", "is-entering-next", "is-entering-previous", "is-leaving");
-    });
-    transitionLine?.classList.remove("is-active", "moves-next", "moves-previous");
-    syncSettledHeroVideo();
-  };
+	heroVideo?.addEventListener("play", updateHeroPlayControl);
+	heroVideo?.addEventListener("pause", updateHeroPlayControl);
+	updateHeroPlayControl();
 
-  const showPage = (nextPage: number) => {
-    if (document.documentElement.classList.contains("is-site-preloading")) return;
-    const clampedPage = Math.max(0, Math.min(pageCount - 1, nextPage));
-    if (transitionLocked || clampedPage === currentPage) return;
+	const syncSettledHeroVideo = () => {
+		if (currentPage === 0) playHeroVideo();
+		else heroVideo?.pause();
+	};
 
-    const outgoing = pages[currentPage];
-    const incoming = pages[clampedPage];
-    const movesNext = clampedPage > currentPage;
-    transitionLocked = true;
+	const settlePages = () => {
+		pages.forEach((page, index) => {
+			page.classList.toggle("is-current", index === currentPage);
+			page.classList.remove(
+				"is-entering",
+				"is-entering-next",
+				"is-entering-previous",
+				"is-leaving",
+			);
+		});
+		transitionLine?.classList.remove(
+			"is-active",
+			"moves-next",
+			"moves-previous",
+		);
+		syncSettledHeroVideo();
+	};
 
-    if (currentPage === 0) {
-      heroVideo?.pause();
-    }
+	const showPage = (nextPage: number) => {
+		if (document.documentElement.classList.contains("is-site-preloading"))
+			return;
+		const clampedPage = Math.max(0, Math.min(pageCount - 1, nextPage));
+		if (transitionLocked || clampedPage === currentPage) return;
 
-    window.dispatchEvent(new CustomEvent("bella:pagewillchange", {
-      detail: {
-        fromPage: currentPage,
-        fromHash: pageHashes[currentPage],
-        toPage: clampedPage,
-        toHash: pageHashes[clampedPage],
-      },
-    }));
+		const outgoing = pages[currentPage];
+		const incoming = pages[clampedPage];
+		const movesNext = clampedPage > currentPage;
+		transitionLocked = true;
 
-    outgoing.classList.add("is-leaving");
-    incoming.classList.add("is-entering", movesNext ? "is-entering-next" : "is-entering-previous");
-    transitionLine?.classList.add("is-active", movesNext ? "moves-next" : "moves-previous");
+		if (currentPage === 0) {
+			cancelHeroRateChange();
+			heroVideo?.pause();
+		}
 
-    currentPage = clampedPage;
-    updateNavigation();
-    history.replaceState(null, "", pageHashes[currentPage]);
-    window.dispatchEvent(new CustomEvent("bella:pagechange", {
-      detail: { page: currentPage, hash: pageHashes[currentPage] },
-    }));
+		window.dispatchEvent(
+			new CustomEvent("bella:pagewillchange", {
+				detail: {
+					fromPage: currentPage,
+					fromHash: pageHashes[currentPage],
+					toPage: clampedPage,
+					toHash: pageHashes[clampedPage],
+				},
+			}),
+		);
 
-    window.setTimeout(() => {
-      settlePages();
-      transitionLocked = false;
-    }, transitionDuration);
-  };
+		outgoing.classList.add("is-leaving");
+		incoming.classList.add(
+			"is-entering",
+			movesNext ? "is-entering-next" : "is-entering-previous",
+		);
+		transitionLine?.classList.add(
+			"is-active",
+			movesNext ? "moves-next" : "moves-previous",
+		);
 
-  const moveForward = () => showPage(currentPage + 1);
+		currentPage = clampedPage;
+		updateNavigation();
+		history.replaceState(null, "", pageHashes[currentPage]);
+		window.dispatchEvent(
+			new CustomEvent("bella:pagechange", {
+				detail: { page: currentPage, hash: pageHashes[currentPage] },
+			}),
+		);
 
-  const getCurrentScrollSurface = () => {
-    const surface = pages[currentPage]?.querySelector<HTMLElement>(
-      ".page-scroll-surface, .gallery-scroll-surface, .mobile-page-scroll-surface",
-    ) ?? null;
-    if (!surface) return null;
+		window.setTimeout(() => {
+			settlePages();
+			transitionLocked = false;
+		}, transitionDuration);
+	};
 
-    const overflowY = window.getComputedStyle(surface).overflowY;
-    return overflowY === "auto" || overflowY === "scroll" ? surface : null;
-  };
+	const moveForward = () => showPage(currentPage + 1);
 
-  settlePages();
-  updateNavigation();
+	const getCurrentScrollSurface = () => {
+		const surface =
+			pages[currentPage]?.querySelector<HTMLElement>(
+				".page-scroll-surface, .gallery-scroll-surface, .mobile-page-scroll-surface",
+			) ?? null;
+		if (!surface) return null;
 
-  window.addEventListener("wheel", (event) => {
-    if (document.querySelector("dialog[open]")) return;
-    const scrollSurface = getCurrentScrollSurface();
-    const hasInternalScroll = Boolean(
-      scrollSurface && scrollSurface.scrollHeight > scrollSurface.clientHeight + 2,
-    );
+		const overflowY = window.getComputedStyle(surface).overflowY;
+		return overflowY === "auto" || overflowY === "scroll" ? surface : null;
+	};
 
-    if (scrollSurface && hasInternalScroll) {
-      const canScrollDown = scrollSurface.scrollTop + scrollSurface.clientHeight < scrollSurface.scrollHeight - 2;
-      const canScrollUp = scrollSurface.scrollTop > 2;
-      if ((event.deltaY > 0 && canScrollDown) || (event.deltaY < 0 && canScrollUp)) {
-        return;
-      }
-    }
+	settlePages();
+	updateNavigation();
 
-    if (transitionLocked || Math.abs(event.deltaY) < 10) return;
-    event.preventDefault();
-    if (event.deltaY > 0) moveForward();
-    else showPage(currentPage - 1);
-  }, { passive: false });
+	window.addEventListener(
+		"wheel",
+		(event) => {
+			if (document.querySelector("dialog[open]")) return;
+			const scrollSurface = getCurrentScrollSurface();
+			const hasInternalScroll = Boolean(
+				scrollSurface &&
+				scrollSurface.scrollHeight > scrollSurface.clientHeight + 2,
+			);
 
-  window.addEventListener("touchstart", (event) => {
-    if (event.touches.length !== 1 || transitionLocked) return;
-    if (document.querySelector("dialog[open]") || document.documentElement.classList.contains("mobile-menu-open")) return;
-    const target = event.target as Element | null;
-    if (target?.closest("a,button,input,select,textarea,summary,[contenteditable='true'],.timeline-panel")) return;
-    const touch = event.touches[0];
-    touchIdentifier = touch.identifier;
-    touchStartX = touch.clientX;
-    touchStartY = touch.clientY;
-    touchStartedAt = performance.now();
-    touchScrollSurface = getCurrentScrollSurface();
-    touchStartedAtTop = !touchScrollSurface || touchScrollSurface.scrollTop <= 2;
-    touchStartedAtBottom = !touchScrollSurface
-      || touchScrollSurface.scrollTop + touchScrollSurface.clientHeight >= touchScrollSurface.scrollHeight - 2;
-  }, { passive: true });
+			if (scrollSurface && hasInternalScroll) {
+				const canScrollDown =
+					scrollSurface.scrollTop + scrollSurface.clientHeight <
+					scrollSurface.scrollHeight - 2;
+				const canScrollUp = scrollSurface.scrollTop > 2;
+				if (
+					(event.deltaY > 0 && canScrollDown) ||
+					(event.deltaY < 0 && canScrollUp)
+				) {
+					return;
+				}
+			}
 
-  window.addEventListener("touchend", (event) => {
-    if (touchStartedAt === 0) return;
-    const touch = Array.from(event.changedTouches).find(
-      (candidate) => candidate.identifier === touchIdentifier,
-    );
-    if (!touch) return;
-    const deltaX = touch.clientX - touchStartX;
-    const deltaY = touch.clientY - touchStartY;
-    const elapsed = performance.now() - touchStartedAt;
-    touchStartedAt = 0;
-    touchIdentifier = -1;
-    if (transitionLocked || elapsed > 900 || Math.abs(deltaY) < 64 || Math.abs(deltaY) < Math.abs(deltaX) * 1.25) return;
+			if (transitionLocked || Math.abs(event.deltaY) < 10) return;
+			event.preventDefault();
+			if (event.deltaY > 0) moveForward();
+			else showPage(currentPage - 1);
+		},
+		{ passive: false },
+	);
 
-    if (touchScrollSurface) {
-      if (deltaY < 0 && !touchStartedAtBottom) return;
-      if (deltaY > 0 && !touchStartedAtTop) return;
-    }
-    if (deltaY < 0) moveForward();
-    else showPage(currentPage - 1);
-  }, { passive: true });
+	window.addEventListener(
+		"touchstart",
+		(event) => {
+			if (event.touches.length !== 1 || transitionLocked) return;
+			if (
+				document.querySelector("dialog[open]") ||
+				document.documentElement.classList.contains("mobile-menu-open")
+			)
+				return;
+			const target = event.target as Element | null;
+			if (
+				target?.closest(
+					"a,button,input,select,textarea,summary,[contenteditable='true'],.timeline-panel",
+				)
+			)
+				return;
+			const touch = event.touches[0];
+			touchIdentifier = touch.identifier;
+			touchStartX = touch.clientX;
+			touchStartY = touch.clientY;
+			touchStartedAt = performance.now();
+			touchScrollSurface = getCurrentScrollSurface();
+			touchStartedAtTop =
+				!touchScrollSurface || touchScrollSurface.scrollTop <= 2;
+			touchStartedAtBottom =
+				!touchScrollSurface ||
+				touchScrollSurface.scrollTop +
+					touchScrollSurface.clientHeight >=
+					touchScrollSurface.scrollHeight - 2;
+		},
+		{ passive: true },
+	);
 
-  window.addEventListener("touchcancel", () => {
-    touchStartedAt = 0;
-    touchIdentifier = -1;
-  }, { passive: true });
+	window.addEventListener(
+		"touchend",
+		(event) => {
+			if (touchStartedAt === 0) return;
+			const touch = Array.from(event.changedTouches).find(
+				(candidate) => candidate.identifier === touchIdentifier,
+			);
+			if (!touch) return;
+			const deltaX = touch.clientX - touchStartX;
+			const deltaY = touch.clientY - touchStartY;
+			const elapsed = performance.now() - touchStartedAt;
+			touchStartedAt = 0;
+			touchIdentifier = -1;
+			if (
+				transitionLocked ||
+				elapsed > 900 ||
+				Math.abs(deltaY) < 64 ||
+				Math.abs(deltaY) < Math.abs(deltaX) * 1.25
+			)
+				return;
 
-  pageLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const page = Number(link.dataset.page);
-      if (!Number.isFinite(page)) return;
-      event.preventDefault();
-      showPage(page);
-    });
-  });
+			if (touchScrollSurface) {
+				if (deltaY < 0 && !touchStartedAtBottom) return;
+				if (deltaY > 0 && !touchStartedAtTop) return;
+			}
+			if (deltaY < 0) moveForward();
+			else showPage(currentPage - 1);
+		},
+		{ passive: true },
+	);
 
-  window.addEventListener("keydown", (event) => {
-    if (["ArrowDown", "ArrowRight", "PageDown"].includes(event.key)) moveForward();
-    if (["ArrowUp", "ArrowLeft", "PageUp"].includes(event.key)) showPage(currentPage - 1);
-  });
+	window.addEventListener(
+		"touchcancel",
+		() => {
+			touchStartedAt = 0;
+			touchIdentifier = -1;
+		},
+		{ passive: true },
+	);
+
+	pageLinks.forEach((link) => {
+		link.addEventListener("click", (event) => {
+			const page = Number(link.dataset.page);
+			if (!Number.isFinite(page)) return;
+			event.preventDefault();
+			showPage(page);
+		});
+	});
+
+	window.addEventListener("keydown", (event) => {
+		if (["ArrowDown", "ArrowRight", "PageDown"].includes(event.key))
+			moveForward();
+		if (["ArrowUp", "ArrowLeft", "PageUp"].includes(event.key))
+			showPage(currentPage - 1);
+	});
 </script>

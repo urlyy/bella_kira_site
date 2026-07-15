@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "LXGW WenKai Mono Lite";
-	src: url("/assets/fonts/LXGWWenKaiMonoLite-Site.woff2?v=0895b12fbd02") format("woff2");
+	src: url("/assets/fonts/LXGWWenKaiMonoLite-Site.woff2?v=a7079d20c6fc") format("woff2");
 	font-display: swap;
 	font-style: normal;
 	font-weight: 400;
@@ -19,6 +19,12 @@
 	--bella-paper-cool: #e8ddeb;
 	--bella-line-light: rgba(84, 46, 95, 0.16);
 	--bella-line-dark: rgba(232, 208, 239, 0.18);
+	--chapter-kicker-font-family: system-ui, sans-serif;
+	--chapter-kicker-font-size: 10px;
+	--chapter-subtitle-font-family:
+		"LXGW WenKai Mono Lite", "PingFang SC", "Microsoft YaHei", system-ui,
+		sans-serif;
+	--chapter-subtitle-font-size: 13px;
 	color-scheme: dark;
 	font-family:
 		"LXGW WenKai Mono Lite", "PingFang SC", "Microsoft YaHei", system-ui,
@@ -26,6 +32,13 @@
 	color: #fff;
 	background: #050507;
 	font-synthesis: none;
+}
+
+@media (max-width: 760px) {
+	:root {
+		--chapter-kicker-font-size: 9px;
+		--chapter-subtitle-font-size: 11px;
+	}
 }
 
 * {
@@ -818,7 +831,9 @@ img {
 .profile-kicker {
 	margin: 0 0 8px;
 	color: rgba(68, 36, 79, 0.7);
-	font-size: 11px;
+	font-family: var(--chapter-kicker-font-family);
+	font-size: var(--chapter-kicker-font-size);
+	line-height: 1.4;
 	letter-spacing: 0.22em;
 }
 
@@ -1405,7 +1420,9 @@ img {
 .support-heading p {
 	margin: 0 0 7px;
 	color: rgba(71, 38, 80, 0.54);
-	font-size: 10px;
+	font-family: var(--chapter-kicker-font-family);
+	font-size: var(--chapter-kicker-font-size);
+	line-height: 1.4;
 	letter-spacing: 0.28em;
 }
 
@@ -1420,7 +1437,8 @@ img {
 .support-heading > span {
 	padding-bottom: 2px;
 	color: rgba(69, 40, 76, 0.58);
-	font-size: 12px;
+	font-family: var(--chapter-subtitle-font-family);
+	font-size: var(--chapter-subtitle-font-size);
 	line-height: 1.8;
 	text-align: right;
 }
@@ -1881,7 +1899,9 @@ img {
 	grid-column: 1;
 	margin: 0 0 5px;
 	color: rgba(73, 40, 83, 0.52);
-	font-size: 10px;
+	font-family: var(--chapter-kicker-font-family);
+	font-size: var(--chapter-kicker-font-size);
+	line-height: 1.4;
 	letter-spacing: 0.25em;
 }
 
@@ -1900,7 +1920,8 @@ img {
 	max-width: 360px;
 	padding-bottom: 4px;
 	color: rgba(65, 38, 72, 0.58);
-	font-size: 13px;
+	font-family: var(--chapter-subtitle-font-family);
+	font-size: var(--chapter-subtitle-font-size);
 	letter-spacing: 0.04em;
 }
 
@@ -2151,7 +2172,9 @@ img {
 	grid-column: 1;
 	margin: 0 0 5px;
 	color: rgba(73, 40, 83, 0.5);
-	font-size: 10px;
+	font-family: var(--chapter-kicker-font-family);
+	font-size: var(--chapter-kicker-font-size);
+	line-height: 1.4;
 	letter-spacing: 0.25em;
 }
 
@@ -2170,7 +2193,8 @@ img {
 	max-width: 390px;
 	padding-bottom: 5px;
 	color: rgba(66, 38, 73, 0.56);
-	font-size: 13px;
+	font-family: var(--chapter-subtitle-font-family);
+	font-size: var(--chapter-subtitle-font-size);
 }
 
 .sticker-section {
@@ -3033,7 +3057,7 @@ img {
 	.support-heading > span {
 		display: block;
 		margin-top: 14px;
-		font-size: 11px;
+		font-size: var(--chapter-subtitle-font-size);
 		line-height: 1.7;
 		text-align: left;
 	}

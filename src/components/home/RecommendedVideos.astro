@@ -3,117 +3,155 @@ import videoData from "../../content/recommended-videos.json";
 import coverManifestData from "../../../public/assets/optimized/recommended-covers/manifest.json";
 
 interface RecommendedVideo {
-  cover: string;
-  title: string;
-  url: string;
-  publishedAt: string;
-  coverWarning?: string;
+	cover: string;
+	title: string;
+	url: string;
+	publishedAt: string;
+	coverWarning?: string;
 }
 
 const collections = videoData.collections as Array<{
-  id: string;
-  title: string;
-  items: RecommendedVideo[];
+	id: string;
+	title: string;
+	items: RecommendedVideo[];
 }>;
 
 const coverManifest = coverManifestData as {
-  images: Record<string, { outputHash: string }>;
+	images: Record<string, { outputHash: string }>;
 };
 
 const optimizedCover = (cover: string) => {
-  const sourceName = cover.split("/").at(-1) ?? "";
-  const optimizedPath = cover
-    .replace("/assets/recommended-videos/covers/", "/assets/optimized/recommended-covers/")
-    .replace(/\.(?:png|jpe?g)$/i, ".webp");
-  const outputHash = coverManifest.images[sourceName]?.outputHash;
-  return outputHash ? `${optimizedPath}?v=${outputHash.slice(0, 12)}` : optimizedPath;
+	const sourceName = cover.split("/").at(-1) ?? "";
+	const optimizedPath = cover
+		.replace(
+			"/assets/recommended-videos/covers/",
+			"/assets/optimized/recommended-covers/",
+		)
+		.replace(/\.(?:png|jpe?g)$/i, ".webp");
+	const outputHash = coverManifest.images[sourceName]?.outputHash;
+	return outputHash
+		? `${optimizedPath}?v=${outputHash.slice(0, 12)}`
+		: optimizedPath;
 };
 ---
 
 <section class="page watch-page" data-page-name="watch" aria-label="推荐视频">
-  <div class="page-visual page-scroll-surface watch-visual">
-    <header class="watch-heading">
-      <p>RECOMMENDED · WATCH</p>
-      <h1>推荐视频</h1>
-      <span>从闪耀舞台到日常絮语，遇见贝拉的每一种模样。</span>
-    </header>
+	<div class="page-visual page-scroll-surface watch-visual">
+		<header class="watch-heading">
+			<p>RECOMMENDED · WATCH</p>
+			<h1>推荐视频</h1>
+			<span>从闪耀舞台到日常絮语，珍藏贝拉的每一种模样。</span>
+		</header>
 
-    <div class="watch-next-row">
-      <a class="watch-next" href="/#stickers" data-page="6">
-        <span>
-          <small>NEXT · STICKERS</small>
-          前往表情包
-        </span>
-        <i aria-hidden="true">→</i>
-      </a>
-    </div>
+		<div class="watch-next-row">
+			<a class="watch-next" href="/#stickers" data-page="6">
+				<span>
+					<small>NEXT · STICKERS</small>
+					前往表情包
+				</span>
+				<i aria-hidden="true">→</i>
+			</a>
+		</div>
 
-    <div class="collection-list">
-      {collections.map((collection) => (
-        <section class="video-collection" aria-label={collection.title}>
-          <h2>
-            {collection.title}
-            <span> {collection.items.length}</span>
-          </h2>
-          {collection.items.length > 0 ? (
-            <div class="video-grid">
-              {collection.items.map((video) => (
-                <a
-                  class:list={["video-card", { "video-card--warned": video.coverWarning }]}
-                  href={video.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span class:list={["video-cover", { "video-cover--warned": video.coverWarning }]}>
-                    <img
-                      data-src={optimizedCover(video.cover)}
-                      alt=""
-                      width="640"
-                      height="360"
-                      draggable="false"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    {video.coverWarning ? (
-                      <span class="video-cover-warning">{video.coverWarning}</span>
-                    ) : (
-                      <i aria-hidden="true">↗</i>
-                    )}
-                  </span>
-                  <strong><span>{video.title}</span></strong>
-                  <time>{video.publishedAt}</time>
-                </a>
-              ))}
-            </div>
-          ) : (
-            <p class="empty-collection">这个合集还没有视频。</p>
-          )}
-        </section>
-      ))}
-    </div>
-
-  </div>
+		<div class="collection-list">
+			{
+				collections.map((collection) => (
+					<section
+						class="video-collection"
+						aria-label={collection.title}
+					>
+						<h2>
+							{collection.title}
+							<span> {collection.items.length}</span>
+						</h2>
+						{collection.items.length > 0 ? (
+							<div class="video-grid">
+								{collection.items.map((video) => (
+									<a
+										class:list={[
+											"video-card",
+											{
+												"video-card--warned":
+													video.coverWarning,
+											},
+										]}
+										href={video.url}
+										target="_blank"
+										rel="noreferrer"
+									>
+										<span
+											class:list={[
+												"video-cover",
+												{
+													"video-cover--warned":
+														video.coverWarning,
+												},
+											]}
+										>
+											<img
+												data-src={optimizedCover(
+													video.cover,
+												)}
+												alt=""
+												width="640"
+												height="360"
+												draggable="false"
+												loading="lazy"
+												decoding="async"
+											/>
+											{video.coverWarning ? (
+												<span class="video-cover-warning">
+													{video.coverWarning}
+												</span>
+											) : (
+												<i aria-hidden="true">↗</i>
+											)}
+										</span>
+										<strong>
+											<span>{video.title}</span>
+										</strong>
+										<time>{video.publishedAt}</time>
+									</a>
+								))}
+							</div>
+						) : (
+							<p class="empty-collection">这个合集还没有视频。</p>
+						)}
+					</section>
+				))
+			}
+		</div>
+	</div>
 </section>
 
 <script>
-  const watchSurface = document.querySelector<HTMLElement>(".watch-visual");
-  const watchImages = Array.from(watchSurface?.querySelectorAll<HTMLImageElement>("img[data-src]") ?? []);
-  let watchImagesInitialized = false;
-  const watchImageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const image = entry.target as HTMLImageElement;
-      if (image.dataset.src) image.src = image.dataset.src;
-      observer.unobserve(image);
-    });
-  }, { root: watchSurface, rootMargin: "500px 0px", threshold: 0.01 });
-  const initializeWatchImages = () => {
-    if (watchImagesInitialized) return;
-    watchImagesInitialized = true;
-    watchImages.forEach((image) => watchImageObserver.observe(image));
-  };
-  window.addEventListener("bella:pagewillchange", (event) => {
-    if ((event as CustomEvent<{ toHash?: string }>).detail?.toHash === "#watch") initializeWatchImages();
-  });
-  if (window.location.hash === "#watch") initializeWatchImages();
+	const watchSurface = document.querySelector<HTMLElement>(".watch-visual");
+	const watchImages = Array.from(
+		watchSurface?.querySelectorAll<HTMLImageElement>("img[data-src]") ?? [],
+	);
+	let watchImagesInitialized = false;
+	const watchImageObserver = new IntersectionObserver(
+		(entries, observer) => {
+			entries.forEach((entry) => {
+				if (!entry.isIntersecting) return;
+				const image = entry.target as HTMLImageElement;
+				if (image.dataset.src) image.src = image.dataset.src;
+				observer.unobserve(image);
+			});
+		},
+		{ root: watchSurface, rootMargin: "500px 0px", threshold: 0.01 },
+	);
+	const initializeWatchImages = () => {
+		if (watchImagesInitialized) return;
+		watchImagesInitialized = true;
+		watchImages.forEach((image) => watchImageObserver.observe(image));
+	};
+	window.addEventListener("bella:pagewillchange", (event) => {
+		if (
+			(event as CustomEvent<{ toHash?: string }>).detail?.toHash ===
+			"#watch"
+		)
+			initializeWatchImages();
+	});
+	if (window.location.hash === "#watch") initializeWatchImages();
 </script>

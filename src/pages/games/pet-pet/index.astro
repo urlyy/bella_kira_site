@@ -4,40 +4,61 @@ import "./pet-pet.css";
 ---
 
 <SiteLayout title="摸摸贝拉 · 贝拉kira粉丝站">
-  <main class="pet-pet-app">
-    <header>
-      <p class="pet-pet-kicker">BELLA KIRA · PETPET MAKER</p>
-      <h1>摸摸贝拉</h1>
-      <p>选一张喜欢的图片，把它变成可以带走的摸头 GIF。</p>
-    </header>
+	<main class="pet-pet-app">
+		<header>
+			<p class="pet-pet-kicker">BELLA KIRA · PETPET MAKER</p>
+			<h1>摸摸贝拉</h1>
+			<p>选一张喜欢的图片，把它变成可以带走的摸头 GIF。</p>
+		</header>
 
-    <section class="pet-pet-maker">
-      <div class="preview-panel">
-        <div class="canvas-shell">
-          <canvas id="previewCanvas" width="256" height="256" aria-label="PetPet 动画预览"></canvas>
-          <span>LIVE PREVIEW</span>
-        </div>
-        <p id="status" aria-live="polite">正在准备预览…</p>
-      </div>
+		<section class="pet-pet-maker">
+			<div class="preview-panel">
+				<div class="canvas-shell">
+					<canvas
+						id="previewCanvas"
+						width="256"
+						height="256"
+						aria-label="PetPet 动画预览"></canvas>
+					<span>LIVE PREVIEW</span>
+				</div>
+				<p id="status" aria-live="polite">正在准备预览…</p>
+			</div>
 
-      <aside class="control-panel">
-        <div class="field">
-          <label for="preset">选择图片</label>
-          <select id="preset">
-            <option value="/assets/optimized/pet-stage.webp">贝拉舞台写真</option>
-            <option value="/assets/optimized/pet-light.webp">贝拉光影片段</option>
-            <option value="/assets/optimized/game-bg.webp">2026 生日海报</option>
-          </select>
-        </div>
-        <label class="upload" for="upload">＋ 上传自己的图片</label>
-        <input id="upload" type="file" accept="image/png,image/jpeg,image/webp" hidden />
-        <button id="generate" type="button">生成 GIF</button>
-        <a id="download" class="download" hidden>保存 bella-petpet.gif</a>
-        <p class="source-note">使用 pet-pet-gif 原版 10 帧手部素材与动作参数</p>
-        <p class="privacy">图片只在你的浏览器中处理，不会上传。</p>
-      </aside>
-    </section>
-    <a class="site-return" href="/games/" aria-label="返回互动空间">← 互动空间</a>
-  </main>
-  <script src="../../../features/pet-pet.ts"></script>
+			<aside class="control-panel">
+				<div class="field">
+					<label for="preset">选择图片</label>
+					<select id="preset">
+						<option value="/assets/optimized/pet-stage.webp"
+							>贝拉舞台写真</option
+						>
+						<option value="/assets/optimized/pet-light.webp"
+							>贝拉光影片段</option
+						>
+						<option value="/assets/optimized/game-bg.webp"
+							>2026 生日海报</option
+						>
+					</select>
+				</div>
+				<label class="upload" for="upload">＋ 上传自己的图片</label>
+				<input
+					id="upload"
+					type="file"
+					accept="image/png,image/jpeg,image/webp"
+					hidden
+				/>
+				<button id="generate" type="button">生成 GIF</button>
+				<a id="download" class="download" hidden
+					>保存 bella-petpet.gif</a
+				>
+				<p class="source-note">
+					使用 pet-pet-gif 原版 10 帧手部素材与动作参数
+				</p>
+				<p class="privacy">图片只在你的浏览器中处理，不会上传。</p>
+			</aside>
+		</section>
+		<a class="site-return" href="/games/" aria-label="返回互动空间"
+			>← 互动空间</a
+		>
+	</main>
+	<script src="../../../features/pet-pet.ts"></script>
 </SiteLayout>

@@ -3,15 +3,23 @@ import SiteLayout from "../layouts/SiteLayout.astro";
 ---
 
 <SiteLayout title="正在前往同行的时间 · 贝拉kira粉丝站">
-  <main class="timeline-redirect">
-    <p>正在前往贝拉的「一路繁花」…</p>
-    <a href="/#timeline">立即前往</a>
-  </main>
+	<main class="timeline-redirect">
+		<p>正在前往贝拉的「一路繁花」…</p>
+		<a href="/#timeline">立即前往</a>
+	</main>
 </SiteLayout>
 
 <meta http-equiv="refresh" content="0;url=/#timeline" />
-<script is:inline>window.location.replace("/#timeline");</script>
+<script is:inline>
+	window.location.replace("/#timeline");
+</script>
 
 <style>
-  .timeline-redirect { min-height: 100svh; display: grid; place-content: center; gap: 12px; text-align: center; }
+	.timeline-redirect {
+		min-height: 100svh;
+		display: grid;
+		place-content: center;
+		gap: 12px;
+		text-align: center;
+	}
 </style>

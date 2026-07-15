@@ -451,23 +451,23 @@ export default function FollowerTimeline() {
 			lineGradient
 				.append("stop")
 				.attr("offset", "0%")
-				.attr("stop-color", "#9a74ca");
+				.attr("stop-color", "#c64f6b");
 			lineGradient
 				.append("stop")
-				.attr("offset", "32%")
-				.attr("stop-color", "#c284bb");
+				.attr("offset", "16%")
+				.attr("stop-color", "#e88998");
 			lineGradient
 				.append("stop")
-				.attr("offset", "59%")
-				.attr("stop-color", "#db7d74");
+				.attr("offset", "44%")
+				.attr("stop-color", "#f3adb0");
 			lineGradient
 				.append("stop")
-				.attr("offset", "81%")
-				.attr("stop-color", "#edaa8e");
+				.attr("offset", "72%")
+				.attr("stop-color", "var(--timeline-line-peach, #f7cfaa)");
 			lineGradient
 				.append("stop")
 				.attr("offset", "100%")
-				.attr("stop-color", "#fff0a8");
+				.attr("stop-color", "var(--timeline-line-yellow, #ffe9a8)");
 			const glow = defs
 				.append("filter")
 				.attr("id", "timeline-glow")
@@ -925,7 +925,7 @@ export default function FollowerTimeline() {
 					ZeroRoku
 				</a>
 				<span aria-hidden="true"> · </span>
-				当前增量数据来源：自制爬虫每日23时爬取
+				后续增量数据来源：自制爬虫每日23时爬取
 			</p>
 		</section>
 	);

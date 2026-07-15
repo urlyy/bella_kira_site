@@ -8,34 +8,52 @@ import "./games.css";
 ---
 
 <SiteLayout title="互动空间 · 贝拉kira粉丝站">
-  <main class="games-page standalone-games-page">
-    <SiteHeader />
-    <div class="games-atmosphere" aria-hidden="true"></div>
-    <section class="games-intro" aria-labelledby="games-title">
-      <p class="games-kicker">STARRY DREAMS · INTERACTIVE SPACE</p>
-      <div class="games-title-row">
-        <h1 id="games-title">互动空间</h1>
-        <InteractiveHeadModel />
-        <span class="games-count"><b>{String(experiences.length).padStart(2, "0")}</b> 项体验</span>
-      </div>
-    </section>
+	<main class="games-page standalone-games-page">
+		<SiteHeader />
+		<div class="games-atmosphere" aria-hidden="true"></div>
+		<section class="games-intro" aria-labelledby="games-title">
+			<p class="games-kicker">STARRY DREAMS · INTERACTIVE SPACE</p>
+			<div class="games-title-row">
+				<h1 id="games-title">互动空间</h1>
+				<InteractiveHeadModel />
+				<span class="games-count"
+					><b>{String(experiences.length).padStart(2, "0")}</b> 项体验</span
+				>
+			</div>
+		</section>
 
-    <section class="game-grid" aria-label="互动体验列表">
-      {experiences.map((game, index) => (
-        <a class:list={["game-card", `tone-${game.tone}`, { featured: index === 0 }]} href={`/games/${game.slug}/`}>
-          <span class="game-card-number">{String(index + 1).padStart(2, "0")}</span>
-          <span class="game-card-mark" aria-hidden="true">{game.mark}</span>
-          <span class="game-card-copy">
-            <small>{game.eyebrow}</small>
-            <strong>{game.title}</strong>
-            <span>{game.description}</span>
-          </span>
-          <span class="game-card-action">{"action" in game ? game.action : "开始游戏"} <i aria-hidden="true">↗</i></span>
-        </a>
-      ))}
-    </section>
+		<section class="game-grid" aria-label="互动体验列表">
+			{
+				experiences.map((game, index) => (
+					<a
+						class:list={[
+							"game-card",
+							`tone-${game.tone}`,
+							{ featured: index === 0 },
+						]}
+						href={`/games/${game.slug}/`}
+					>
+						<span class="game-card-number">
+							{String(index + 1).padStart(2, "0")}
+						</span>
+						<span class="game-card-mark" aria-hidden="true">
+							{game.mark}
+						</span>
+						<span class="game-card-copy">
+							<small>{game.eyebrow}</small>
+							<strong>{game.title}</strong>
+							<span>{game.description}</span>
+						</span>
+						<span class="game-card-action">
+							{"action" in game ? game.action : "开始游戏"}{" "}
+							<i aria-hidden="true">↗</i>
+						</span>
+					</a>
+				))
+			}
+		</section>
 
-    <footer class="games-footer"><a href="/#home">返回主站</a></footer>
-  </main>
-  <CursorStars />
+		<footer class="games-footer"><a href="/#home">返回主站</a></footer>
+	</main>
+	<CursorStars />
 </SiteLayout>

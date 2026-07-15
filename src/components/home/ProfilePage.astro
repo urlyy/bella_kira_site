@@ -1,323 +1,380 @@
 ---
 const profile = [
-  { label: "年龄", value: "19" },
-  { label: "身高", value: "159cm" },
-  { label: "体重", value: "48kg" },
-  { label: "出道日", value: "2020年11月23日" },
-  { label: "定位", value: "队长兼舞蹈担当" },
-  { label: "生日", value: "7月17日" },
-  { label: "印象", value: "喜欢爬山、老钱(伪)、B.King、晕3D", wide: true },
+	{ label: "年龄", value: "19" },
+	{ label: "身高", value: "159cm" },
+	{ label: "体重", value: "48kg" },
+	{ label: "出道日", value: "2020年11月23日" },
+	{ label: "定位", value: "队长兼舞蹈担当" },
+	{ label: "生日", value: "7月17日" },
+	{ label: "印象", value: "喜欢爬山、老钱(伪)、B.King、晕3D", wide: true },
 ];
 ---
 
 <section class="page profile-page" data-page-name="about" aria-label="关于贝拉">
-  <div class="page-visual profile-visual mobile-page-scroll-surface" data-profile-visual>
-    <div class="profile-content" data-profile-content>
-      <p class="profile-kicker" data-profile-enter style="--enter:0">ABOUT · BELLA KIRA</p>
-      <h1 data-profile-enter style="--enter:1">角色档案</h1>
-      <dl class="profile-list">
-        <div class="profile-item--wide" data-profile-enter style="--enter:2">
-          <dt>外号</dt>
-          <dd class="profile-nicknames">
-            <span>二宝、山药姐、小土妞、</span><span
-              class="fan-name-spoiler"
-              tabindex="0"
-              role="note"
-              aria-label="隐藏外号：老公"
-              title="悬停或聚焦查看"
-            >老公</span>
-          </dd>
-        </div>
-        {profile.map((item, index) => (
-          <div class:list={{ "profile-item--wide": item.wide }} data-profile-enter style={`--enter:${index + 3}`}>
-            <dt>{item.label}</dt>
-            <dd>{item.value}</dd>
-          </div>
-        ))}
-      </dl>
+	<div
+		class="page-visual profile-visual mobile-page-scroll-surface"
+		data-profile-visual
+	>
+		<div class="profile-content" data-profile-content>
+			<p class="profile-kicker" data-profile-enter style="--enter:0">
+				ABOUT · BELLA KIRA
+			</p>
+			<h1 data-profile-enter style="--enter:1">角色档案</h1>
+			<dl class="profile-list">
+				<div
+					class="profile-item--wide"
+					data-profile-enter
+					style="--enter:2"
+				>
+					<dt>外号</dt>
+					<dd class="profile-nicknames">
+						<span>二宝、山药姐、小土妞、</span><span
+							class="fan-name-spoiler"
+							tabindex="0"
+							role="note"
+							aria-label="隐藏外号：老公"
+							title="悬停或聚焦查看">老公</span
+						>
+					</dd>
+				</div>
+				{
+					profile.map((item, index) => (
+						<div
+							class:list={{ "profile-item--wide": item.wide }}
+							data-profile-enter
+							style={`--enter:${index + 3}`}
+						>
+							<dt>{item.label}</dt>
+							<dd>{item.value}</dd>
+						</div>
+					))
+				}
+			</dl>
 
-      <div class="fan-identity" data-profile-enter style={`--enter:${profile.length + 3}`}>
-        <img src="/assets/optimized/beijixing.webp" alt="贝极星粉丝形象" decoding="async" draggable="false" />
-        <span>
-          <small>粉丝名</small>
-          <strong class="fan-names">
-            <span>贝极星</span>
-            <span class="fan-name-separator" aria-hidden="true">、</span>
-            <span
-              class="fan-name-spoiler"
-              tabindex="0"
-              role="note"
-              aria-label="隐藏称呼：笨极星"
-              title="悬停或聚焦查看"
-            >笨极星</span>
-            <span class="fan-name-separator" aria-hidden="true">、</span>
-            <span
-              class="fan-name-spoiler"
-              tabindex="0"
-              role="note"
-              aria-label="隐藏称呼：拉圾星"
-              title="悬停或聚焦查看"
-            >垃圾星</span>
-          </strong>
-        </span>
-      </div>
+			<div
+				class="fan-identity"
+				data-profile-enter
+				style={`--enter:${profile.length + 3}`}
+			>
+				<img
+					src="/assets/optimized/beijixing.webp"
+					alt="贝极星粉丝形象"
+					decoding="async"
+					draggable="false"
+				/>
+				<span>
+					<small>粉丝名</small>
+					<strong class="fan-names">
+						<span>贝极星</span>
+						<span class="fan-name-separator" aria-hidden="true"
+							>、</span
+						>
+						<span
+							class="fan-name-spoiler"
+							tabindex="0"
+							role="note"
+							aria-label="隐藏称呼：笨极星"
+							title="悬停或聚焦查看">笨极星</span
+						>
+						<span class="fan-name-separator" aria-hidden="true"
+							>、</span
+						>
+						<span
+							class="fan-name-spoiler"
+							tabindex="0"
+							role="note"
+							aria-label="隐藏称呼：拉圾星"
+							title="悬停或聚焦查看">垃圾星</span
+						>
+					</strong>
+				</span>
+			</div>
 
-      <div class="profile-links" data-profile-enter style={`--enter:${profile.length + 4}`}>
-        <a
-          class="bilibili-card bilibili-card--space"
-          href="https://space.bilibili.com/672353429"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span class="bilibili-image bilibili-logo" aria-hidden="true">
-            <img src="/assets/bilibili-logo.png" alt="" draggable="false" />
-          </span>
-          <span class="bilibili-copy">
-            <small>BILIBILI SPACE</small>
-            <strong>前往B站主页</strong>
-          </span>
-          <span class="bilibili-arrow" aria-hidden="true">↗</span>
-        </a>
+			<div
+				class="profile-links"
+				data-profile-enter
+				style={`--enter:${profile.length + 4}`}
+			>
+				<a
+					class="bilibili-card bilibili-card--space"
+					href="https://space.bilibili.com/672353429"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<span
+						class="bilibili-image bilibili-logo"
+						aria-hidden="true"
+					>
+						<img
+							src="/assets/bilibili-logo.png"
+							alt=""
+							draggable="false"
+						/>
+					</span>
+					<span class="bilibili-copy">
+						<small>BILIBILI SPACE</small>
+						<strong>前往B站主页</strong>
+					</span>
+					<span class="bilibili-arrow" aria-hidden="true">↗</span>
+				</a>
 
-        <a
-          class="bilibili-card bilibili-card--live"
-          href="https://live.bilibili.com/22632424"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span class="bilibili-image bilibili-avatar" aria-hidden="true"></span>
-          <span class="bilibili-copy">
-            <small>LIVE ROOM</small>
-            <strong>前往直播间</strong>
-          </span>
-          <span class="bilibili-arrow" aria-hidden="true">↗</span>
-        </a>
-      </div>
+				<a
+					class="bilibili-card bilibili-card--live"
+					href="https://live.bilibili.com/22632424"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<span
+						class="bilibili-image bilibili-avatar"
+						aria-hidden="true"></span>
+					<span class="bilibili-copy">
+						<small>LIVE ROOM</small>
+						<strong>前往直播间</strong>
+					</span>
+					<span class="bilibili-arrow" aria-hidden="true">↗</span>
+				</a>
+			</div>
 
-      <a
-        class="profile-schedule"
-        data-profile-enter
-        style={`--enter:${profile.length + 5}`}
-        href="https://asoul.love/calendar/latest?include=bella"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="前往枝江站查看贝拉直播日程（外部链接）"
-      >
-        <span class="schedule-calendar" aria-hidden="true">
-          <i></i>
-          <b>日程</b>
-        </span>
-        <span class="schedule-copy">
-          <small>EXTERNAL · ASOUL.LOVE</small>
-          <strong>查看贝拉直播日程</strong>
-        </span>
-        <span class="schedule-action">打开枝江日程表 <i aria-hidden="true">↗</i></span>
-      </a>
-    </div>
-    <div class="profile-media" data-profile-media aria-hidden="true"></div>
-  </div>
+			<a
+				class="profile-schedule"
+				data-profile-enter
+				style={`--enter:${profile.length + 5}`}
+				href="https://asoul.love/calendar/latest?include=bella"
+				target="_blank"
+				rel="noreferrer"
+				aria-label="前往枝江站查看贝拉直播日程（外部链接）"
+			>
+				<span class="schedule-calendar" aria-hidden="true">
+					<i></i>
+					<b>日程</b>
+				</span>
+				<span class="schedule-copy">
+					<small>EXTERNAL · ASOUL.LOVE</small>
+					<strong>查看贝拉直播日程</strong>
+				</span>
+				<span class="schedule-action"
+					>打开枝江日程表 <i aria-hidden="true">↗</i></span
+				>
+			</a>
+		</div>
+		<div class="profile-media" data-profile-media aria-hidden="true"></div>
+	</div>
 </section>
 
 <script>
-  const page = document.querySelector<HTMLElement>(".profile-page");
-  const visual = page?.querySelector<HTMLElement>("[data-profile-visual]");
-  const media = page?.querySelector<HTMLElement>("[data-profile-media]");
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const finePointer = window.matchMedia("(pointer: fine)");
-  let revealTimer = 0;
-  let parallaxFrame = 0;
-  let targetX = 0;
-  let targetY = 0;
-  let currentX = 0;
-  let currentY = 0;
+	const page = document.querySelector<HTMLElement>(".profile-page");
+	const visual = page?.querySelector<HTMLElement>("[data-profile-visual]");
+	const media = page?.querySelector<HTMLElement>("[data-profile-media]");
+	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	const finePointer = window.matchMedia("(pointer: fine)");
+	let revealTimer = 0;
+	let parallaxFrame = 0;
+	let targetX = 0;
+	let targetY = 0;
+	let currentX = 0;
+	let currentY = 0;
 
-  const setRevealed = (active: boolean) => {
-    if (!page) return;
-    window.clearTimeout(revealTimer);
-    if (!active) {
-      page.classList.remove("is-archive-revealing", "is-archive-ready");
-      return;
-    }
-    if (reducedMotion.matches) {
-      page.classList.add("is-archive-ready");
-      return;
-    }
-    page.classList.remove("is-archive-ready");
-    page.classList.add("is-archive-revealing");
-    revealTimer = window.setTimeout(() => {
-      page.classList.add("is-archive-ready");
-      page.classList.remove("is-archive-revealing");
-    }, 1100);
-  };
+	const setRevealed = (active: boolean) => {
+		if (!page) return;
+		window.clearTimeout(revealTimer);
+		if (!active) {
+			page.classList.remove("is-archive-revealing", "is-archive-ready");
+			return;
+		}
+		if (reducedMotion.matches) {
+			page.classList.add("is-archive-ready");
+			return;
+		}
+		page.classList.remove("is-archive-ready");
+		page.classList.add("is-archive-revealing");
+		revealTimer = window.setTimeout(() => {
+			page.classList.add("is-archive-ready");
+			page.classList.remove("is-archive-revealing");
+		}, 1100);
+	};
 
-  const applyParallax = (x: number, y: number) => {
-    // Only the character / background layer moves. Keep scale at 1 so cover framing
-    // matches the original full-bleed background (no extra crop from zoom).
-    media?.style.setProperty("transform", `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`);
-  };
+	const applyParallax = (x: number, y: number) => {
+		// Only the character / background layer moves. Keep scale at 1 so cover framing
+		// matches the original full-bleed background (no extra crop from zoom).
+		media?.style.setProperty(
+			"transform",
+			`translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`,
+		);
+	};
 
-  const tickParallax = () => {
-    currentX += (targetX - currentX) * 0.22;
-    currentY += (targetY - currentY) * 0.22;
-    applyParallax(currentX, currentY);
-    if (Math.abs(targetX - currentX) > 0.15 || Math.abs(targetY - currentY) > 0.15) {
-      parallaxFrame = requestAnimationFrame(tickParallax);
-    } else {
-      currentX = targetX;
-      currentY = targetY;
-      applyParallax(currentX, currentY);
-      parallaxFrame = 0;
-    }
-  };
+	const tickParallax = () => {
+		currentX += (targetX - currentX) * 0.22;
+		currentY += (targetY - currentY) * 0.22;
+		applyParallax(currentX, currentY);
+		if (
+			Math.abs(targetX - currentX) > 0.15 ||
+			Math.abs(targetY - currentY) > 0.15
+		) {
+			parallaxFrame = requestAnimationFrame(tickParallax);
+		} else {
+			currentX = targetX;
+			currentY = targetY;
+			applyParallax(currentX, currentY);
+			parallaxFrame = 0;
+		}
+	};
 
-  const requestParallax = () => {
-    if (!parallaxFrame) parallaxFrame = requestAnimationFrame(tickParallax);
-  };
+	const requestParallax = () => {
+		if (!parallaxFrame) parallaxFrame = requestAnimationFrame(tickParallax);
+	};
 
-  visual?.addEventListener("pointermove", (event) => {
-    if (!finePointer.matches || reducedMotion.matches || event.pointerType !== "mouse") return;
-    const bounds = visual.getBoundingClientRect();
-    const nx = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
-    const ny = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
-    // Keep travel small so the bleed around the layer can hide edges without zooming in.
-    targetX = nx * 18;
-    targetY = ny * 12;
-    requestParallax();
-  });
+	visual?.addEventListener("pointermove", (event) => {
+		if (
+			!finePointer.matches ||
+			reducedMotion.matches ||
+			event.pointerType !== "mouse"
+		)
+			return;
+		const bounds = visual.getBoundingClientRect();
+		const nx = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+		const ny = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+		// Keep travel small so the bleed around the layer can hide edges without zooming in.
+		targetX = nx * 18;
+		targetY = ny * 12;
+		requestParallax();
+	});
 
-  visual?.addEventListener("pointerleave", () => {
-    targetX = 0;
-    targetY = 0;
-    requestParallax();
-  });
+	visual?.addEventListener("pointerleave", () => {
+		targetX = 0;
+		targetY = 0;
+		requestParallax();
+	});
 
-  window.addEventListener("bella:pagewillchange", (event) => {
-    const hash = (event as CustomEvent<{ toHash?: string }>).detail?.toHash;
-    setRevealed(hash === "#about");
-  });
+	window.addEventListener("bella:pagewillchange", (event) => {
+		const hash = (event as CustomEvent<{ toHash?: string }>).detail?.toHash;
+		setRevealed(hash === "#about");
+	});
 
-  if (window.location.hash === "#about") setRevealed(true);
+	if (window.location.hash === "#about") setRevealed(true);
 </script>
 
 <style is:global>
-  .profile-visual {
-    background-image: none !important;
-  }
+	.profile-visual {
+		background-image: none !important;
+	}
 
-  .profile-media {
-    position: absolute;
-    z-index: 0;
-    /* Match original full-bleed cover framing. Tiny fixed bleed only hides parallax edges. */
-    inset: -20px;
-    background-color: var(--bella-night, #171020);
-    background-image: url("/assets/optimized/profile-bg.webp");
-    background-position: center;
-    background-size: cover;
-    pointer-events: none;
-    transform: translate3d(0, 0, 0);
-    will-change: transform;
-  }
+	.profile-media {
+		position: absolute;
+		z-index: 0;
+		/* Match original full-bleed cover framing. Tiny fixed bleed only hides parallax edges. */
+		inset: -20px;
+		background-color: var(--bella-night, #171020);
+		background-image: url("/assets/optimized/profile-bg.webp");
+		background-position: center;
+		background-size: cover;
+		pointer-events: none;
+		transform: translate3d(0, 0, 0);
+		will-change: transform;
+	}
 
-  .profile-visual .profile-content {
-    z-index: 2;
-  }
+	.profile-visual .profile-content {
+		z-index: 2;
+	}
 
-  .profile-visual::after {
-    z-index: 1;
-  }
+	.profile-visual::after {
+		z-index: 1;
+	}
 
-  @media (max-width: 760px) {
-    .profile-media {
-      background-position: 33% center;
-      inset: -12px;
-    }
-  }
+	@media (max-width: 760px) {
+		.profile-media {
+			background-position: 33% center;
+			inset: -12px;
+		}
+	}
 
-  .profile-page [data-profile-enter] {
-    opacity: 1;
-    transform: none;
-  }
+	.profile-page [data-profile-enter] {
+		opacity: 1;
+		transform: none;
+	}
 
-  .profile-page:not(.is-archive-ready):not(.is-archive-revealing) [data-profile-enter] {
-    opacity: 0;
-    transform: translate3d(0, 10px, 0);
-  }
+	.profile-page:not(.is-archive-ready):not(.is-archive-revealing)
+		[data-profile-enter] {
+		opacity: 0;
+		transform: translate3d(0, 10px, 0);
+	}
 
-  .profile-page.is-archive-revealing [data-profile-enter] {
-    animation: profile-archive-scan 720ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--enter, 0) * 55ms) both;
-  }
+	.profile-page.is-archive-revealing [data-profile-enter] {
+		animation: profile-archive-scan 720ms cubic-bezier(0.22, 1, 0.36, 1)
+			calc(var(--enter, 0) * 55ms) both;
+	}
 
-  @keyframes profile-archive-scan {
-    from {
-      opacity: 0;
-      transform: translate3d(14px, 8px, 0);
-      filter: blur(2px);
-    }
-    to {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-      filter: blur(0);
-    }
-  }
+	@keyframes profile-archive-scan {
+		from {
+			opacity: 0;
+			transform: translate3d(14px, 8px, 0);
+			filter: blur(2px);
+		}
+		to {
+			opacity: 1;
+			transform: translate3d(0, 0, 0);
+			filter: blur(0);
+		}
+	}
 
-  .profile-links .bilibili-card::before {
-    position: absolute;
-    z-index: 3;
-    top: 0;
-    bottom: 0;
-    left: -40%;
-    width: 36%;
-    background: linear-gradient(
-      100deg,
-      transparent,
-      rgba(255, 255, 255, 0.08) 35%,
-      rgba(255, 248, 220, 0.42) 50%,
-      rgba(255, 255, 255, 0.08) 65%,
-      transparent
-    );
-    content: "";
-    opacity: 0;
-    pointer-events: none;
-    transform: skewX(-18deg) translateX(-120%);
-  }
+	.profile-links .bilibili-card::before {
+		position: absolute;
+		z-index: 3;
+		top: 0;
+		bottom: 0;
+		left: -40%;
+		width: 36%;
+		background: linear-gradient(
+			100deg,
+			transparent,
+			rgba(255, 255, 255, 0.08) 35%,
+			rgba(255, 248, 220, 0.42) 50%,
+			rgba(255, 255, 255, 0.08) 65%,
+			transparent
+		);
+		content: "";
+		opacity: 0;
+		pointer-events: none;
+		transform: skewX(-18deg) translateX(-120%);
+	}
 
-  .profile-links .bilibili-card:hover::before,
-  .profile-links .bilibili-card:focus-visible::before {
-    opacity: 1;
-    animation: profile-signal-sweep 720ms cubic-bezier(0.22, 0.8, 0.2, 1);
-  }
+	.profile-links .bilibili-card:hover::before,
+	.profile-links .bilibili-card:focus-visible::before {
+		opacity: 1;
+		animation: profile-signal-sweep 720ms cubic-bezier(0.22, 0.8, 0.2, 1);
+	}
 
-  @keyframes profile-signal-sweep {
-    from {
-      transform: skewX(-18deg) translateX(-140%);
-    }
-    to {
-      transform: skewX(-18deg) translateX(340%);
-    }
-  }
+	@keyframes profile-signal-sweep {
+		from {
+			transform: skewX(-18deg) translateX(-140%);
+		}
+		to {
+			transform: skewX(-18deg) translateX(340%);
+		}
+	}
 
-  @media (pointer: coarse) {
-    .profile-media {
-      transform: none !important;
-    }
-  }
+	@media (pointer: coarse) {
+		.profile-media {
+			transform: none !important;
+		}
+	}
 
-  @media (prefers-reduced-motion: reduce) {
-    .profile-media {
-      transform: none !important;
-    }
+	@media (prefers-reduced-motion: reduce) {
+		.profile-media {
+			transform: none !important;
+		}
 
-    .profile-page [data-profile-enter],
-    .profile-page:not(.is-archive-ready):not(.is-archive-revealing) [data-profile-enter],
-    .profile-page.is-archive-revealing [data-profile-enter] {
-      opacity: 1;
-      transform: none;
-      filter: none;
-      animation: none;
-    }
+		.profile-page [data-profile-enter],
+		.profile-page:not(.is-archive-ready):not(.is-archive-revealing)
+			[data-profile-enter],
+		.profile-page.is-archive-revealing [data-profile-enter] {
+			opacity: 1;
+			transform: none;
+			filter: none;
+			animation: none;
+		}
 
-    .profile-links .bilibili-card::before {
-      display: none;
-    }
-  }
+		.profile-links .bilibili-card::before {
+			display: none;
+		}
+	}
 </style>

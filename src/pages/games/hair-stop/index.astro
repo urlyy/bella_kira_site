@@ -3,63 +3,90 @@ import shellUrl from "../_shared/game-shell.css?url";
 import styleUrl from "./_assets/style.css?url";
 import gameUrl from "./_assets/game.js?url";
 ---
+
 <!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#10091f">
-  <title>飞发暂停 · 贝拉发型截图机</title>
-  <link rel="stylesheet" href={styleUrl}>
-  <link rel="stylesheet" href={shellUrl}>
-</head>
-<body>
-  <main class="page">
-    <header>
-      <p class="kicker">BELLA KIRA · HAIR FREEZE</p>
-      <h1>飞发暂停</h1>
-      <p>发型依次从右侧飞入、从左侧飞出，点一下只留下离贝拉最近的那顶。</p>
-    </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#10091f" />
+		<title>飞发暂停 · 贝拉发型截图机</title>
+		<link rel="stylesheet" href={styleUrl} />
+		<link rel="stylesheet" href={shellUrl} />
+	</head>
+	<body>
+		<main class="page">
+			<header>
+				<p class="kicker">BELLA KIRA · HAIR FREEZE</p>
+				<h1>飞发暂停</h1>
+				<p>
+					发型依次从右侧飞入、从左侧飞出，点一下只留下离贝拉最近的那顶。
+				</p>
+			</header>
 
-    <section class="layout">
-      <aside class="glass left-glass" aria-hidden="true">
-        <span>01</span><i></i><i></i><i></i>
-        <b>HAIR<br>STREAM</b>
-      </aside>
+			<section class="layout">
+				<aside class="glass left-glass" aria-hidden="true">
+					<span>01</span><i></i><i></i><i></i>
+					<b>HAIR<br />STREAM</b>
+				</aside>
 
-      <section class="game-card" aria-label="飞发暂停游戏">
-        <div class="topbar">
-          <div><span class="live-dot"></span><b id="status">高速循环中</b></div>
-          <span id="hairCount">LOOK 01</span>
-        </div>
+				<section class="game-card" aria-label="飞发暂停游戏">
+					<div class="topbar">
+						<div>
+							<span class="live-dot"></span><b id="status"
+								>高速循环中</b
+							>
+						</div>
+						<span id="hairCount">LOOK 01</span>
+					</div>
 
-        <button class="scene" id="scene" type="button" aria-label="点击暂停并保留最近的头发">
-          <div class="speed-lines"></div>
-          <div class="stream" id="stream" aria-hidden="true"></div>
-          <div class="bella" aria-hidden="true">
-            <div class="head"><i></i><i></i><span class="eye left"></span><span class="eye right"></span><span class="mouth"></span></div>
-            <div class="neck"></div><div class="body"><span>✦</span></div>
-          </div>
-          <div class="freeze-flash" id="freezeFlash"></div>
-          <div class="scene-label"><span id="sceneHint">点击画面暂停</span><small>或按空格键</small></div>
-        </button>
+					<button
+						class="scene"
+						id="scene"
+						type="button"
+						aria-label="点击暂停并保留最近的头发"
+					>
+						<div class="speed-lines"></div>
+						<div class="stream" id="stream" aria-hidden="true">
+						</div>
+						<div class="bella" aria-hidden="true">
+							<div class="head">
+								<i></i><i></i><span class="eye left"
+								></span><span class="eye right"></span><span
+									class="mouth"></span>
+							</div>
+							<div class="neck"></div><div class="body">
+								<span>✦</span>
+							</div>
+						</div>
+						<div class="freeze-flash" id="freezeFlash"></div>
+						<div class="scene-label">
+							<span id="sceneHint">点击画面暂停</span><small
+								>或按空格键</small
+							>
+						</div>
+					</button>
 
-        <div class="bottom-note">
-          <span>暂停后可直接截图</span>
-          <button id="toggle" type="button">暂停</button>
-        </div>
-      </section>
+					<div class="bottom-note">
+						<span>暂停后可直接截图</span>
+						<button id="toggle" type="button">暂停</button>
+					</div>
+				</section>
 
-      <aside class="glass right-glass">
-        <p class="kicker">HOW TO PLAY</p>
-        <strong>看准喜欢的发型</strong>
-        <p>点击暂停后，系统只保留最接近人物的一顶发型。</p>
-        <div class="keys"><kbd>SPACE</kbd><span>暂停 / 继续</span></div>
-        <div class="glass-orb"></div>
-      </aside>
-    </section>
-  </main>
-  <a class="site-return" href="/games/" aria-label="返回互动空间">← 互动空间</a>
-  <script is:inline src={gameUrl}></script>
-</body>
+				<aside class="glass right-glass">
+					<p class="kicker">HOW TO PLAY</p>
+					<strong>看准喜欢的发型</strong>
+					<p>点击暂停后，系统只保留最接近人物的一顶发型。</p>
+					<div class="keys">
+						<kbd>SPACE</kbd><span>暂停 / 继续</span>
+					</div>
+					<div class="glass-orb"></div>
+				</aside>
+			</section>
+		</main>
+		<a class="site-return" href="/games/" aria-label="返回互动空间"
+			>← 互动空间</a
+		>
+		<script is:inline src={gameUrl}></script>
+	</body>
 </html>

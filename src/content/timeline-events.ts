@@ -14,6 +14,25 @@ export type TimelineEvent = {
 
 export const timelineEvents: TimelineEvent[] = [
 	{
+		id: "account-start",
+		date: "2020-11-26",
+		title: "创建B站账号",
+		description: "",
+		links: [],
+	},
+	{
+		id: "first-solo-live",
+		date: "2020-12-24",
+		title: "在平安夜完成首次个人直播",
+		description: "",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://www.bilibili.com/opus/470819859798080665",
+			},
+		],
+	},
+	{
 		id: "beijixing_name",
 		date: "2021-01-06",
 		title: "粉丝名确定为“贝极星“",
@@ -38,6 +57,18 @@ export const timelineEvents: TimelineEvent[] = [
 		],
 	},
 	{
+		id: "first-offline-live",
+		date: "2021-05-01",
+		title: "A-SOUL首次线下Live",
+		description: "",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://www.bilibili.com/opus/519834434600202903",
+			},
+		],
+	},
+	{
 		id: "reach-10w-followers",
 		date: "2021-05-03",
 		title: "达成10万粉丝",
@@ -49,7 +80,7 @@ export const timelineEvents: TimelineEvent[] = [
 		date: "2021-07-16",
 		title: "一周年生日会",
 		description:
-			"《贝拉生日会！一起来哟！》，直播结束时共 11396 位舰长，达成“全 B 站第二个万舰主播”和“虚拟主播中第一个万舰主播”成就。",
+			"《贝拉生日会！一起来哟！》，达成“全 B 站第二个万舰主播”和“虚拟主播中第一个万舰主播”成就。",
 		links: [
 			{
 				label: "观看视频",
@@ -66,6 +97,18 @@ export const timelineEvents: TimelineEvent[] = [
 			{
 				label: "查看动态",
 				url: "https://www.bilibili.com/opus/558758859912566116",
+			},
+		],
+	},
+	{
+		id: "lifeafter-collab",
+		date: "2021-08-20",
+		title: "《明日之后》联动直播",
+		description: "",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://www.bilibili.com/opus/556925634731770281",
 			},
 		],
 	},
@@ -93,6 +136,22 @@ export const timelineEvents: TimelineEvent[] = [
 			},
 		],
 	},
+	// {
+	// 	id: "loreal-collab",
+	// 	date: "2021-11-05",
+	// 	title: "欧莱雅男士联动直播",
+	// 	description: "欧莱雅男士联动直播带来新歌、新舞及联动单曲《魂然天成》。",
+	// 	links: [
+	// 		{
+	// 			label: "查看动态",
+	// 			url: "https://www.bilibili.com/opus/589476539033638006",
+	// 		},
+	// 		{
+	// 			label: "观看视频",
+	// 			url: "https://www.bilibili.com/video/BV1Ar4y1C77P",
+	// 		},
+	// 	],
+	// },
 	{
 		id: "decoration-1",
 		date: "2021-11-18",
@@ -165,6 +224,22 @@ export const timelineEvents: TimelineEvent[] = [
 			},
 		],
 	},
+	// {
+	// 	id: "ssjj2-nvidia-collab",
+	// 	date: "2023-01-17",
+	// 	title: "1. A-SOUL X《生死狙击2》联动版本上线; 2. NVIDIA X A-SOUL跨次元新春祝福",
+	// 	description: "",
+	// 	links: [
+	// 		{
+	// 			label: "查看动态",
+	// 			url: "https://www.bilibili.com/opus/749406767552659456",
+	// 		},
+	// 		{
+	// 			label: "观看视频",
+	// 			url: "https://www.bilibili.com/video/BV1a14y1M7TZ",
+	// 		},
+	// 	],
+	// },
 	{
 		id: "naodongbo",
 		date: "2023-05-09",
@@ -177,6 +252,18 @@ export const timelineEvents: TimelineEvent[] = [
 			},
 		],
 	},
+	// {
+	// 	id: "leap-top",
+	// 	date: "2023-05-11",
+	// 	title: "心跳狂飙、疾速领跑！零跑汽车×A-SOUL合作曲《Leap Top》",
+	// 	description: "",
+	// 	links: [
+	// 		{
+	// 			label: "观看视频",
+	// 			url: "https://www.bilibili.com/video/BV16k4y1j79k",
+	// 		},
+	// 	],
+	// },
 	{
 		id: "yinsheng",
 		date: "2023-05-22",
@@ -198,6 +285,30 @@ export const timelineEvents: TimelineEvent[] = [
 			{
 				label: "观看视频",
 				url: "https://www.bilibili.com/video/BV1xh411K7ep",
+			},
+		],
+	},
+	// {
+	// 	id: "intel-collab",
+	// 	date: "2023-07-10",
+	// 	title: "英特尔 x A-SOUL惊喜联动",
+	// 	description: "",
+	// 	links: [
+	// 		{
+	// 			label: "观看视频",
+	// 			url: "https://www.bilibili.com/video/BV11F411X7p8",
+	// 		},
+	// 	],
+	// },
+	{
+		id: "bilibili-up-emoji",
+		date: "2023-07-15",
+		title: "贝拉UP主大表情上架",
+		description: "",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://www.bilibili.com/opus/818058619830403156",
 			},
 		],
 	},
@@ -226,18 +337,6 @@ export const timelineEvents: TimelineEvent[] = [
 		],
 	},
 	{
-		id: "ice-fire-ambassador",
-		date: "2024-09-16",
-		title: "2024冰火歌会中秋大使",
-		description: "A-SOUL受邀成为2024冰火歌会中秋大使，表演《千本樱》。",
-		links: [
-			{
-				label: "观看视频",
-				url: "https://www.bilibili.com/festival/binghuogehuimanyouji?bvid=BV19StseQEAs",
-			},
-		],
-	},
-	{
 		id: "soul-gaze-single",
 		date: "2024-10-12",
 		title: "第二首个人单曲《我以灵魂注视你的心》正式上线",
@@ -258,6 +357,18 @@ export const timelineEvents: TimelineEvent[] = [
 			{
 				label: "观看视频",
 				url: "https://www.bilibili.com/video/BV1gykFYwE7o",
+			},
+		],
+	},
+	{
+		id: "amap-navigation-voice",
+		date: "2024-12-31",
+		title: "贝拉主题导航套装在高德地图APP正式上线",
+		description: "",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://www.bilibili.com/opus/1016773379949068306",
 			},
 		],
 	},
@@ -334,6 +445,30 @@ export const timelineEvents: TimelineEvent[] = [
 			{
 				label: "观看视频",
 				url: "https://www.bilibili.com/video/BV1ZRiMB5EjF",
+			},
+		],
+	},
+	{
+		id: "endfield-collab-streams",
+		date: "2026-01-22",
+		title: "首次《明日方舟：终末地》商单直播",
+		description: "",
+		links: [
+			{
+				label: "观看视频",
+				url: "https://www.bilibili.com/video/BV1XnzsBpEsj",
+			},
+		],
+	},
+	{
+		id: "punishing-gray-raven-collab-streams",
+		date: "2026-03-17",
+		title: "首次《战双帕弥什》商单直播",
+		description: "",
+		links: [
+			{
+				label: "观看视频",
+				url: "https://www.bilibili.com/video/BV1GqwRzeEiU",
 			},
 		],
 	},

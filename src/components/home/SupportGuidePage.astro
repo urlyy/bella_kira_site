@@ -1,114 +1,186 @@
 ---
 const lyricGuides = [
-  {
-    title: "一起跳起来",
-    number: "01",
-    href: "https://www.bilibili.com/video/BV1kPQjBLEDw/",
-  },
-  {
-    title: "我以灵魂注视你的心",
-    number: "02",
-    href: "https://www.bilibili.com/video/BV1YyJizoEH6/",
-  },
-  {
-    title: "Shiny Dancer",
-    number: "03",
-    href: "https://www.bilibili.com/video/BV1aN4y1z7iy/",
-  },
+	{
+		title: "一起跳起来",
+		number: "01",
+		href: "https://www.bilibili.com/video/BV1kPQjBLEDw/",
+	},
+	{
+		title: "我以灵魂注视你的心",
+		number: "02",
+		href: "https://www.bilibili.com/video/BV1YyJizoEH6/",
+	},
+	{
+		title: "Shiny Dancer",
+		number: "03",
+		href: "https://www.bilibili.com/video/BV1aN4y1z7iy/",
+	},
 ];
 ---
 
-<section class="page support-page" data-page-name="support" aria-label="应援指南">
-  <div class="page-visual support-visual mobile-page-scroll-surface">
-    <div class="support-orbit support-orbit--large" aria-hidden="true"></div>
-    <div class="support-orbit support-orbit--small" aria-hidden="true"></div>
+<section
+	class="page support-page"
+	data-page-name="support"
+	aria-label="应援指南"
+>
+	<div class="page-visual support-visual mobile-page-scroll-surface">
+		<div class="support-orbit support-orbit--large" aria-hidden="true">
+		</div>
+		<div class="support-orbit support-orbit--small" aria-hidden="true">
+		</div>
 
-    <div class="support-shell">
-      <header class="support-heading">
-        <div>
-          <p>SUPPORT · BELLA KIRA</p>
-          <h1>应援指南</h1>
-        </div>
-        <span>把喜欢化成同一种颜色、同一个声音，<br />在她望向舞台下时成为彼此的星光。</span>
-      </header>
+		<div class="support-shell">
+			<header class="support-heading">
+				<div>
+					<p>SUPPORT · BELLA KIRA</p>
+					<h1>应援指南</h1>
+				</div>
+				<span
+					>把喜欢化成同一种颜色、同一个声音，<br
+					/>在她望向舞台下时成为彼此的星光。</span
+				>
+			</header>
 
-      <div class="support-layout">
-        <article class="support-card support-color-card">
-          <div class="support-card-index"><span>01</span><b>应援色</b></div>
-          <div class="support-color-body">
-            <div class="support-color-swatch" aria-label="贝拉应援色 DB7D74">
-              <span></span>
-              <img src="/assets/optimized/beijixing.webp" alt="" decoding="async" draggable="false" />
-            </div>
-            <div class="support-color-copy">
-              <strong>#DB7D74</strong>
-              <button class="support-color-code" type="button" data-copy-color="#DB7D74" aria-label="复制应援色色值 DB7D74">
-                <i aria-hidden="true">复制色值</i>
-              </button>
-            </div>
-          </div>
-        </article>
+			<div class="support-layout">
+				<article class="support-card support-color-card">
+					<div class="support-card-index">
+						<span>01</span><b>应援色</b>
+					</div>
+					<div class="support-color-body">
+						<div
+							class="support-color-swatch"
+							aria-label="贝拉应援色 DB7D74"
+						>
+							<span></span>
+							<img
+								src="/assets/optimized/beijixing.webp"
+								alt=""
+								decoding="async"
+								draggable="false"
+							/>
+						</div>
+						<div class="support-color-copy">
+							<strong>#DB7D74</strong>
+							<button
+								class="support-color-code"
+								type="button"
+								data-copy-color="#DB7D74"
+								aria-label="复制应援色色值 DB7D74"
+							>
+								<i aria-hidden="true">复制色值</i>
+							</button>
+						</div>
+					</div>
+				</article>
 
-        <article class="support-card support-slogan-card">
-          <div class="support-card-index"><span>02</span><b>口号</b></div>
-          <div class="support-slogan-body">
-            <blockquote>A-SOUL时代，<br />沸腾期待！</blockquote>
-          </div>
-        </article>
+				<article class="support-card support-slogan-card">
+					<div class="support-card-index">
+						<span>02</span><b>口号</b>
+					</div>
+					<div class="support-slogan-body">
+						<blockquote>A-SOUL时代，<br />沸腾期待！</blockquote>
+					</div>
+				</article>
 
-        <article class="support-card support-lyrics-card">
-          <div class="support-card-index"><span>03</span><b>歌词应援</b></div>
-          <div class="support-lyrics-intro">
-            <p>官方教学</p>
-            <span>选择曲目，前往完整应援教学</span>
-          </div>
-          <div class="support-song-list">
-            {lyricGuides.map((guide) => (
-              <a href={guide.href} target="_blank" rel="noreferrer">
-                <span class="support-song-number">{guide.number}</span>
-                <span class="support-song-copy">
-                  <strong>{guide.title}</strong>
-                </span>
-                <span class="support-song-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-                <span class="support-song-arrow" aria-hidden="true">↗</span>
-              </a>
-            ))}
-          </div>
-        </article>
-      </div>
-    </div>
-  </div>
+				<article class="support-card support-lyrics-card">
+					<div class="support-card-index">
+						<span>03</span><b>歌词应援</b>
+					</div>
+					<div class="support-lyrics-intro">
+						<p>官方教学</p>
+						<span>选择曲目，前往完整应援教学</span>
+					</div>
+					<div class="support-song-list">
+						{
+							lyricGuides.map((guide) => (
+								<a
+									href={guide.href}
+									target="_blank"
+									rel="noreferrer"
+								>
+									<span class="support-song-number">
+										{guide.number}
+									</span>
+									<span class="support-song-copy">
+										<strong>{guide.title}</strong>
+									</span>
+									<span
+										class="support-song-wave"
+										aria-hidden="true"
+									>
+										<>
+											<i />
+											<i />
+											<i />
+											<i />
+											<i />
+										</>
+									</span>
+									<span
+										class="support-song-arrow"
+										aria-hidden="true"
+									>
+										↗
+									</span>
+								</a>
+							))
+						}
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
 
-  <div class="sticker-toast" data-support-toast role="status" aria-live="polite" aria-atomic="true">
-    <img src="/assets/optimized/beijixing.webp" alt="" decoding="async" draggable="false" />
-    <span data-support-toast-message></span>
-  </div>
+	<div
+		class="sticker-toast"
+		data-support-toast
+		role="status"
+		aria-live="polite"
+		aria-atomic="true"
+	>
+		<img
+			src="/assets/optimized/beijixing.webp"
+			alt=""
+			decoding="async"
+			draggable="false"
+		/>
+		<span data-support-toast-message></span>
+	</div>
 </section>
 
 <script>
-  const supportToast = document.querySelector<HTMLElement>("[data-support-toast]");
-  const supportToastMessage = supportToast?.querySelector<HTMLElement>("[data-support-toast-message]");
-  let supportToastTimer: number | undefined;
+	const supportToast = document.querySelector<HTMLElement>(
+		"[data-support-toast]",
+	);
+	const supportToastMessage = supportToast?.querySelector<HTMLElement>(
+		"[data-support-toast-message]",
+	);
+	let supportToastTimer: number | undefined;
 
-  const showSupportToast = (message: string, state: "success" | "error") => {
-    if (!supportToast || !supportToastMessage) return;
-    window.clearTimeout(supportToastTimer);
-    supportToastMessage.textContent = message;
-    supportToast.dataset.state = state;
-    supportToast.classList.remove("is-visible");
-    void supportToast.offsetWidth;
-    supportToast.classList.add("is-visible");
-    supportToastTimer = window.setTimeout(() => supportToast.classList.remove("is-visible"), 2200);
-  };
+	const showSupportToast = (message: string, state: "success" | "error") => {
+		if (!supportToast || !supportToastMessage) return;
+		window.clearTimeout(supportToastTimer);
+		supportToastMessage.textContent = message;
+		supportToast.dataset.state = state;
+		supportToast.classList.remove("is-visible");
+		void supportToast.offsetWidth;
+		supportToast.classList.add("is-visible");
+		supportToastTimer = window.setTimeout(
+			() => supportToast.classList.remove("is-visible"),
+			2200,
+		);
+	};
 
-  document.querySelector<HTMLButtonElement>("[data-copy-color]")?.addEventListener("click", async (event) => {
-    const button = event.currentTarget as HTMLButtonElement;
-    const value = button.dataset.copyColor ?? "#DB7D74";
-    try {
-      await navigator.clipboard.writeText(value);
-      showSupportToast("应援色色值已复制！", "success");
-    } catch {
-      showSupportToast("复制失败，请检查浏览器剪贴板权限", "error");
-    }
-  });
+	document
+		.querySelector<HTMLButtonElement>("[data-copy-color]")
+		?.addEventListener("click", async (event) => {
+			const button = event.currentTarget as HTMLButtonElement;
+			const value = button.dataset.copyColor ?? "#DB7D74";
+			try {
+				await navigator.clipboard.writeText(value);
+				showSupportToast("应援色色值已复制！", "success");
+			} catch {
+				showSupportToast("复制失败，请检查浏览器剪贴板权限", "error");
+			}
+		});
 </script>

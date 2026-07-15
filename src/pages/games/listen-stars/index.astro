@@ -2,42 +2,98 @@
 import shellUrl from "../_shared/game-shell.css?url";
 import styleUrl from "./_assets/style.css?url";
 ---
+
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>聆听星星 · 贝拉星空互动</title>
-    <link rel="stylesheet" href={styleUrl}>
-    <link rel="stylesheet" href={shellUrl}>
-  </head>
-  <body>
-    <main>
-      <header><p>BELLA KIRA · LISTEN TO THE STARS</p><h1>聆听星星</h1><span>每一颗星都有自己的声音。轻触它们，让夜空替你弹一段旋律。</span></header>
-      <section>
-        <canvas id="sky"></canvas>
-        <aside class="midi-player" aria-labelledby="midi-player-title">
-          <div class="midi-heading">
-            <div><small>MIDI STARGAZER</small><strong id="midi-player-title">让星空演奏</strong></div>
-            <label class="midi-import"><input id="midi-file" type="file" accept=".mid,.midi,audio/midi,audio/x-midi"><span>导入 MIDI</span></label>
-          </div>
-          <p class="midi-status" id="midi-status">文件只在浏览器本地读取，不会上传</p>
-          <div class="midi-options">
-            <label><span>音轨</span><select id="midi-track" disabled><option value="all">全部旋律轨</option></select></label>
-            <label><span>音色映射</span><select id="midi-mode"><option value="sky">星空和声</option><option value="original">原曲音高</option></select></label>
-            <label><span>速度</span><select id="midi-speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
-          </div>
-          <div class="midi-transport">
-            <button id="midi-play" type="button" disabled>播放</button>
-            <button id="midi-restart" type="button" disabled>回到开头</button>
-            <label><span id="midi-current">0:00</span><input id="midi-progress" type="range" min="0" max="1000" value="0" disabled aria-label="MIDI 播放进度"><span id="midi-duration">0:00</span></label>
-          </div>
-        </aside>
-        <div class="legend"><span><i></i>轻触星星 · 播放音符</span><span><i class="north"></i>长按北极星 · 全空和声</span><button id="mute" type="button">声音开启</button></div>
-        <div id="message">找到最亮的北极星</div>
-      </section>
-    </main>
-    <a class="site-return" href="/games/" aria-label="返回互动空间">← 互动空间</a>
-    <script src="./_assets/stars.js"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>聆听星星 · 贝拉星空互动</title>
+		<link rel="stylesheet" href={styleUrl} />
+		<link rel="stylesheet" href={shellUrl} />
+	</head>
+	<body>
+		<main>
+			<header>
+				<p>BELLA KIRA · LISTEN TO THE STARS</p><h1>聆听星星</h1><span
+					>每一颗星都有自己的声音。轻触它们，让夜空替你弹一段旋律。</span
+				>
+			</header>
+			<section>
+				<canvas id="sky"></canvas>
+				<aside class="midi-player" aria-labelledby="midi-player-title">
+					<div class="midi-heading">
+						<div>
+							<small>MIDI STARGAZER</small><strong
+								id="midi-player-title">让星空演奏</strong
+							>
+						</div>
+						<label class="midi-import"
+							><input
+								id="midi-file"
+								type="file"
+								accept=".mid,.midi,audio/midi,audio/x-midi"
+							/><span>导入 MIDI</span></label
+						>
+					</div>
+					<p class="midi-status" id="midi-status">
+						文件只在浏览器本地读取，不会上传
+					</p>
+					<div class="midi-options">
+						<label
+							><span>音轨</span><select id="midi-track" disabled
+								><option value="all">全部旋律轨</option></select
+							></label
+						>
+						<label
+							><span>音色映射</span><select id="midi-mode"
+								><option value="sky">星空和声</option><option
+									value="original">原曲音高</option
+								></select
+							></label
+						>
+						<label
+							><span>速度</span><select id="midi-speed"
+								><option value="0.75">0.75×</option><option
+									value="1"
+									selected>1×</option
+								><option value="1.25">1.25×</option><option
+									value="1.5">1.5×</option
+								></select
+							></label
+						>
+					</div>
+					<div class="midi-transport">
+						<button id="midi-play" type="button" disabled
+							>播放</button
+						>
+						<button id="midi-restart" type="button" disabled
+							>回到开头</button
+						>
+						<label
+							><span id="midi-current">0:00</span><input
+								id="midi-progress"
+								type="range"
+								min="0"
+								max="1000"
+								value="0"
+								disabled
+								aria-label="MIDI 播放进度"
+							/><span id="midi-duration">0:00</span></label
+						>
+					</div>
+				</aside>
+				<div class="legend">
+					<span><i></i>轻触星星 · 播放音符</span><span
+						><i class="north"></i>长按北极星 · 全空和声</span
+					><button id="mute" type="button">声音开启</button>
+				</div>
+				<div id="message">找到最亮的北极星</div>
+			</section>
+		</main>
+		<a class="site-return" href="/games/" aria-label="返回互动空间"
+			>← 互动空间</a
+		>
+		<script src="./_assets/stars.js"></script>
+	</body>
 </html>

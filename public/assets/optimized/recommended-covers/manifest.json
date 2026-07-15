@@ -27,6 +27,11 @@
 			"output": "壁纸2.webp",
 			"outputHash": "bfb2a1c481a93ba66e12b881e9f7043ff14c4fbfb0e3f347d16cf8e7911ac30c"
 		},
+		"侧颜冷静转头憨.jpg": {
+			"sourceHash": "2d02494097c55f6223adc0432f1306b592eef35787c45e7b095a4d5a8e65092c",
+			"output": "侧颜冷静转头憨.webp",
+			"outputHash": "bf51fa2d0db21476b1778c17d1b017788c49f0f6a06359599791218298b06057"
+		},
 		"除夕.png": {
 			"sourceHash": "7a3b0d3fd65af5fde408f6eca467a0a8888664a1901995377bc031c70e32cdc8",
 			"output": "除夕.webp",
@@ -36,6 +41,11 @@
 			"sourceHash": "a66818c74ca4354743d7569ee109a46c7039c252fc6ae85adbfa3d1560a120a9",
 			"output": "除夕5人.webp",
 			"outputHash": "ef38c99211e6e34293c954a2d6a8a1359c35825aaf38022e30b42af76bca99be"
+		},
+		"聪明大贝拉.jpg": {
+			"sourceHash": "a08d2d8b0daaaeae2d9cc42601b50de4970f692d6450f244be7f91730daf587e",
+			"output": "聪明大贝拉.webp",
+			"outputHash": "61b23d18e7439fe3d7e0161a2e3a0cab9bfdd36c7710ed13d5510ed745c5f9e8"
 		},
 		"迪迦day2.png": {
 			"sourceHash": "fb19bab41c1d8d8e30eec75e22c5cd354563df7521f01cdb3f08404d3f670c06",
@@ -96,6 +106,11 @@
 			"sourceHash": "aa1bfaf975b49c546b3816d3b6732f2f469017a37d615bc4327fbd0b997c93fc",
 			"output": "我不会直播.webp",
 			"outputHash": "21cee10f325d1c681ce67ab700da032fed2ec5b1958a7be7b5c2d09cc733f4f3"
+		},
+		"我是侄女哦.jpg": {
+			"sourceHash": "8d92b00ab08a6d7a969f0b91d247e72976b1f40ccb1d1bbef9e397b4f524a5fc",
+			"output": "我是侄女哦.webp",
+			"outputHash": "62eb71fdf704434b09bb1ad7ce65cc8c0f3894c8bca56d16ab83adf18e8ea7d5"
 		},
 		"我以灵魂.png": {
 			"sourceHash": "27556eaf4df66f90921f05109190c3a35fd307397f1c79057005f74fe1d2fdf6",
