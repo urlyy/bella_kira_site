@@ -1,8 +1,8 @@
 # 贝拉kira
 
-一个为 A-SOUL 成员贝拉打造的非官方、非商业粉丝应援站。
+一个为 A-SOUL 成员贝拉kira 打造的非官方、非商业粉丝应援站。
 
-网站希望让第一次认识贝拉的人快速感受到她的魅力，也为贝极星留下一处可以反复回来看看舞台、时光、表情包、同人作品与互动内容的地方。
+网站希望让第一次认识贝拉的人快速感受到她的魅力，也为贝极星留下一处可以反复回来看看舞台、一路繁花、表情包、同人作品与互动内容的地方。
 
 > 本项目与 A-SOUL、贝拉及其官方运营方不存在隶属或合作关系。角色形象、官方图片、音视频、模型与其他相关素材的权利归各自权利方所有，详见站内「站点公告」。
 
@@ -10,27 +10,27 @@
 
 首页采用全屏章节式浏览，并以贝极星作为页面切换标记。目前包含：
 
-- 首页视频、贝拉介绍、应援指南、粉丝时光轨迹与服装展示
+- 首页视频、贝拉介绍、应援指南、「一路繁花」粉丝轨迹与服装展示
 - 推荐视频、表情包、光影画廊与同人文书架
 - 枝江相关主页和站外资源导航
 - 包含模型舞台、拼图、音游与轻量小游戏的互动空间
-- 独立的站点公告、更新记录及素材使用说明
+- 作为首页最后一章的站点公告、素材使用说明与反馈入口
 
-互动空间当前提供 11 个浏览器端体验：
+互动空间当前提供 11 个浏览器端体验，其中合成游戏和接住 SC 暂不在入口列表展示：
 
-| 路由 | 内容 |
-| --- | --- |
-| `/games/model-stage/` | PMX 模型舞台与姿势编辑 |
-| `/games/memory-match/` | 记忆翻牌 |
-| `/games/star-hit/` | 30 秒反应挑战 |
-| `/games/hair-stop/` | 飞发暂停截图互动 |
-| `/games/stage-puzzle/` | 滑块拼图 |
-| `/games/jigsaw-puzzle/` | 不规则自由拼图 |
-| `/games/merge-watermelon/` | 合成游戏 |
-| `/games/link-match/` | 连连看 |
-| `/games/bubble-shooter/` | 泡泡消除 |
-| `/games/listen-stars/` | 星空乐器与 MIDI 播放 |
-| `/games/pet-pet/` | 浏览器本地 PetPet GIF 制作 |
+| 路由                       | 内容                       |
+| -------------------------- | -------------------------- |
+| `/games/model-stage/`      | PMX 模型舞台与姿势编辑     |
+| `/games/memory-match/`     | 记忆翻牌                   |
+| `/games/star-hit/`         | 30 秒反应挑战              |
+| `/games/hair-stop/`        | 枝江角色组件拼装           |
+| `/games/stage-puzzle/`     | 滑块拼图                   |
+| `/games/jigsaw-puzzle/`    | 不规则自由拼图             |
+| `/games/merge-watermelon/` | 合成游戏                   |
+| `/games/link-match/`       | 连连看                     |
+| `/games/listen-stars/`     | 星空乐器与 MIDI 播放       |
+| `/games/pet-pet/`          | 浏览器本地 PetPet GIF 制作 |
+| `/games/superchat-catch/`  | 接住 SC，积累金额并控制羞耻值 |
 
 ## 技术栈
 
@@ -64,27 +64,37 @@ npm run dev
 
 ### 常用命令
 
-| 命令 | 用途 |
-| --- | --- |
-| `npm run dev` | 启动 Astro 开发服务器 |
-| `npm run check` | 执行 Astro / TypeScript 检查 |
-| `npm run optimize` | 统一生成或更新全部优化资源 |
-| `npm run optimize:check` | 只读检查全部优化资源是否缺失或过期 |
-| `npm run gallery:optimize` | 为画廊原图生成或更新 WebP 预览图 |
-| `npm run gallery:check` | 检查画廊预览图是否缺失或过期 |
-| `npm run build` | 检查全部优化资源、校验项目并生成静态站点 |
-| `npm run preview` | 本地预览 `dist/` 构建结果 |
+| 命令                     | 用途                                         |
+| ------------------------ | -------------------------------------------- |
+| `npm run dev`            | 启动 Astro 开发服务器                        |
+| `npm run check`          | 执行 Astro / TypeScript 检查                 |
+| `npm run format`         | 写入 Prettier 格式化结果                     |
+| `npm run format:check`   | 只读检查 Prettier 格式                       |
+| `npm run optimize`       | 统一生成或更新全部优化资源                   |
+| `npm run optimize:check` | 只读检查全部优化资源是否缺失或过期           |
+| `npm run build`          | 先写入格式化，再检查资源与代码并生成静态站点 |
+| `npm run preview`        | 本地预览 `dist/` 构建结果                    |
 
 预览构建产物时，推荐运行 `npm run preview`。如果使用 VS Code Live
 Server，本仓库已将其站点根目录配置为 `dist/`；请先运行 `npm run build`，
 再启动 Live Server，并访问 `/`，不要以仓库根目录访问 `/dist/index.html`。
 构建页面中的 `/_astro/` 和 `/assets/` 都是相对于站点根目录的绝对路径。
 
-建议提交前至少运行：
+提交前至少运行：
 
 ```bash
 npm run build
 ```
+
+`npm run build` 会调用 `npm run format` 并可能修改源文件。如果只需要不写入文件的检查，请组合使用 `npm run format:check`、`npm run optimize:check` 和 `npm run check`。
+
+## 验证与验收
+
+对会影响站点输出的改动，「verify / check / review」必须同时包含代码检查和实际渲染的视觉检查，不能只完成其中一边。
+
+- 代码侧：根据改动范围检查格式、优化资源、Astro / TypeScript 诊断、生产构建、相关功能与可访问性。
+- 视觉侧：在渲染后的页面中检查受影响的路由和交互状态；桌面端、移动端、深色、浅色都要覆盖，布局相关改动还需检查矮视口和横屏。
+- 自动化命令通过不代表视觉验收完成，页面看起来正常也不代表代码已经通过检查。某一侧无法执行或确实不适用时，必须明确说明原因和未验证范围。
 
 ## 项目结构
 
@@ -99,7 +109,7 @@ npm run build
 ├── src/layouts/                # 全站页面布局
 ├── src/pages/                  # Astro 路由
 │   ├── games/                  # 互动空间及各独立游戏
-│   └── notice/                 # 站点公告
+│   └── notice/                 # 旧公告路由跳转到 /#notice
 └── src/styles/                 # 全局样式
 ```
 
@@ -135,6 +145,20 @@ npm run gallery:optimize
 ```
 
 脚本会在 `public/assets/gallery/previews/` 中生成最长边不超过 1200px 的 WebP 预览图，并维护 `manifest.json`。原图、预览图和清单需要一起提交。
+
+### 优化图片资源
+
+这些源素材都有对应的 WebP 优化产物与清单：
+
+| 素材         | 生成命令                              | 只读检查                           |
+| ------------ | ------------------------------------- | ---------------------------------- |
+| 画廊预览     | `npm run gallery:optimize`            | `npm run gallery:check`            |
+| 服装立绘     | `npm run clothes:optimize`            | `npm run clothes:check`            |
+| 服装背景     | `npm run cloth-bg:optimize`           | `npm run cloth-bg:check`           |
+| 推荐视频封面 | `npm run recommended-covers:optimize` | `npm run recommended-covers:check` |
+| 表情包       | `npm run stickers:optimize`           | `npm run stickers:check`           |
+
+新增、替换或删除源素材后，运行对应的生成命令，并将源文件、优化产物和清单一起提交。
 
 ### 同人文与互动入口
 

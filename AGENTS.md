@@ -9,10 +9,18 @@ The canonical user-facing name is `贝拉kira`. The current header wordmark rend
 ## Working Agreement
 
 - Treat the implementation in `src/` and the content files in `src/content/` as the source of truth. Update this document only with durable architecture, behavior, content, and maintenance rules; do not use it as a research log or brainstorm backlog.
+- Keep documentation scoped and synchronized: `README.md` is the user-facing setup, maintenance, and deployment guide; `AGENTS.md` records durable implementation and acceptance constraints; asset-local source records preserve attribution. Remove superseded guidance instead of retaining parallel or historical versions.
 - Preserve the modular page structure. `src/pages/index.astro` is a thin home-page assembly surface; each chapter, the persistent header, and page navigation live in focused components.
-- After visual changes, inspect the rendered result at desktop and mobile sizes in both dark and light themes, including short and landscape viewports. Review composition, contrast, hierarchy, spacing, proportions, and readability over changing media—not only whether the project builds.
 - Do not display decorative full-page labels in the `数字 / ENGLISH NAME` format. Functional pagination, content indices, and section numbers are allowed.
 - Reuse the Bella-themed toast treatment for actions that copy, generate, unlock, obtain, succeed, or fail. Do not rely only on silent completion or temporary button text.
+
+## Verification and Acceptance
+
+- A request to **verify**, **check**, **review**, or otherwise validate work requires both code verification and rendered visual verification whenever the result can affect the site. Neither track can substitute for the other, and a passing build alone is not a complete acceptance result.
+- Code verification must cover the checks relevant to the change: formatting, optimized-asset consistency, Astro/TypeScript diagnostics, production build, and affected behavior or accessibility. Use `npm run format:check`, `npm run optimize:check`, `npm run check`, and/or `npm run build` in proportion to the change.
+- Visual verification must use the rendered site, not source inspection alone. Inspect affected routes and states at desktop and mobile sizes in both dark and light themes, and include short-height and landscape viewports when layout or full-screen navigation can be affected. Review composition, contrast, hierarchy, spacing, clipping, proportions, responsive behavior, interactions, and readability over changing media.
+- Exercise the relevant interaction path, not only the initial frame: chapter wipes and internal scrolling, menus and dialogs, loading/error/empty states, media controls, keyboard/touch behavior, and reduced-motion alternatives as applicable.
+- If either verification track is blocked or genuinely not applicable, state that explicitly with the reason and list exactly what was and was not checked. Do not report the work as fully verified while leaving one applicable track unexamined.
 
 ## Stack and Repository Layout
 
@@ -24,9 +32,9 @@ The canonical user-facing name is `贝拉kira`. The current header wordmark rend
     - `src/content/fan-fiction.json`
     - `src/content/timeline-events.ts`
     - `src/content/interactive-experiences.ts`
-- JSON, JavaScript, and TypeScript use Prettier with tabs and a tab width of four. Run `npm run format` and `npm run format:check` as appropriate.
+- Astro, JSON, JavaScript, and TypeScript use Prettier with tabs and a tab width of four. Run `npm run format` and `npm run format:check` as appropriate.
 - Every `*:optimize` command must have a corresponding read-only `*:check` command. Optimize scripts use source-content hashes and committed manifests for incremental generation and validation, not filesystem timestamps. Pages append manifest-derived output hashes to optimized asset URLs for automatic browser/CDN cache invalidation. `npm run optimize` generates all optimized assets, while `npm run optimize:check` validates them without modifying files.
-- `npm run build` runs `optimize:check`, Astro/TypeScript checks, and the static build. Husky runs `gallery:check` before commits and the complete build before pushes; GitHub Actions runs the same build on pushes and pull requests.
+- `npm run build` first runs the write-mode formatter, then `optimize:check`, Astro/TypeScript checks, and the static build. Use the individual `*:check` commands when verification must remain read-only. Husky runs `gallery:check` before commits and the complete build before pushes; GitHub Actions runs the same build on pushes and pull requests.
 
 ## Routes and Navigation
 
@@ -61,7 +69,7 @@ When chapter order changes, update all of these together: `src/pages/index.astro
 ## Global Presentation and Input
 
 - The site uses the bundled LXGW WenKai Mono Lite font and Bella’s support color `#DB7D74` as a key accent.
-- The unified visual identity is `暮色星轨档案`: all home chapters except the full-screen video hero use one deep night-purple, warm-white, support-coral, and restrained starlight-gold system. Character artwork and chapter media provide individuality, while backgrounds, headings, borders, cards, and controls remain recognizably part of the same dusk visual world.
+- The unified visual identity is `暮色星轨档案`: all home chapters except the full-screen video hero share a night-purple, warm-white, support-coral, and restrained starlight-gold system, with a coordinated light-theme counterpart. Character artwork and chapter media provide individuality, while backgrounds, headings, borders, cards, and controls remain recognizably part of the same visual world.
 - The desktop header floats over the current chapter without a large dark or frosted block. Its active state is a delicate stage/jewelry ornament close to the text, and the navigation is centered against the viewport rather than the remaining space beside the brand.
 - Persistent header text uses warm white with a dark edge/shadow treatment strong enough to remain readable on both dusk chapters and bright moving hero frames; the active item shifts to a high-contrast warm coral tint. Do not return to low-contrast purple navigation text.
 - Fine-pointer movement creates a non-interactive purple, white, warm-yellow, and coral star trail. It is disabled for coarse pointers and `prefers-reduced-motion`.
@@ -86,17 +94,16 @@ When chapter order changes, update all of these together: `src/pages/index.astro
 - The timeline chapter's confirmed user-facing title is exactly `一路繁花`; do not call it `时光` in navigation, page headings, or accessibility labels.
 - The timeline uses a dusk/night `暮色星轨档案` treatment rather than a pale generic analytics dashboard. Its follower curve reads as a luminous star track in a dark open canvas; axes and grids stay restrained, milestones read as lit stars, event details resemble observation records, and playback belongs to a thin timeline rail rather than a bright generic dashboard control.
 - The animated point traveling along the follower curve uses a small `public/assets/贝极星.png` mascot image rather than a generic circular marker.
-
 - `FollowerTimeline.tsx` is a React/D3 island backed by `/api/fans?name=贝拉kira` and editorial events from `timeline-events.ts`. Development proxies the same-origin endpoint to the configured worker; production must provide `/api/fans` at the hosting layer.
 - The chart supports loading/error/retry states, nearest-sample pointer inspection, a seekable 12-second narrative playback, play/pause/replay, and editorial event callouts. The first visit auto-plays once; reduced-motion users see the completed chart.
 - Before a page wipe leaves the timeline, finish the visualization synchronously and stop its playback so no chart animation runs under the transition.
 
 ### 服装展示
 
-- The outfit archive is a closed horizontal ring. The active full-body cutout is dominant at center with two visible neighbors on each side, nonlinear depth falloff, raised foot baseline, attached reflection, and a star-filled elliptical stage.
+- The outfit archive is a closed horizontal ring. The active full-body cutout is dominant at center with two visible neighbors on each side, nonlinear depth falloff, a raised foot baseline, and a star-filled elliptical stage. Character cutouts do not render mirrored floor reflections.
 - Dragging or previous/next controls rotate the ring without reusing the page wipe. The selected wallpaper crossfades independently. Portrait wallpapers use a complete clear artwork layer over a dim blurred cover-fill backing; landscape entries remain full bleed.
-- Outfit names are not shown. Each entry needs only a character cutout plus its background and fit metadata. The current implementation repeats a small archive to maintain at least nine ring planes and lazy-loads distant character/reflection images through `data-src`.
-- Outfit cutouts under `public/assets/clothes/` are converted to versioned WebP assets by `npm run clothes:optimize`; commit the source images, optimized files, and manifest together.
+- Outfit names are not shown. Each entry needs only a character cutout plus its background and fit metadata. The ring maintains at least nine planes when the archive is small and lazy-loads distant character images through `data-src`.
+- Outfit cutouts under `public/assets/clothes/` and wallpapers under `public/assets/cloth_bg/` are converted to versioned WebP assets by `npm run clothes:optimize` and `npm run cloth-bg:optimize`; commit source images, optimized files, and manifests together.
 
 ### 推荐视频、表情包、画廊与同人文
 
@@ -114,14 +121,16 @@ When chapter order changes, update all of these together: `src/pages/index.astro
 
 ### 互动空间
 
-- The home chapter and `/games/` lobby render the same ordered entries from `interactive-experiences.ts`. There are currently 11 experiences: model stage, memory match, star hit, hair stop, stage puzzle, jigsaw puzzle, merge, link match, bubble shooter, listen-stars, and PetPet GIF maker.
+- The home chapter and `/games/` lobby render the same ordered visible entries from `interactive-experiences.ts`. There are currently 7 visible experiences: model stage, memory match, character assembly, stage puzzle, jigsaw puzzle, link match, and PetPet GIF maker. Star hit, listen-stars, merge, and Super Chat catch remain implemented but are temporarily hidden from both entry lists.
+- Character assembly keeps its legacy `/games/hair-stop/` route. Its source PSD files live under `public/assets/psd/`; browser-ready transparent parts and the assembly manifest live under `public/assets/character-assembly/`. User-facing source names are mapped from PSD filenames in `src/content/character-assembly-names.json`. Handwear, legwear, and footwear are split into independent left/right screen-side pieces during export. Face, nose, mouth, eye white, eyebrow, eyelash, and iris layers are combined into one recognizable `面部` piece per PSD; ears remain separate. The library exposes parts from every PSD together so players can mix sources freely, move, scale, rotate, delete, and reorder pieces while their transformed bounds stay inside the square assembly area. Players can multi-select with modifier-click, Ctrl/Cmd+A, or the touch-friendly multi-select mode; movement and toolbar transforms apply to the whole selection. A single selected piece can be deformed through a 3×3 mesh with nine draggable, keyboard-accessible control points. Ctrl/Cmd+Z and the visible undo control reverse canvas and mesh mutations. The current composition exports as a 1280×1280 transparent PNG with layer order, mesh deformation, rotation, and scale preserved. There is no target character, snap position, or completion judgment.
 - Each experience is a first-class route under `/games/<slug>/` with its own asset bundle and a `← 互动空间` return control. Do not iframe the current DOM/Canvas experiences. Engine-exported games may later use a site-owned shell and iframe when isolation is required.
 - The PMX model stage is a pose editor. Beginner mode exposes curated body parts, named poses, expressions, axis rotation, per-part reset, full reset, and help. Advanced mode exposes the complete source-order bone list, search, raw XYZ rotation, selected-bone skeleton highlighting, parent/child links, a projected label, and global/local axes.
 - PMX pose updates must solve all rotation grants, including leg D chains, arm/wrist twists, accessories, eyes, and waist-cancel bones. Camera instructions are input-specific: mouse language on desktop; one-finger rotate, pinch zoom, and two-finger pan on touch devices.
+- Super Chat catch reads editable preset messages from `src/content/superchat-catch.ts`. Each message owns its price and shame increase; six price tiers control the Bilibili-inspired card colors and spawn rarity. Wealth is the total caught value, while shame also rises passively so every run ends.
 
-## Standalone Notice and Rights
+## Notice and Rights
 
-- `/notice/` uses the kicker `SITE NOTICE · ABOUT THIS SITE` and two numbered sections: `01 版权与使用说明` and `02 建议与反馈`; it does not include an update-log section.
-- The `贝拉的舞台` card in `互动空间` uses the same tone-based abstract card background system as the other experiences; it does not use a photographic background image.
-- Updates are maintained in one data block and shown in a collapsed panel with bounded internal scrolling. The four rights/usage items form one two-by-two card grid. Feedback links to Bilibili UID `36733462`.
+- The final home chapter uses the kicker `SITE NOTICE · ABOUT THIS SITE` and two numbered sections: `01 版权与使用说明` and `02 建议与反馈`; it does not include an update-log section. `/notice/` is only a legacy redirect to `/#notice`.
+- The `贝拉姿势编辑器` card in `互动空间` uses the same tone-based abstract card background system as the other experiences; it does not use a photographic background image.
+- The four rights/usage items form one two-by-two card grid. Feedback links to Bilibili UID `36733462`.
 - Keep the notice explicit that this is an unofficial non-commercial project with no official affiliation. Official identities and media remain with their rights holders; credited fan works remain with their creators; PMX/MMD use follows bundled author rules and does not imply redistribution permission; fan fiction retains author attribution; rights holders may request correction, attribution, or removal.

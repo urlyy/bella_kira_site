@@ -1,14 +1,3 @@
-const ITEMS = [
-	{ icon: "★", name: "北极星" },
-	{ icon: "🎤", name: "舞台" },
-	{ icon: "🦙", name: "羊驼" },
-	{ icon: "🎀", name: "缎带" },
-	{ icon: "🌹", name: "玫瑰" },
-	{ icon: "🎧", name: "旋律" },
-	{ icon: "💜", name: "心意" },
-	{ icon: "🌙", name: "月光" },
-];
-
 const CONFIG = {
 	easy: { pairs: 4, columns: 4 },
 	normal: { pairs: 6, columns: 4 },
@@ -16,6 +5,7 @@ const CONFIG = {
 };
 
 const board = document.querySelector("#board");
+const ITEMS = JSON.parse(board.dataset.items || "[]");
 const template = document.querySelector("#cardTemplate");
 const movesEl = document.querySelector("#moves");
 const comboEl = document.querySelector("#combo");
@@ -23,6 +13,8 @@ const timeEl = document.querySelector("#time");
 const difficulty = document.querySelector("#difficulty");
 const modal = document.querySelector("#winModal");
 const soundButton = document.querySelector("#soundButton");
+const toast = document.querySelector("#gameToast");
+const toastMessage = document.querySelector("#toastMessage");
 
 let openCards = [];
 let matchedPairs = 0;
@@ -33,6 +25,16 @@ let timer = null;
 let locked = false;
 let soundOn = true;
 let audioContext = null;
+let toastTimer = 0;
+
+function showToast(message) {
+	window.clearTimeout(toastTimer);
+	toastMessage.textContent = message;
+	toast.classList.add("is-visible");
+	toastTimer = window.setTimeout(() => {
+		toast.classList.remove("is-visible");
+	}, 1900);
+}
 
 function shuffle(items) {
 	const result = [...items];
@@ -85,8 +87,10 @@ function createCard(item, id) {
 	card.dataset.pair = item.name;
 	card.dataset.id = id;
 	card.setAttribute("aria-label", "未翻开的卡牌");
-	card.querySelector("b").textContent = item.icon;
-	card.querySelector("small").textContent = item.name;
+	const image = card.querySelector("img");
+	image.src = item.src;
+	image.draggable = false;
+	image.decoding = "async";
 	card.addEventListener("click", () => flipCard(card));
 	return card;
 }
@@ -167,11 +171,15 @@ function newGame() {
 
 	const { pairs, columns } = CONFIG[difficulty.value];
 	board.style.setProperty("--columns", columns);
-	const deck = shuffle(ITEMS.slice(0, pairs).flatMap((item) => [item, item]));
+	const roundItems = shuffle(ITEMS).slice(0, pairs);
+	const deck = shuffle(roundItems.flatMap((item) => [item, item]));
 	deck.forEach((item, index) => board.append(createCard(item, index)));
 }
 
-document.querySelector("#restart").addEventListener("click", newGame);
+document.querySelector("#restart").addEventListener("click", () => {
+	newGame();
+	showToast("星光已经重新洗牌啦 ✦");
+});
 document.querySelector("#playAgain").addEventListener("click", newGame);
 difficulty.addEventListener("change", newGame);
 soundButton.addEventListener("click", () => {

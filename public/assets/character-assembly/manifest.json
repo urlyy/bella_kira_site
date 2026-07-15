@@ -1,0 +1,995 @@
+{
+	"version": 2,
+	"canvas": {
+		"width": 1280,
+		"height": 1280
+	},
+	"characters": [
+		{
+			"id": "baila",
+			"name": "白拉",
+			"source": "白拉.psd",
+			"preview": "/assets/character-assembly/baila/preview.webp",
+			"parts": [
+				{
+					"id": "back-hair",
+					"label": "后发",
+					"src": "/assets/character-assembly/baila/back-hair.webp",
+					"x": 475,
+					"y": 51,
+					"width": 337,
+					"height": 512,
+					"z": 1
+				},
+				{
+					"id": "handwear-left",
+					"label": "手部（画面左）",
+					"src": "/assets/character-assembly/baila/handwear-left.webp",
+					"x": 434,
+					"y": 272,
+					"width": 206,
+					"height": 430,
+					"z": 2
+				},
+				{
+					"id": "handwear-right",
+					"label": "手部（画面右）",
+					"src": "/assets/character-assembly/baila/handwear-right.webp",
+					"x": 640,
+					"y": 272,
+					"width": 214,
+					"height": 431,
+					"z": 2
+				},
+				{
+					"id": "neckwear",
+					"label": "颈饰",
+					"src": "/assets/character-assembly/baila/neckwear.webp",
+					"x": 597,
+					"y": 261,
+					"width": 95,
+					"height": 69,
+					"z": 3
+				},
+				{
+					"id": "legwear-left",
+					"label": "腿部（画面左）",
+					"src": "/assets/character-assembly/baila/legwear-left.webp",
+					"x": 540,
+					"y": 622,
+					"width": 98,
+					"height": 646,
+					"z": 4
+				},
+				{
+					"id": "legwear-right",
+					"label": "腿部（画面右）",
+					"src": "/assets/character-assembly/baila/legwear-right.webp",
+					"x": 645,
+					"y": 622,
+					"width": 102,
+					"height": 646,
+					"z": 4
+				},
+				{
+					"id": "bottomwear",
+					"label": "下装",
+					"src": "/assets/character-assembly/baila/bottomwear.webp",
+					"x": 332,
+					"y": 441,
+					"width": 614,
+					"height": 694,
+					"z": 5
+				},
+				{
+					"id": "neck",
+					"label": "颈部",
+					"src": "/assets/character-assembly/baila/neck.webp",
+					"x": 620,
+					"y": 187,
+					"width": 50,
+					"height": 77,
+					"z": 6
+				},
+				{
+					"id": "topwear",
+					"label": "上装",
+					"src": "/assets/character-assembly/baila/topwear.webp",
+					"x": 561,
+					"y": 224,
+					"width": 161,
+					"height": 269,
+					"z": 7
+				},
+				{
+					"id": "ears",
+					"label": "耳朵",
+					"src": "/assets/character-assembly/baila/ears.webp",
+					"x": 572,
+					"y": 157,
+					"width": 140,
+					"height": 38,
+					"z": 8
+				},
+				{
+					"id": "face",
+					"label": "面部",
+					"src": "/assets/character-assembly/baila/face.webp",
+					"x": 580,
+					"y": 55,
+					"width": 131,
+					"height": 177,
+					"z": 15
+				},
+				{
+					"id": "front-hair",
+					"label": "前发",
+					"src": "/assets/character-assembly/baila/front-hair.webp",
+					"x": 566,
+					"y": 61,
+					"width": 169,
+					"height": 227,
+					"z": 16
+				}
+			]
+		},
+		{
+			"id": "jiaran",
+			"name": "嘉然",
+			"source": "嘉然1.psd",
+			"preview": "/assets/character-assembly/jiaran/preview.webp",
+			"parts": [
+				{
+					"id": "back-hair",
+					"label": "后发",
+					"src": "/assets/character-assembly/jiaran/back-hair.webp",
+					"x": 437,
+					"y": 60,
+					"width": 411,
+					"height": 469,
+					"z": 1
+				},
+				{
+					"id": "tail",
+					"label": "尾巴",
+					"src": "/assets/character-assembly/jiaran/tail.webp",
+					"x": 620,
+					"y": 602,
+					"width": 44,
+					"height": 418,
+					"z": 2
+				},
+				{
+					"id": "handwear-left",
+					"label": "手部（画面左）",
+					"src": "/assets/character-assembly/jiaran/handwear-left.webp",
+					"x": 435,
+					"y": 288,
+					"width": 205,
+					"height": 413,
+					"z": 3
+				},
+				{
+					"id": "handwear-right",
+					"label": "手部（画面右）",
+					"src": "/assets/character-assembly/jiaran/handwear-right.webp",
+					"x": 640,
+					"y": 288,
+					"width": 210,
+					"height": 413,
+					"z": 3
+				},
+				{
+					"id": "legwear-left",
+					"label": "腿部（画面左）",
+					"src": "/assets/character-assembly/jiaran/legwear-left.webp",
+					"x": 531,
+					"y": 620,
+					"width": 109,
+					"height": 580,
+					"z": 4
+				},
+				{
+					"id": "legwear-right",
+					"label": "腿部（画面右）",
+					"src": "/assets/character-assembly/jiaran/legwear-right.webp",
+					"x": 640,
+					"y": 620,
+					"width": 114,
+					"height": 580,
+					"z": 4
+				},
+				{
+					"id": "bottomwear",
+					"label": "下装",
+					"src": "/assets/character-assembly/jiaran/bottomwear.webp",
+					"x": 524,
+					"y": 602,
+					"width": 239,
+					"height": 123,
+					"z": 5
+				},
+				{
+					"id": "neck",
+					"label": "颈部",
+					"src": "/assets/character-assembly/jiaran/neck.webp",
+					"x": 591,
+					"y": 212,
+					"width": 102,
+					"height": 130,
+					"z": 6
+				},
+				{
+					"id": "topwear",
+					"label": "上装",
+					"src": "/assets/character-assembly/jiaran/topwear.webp",
+					"x": 474,
+					"y": 272,
+					"width": 336,
+					"height": 418,
+					"z": 7
+				},
+				{
+					"id": "ears",
+					"label": "耳朵",
+					"src": "/assets/character-assembly/jiaran/ears.webp",
+					"x": 572,
+					"y": 185,
+					"width": 139,
+					"height": 33,
+					"z": 9
+				},
+				{
+					"id": "face",
+					"label": "面部",
+					"src": "/assets/character-assembly/jiaran/face.webp",
+					"x": 579,
+					"y": 106,
+					"width": 126,
+					"height": 155,
+					"z": 15
+				},
+				{
+					"id": "front-hair",
+					"label": "前发",
+					"src": "/assets/character-assembly/jiaran/front-hair.webp",
+					"x": 554,
+					"y": 13,
+					"width": 197,
+					"height": 375,
+					"z": 16
+				},
+				{
+					"id": "headwear",
+					"label": "头饰",
+					"src": "/assets/character-assembly/jiaran/headwear.webp",
+					"x": 553,
+					"y": 52,
+					"width": 204,
+					"height": 138,
+					"z": 17
+				}
+			]
+		},
+		{
+			"id": "nailin",
+			"name": "乃琳",
+			"source": "乃琳1.psd",
+			"preview": "/assets/character-assembly/nailin/preview.webp",
+			"parts": [
+				{
+					"id": "back-hair",
+					"label": "后发",
+					"src": "/assets/character-assembly/nailin/back-hair.webp",
+					"x": 476,
+					"y": 75,
+					"width": 341,
+					"height": 599,
+					"z": 1
+				},
+				{
+					"id": "headwear",
+					"label": "头饰",
+					"src": "/assets/character-assembly/nailin/headwear.webp",
+					"x": 529,
+					"y": 87,
+					"width": 221,
+					"height": 161,
+					"z": 2
+				},
+				{
+					"id": "neckwear",
+					"label": "颈饰",
+					"src": "/assets/character-assembly/nailin/neckwear.webp",
+					"x": 594,
+					"y": 286,
+					"width": 104,
+					"height": 73,
+					"z": 3
+				},
+				{
+					"id": "handwear-left",
+					"label": "手部（画面左）",
+					"src": "/assets/character-assembly/nailin/handwear-left.webp",
+					"x": 453,
+					"y": 300,
+					"width": 182,
+					"height": 454,
+					"z": 4
+				},
+				{
+					"id": "handwear-right",
+					"label": "手部（画面右）",
+					"src": "/assets/character-assembly/nailin/handwear-right.webp",
+					"x": 640,
+					"y": 300,
+					"width": 188,
+					"height": 454,
+					"z": 4
+				},
+				{
+					"id": "footwear-left",
+					"label": "脚部（画面左）",
+					"src": "/assets/character-assembly/nailin/footwear-left.webp",
+					"x": 571,
+					"y": 1106,
+					"width": 55,
+					"height": 174,
+					"z": 5
+				},
+				{
+					"id": "footwear-right",
+					"label": "脚部（画面右）",
+					"src": "/assets/character-assembly/nailin/footwear-right.webp",
+					"x": 657,
+					"y": 1106,
+					"width": 57,
+					"height": 174,
+					"z": 5
+				},
+				{
+					"id": "legwear-left",
+					"label": "腿部（画面左）",
+					"src": "/assets/character-assembly/nailin/legwear-left.webp",
+					"x": 534,
+					"y": 571,
+					"width": 106,
+					"height": 606,
+					"z": 6
+				},
+				{
+					"id": "legwear-right",
+					"label": "腿部（画面右）",
+					"src": "/assets/character-assembly/nailin/legwear-right.webp",
+					"x": 640,
+					"y": 571,
+					"width": 103,
+					"height": 603,
+					"z": 6
+				},
+				{
+					"id": "topwear",
+					"label": "上装",
+					"src": "/assets/character-assembly/nailin/topwear.webp",
+					"x": 487,
+					"y": 262,
+					"width": 329,
+					"height": 937,
+					"z": 7
+				},
+				{
+					"id": "neck",
+					"label": "颈部",
+					"src": "/assets/character-assembly/nailin/neck.webp",
+					"x": 616,
+					"y": 208,
+					"width": 59,
+					"height": 88,
+					"z": 8
+				},
+				{
+					"id": "earwear",
+					"label": "耳饰",
+					"src": "/assets/character-assembly/nailin/earwear.webp",
+					"x": 588,
+					"y": 219,
+					"width": 112,
+					"height": 53,
+					"z": 10
+				},
+				{
+					"id": "ears",
+					"label": "耳朵",
+					"src": "/assets/character-assembly/nailin/ears.webp",
+					"x": 565,
+					"y": 16,
+					"width": 164,
+					"height": 209,
+					"z": 11
+				},
+				{
+					"id": "face",
+					"label": "面部",
+					"src": "/assets/character-assembly/nailin/face.webp",
+					"x": 584,
+					"y": 96,
+					"width": 137,
+					"height": 166,
+					"z": 17
+				},
+				{
+					"id": "front-hair",
+					"label": "前发",
+					"src": "/assets/character-assembly/nailin/front-hair.webp",
+					"x": 575,
+					"y": 80,
+					"width": 160,
+					"height": 170,
+					"z": 18
+				}
+			]
+		},
+		{
+			"id": "xinyi",
+			"name": "心宜",
+			"source": "心宜1.psd",
+			"preview": "/assets/character-assembly/xinyi/preview.webp",
+			"parts": [
+				{
+					"id": "back-hair",
+					"label": "后发",
+					"src": "/assets/character-assembly/xinyi/back-hair.webp",
+					"x": 544,
+					"y": 8,
+					"width": 193,
+					"height": 199,
+					"z": 1
+				},
+				{
+					"id": "legwear-left",
+					"label": "腿部（画面左）",
+					"src": "/assets/character-assembly/xinyi/legwear-left.webp",
+					"x": 521,
+					"y": 586,
+					"width": 119,
+					"height": 691,
+					"z": 2
+				},
+				{
+					"id": "legwear-right",
+					"label": "腿部（画面右）",
+					"src": "/assets/character-assembly/xinyi/legwear-right.webp",
+					"x": 640,
+					"y": 586,
+					"width": 120,
+					"height": 691,
+					"z": 2
+				},
+				{
+					"id": "neck",
+					"label": "颈部",
+					"src": "/assets/character-assembly/xinyi/neck.webp",
+					"x": 615,
+					"y": 143,
+					"width": 51,
+					"height": 79,
+					"z": 3
+				},
+				{
+					"id": "bottomwear",
+					"label": "下装",
+					"src": "/assets/character-assembly/xinyi/bottomwear.webp",
+					"x": 472,
+					"y": 386,
+					"width": 332,
+					"height": 319,
+					"z": 4
+				},
+				{
+					"id": "handwear-left",
+					"label": "手部（画面左）",
+					"src": "/assets/character-assembly/xinyi/handwear-left.webp",
+					"x": 410,
+					"y": 249,
+					"width": 176,
+					"height": 568,
+					"z": 5
+				},
+				{
+					"id": "handwear-right",
+					"label": "手部（画面右）",
+					"src": "/assets/character-assembly/xinyi/handwear-right.webp",
+					"x": 691,
+					"y": 249,
+					"width": 179,
+					"height": 568,
+					"z": 5
+				},
+				{
+					"id": "topwear",
+					"label": "上装",
+					"src": "/assets/character-assembly/xinyi/topwear.webp",
+					"x": 446,
+					"y": 190,
+					"width": 389,
+					"height": 523,
+					"z": 6
+				},
+				{
+					"id": "ears",
+					"label": "耳朵",
+					"src": "/assets/character-assembly/xinyi/ears.webp",
+					"x": 568,
+					"y": 126,
+					"width": 143,
+					"height": 40,
+					"z": 7
+				},
+				{
+					"id": "headwear",
+					"label": "头饰",
+					"src": "/assets/character-assembly/xinyi/headwear.webp",
+					"x": 551,
+					"y": 26,
+					"width": 62,
+					"height": 126,
+					"z": 13
+				},
+				{
+					"id": "face",
+					"label": "面部",
+					"src": "/assets/character-assembly/xinyi/face.webp",
+					"x": 565,
+					"y": 58,
+					"width": 149,
+					"height": 140,
+					"z": 15
+				},
+				{
+					"id": "front-hair",
+					"label": "前发",
+					"src": "/assets/character-assembly/xinyi/front-hair.webp",
+					"x": 563,
+					"y": 10,
+					"width": 157,
+					"height": 174,
+					"z": 16
+				}
+			]
+		},
+		{
+			"id": "sinuo",
+			"name": "思诺",
+			"source": "思诺1.psd",
+			"preview": "/assets/character-assembly/sinuo/preview.webp",
+			"parts": [
+				{
+					"id": "back-hair",
+					"label": "后发",
+					"src": "/assets/character-assembly/sinuo/back-hair.webp",
+					"x": 470,
+					"y": 36,
+					"width": 352,
+					"height": 492,
+					"z": 1
+				},
+				{
+					"id": "handwear-left",
+					"label": "手部（画面左）",
+					"src": "/assets/character-assembly/sinuo/handwear-left.webp",
+					"x": 442,
+					"y": 281,
+					"width": 198,
+					"height": 418,
+					"z": 2
+				},
+				{
+					"id": "handwear-right",
+					"label": "手部（画面右）",
+					"src": "/assets/character-assembly/sinuo/handwear-right.webp",
+					"x": 640,
+					"y": 281,
+					"width": 204,
+					"height": 418,
+					"z": 2
+				},
+				{
+					"id": "legwear-left",
+					"label": "腿部（画面左）",
+					"src": "/assets/character-assembly/sinuo/legwear-left.webp",
+					"x": 534,
+					"y": 627,
+					"width": 106,
+					"height": 486,
+					"z": 3
+				},
+				{
+					"id": "legwear-right",
+					"label": "腿部（画面右）",
+					"src": "/assets/character-assembly/sinuo/legwear-right.webp",
+					"x": 640,
+					"y": 627,
+					"width": 113,
+					"height": 486,
+					"z": 3
+				},
+				{
+					"id": "footwear-left",
+					"label": "脚部（画面左）",
+					"src": "/assets/character-assembly/sinuo/footwear-left.webp",
+					"x": 570,
+					"y": 1094,
+					"width": 70,
+					"height": 178,
+					"z": 4
+				},
+				{
+					"id": "footwear-right",
+					"label": "脚部（画面右）",
+					"src": "/assets/character-assembly/sinuo/footwear-right.webp",
+					"x": 640,
+					"y": 1094,
+					"width": 75,
+					"height": 177,
+					"z": 4
+				},
+				{
+					"id": "neck",
+					"label": "颈部",
+					"src": "/assets/character-assembly/sinuo/neck.webp",
+					"x": 619,
+					"y": 187,
+					"width": 52,
+					"height": 78,
+					"z": 5
+				},
+				{
+					"id": "bottomwear",
+					"label": "下装",
+					"src": "/assets/character-assembly/sinuo/bottomwear.webp",
+					"x": 489,
+					"y": 412,
+					"width": 310,
+					"height": 295,
+					"z": 6
+				},
+				{
+					"id": "topwear",
+					"label": "上装",
+					"src": "/assets/character-assembly/sinuo/topwear.webp",
+					"x": 535,
+					"y": 228,
+					"width": 216,
+					"height": 197,
+					"z": 7
+				},
+				{
+					"id": "eyewear",
+					"label": "眼镜",
+					"src": "/assets/character-assembly/sinuo/eyewear.webp",
+					"x": 581,
+					"y": 154,
+					"width": 124,
+					"height": 37,
+					"z": 8
+				},
+				{
+					"id": "earwear",
+					"label": "耳饰",
+					"src": "/assets/character-assembly/sinuo/earwear.webp",
+					"x": 688,
+					"y": 192,
+					"width": 11,
+					"height": 56,
+					"z": 9
+				},
+				{
+					"id": "ears",
+					"label": "耳朵",
+					"src": "/assets/character-assembly/sinuo/ears.webp",
+					"x": 690,
+					"y": 165,
+					"width": 23,
+					"height": 36,
+					"z": 11
+				},
+				{
+					"id": "face",
+					"label": "面部",
+					"src": "/assets/character-assembly/sinuo/face.webp",
+					"x": 582,
+					"y": 70,
+					"width": 122,
+					"height": 165,
+					"z": 17
+				},
+				{
+					"id": "front-hair",
+					"label": "前发",
+					"src": "/assets/character-assembly/sinuo/front-hair.webp",
+					"x": 566,
+					"y": 56,
+					"width": 153,
+					"height": 215,
+					"z": 18
+				},
+				{
+					"id": "headwear",
+					"label": "头饰",
+					"src": "/assets/character-assembly/sinuo/headwear.webp",
+					"x": 557,
+					"y": 31,
+					"width": 173,
+					"height": 121,
+					"z": 19
+				}
+			]
+		},
+		{
+			"id": "squirrel",
+			"name": "松鼠",
+			"source": "松鼠.psd",
+			"preview": "/assets/character-assembly/squirrel/preview.webp",
+			"parts": [
+				{
+					"id": "back-hair",
+					"label": "后发",
+					"src": "/assets/character-assembly/squirrel/back-hair.webp",
+					"x": 468,
+					"y": 89,
+					"width": 346,
+					"height": 581,
+					"z": 1
+				},
+				{
+					"id": "handwear-left",
+					"label": "手部（画面左）",
+					"src": "/assets/character-assembly/squirrel/handwear-left.webp",
+					"x": 419,
+					"y": 312,
+					"width": 204,
+					"height": 440,
+					"z": 2
+				},
+				{
+					"id": "handwear-right",
+					"label": "手部（画面右）",
+					"src": "/assets/character-assembly/squirrel/handwear-right.webp",
+					"x": 646,
+					"y": 312,
+					"width": 214,
+					"height": 440,
+					"z": 2
+				},
+				{
+					"id": "legwear-left",
+					"label": "腿部（画面左）",
+					"src": "/assets/character-assembly/squirrel/legwear-left.webp",
+					"x": 532,
+					"y": 683,
+					"width": 108,
+					"height": 552,
+					"z": 3
+				},
+				{
+					"id": "legwear-right",
+					"label": "腿部（画面右）",
+					"src": "/assets/character-assembly/squirrel/legwear-right.webp",
+					"x": 640,
+					"y": 683,
+					"width": 108,
+					"height": 551,
+					"z": 3
+				},
+				{
+					"id": "bottomwear",
+					"label": "下装",
+					"src": "/assets/character-assembly/squirrel/bottomwear.webp",
+					"x": 512,
+					"y": 619,
+					"width": 256,
+					"height": 149,
+					"z": 4
+				},
+				{
+					"id": "neck",
+					"label": "颈部",
+					"src": "/assets/character-assembly/squirrel/neck.webp",
+					"x": 611,
+					"y": 235,
+					"width": 61,
+					"height": 88,
+					"z": 5
+				},
+				{
+					"id": "topwear",
+					"label": "上装",
+					"src": "/assets/character-assembly/squirrel/topwear.webp",
+					"x": 512,
+					"y": 267,
+					"width": 254,
+					"height": 397,
+					"z": 6
+				},
+				{
+					"id": "ears",
+					"label": "耳朵",
+					"src": "/assets/character-assembly/squirrel/ears.webp",
+					"x": 685,
+					"y": 213,
+					"width": 23,
+					"height": 33,
+					"z": 8
+				},
+				{
+					"id": "face",
+					"label": "面部",
+					"src": "/assets/character-assembly/squirrel/face.webp",
+					"x": 580,
+					"y": 130,
+					"width": 121,
+					"height": 152,
+					"z": 14
+				},
+				{
+					"id": "front-hair",
+					"label": "前发",
+					"src": "/assets/character-assembly/squirrel/front-hair.webp",
+					"x": 558,
+					"y": 104,
+					"width": 165,
+					"height": 225,
+					"z": 15
+				}
+			]
+		},
+		{
+			"id": "penguin",
+			"name": "企鹅",
+			"source": "企鹅.psd",
+			"preview": "/assets/character-assembly/penguin/preview.webp",
+			"parts": [
+				{
+					"id": "back-hair",
+					"label": "后发",
+					"src": "/assets/character-assembly/penguin/back-hair.webp",
+					"x": 467,
+					"y": 26,
+					"width": 343,
+					"height": 496,
+					"z": 1
+				},
+				{
+					"id": "handwear-left",
+					"label": "手部（画面左）",
+					"src": "/assets/character-assembly/penguin/handwear-left.webp",
+					"x": 427,
+					"y": 268,
+					"width": 213,
+					"height": 443,
+					"z": 2
+				},
+				{
+					"id": "handwear-right",
+					"label": "手部（画面右）",
+					"src": "/assets/character-assembly/penguin/handwear-right.webp",
+					"x": 640,
+					"y": 268,
+					"width": 212,
+					"height": 443,
+					"z": 2
+				},
+				{
+					"id": "footwear-left",
+					"label": "脚部（画面左）",
+					"src": "/assets/character-assembly/penguin/footwear-left.webp",
+					"x": 573,
+					"y": 1096,
+					"width": 67,
+					"height": 182,
+					"z": 3
+				},
+				{
+					"id": "footwear-right",
+					"label": "脚部（画面右）",
+					"src": "/assets/character-assembly/penguin/footwear-right.webp",
+					"x": 640,
+					"y": 1096,
+					"width": 66,
+					"height": 182,
+					"z": 3
+				},
+				{
+					"id": "legwear-left",
+					"label": "腿部（画面左）",
+					"src": "/assets/character-assembly/penguin/legwear-left.webp",
+					"x": 533,
+					"y": 633,
+					"width": 107,
+					"height": 472,
+					"z": 4
+				},
+				{
+					"id": "legwear-right",
+					"label": "腿部（画面右）",
+					"src": "/assets/character-assembly/penguin/legwear-right.webp",
+					"x": 640,
+					"y": 633,
+					"width": 107,
+					"height": 472,
+					"z": 4
+				},
+				{
+					"id": "neck",
+					"label": "颈部",
+					"src": "/assets/character-assembly/penguin/neck.webp",
+					"x": 611,
+					"y": 172,
+					"width": 58,
+					"height": 91,
+					"z": 5
+				},
+				{
+					"id": "bottomwear",
+					"label": "下装",
+					"src": "/assets/character-assembly/penguin/bottomwear.webp",
+					"x": 472,
+					"y": 464,
+					"width": 337,
+					"height": 297,
+					"z": 6
+				},
+				{
+					"id": "topwear",
+					"label": "上装",
+					"src": "/assets/character-assembly/penguin/topwear.webp",
+					"x": 536,
+					"y": 249,
+					"width": 206,
+					"height": 226,
+					"z": 7
+				},
+				{
+					"id": "ears",
+					"label": "耳朵",
+					"src": "/assets/character-assembly/penguin/ears.webp",
+					"x": 570,
+					"y": 149,
+					"width": 137,
+					"height": 41,
+					"z": 8
+				},
+				{
+					"id": "headwear",
+					"label": "头饰",
+					"src": "/assets/character-assembly/penguin/headwear.webp",
+					"x": 548,
+					"y": 31,
+					"width": 188,
+					"height": 118,
+					"z": 13
+				},
+				{
+					"id": "face",
+					"label": "面部",
+					"src": "/assets/character-assembly/penguin/face.webp",
+					"x": 575,
+					"y": 62,
+					"width": 130,
+					"height": 172,
+					"z": 16
+				},
+				{
+					"id": "front-hair",
+					"label": "前发",
+					"src": "/assets/character-assembly/penguin/front-hair.webp",
+					"x": 560,
+					"y": 50,
+					"width": 165,
+					"height": 232,
+					"z": 17
+				}
+			]
+		}
+	]
+}

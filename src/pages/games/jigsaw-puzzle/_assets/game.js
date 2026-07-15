@@ -3,17 +3,17 @@ const XLINK_NS = "http://www.w3.org/1999/xlink";
 const IMAGE_LIBRARY = [
 	{
 		id: "birthday-poster",
-		title: "2026 生日舞台海报",
+		title: "六周年生日会海报",
 		source: "/assets/optimized/game-bg.webp",
 	},
 	{
 		id: "bella-stage",
-		title: "贝拉舞台写真",
+		title: "土豆雷-1",
 		source: "/assets/optimized/pet-stage.webp",
 	},
 	{
 		id: "bella-moment",
-		title: "贝拉光影片段",
+		title: "土豆雷-2",
 		source: "/assets/optimized/pet-light.webp",
 	},
 ];

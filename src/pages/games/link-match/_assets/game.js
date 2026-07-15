@@ -1,38 +1,29 @@
 const ROWS = 6,
-	COLS = 8,
-	ICONS = [
-		"★",
-		"♥",
-		"铃",
-		"羊",
-		"北",
-		"贝",
-		"拉",
-		"✦",
-		"月",
-		"♪",
-		"羽",
-		"花",
-	];
+	COLS = 8;
 let grid,
 	selected = null,
 	seconds = 180,
 	timer,
 	running = false;
 const board = document.querySelector("#board"),
+	items = JSON.parse(board.dataset.items || "[]"),
 	leftEl = document.querySelector("#left"),
 	timeEl = document.querySelector("#time"),
 	svg = document.querySelector("#path");
 function shuffled(a) {
-	return [...a].sort(() => Math.random() - 0.5);
+	const result = [...a];
+	for (let i = result.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[result[i], result[j]] = [result[j], result[i]];
+	}
+	return result;
 }
 function format(s) {
 	return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 }
 function makeGrid() {
-	const values = [];
-	for (let i = 0; i < (ROWS * COLS) / 2; i++)
-		values.push(ICONS[i % ICONS.length], ICONS[i % ICONS.length]);
+	const roundItems = shuffled(items).slice(0, (ROWS * COLS) / 2),
+		values = roundItems.flatMap((item) => [item, item]);
 	const mix = shuffled(values);
 	grid = Array.from({ length: ROWS + 2 }, () => Array(COLS + 2).fill(null));
 	for (let r = 1; r <= ROWS; r++)
@@ -43,7 +34,16 @@ function render() {
 	for (let r = 1; r <= ROWS; r++)
 		for (let c = 1; c <= COLS; c++) {
 			const b = document.createElement("button");
-			b.textContent = grid[r][c] || "";
+			const item = grid[r][c];
+			if (item) {
+				const image = document.createElement("img");
+				image.src = item.src;
+				image.alt = "";
+				image.draggable = false;
+				image.decoding = "async";
+				b.append(image);
+				b.setAttribute("aria-label", item.name);
+			}
 			b.className = grid[r][c] ? "" : "empty";
 			b.dataset.r = r;
 			b.dataset.c = c;
@@ -97,14 +97,19 @@ function pathBetween(a, b) {
 }
 function drawPath(points) {
 	const wrap = document.querySelector(".board-wrap").getBoundingClientRect(),
-		buttons = [...board.children];
+		boardRect = board.getBoundingClientRect(),
+		buttons = [...board.children],
+		cell = buttons[0].getBoundingClientRect(),
+		boardStyle = window.getComputedStyle(board),
+		columnGap = Number.parseFloat(boardStyle.columnGap) || 0,
+		rowGap = Number.parseFloat(boardStyle.rowGap) || 0;
 	const coords = points.map((p) => {
 		if (p.r === 0 || p.r === ROWS + 1 || p.c === 0 || p.c === COLS + 1) {
-			const cell = buttons[0].getBoundingClientRect(),
-				gap = 6;
 			return [
-				(p.c - 0.5) * (cell.width + gap) + 42,
-				(p.r - 0.5) * (cell.height + gap) + 42,
+				boardRect.left -
+					wrap.left +
+					(p.c - 0.5) * (cell.width + columnGap),
+				boardRect.top - wrap.top + (p.r - 0.5) * (cell.height + rowGap),
 			];
 		}
 		const el = board.querySelector(`[data-r="${p.r}"][data-c="${p.c}"]`),
@@ -132,7 +137,7 @@ function choose(r, c, el) {
 	const first = selected;
 	first.el.classList.remove("selected");
 	selected = null;
-	if (grid[first.r][first.c] !== grid[r][c]) return;
+	if (grid[first.r][first.c].src !== grid[r][c].src) return;
 	const path = pathBetween(first, { r, c });
 	if (!path) return;
 	drawPath(path);
@@ -149,7 +154,7 @@ function findPair() {
 					for (let cc = 1; cc <= COLS; cc++)
 						if (
 							(rr !== r || cc !== c) &&
-							grid[rr][cc] === grid[r][c] &&
+							grid[rr][cc].src === grid[r][c].src &&
 							pathBetween({ r, c }, { r: rr, c: cc })
 						)
 							return [

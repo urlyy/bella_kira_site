@@ -293,16 +293,6 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
 								draggable="false"
 							/>
 						</span>
-						<span class="outfit-reflection" aria-hidden="true">
-							<img
-								data-src={item.image}
-								alt=""
-								width={item.width}
-								height={item.height}
-								decoding="async"
-								draggable="false"
-							/>
-						</span>
 					</button>
 				))
 			}
@@ -1175,51 +1165,10 @@ const ringItems = Array.from({ length: ringSize }, (_, slot) => ({
 		box-shadow: 0 0 24px rgba(219, 125, 116, 0.25);
 	}
 	.outfit-figure,
-	.outfit-reflection,
-	.outfit-figure img,
-	.outfit-reflection img {
+	.outfit-figure img {
 		-webkit-user-drag: none;
 		-webkit-user-select: none;
 		user-select: none;
-	}
-
-	.outfit-reflection {
-		position: absolute;
-		z-index: -1;
-		top: calc(100% - var(--outfit-foot-gap) + 2px);
-		left: 50%;
-		width: 100%;
-		height: 32%;
-		translate: -50% 0;
-		overflow: hidden;
-		opacity: 0.18;
-		transform: scaleY(-1);
-		transform-origin: top;
-		filter: blur(1px);
-		mask-image: linear-gradient(
-			to bottom,
-			rgba(0, 0, 0, 0.72),
-			transparent 80%
-		);
-		pointer-events: none;
-	}
-	.outfit-reflection img {
-		display: block;
-		width: auto;
-		height: min(73vh, 313%);
-		max-width: none;
-		margin: 0 auto;
-		object-fit: contain;
-		object-position: center bottom;
-		opacity: 0;
-		transform: translateY(-68%);
-		transition: opacity 0.38s ease;
-	}
-	.outfit-reflection img.is-ready {
-		opacity: 1;
-	}
-	.outfit-plane.is-behind .outfit-reflection {
-		opacity: 0;
 	}
 
 	.outfit-arrow {

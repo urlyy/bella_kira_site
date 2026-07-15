@@ -1,7 +1,10 @@
 ---
+import characterAssemblyNames from "../../../content/character-assembly-names.json";
 import shellUrl from "../_shared/game-shell.css?url";
 import styleUrl from "./_assets/style.css?url";
 import gameUrl from "./_assets/game.js?url";
+
+const characterAssemblyNamesJson = JSON.stringify(characterAssemblyNames);
 ---
 
 <!doctype html>
@@ -10,83 +13,236 @@ import gameUrl from "./_assets/game.js?url";
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#10091f" />
-		<title>飞发暂停 · 贝拉发型截图机</title>
+		<title>枝江拼装室 · 自由角色拼装</title>
+		<script is:inline>
+			try {
+				const savedTheme = localStorage.getItem("bella-kira-theme");
+				document.documentElement.dataset.theme =
+					savedTheme === "light" ? "light" : "dark";
+			} catch {
+				document.documentElement.dataset.theme = "dark";
+			}
+		</script>
 		<link rel="stylesheet" href={styleUrl} />
 		<link rel="stylesheet" href={shellUrl} />
 	</head>
 	<body>
 		<main class="page">
-			<header>
-				<p class="kicker">BELLA KIRA · HAIR FREEZE</p>
-				<h1>飞发暂停</h1>
-				<p>
-					发型依次从右侧飞入、从左侧飞出，点一下只留下离贝拉最近的那顶。
-				</p>
+			<header class="game-header">
+				<div>
+					<p class="kicker">CHARACTER ASSEMBLY · ZHIJIANG WORKSHOP</p>
+					<h1>枝江拼装室</h1>
+					<p class="intro">
+						点选组件加入画布，再在限定拼装区里随意移动、叠放。
+					</p>
+				</div>
+				<button class="theme-toggle" id="theme-toggle" type="button">
+					<span aria-hidden="true">☾</span><b>切换浅色</b>
+				</button>
 			</header>
 
-			<section class="layout">
-				<aside class="glass left-glass" aria-hidden="true">
-					<span>01</span><i></i><i></i><i></i>
-					<b>HAIR<br />STREAM</b>
+			<section class="game-layout" aria-label="自由角色组件拼装游戏">
+				<aside class="panel filter-panel">
+					<div class="panel-heading">
+						<span>01</span>
+						<div>
+							<small>FILTER</small>
+							<h2>筛选组件</h2>
+						</div>
+					</div>
+					<div class="filter-group">
+						<strong>来源</strong>
+						<div
+							class="filter-options source-filters"
+							id="source-filters"
+							role="group"
+							aria-label="按角色来源筛选"
+						>
+						</div>
+					</div>
+					<div class="filter-group">
+						<strong>部位</strong>
+						<div
+							class="filter-options category-filters"
+							id="category-filters"
+							role="group"
+							aria-label="按部位筛选"
+						>
+						</div>
+					</div>
+					<div class="play-notes">
+						<p><b>1</b><span>点选任意来源的组件加入画布</span></p>
+						<p><b>2</b><span>多选后可统一移动、缩放和旋转</span></p>
+						<p>
+							<b>3</b><span>单选组件，用 3×3 网格自由变形</span>
+						</p>
+						<p><b>4</b><span>Ctrl / ⌘ + Z 撤销上一步</span></p>
+					</div>
 				</aside>
 
-				<section class="game-card" aria-label="飞发暂停游戏">
-					<div class="topbar">
+				<section class="assembly-card" aria-labelledby="assembly-title">
+					<div class="assembly-topbar">
 						<div>
-							<span class="live-dot"></span><b id="status"
-								>高速循环中</b
-							>
+							<span class="status-dot" aria-hidden="true"></span>
+							<b id="assembly-title">自由拼装中</b>
 						</div>
-						<span id="hairCount">LOOK 01</span>
+						<span id="piece-count">画布 00 件</span>
 					</div>
 
-					<button
-						class="scene"
-						id="scene"
-						type="button"
-						aria-label="点击暂停并保留最近的头发"
-					>
-						<div class="speed-lines"></div>
-						<div class="stream" id="stream" aria-hidden="true">
-						</div>
-						<div class="bella" aria-hidden="true">
-							<div class="head">
-								<i></i><i></i><span class="eye left"
-								></span><span class="eye right"></span><span
-									class="mouth"></span>
-							</div>
-							<div class="neck"></div><div class="body">
+					<div class="board-shell">
+						<div
+							class="assembly-board"
+							id="assembly-board"
+							aria-label="限定自由拼装区域"
+						>
+							<div class="board-grid" aria-hidden="true"></div>
+							<div class="piece-stage" id="piece-stage"></div>
+							<div class="board-empty" id="board-empty">
 								<span>✦</span>
+								<b>从组件库挑选第一件部件</b>
+								<small>不同角色的组件可以随意混搭</small>
 							</div>
 						</div>
-						<div class="freeze-flash" id="freezeFlash"></div>
-						<div class="scene-label">
-							<span id="sceneHint">点击画面暂停</span><small
-								>或按空格键</small
-							>
-						</div>
-					</button>
+						<span class="boundary-label"
+							>ASSEMBLY AREA · 仅限框内</span
+						>
+					</div>
 
-					<div class="bottom-note">
-						<span>暂停后可直接截图</span>
-						<button id="toggle" type="button">暂停</button>
+					<div class="assembly-controls">
+						<p id="selection-label" aria-live="polite">
+							尚未选中画布组件
+						</p>
+						<div class="layer-controls" id="layer-controls">
+							<div
+								class="control-group"
+								role="group"
+								aria-label="选择与历史"
+							>
+								<button id="undo-button" type="button" disabled
+									>撤销</button
+								>
+								<button
+									id="multi-select-toggle"
+									type="button"
+									aria-pressed="false"
+								>
+									多选
+								</button>
+								<button
+									id="mesh-toggle"
+									type="button"
+									aria-pressed="false"
+									disabled
+								>
+									3×3 网格
+								</button>
+							</div>
+							<div
+								class="control-group"
+								role="group"
+								aria-label="图层顺序"
+							>
+								<button
+									data-action="back"
+									type="button"
+									disabled>下移一层</button
+								>
+								<button
+									data-action="front"
+									type="button"
+									disabled>上移一层</button
+								>
+							</div>
+							<div
+								class="control-group"
+								role="group"
+								aria-label="变换组件"
+							>
+								<button
+									data-action="restore"
+									type="button"
+									disabled>复位</button
+								>
+								<button
+									data-action="shrink"
+									type="button"
+									disabled>缩小</button
+								>
+								<button
+									data-action="grow"
+									type="button"
+									disabled>放大</button
+								>
+								<button
+									data-action="rotate-left"
+									type="button"
+									disabled>左转</button
+								>
+								<button
+									data-action="rotate-right"
+									type="button"
+									disabled>右转</button
+								>
+							</div>
+							<div
+								class="control-group control-group-output"
+								role="group"
+								aria-label="删除与导出"
+							>
+								<button
+									data-action="delete"
+									type="button"
+									disabled>删除</button
+								>
+								<button
+									id="export-button"
+									type="button"
+									disabled>导出 PNG</button
+								>
+								<button id="clear-button" type="button"
+									>清空画布</button
+								>
+							</div>
+						</div>
 					</div>
 				</section>
 
-				<aside class="glass right-glass">
-					<p class="kicker">HOW TO PLAY</p>
-					<strong>看准喜欢的发型</strong>
-					<p>点击暂停后，系统只保留最接近人物的一顶发型。</p>
-					<div class="keys">
-						<kbd>SPACE</kbd><span>暂停 / 继续</span>
+				<aside class="panel parts-panel">
+					<div class="panel-heading">
+						<span>02</span>
+						<div>
+							<small>MIX &amp; MATCH</small>
+							<h2>组件库</h2>
+						</div>
 					</div>
-					<div class="glass-orb"></div>
+					<p class="parts-hint">
+						<span id="library-count">0 个可选组件</span> · 点一下即可加入画布
+					</p>
+					<div class="parts-list" id="parts-list"></div>
 				</aside>
 			</section>
 		</main>
+
+		<div
+			class="game-toast"
+			id="game-toast"
+			role="status"
+			aria-live="polite"
+			aria-atomic="true"
+		>
+			<img src="/assets/贝极星.png" alt="" draggable="false" />
+			<span id="toast-message"></span>
+		</div>
+
 		<a class="site-return" href="/games/" aria-label="返回互动空间"
 			>← 互动空间</a
 		>
+		<script
+			is:inline
+			id="character-name-map"
+			type="application/json"
+			set:html={characterAssemblyNamesJson}
+		/>
 		<script is:inline src={gameUrl}></script>
 	</body>
 </html>

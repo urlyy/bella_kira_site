@@ -1,7 +1,7 @@
 const IMAGE_LIBRARY = [
 	{
 		id: "birthday-poster",
-		title: "2026 生日舞台海报",
+		title: "六周年生日会海报",
 		source: "/assets/optimized/game-bg.webp",
 	},
 	// 后续图片：{ id: "唯一名称", title: "显示名称", source: "图片路径" }

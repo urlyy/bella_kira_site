@@ -175,7 +175,7 @@ window.addEventListener("pagehide", () => {
 	if (downloadUrl) URL.revokeObjectURL(downloadUrl);
 });
 
-void selectSource(preset.value, "贝拉舞台写真");
+void selectSource(preset.value, "土豆雷-1");
 void waitForHands().catch((error: Error) => {
 	status.textContent = error.message;
 });
