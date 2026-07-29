@@ -596,6 +596,7 @@
 	color: #6b5771;
 	font-size: 12px;
 	line-height: 1.68;
+	white-space: pre-line;
 }
 .timeline-event-card.is-upcoming {
 	border-left-color: #7d5aaa;

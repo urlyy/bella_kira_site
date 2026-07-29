@@ -500,7 +500,36 @@ export const timelineEvents: TimelineEvent[] = [
 		id: "sixth-birthday-live",
 		date: "2026-07-25",
 		title: "六周年生日会《八音盒少女》",
+		description: `（万舰达成）
+［贝拉kira］下播了
+标题：【贝拉生日会】八音盒少女
+时长：3h27m54s｜大小：10.42 GB
+互动人数：17.7k｜弹幕：195.4k
+新增舰长：9691 ｜ 提督：230 ｜ 总督：31
+SC数量 ： 845｜ 金额：¥72772
+总营收：¥2780338
+时间：2026-07-25 23:14:42`,
+		links: [
+			{
+				label: "观看视频",
+				url: "https://www.bilibili.com/video/BV1S23G6UEW2",
+			},
+			{
+				label: "观看视频",
+				url: "https://www.bilibili.com/video/BV1AB3F6qE5H",
+			},
+		],
+	},
+	{
+		id: "xia-zhong-jing-hong",
+		date: "2026-07-29",
+		title: "收藏集《贝拉的冒险DLC-匣中惊鸿》发售",
 		description: "",
-		status: "upcoming",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://www.bilibili.com/opus/1230070045807214598",
+			},
+		],
 	},
 ];
