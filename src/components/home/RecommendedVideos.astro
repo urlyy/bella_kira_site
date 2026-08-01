@@ -17,21 +17,15 @@ const collections = videoData.collections as Array<{
 }>;
 
 const coverManifest = coverManifestData as {
-	images: Record<string, { outputHash: string }>;
+	images: Record<string, { output: string; outputHash: string }>;
 };
 
 const optimizedCover = (cover: string) => {
 	const sourceName = cover.split("/").at(-1) ?? "";
-	const optimizedPath = cover
-		.replace(
-			"/assets/recommended-videos/covers/",
-			"/assets/optimized/recommended-covers/",
-		)
-		.replace(/\.(?:png|jpe?g)$/i, ".webp");
-	const outputHash = coverManifest.images[sourceName]?.outputHash;
-	return outputHash
-		? `${optimizedPath}?v=${outputHash.slice(0, 12)}`
-		: optimizedPath;
+	const optimized = coverManifest.images[sourceName];
+	if (!optimized) return cover;
+
+	return `/assets/optimized/recommended-covers/${optimized.output}?v=${optimized.outputHash.slice(0, 12)}`;
 };
 ---
 

@@ -16,6 +16,11 @@
 			"output": "25年生日服.webp",
 			"outputHash": "50257631aec39db063a2480ad49ac2fed49efadce96d6df2f698bff42b8faf12"
 		},
+		"26年生日会.png": {
+			"sourceHash": "e69c9b75a6c8637c41883f7d5e1a875c587e99636f599a9af0d07970dcacb5fc",
+			"output": "26年生日会.webp",
+			"outputHash": "b9b05fa169224639f2bf90aa6d368d0c5c52a4a6e00dc065bbfe380089a10bcb"
+		},
 		"白拉.png": {
 			"sourceHash": "412d57fcbe572ebc46dd50d7ef940d832192ee7fdabac4d7e83facf74372a5f4",
 			"output": "白拉.webp",
@@ -30,6 +35,11 @@
 			"sourceHash": "5f6aaf10b723d98483d70ff271f6551de013f554fd4064c1010627918630a608",
 			"output": "常服.webp",
 			"outputHash": "f89c77331b668523b5e117414cab13a223677d1862dcf3cb4c2bbef35deddae4"
+		},
+		"二周年团服.png": {
+			"sourceHash": "05a0d8a8635a58e374f1708452186828ec19f1829fcab7eca0a1bf89fd92a8b3",
+			"output": "二周年团服.webp",
+			"outputHash": "07d911926d9ba2f2d941ce4068241a447ed9acd141375c810368db3e74a855ba"
 		},
 		"黑白运动服.png": {
 			"sourceHash": "b1688d8720d86fc501736aedec756aa589f02e97087f24517b6846f414870ceb",

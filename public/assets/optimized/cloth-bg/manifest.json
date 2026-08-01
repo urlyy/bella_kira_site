@@ -6,14 +6,19 @@
 	},
 	"images": {
 		"22生日会.png": {
-			"sourceHash": "52011300038264f0f76c79eba8c40b6027dbe78021e7adafb79bd0bf3937d6a6",
+			"sourceHash": "bca5a75bd0878e9b9f6dc58a1c4f8be0a97796a5837a8758b3698211e03c0430",
 			"output": "22生日会.webp",
-			"outputHash": "1f278df93ceace0a0bfe8281509b7a8f34454cbe493a7fc3157fe029765a24fe"
+			"outputHash": "5adc0ebf1b2cffd677d4c13cc4c3bc87c11e46d1b55d36bc5e2c117be4450ed8"
 		},
 		"25生日会.png": {
 			"sourceHash": "02fed9c5b6b17eadd85aee1782056b29d24da9c3ebe5b0dceec83673a34881ac",
 			"output": "25生日会.webp",
 			"outputHash": "4327bb100be6606227dad3a06dccde8c60047505d395d25fc9228d2a8b21d91c"
+		},
+		"26年生日会.png": {
+			"sourceHash": "e7bbb2456499b280fbb5b1a883b23746b15e6cee50fad48e7efdfd5099a01f69",
+			"output": "26年生日会.webp",
+			"outputHash": "716e742aeae9fe6aed09ec17c56dfee559afb340528a42755a0ee5b682503ebf"
 		},
 		"白拉.jpg": {
 			"sourceHash": "b1eeb3030c452bf2fa5a610199491414353a4ec232d28505a7eb6b66d864f937",
@@ -29,6 +34,11 @@
 			"sourceHash": "d52b5f0a8e0e036ef616343102b67ff206030652af4871593ee97302a1167450",
 			"output": "常服.webp",
 			"outputHash": "8f0f5db1d3e1c900ede963cb05cb8ed7870fbc289db2a4f26a38fc2bac35daba"
+		},
+		"二周年团服.png": {
+			"sourceHash": "d3b9708a5694598f67a71a4462d2ee147b20b00667092f9c48f207e6419b111d",
+			"output": "二周年团服.webp",
+			"outputHash": "5b2a588731dbf620542c23d035938e66681a2cbd73a1762675242383c6990bb0"
 		},
 		"黑白运动服.png": {
 			"sourceHash": "d929368362c0776bb463e7edba197e50ac703c8d93bfd055993d23ae1a39252d",

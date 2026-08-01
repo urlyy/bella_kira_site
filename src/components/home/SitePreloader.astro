@@ -79,6 +79,8 @@
 	if (preloader && root.classList.contains("is-site-preloading")) {
 		const startedAt = performance.now();
 		const video = document.querySelector<HTMLVideoElement>(".hero-video");
+		video?.pause();
+		if (video) video.currentTime = 0;
 		const outfitSources = Array.from(
 			document.querySelectorAll<HTMLImageElement>(
 				".outfit-page img[data-src]",
@@ -200,8 +202,14 @@
 				sessionStorage.setItem("bella-site-preloaded-v1", "1");
 			} catch {}
 			window.dispatchEvent(new CustomEvent("bella:preloadcomplete"));
-			if (window.location.hash === "" || window.location.hash === "#home")
-				void video?.play().catch(() => undefined);
+			if (
+				video &&
+				(window.location.hash === "" ||
+					window.location.hash === "#home")
+			) {
+				video.currentTime = 0;
+				void video.play().catch(() => undefined);
+			}
 			window.setTimeout(() => preloader.remove(), 760);
 		});
 	}

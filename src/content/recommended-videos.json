@@ -179,6 +179,12 @@
 			"title": "直播神回",
 			"items": [
 				{
+					"cover": "/assets/recommended-videos/covers/杂谈复盘.png",
+					"title": "【A-SOUL】贝拉 2026.6.18 复盘一下杂谈栏目【直播录像】",
+					"url": "https://www.bilibili.com/video/BV18Qjw6PE4y",
+					"publishedAt": "2026-06-18"
+				},
+				{
 					"cover": "/assets/recommended-videos/covers/羞死.png",
 					"title": "【A-SOUL双播】贝拉&乃琳 2026.1.16 羞死了【直播录像】",
 					"url": "https://www.bilibili.com/video/BV1y2rCBNEdh",

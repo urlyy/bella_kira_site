@@ -95,6 +95,8 @@
 
 	const playHeroVideo = () => {
 		if (!heroVideo || userPausedHero) return;
+		if (document.documentElement.classList.contains("is-site-preloading"))
+			return;
 		if (!heroVideo.paused) return;
 		void heroVideo.play().catch(() => {
 			// Browsers may still reject scripted playback despite the muted video.
