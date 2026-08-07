@@ -17,15 +17,6 @@ export const interactiveExperiences = [
 		tone: "violet",
 	},
 	{
-		slug: "star-hit",
-		title: "应援接接乐",
-		eyebrow: "30 SECOND CHALLENGE",
-		description: "在 30 秒内接住更多应援物，同时避开突然出现的土豆雷。",
-		mark: "★",
-		tone: "coral",
-		hidden: true,
-	},
-	{
 		slug: "hair-stop",
 		title: "枝江拼装室",
 		eyebrow: "CHARACTER ASSEMBLY",
@@ -51,30 +42,12 @@ export const interactiveExperiences = [
 		tone: "pink",
 	},
 	{
-		slug: "merge-watermelon",
-		title: "应援物合成",
-		eyebrow: "MERGE",
-		description: "投下相同的物品，让它们碰撞并合成为更高级的收藏。",
-		mark: "◎",
-		tone: "mint",
-		hidden: true,
-	},
-	{
 		slug: "link-match",
 		title: "图案连连看",
 		eyebrow: "LINK MATCH",
 		description: "找出两个相同图案，用不超过两次转弯的路线将它们连接。",
 		mark: "⌘",
 		tone: "violet",
-	},
-	{
-		slug: "listen-stars",
-		title: "星空乐器",
-		eyebrow: "STAR INSTRUMENT",
-		description: "点击星星自由演奏，也可以导入 MIDI，让它自动播放旋律。",
-		mark: "♫",
-		tone: "gold",
-		hidden: true,
 	},
 	{
 		slug: "pet-pet",
@@ -84,16 +57,6 @@ export const interactiveExperiences = [
 		mark: "♡",
 		tone: "coral",
 		action: "制作 GIF",
-	},
-	{
-		slug: "superchat-catch",
-		title: "接住 SC",
-		eyebrow: "SUPER CHAT CATCH",
-		description: "左右移动接住醒目留言，在羞耻值满之前攒下更多金额。",
-		mark: "¥",
-		tone: "pink",
-		action: "开始接 SC",
-		hidden: true,
 	},
 ] as const;
 
