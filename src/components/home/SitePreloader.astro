@@ -154,18 +154,30 @@
 		const preloadVideo = new Promise<void>((resolve) => {
 			if (
 				!video ||
+				video.error ||
 				video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA
 			) {
 				resolve();
 				return;
 			}
+			let finished = false;
 			const finish = () => {
+				if (finished) return;
+				finished = true;
 				video.removeEventListener("canplay", finish);
 				video.removeEventListener("error", finish);
 				resolve();
 			};
 			video.addEventListener("canplay", finish, { once: true });
 			video.addEventListener("error", finish, { once: true });
+			const source = video.querySelector<HTMLSourceElement>("source");
+			if (source?.src) {
+				void fetch(source.src, { method: "HEAD" })
+					.then((response) => {
+						if (response.status === 404) finish();
+					})
+					.catch(() => undefined);
+			}
 			video.load();
 		}).finally(completeTask);
 
