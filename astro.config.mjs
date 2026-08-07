@@ -4,7 +4,7 @@ import { rm } from "node:fs/promises";
 
 const unpublishedAssets = [
 	"assets/请停止你的浏览！然后下载并且使用这一款风格多变的动态壁纸！！.mp4",
-	"assets/optimized/video/hero-1080p.mp4",
+	// "assets/optimized/video/hero-1080p.mp4",
 	"assets/optimized/video/hero-720p.mp4",
 	"assets/fonts/LXGWWenKaiMonoLite-Light.ttf",
 	"assets/fonts/LXGWWenKaiMonoLite-Regular.ttf",
