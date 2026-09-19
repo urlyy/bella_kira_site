@@ -582,6 +582,21 @@
 	}
 
 	@media (max-width: 430px) {
+		.stage {
+			bottom: 128px;
+		}
+		.finish-control {
+			display: grid;
+			gap: 10px;
+		}
+		.finish-heading,
+		.foil-row {
+			min-width: 0;
+		}
+		.finish-heading > span:last-child {
+			display: block;
+			margin-left: auto;
+		}
 		.motion-toggle {
 			height: 32px;
 			padding-inline: 9px;

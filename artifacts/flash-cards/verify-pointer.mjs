@@ -97,7 +97,8 @@ try {
 			};
 			ws.addEventListener("message", listener);
 		});
-		await send("Page.navigate", {url: target});
+		if(await evaluate("location.href")===target) await send("Page.reload");
+		else await send("Page.navigate", {url: target});
 		await loaded;
 	};
 	const settle = () => evaluate(`new Promise((resolve, reject) => {
@@ -152,11 +153,14 @@ try {
 				const p = h.root.position.clone().set((u-.5)*6.3,(.5-v)*9.45,0).applyMatrix4(h.root.matrixWorld).project(h.camera);
 				samples.push({u,v,x:rect.x+(p.x+1)*rect.width/2,y:rect.y+(1-p.y)*rect.height/2});
 			}
-			return {samples,asset: h.config.assets.subject};
+			const imageHeight = 9.45*rect.height/(2*h.camera.position.z*Math.tan(h.camera.fov*Math.PI/360));
+			return {samples,asset: h.config.assets.subject,imageWidth:Math.round(imageHeight*h.config.cardAspect),imageHeight:Math.round(imageHeight)};
 		})()`);
 		const frame = await sharp(await shot(label)).removeAlpha().raw().toBuffer({resolveWithObject:true});
 		const sourcePath = path.join("public", decodeURIComponent(new URL(samples.asset,url).pathname));
-		const source = await sharp(sourcePath).flatten({background:"#f6f3ed"}).removeAlpha().raw().toBuffer({resolveWithObject:true});
+		// Match the print's displayed resolution before comparing pixels; the GPU
+		// minifies the original with mipmaps, especially on a short landscape screen.
+		const source = await sharp(sourcePath).flatten({background:"#f6f3ed"}).resize(samples.imageWidth,samples.imageHeight).removeAlpha().raw().toBuffer({resolveWithObject:true});
 		const rgb = (raw,x,y) => {
 			x=Math.max(0,Math.min(raw.info.width-1,Math.round(x)));
 			y=Math.max(0,Math.min(raw.info.height-1,Math.round(y)));
@@ -175,7 +179,7 @@ try {
 	await send("Runtime.enable");
 	await send("Network.enable");
 	if (!process.env.GALLERY_ONLY) {
-	for (const [mode, width, height, mobile] of [
+	if (!process.env.PRINT_ONLY) for (const [mode, width, height, mobile] of [
 		["desktop", 1280, 800, false],
 		["mobile", 390, 844, true],
 		["landscape", 844, 390, true],
@@ -280,6 +284,7 @@ try {
 		}
 	}
 	}
+	if (!process.env.PRINT_ONLY) {
 	const home = new URL("/#gallery",url).href;
 	const homeReady = () => evaluate(`new Promise((resolve,reject)=> {
 		const started=performance.now();
@@ -325,6 +330,12 @@ try {
 				return {cardHeight:visibleHeight,stageHeight:s.height,stageWidth:s.width,aspect:h.config.cardAspect,viewportHeight:innerHeight,dialog:document.querySelector('[data-gallery-card-dialog]').getBoundingClientRect().toJSON()};
 			})()`);
 			check(`${mode} ${theme} card has margins`,sizing.cardHeight<=621 && sizing.cardHeight<=sizing.stageHeight*.81 && sizing.cardHeight*sizing.aspect<=sizing.stageWidth*.81,sizing);
+			check(`${mode} ${theme} controls stay inside dialog`,await evaluate(`(() => {
+				const dialog=document.querySelector('[data-gallery-card-dialog]'),r=dialog.getBoundingClientRect();
+				return [...dialog.querySelectorAll("button,a,input,output")].every(el=>{
+					const b=el.getBoundingClientRect();return !b.width || (b.left>=r.left && b.right<=r.right && b.top>=r.top && b.bottom<=r.bottom);
+				});
+			})()`));
 			await shot(`gallery-${mode}-${theme}`);
 			if(mode==="desktop" && theme==="light") {
 				const current=await evaluate(`window.__holo.config.assets.subject`);
@@ -405,7 +416,12 @@ try {
 	await key("Escape");
 	await closed();
 	check("fallback modal closes and releases its animation",true);
+	}
 	check("no runtime errors", errors.length === 0, errors);
+	check("selected verification suite completed", true);
+} catch(error) {
+	results.push({name:"selected verification suite completed",pass:false,detail:String(error)});
+	throw error;
 } finally {
 	ws?.close();
 	const closed = browser.exitCode !== null || browser.signalCode !== null

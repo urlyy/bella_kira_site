@@ -91,20 +91,31 @@ export function setupGalleryCards() {
 			void show(index + delta);
 		});
 	}
-	dialog
-		.querySelector("[data-card-close]")
-		?.addEventListener("click", () => dialog.close());
-	dialog.addEventListener("click", (event) => {
-		if (event.target === dialog) dialog.close();
-	});
-	dialog.addEventListener("close", () => {
+	const release = () => {
 		request++;
 		dispose?.();
 		dispose = undefined;
 		host.dataset.state = "closed";
 		trigger?.focus({ preventScroll: true });
+	};
+	const close = () => {
+		dialog.close();
+		release();
+	};
+	dialog.querySelector("[data-card-close]")?.addEventListener("click", close);
+	dialog.addEventListener("click", (event) => {
+		if (event.target === dialog) close();
+	});
+	dialog.addEventListener("cancel", (event) => {
+		event.preventDefault();
+		close();
+	});
+	dialog.addEventListener("close", () => {
+		// Native close events are queued. An earlier close must not dispose a
+		// viewer that the user has already opened again.
+		if (!dialog.open && host.dataset.state !== "closed") release();
 	});
 	window.addEventListener("bella:pagewillchange", () => {
-		if (dialog.open) dialog.close();
+		if (dialog.open) close();
 	});
 }
