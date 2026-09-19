@@ -11,10 +11,10 @@
 	"artworkFit": [1, 1],
 	"assets": {
 		"model": "/assets/flash-cards/card.glb?v=3600cb818511",
-		"subject": "/assets/gallery/gallery-025.png?v=de9b2300ce9c",
+		"subject": "/assets/flash-cards/gallery-025/artwork.webp?v=98d2b765a724",
 		"subjectMask": "/assets/flash-cards/gallery-025/subject-mask.png?v=2d2422b5b76d",
 		"backgroundMask": "/assets/flash-cards/gallery-025/background-mask.png?v=e6b2be8f8686",
-		"background": "/assets/gallery/gallery-025.png?v=de9b2300ce9c",
+		"background": "/assets/flash-cards/gallery-025/artwork.webp?v=98d2b765a724",
 		"text": "/assets/flash-cards/empty.png",
 		"lineart": "/assets/flash-cards/gallery-025/lineart.png?v=7b3a7e84e09c"
 	},

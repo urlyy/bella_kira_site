@@ -8,7 +8,8 @@ const directory = "public/assets/flash-cards";
 const gallery = "public/assets/gallery";
 const check = process.argv.includes("--check");
 const hash = (data) => createHash("sha256").update(data).digest("hex");
-const version = 1;
+const version = 2;
+const textureSettings = { maxDimension: 2000, quality: 88, effort: 5 };
 const files = (await readdir(gallery, { withFileTypes: true }))
 	.filter(
 		(entry) =>
@@ -45,6 +46,43 @@ for (const [index, file] of files.entries()) {
 		: `artwork-${hash(file).slice(0, 8)}`;
 	const dest = `${directory}/${id}`;
 	const { width, height } = await sharp(source).metadata();
+	const texturePath = `${dest}/artwork.webp`;
+	let artworkHash;
+	try {
+		artworkHash = hash(await readFile(texturePath));
+	} catch {
+		/* Generated below. */
+	}
+	const old = previous.cards.find((card) => card.id === id);
+	if (
+		previous.version !== version ||
+		JSON.stringify(previous.textureSettings) !==
+			JSON.stringify(textureSettings) ||
+		old?.sourceHash !== sourceHash ||
+		old?.artworkHash !== artworkHash ||
+		!artworkHash
+	) {
+		if (check)
+			throw Error(
+				`Stale flash-card texture: ${file}; run npm run cards:generate`,
+			);
+		await mkdir(dest, { recursive: true });
+		const artwork = await sharp(source, { animated: false })
+			.rotate()
+			.resize({
+				width: textureSettings.maxDimension,
+				height: textureSettings.maxDimension,
+				fit: "inside",
+				withoutEnlargement: true,
+			})
+			.webp({
+				quality: textureSettings.quality,
+				effort: textureSettings.effort,
+			})
+			.toBuffer();
+		await writeFile(texturePath, artwork);
+		artworkHash = hash(artwork);
+	}
 	const mask = JSON.parse(await readFile(`${dest}/mask-source.json`, "utf8"));
 	if (
 		mask.sourceHash !== sourceHash ||
@@ -55,7 +93,6 @@ for (const [index, file] of files.entries()) {
 		throw Error(
 			`Stale subject mask: ${file}; run scripts/generate-card-masks.py`,
 		);
-	const old = previous.cards.find((card) => card.id === id);
 	let lineHash;
 	try {
 		lineHash = hash(await readFile(`${dest}/lineart.png`));
@@ -93,7 +130,7 @@ for (const [index, file] of files.entries()) {
 		await writeFile(`${dest}/lineart.png`, line);
 		lineHash = hash(line);
 	}
-	const original = `/assets/gallery/${encodeURIComponent(file)}?v=${sourceHash.slice(0, 12)}`;
+	const artwork = `/assets/flash-cards/${id}/artwork.webp?v=${artworkHash.slice(0, 12)}`;
 	const config = {
 		title: "贝拉kira",
 		subtitle: "画廊闪卡",
@@ -107,10 +144,10 @@ for (const [index, file] of files.entries()) {
 		artworkFit: [1, 1],
 		assets: {
 			model: `/assets/flash-cards/card.glb?v=${modelHash.slice(0, 12)}`,
-			subject: original,
+			subject: artwork,
 			subjectMask: `/assets/flash-cards/${id}/subject-mask.png?v=${mask.subjectHash.slice(0, 12)}`,
 			backgroundMask: `/assets/flash-cards/${id}/background-mask.png?v=${mask.backgroundHash.slice(0, 12)}`,
-			background: original,
+			background: artwork,
 			text: "/assets/flash-cards/empty.png",
 			lineart: `/assets/flash-cards/${id}/lineart.png?v=${lineHash.slice(0, 12)}`,
 		},
@@ -135,12 +172,13 @@ for (const [index, file] of files.entries()) {
 		width,
 		height,
 		sourceHash,
+		artworkHash,
 		lineHash,
 		configHash,
 		configUrl: `/assets/flash-cards/${id}/card-config.json?v=${configHash.slice(0, 12)}`,
 	});
 }
-const manifest = { version, modelHash, cards };
+const manifest = { version, textureSettings, modelHash, cards };
 if (check) {
 	if (JSON.stringify(previous) !== JSON.stringify(manifest))
 		throw Error("Flash-card manifest differs; run npm run cards:generate");

@@ -1,5 +1,6 @@
 {
-	"version": 1,
+	"version": 2,
+	"textureSettings": { "maxDimension": 2000, "quality": 88, "effort": 5 },
 	"modelHash": "3600cb8185110d0083f5b051ae0a8a1c8208dcb4484b684dcf358ed40defe5ef",
 	"cards": [
 		{
@@ -8,9 +9,10 @@
 			"width": 837,
 			"height": 1280,
 			"sourceHash": "f93c74b99a32849b21d71315df048b93c0bddce90a910c90e968a0d31c7fb50d",
+			"artworkHash": "66e382cb4b8972a3e343028bcf75381c31ad166f53b5db4103bec1348722deff",
 			"lineHash": "e77694e99f9620d50b10bf3ebd9c11f29bad1dfaba4796e041656d8a7d66fdb5",
-			"configHash": "215bedff33372b48cf4f7067d94f2441e4ea1ded9038bcb214a2491566955779",
-			"configUrl": "/assets/flash-cards/artwork-b1a0b832/card-config.json?v=215bedff3337"
+			"configHash": "49035fd42995f530e2a88b18691076ba080ebafc320de93ef52e13a0a12dcb10",
+			"configUrl": "/assets/flash-cards/artwork-b1a0b832/card-config.json?v=49035fd42995"
 		},
 		{
 			"id": "artwork-6ed9e6de",
@@ -18,9 +20,10 @@
 			"width": 2480,
 			"height": 3306,
 			"sourceHash": "40d56c0352a96e990ab3a57a78e5f3e7069ca129c9f265d2f59dc0186358fc51",
+			"artworkHash": "c9eb6978a2d45d701be4d04a3861012613ac55843407ee7108c8245369a9d8f9",
 			"lineHash": "8d7e7601ef8acf0a2c75c0f7f322373ee6468c2872b55847905fa62a442dd8ba",
-			"configHash": "d1e02d24b90975a6aaddc1db1dd19913ff351a534069bf0e0dcd42651d0c1f22",
-			"configUrl": "/assets/flash-cards/artwork-6ed9e6de/card-config.json?v=d1e02d24b909"
+			"configHash": "8b1f46c216f997208da30db4822fa82f0500a4333b72ae4b2a131ba7d884bbcb",
+			"configUrl": "/assets/flash-cards/artwork-6ed9e6de/card-config.json?v=8b1f46c216f9"
 		},
 		{
 			"id": "gallery-000",
@@ -28,9 +31,10 @@
 			"width": 1080,
 			"height": 1920,
 			"sourceHash": "fc83281ca8886b212b9f0a67ff870ba09f179f0dabad352d7aadfd848ff15aae",
+			"artworkHash": "e0cf15ed9f816a9f69e7f4eec448ca27f2ee307ff7fe3c34f2ead9ea63d2df36",
 			"lineHash": "3da652eafce2aeaf94d342963856a0d196486b9ed2a14a4f74b6dde884878a29",
-			"configHash": "9fbc63246651b3404c0096aeeb652711a97d893a7a329036e4822ef196f0b82d",
-			"configUrl": "/assets/flash-cards/gallery-000/card-config.json?v=9fbc63246651"
+			"configHash": "a7b304cb39cf0608a8273ec6c0883b68e276e81f54484f6e3bc6acd12ca7e0ab",
+			"configUrl": "/assets/flash-cards/gallery-000/card-config.json?v=a7b304cb39cf"
 		},
 		{
 			"id": "gallery-001",
@@ -38,9 +42,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "2efa6664d1372f50ecf5df192c85d1739c4722b09dd495d8da990eb48fefa421",
+			"artworkHash": "6987c0c645377820b552581e7b81963c81511b3f810e23ce0e831c3885e2d8bd",
 			"lineHash": "bf1b86901a795fa62a09f9cf085dc92ad81574a4bf37a8064a015d5e5398119a",
-			"configHash": "0010104fdac3ce4ff318ca80644ba4ff1b20c46be9d57a6560bf45aa0b0c14ac",
-			"configUrl": "/assets/flash-cards/gallery-001/card-config.json?v=0010104fdac3"
+			"configHash": "f32f1eac648210ec14a16d7bf179d768abb6ab09b27f1f820ddf27f785c086f4",
+			"configUrl": "/assets/flash-cards/gallery-001/card-config.json?v=f32f1eac6482"
 		},
 		{
 			"id": "gallery-002",
@@ -48,9 +53,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "b54bebb730ed38ebc38fffd0a942fb9c62eae446b46d0fff355099a0ee08111a",
+			"artworkHash": "9dd7fc8abb67fcb68fab6699959695138572f49f9aeedaa2f42eae885b66303b",
 			"lineHash": "094025b6377d51a6c0a1d32cebcac188d21274c24d6007bf31687f4f92e2b9cf",
-			"configHash": "f48668c11299a2556ca9dc9ebc9fbcb42e4fa055e610254cf9276859e94c6688",
-			"configUrl": "/assets/flash-cards/gallery-002/card-config.json?v=f48668c11299"
+			"configHash": "528b81a307f5141cc95ba95f16e394eb02464beab2ad4e970294afc6146dd0d7",
+			"configUrl": "/assets/flash-cards/gallery-002/card-config.json?v=528b81a307f5"
 		},
 		{
 			"id": "gallery-003",
@@ -58,9 +64,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "e1873be3ffdf6399a3b6e818a418a2393f947f67c20f59287da715f016d9cc23",
+			"artworkHash": "e3692e3937ebedc14ad80b5074731c18fcaa5c4e2ce582c8c235c07cf6404793",
 			"lineHash": "e8af84074c073149288e96597ce81a77f59017b9a61a574c0f0b43e8f79beb5b",
-			"configHash": "e1aef2620c03482bcb01ee526aefadf4e5a9718de64376c19d52b3cc778ba0ba",
-			"configUrl": "/assets/flash-cards/gallery-003/card-config.json?v=e1aef2620c03"
+			"configHash": "4a8be2efdc5db4c7083fae86f84d66322829fe4b4fdf286c2b2fd8acaf98d531",
+			"configUrl": "/assets/flash-cards/gallery-003/card-config.json?v=4a8be2efdc5d"
 		},
 		{
 			"id": "gallery-004",
@@ -68,9 +75,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "8e6979fd5d600eabb55f91dc4bac07dcc2c719b20ca47a862cc8e5ac651a6031",
+			"artworkHash": "62ce11ca514cffdf2d8979b3f3a219349e2bf8ea0e02f34f94cd3093e48c01ea",
 			"lineHash": "7eb9bd12dbdffd4dc133f6f0ca0af817f6126554c7d05b28e60c76fa818a4c57",
-			"configHash": "380df2f3f95146e8ac6d3d45adb7e6f7cba1d9dd32013e340ecb2498bb4bfc3b",
-			"configUrl": "/assets/flash-cards/gallery-004/card-config.json?v=380df2f3f951"
+			"configHash": "9025021429952dfb6c2813cf4f4830a4f47509831eaa55947fb6f12549aa746b",
+			"configUrl": "/assets/flash-cards/gallery-004/card-config.json?v=902502142995"
 		},
 		{
 			"id": "gallery-005",
@@ -78,9 +86,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "4f8bf1db10ca29da769814da404b1dcd7048dd947e4c1c201316a2643785f616",
+			"artworkHash": "25b692421f3111aac196039cc969e95479ad01e4763fbbecdd5112335b50c39f",
 			"lineHash": "c07f47dacde52a2d2813bd7f17c025d222cb617a3ae823144aa67f723de35293",
-			"configHash": "1cb9eeeee1495109843a540349bea37d68609566061f183e1e50165adc5111ad",
-			"configUrl": "/assets/flash-cards/gallery-005/card-config.json?v=1cb9eeeee149"
+			"configHash": "c8b257f87906f7c1ba365ec1f0a6fdaeb952eac3c6b57a3dffc6906c0cca4474",
+			"configUrl": "/assets/flash-cards/gallery-005/card-config.json?v=c8b257f87906"
 		},
 		{
 			"id": "gallery-006",
@@ -88,9 +97,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "151f1fca95973de6106156639da95bc15d943844a123502643653b21791783bf",
+			"artworkHash": "5a2981f45a6eaace799cdaf97b22019d182bef51e552e5f369bfe3e3485d077f",
 			"lineHash": "c25925d723d5c24385c5a681ee060930d6db51ecb25445941355e53fb0edaf81",
-			"configHash": "d28608851e0e4eef50468edfb1b673b45b2d78d2896df5d563108a1f155803c9",
-			"configUrl": "/assets/flash-cards/gallery-006/card-config.json?v=d28608851e0e"
+			"configHash": "d256f9a7f04c307766a178bd49e08f6d0edfc2a6c9cf27eb7d2f2f737c0fab5a",
+			"configUrl": "/assets/flash-cards/gallery-006/card-config.json?v=d256f9a7f04c"
 		},
 		{
 			"id": "gallery-008",
@@ -98,9 +108,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "536bb6dab84263be6e26330acb61d8b341bf22d5fd2b285bd524ef6d4c624cd0",
+			"artworkHash": "933a5341aaaa9cf51d1e4399bbd2210891320a6812a04d3f2b907d10fce09967",
 			"lineHash": "8c604f1dd0f7153a7726232a1fdee213a18022aea123a40ce18cad2deda31778",
-			"configHash": "5c0e770e234032c638f6eaef752f7e289054c0de1378b88c77a8b42da46302eb",
-			"configUrl": "/assets/flash-cards/gallery-008/card-config.json?v=5c0e770e2340"
+			"configHash": "afd279e7656dee3c4071202e433fb18d659303120eea6ee9b04e96c2c8e85070",
+			"configUrl": "/assets/flash-cards/gallery-008/card-config.json?v=afd279e7656d"
 		},
 		{
 			"id": "gallery-009",
@@ -108,9 +119,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "734f2452f98f27d0e1f04ff785eea10826e8a9aba1f29753ff731bfc688ebde7",
+			"artworkHash": "15af46eab1e44064957bcf9a466ccb9e58c0b2e14a0b1461bd10a60a415b95ef",
 			"lineHash": "92a6d2a3ecb69d7fb462e24a80b3d39ec799856eb7aecb3663bfbbd1b0107841",
-			"configHash": "83f3099b98363e2714d8cac5310ec39b46eba28b1b2e2f5497efc87133d8e201",
-			"configUrl": "/assets/flash-cards/gallery-009/card-config.json?v=83f3099b9836"
+			"configHash": "fe0bdbbcf64d734437221b2fb83b87de6667cc323835b24afe88d5201ec73e6d",
+			"configUrl": "/assets/flash-cards/gallery-009/card-config.json?v=fe0bdbbcf64d"
 		},
 		{
 			"id": "gallery-010",
@@ -118,9 +130,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "4ae14b63603342442cf29ffdb149e87585dad02f80246e2b504b03136b444478",
+			"artworkHash": "e3824be209a6ed787780d8c285ca9ca4b6b5c957380a4dd0d19b951379a5cd6d",
 			"lineHash": "e5386187601639530ca20d2cf479e0bd513435c3f51d5fa224d74075c173ff0e",
-			"configHash": "96c1066d0c5e2c9997b04df190f16b188610f79a8936f672240333328fbc7f0e",
-			"configUrl": "/assets/flash-cards/gallery-010/card-config.json?v=96c1066d0c5e"
+			"configHash": "499816c27713d6c495112a8686f30b938bd505d48cd35162e6ddca16f934dbc0",
+			"configUrl": "/assets/flash-cards/gallery-010/card-config.json?v=499816c27713"
 		},
 		{
 			"id": "gallery-011",
@@ -128,9 +141,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "40ddf89e618e680c15245f716d00b664eefa7e2874ab46dda8b9b85e523f9409",
+			"artworkHash": "83d4b728a8863e0b2f9cfbefd812d73520cf03fab5ec3f1341533e7032e7f930",
 			"lineHash": "e499a7a4051f213580436a522af4d35261eaa043a7f13671942d93a795ec5741",
-			"configHash": "559c582ad176a78824ba20cf551990bfb27992b065a452c0aa48b49f067682a8",
-			"configUrl": "/assets/flash-cards/gallery-011/card-config.json?v=559c582ad176"
+			"configHash": "fcbb9563bead9d959b2abca5619e1d85279ffedcb766e0000f9ef066aa65e926",
+			"configUrl": "/assets/flash-cards/gallery-011/card-config.json?v=fcbb9563bead"
 		},
 		{
 			"id": "gallery-012",
@@ -138,9 +152,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "61b95d6a8bf26d9d5be95a768ef0457bee6fdecdbddde40b96039d0fd3e69614",
+			"artworkHash": "1643cd523f3776be875c1a62060d55eaffea11c7f6e5d02a3cb42c1df2e9450b",
 			"lineHash": "483fff357830f435e58269e5349d71b0439fdf4b63ca6406ff90fa23b972258b",
-			"configHash": "46939c671c82461e86e012f0f291dc6850d8efe6df192fbf2d3e89ed6486ad22",
-			"configUrl": "/assets/flash-cards/gallery-012/card-config.json?v=46939c671c82"
+			"configHash": "da272c4fccfcee9f6e4bd01f708a1dee7778955d6e90f96e36cc69f82d6e732f",
+			"configUrl": "/assets/flash-cards/gallery-012/card-config.json?v=da272c4fccfc"
 		},
 		{
 			"id": "gallery-013",
@@ -148,9 +163,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "907a86ab5a17c8091e0b7f03a54c4362f14aa146c1f21e1c0bdadaf3ad19c602",
+			"artworkHash": "1e24ecc9c9a5110d85728eefa1c8dda550a0b5a53832381a21c2c6623c120d23",
 			"lineHash": "bbc5a58033285950b1b3d52000b31a901e773f4ba63e232365029758168991ed",
-			"configHash": "b411316acf628b07a23fa7ad112d4b975eb31550172727eb92e56d1a6cf4a29d",
-			"configUrl": "/assets/flash-cards/gallery-013/card-config.json?v=b411316acf62"
+			"configHash": "8b07ed8cbd62d0df48d94378cc729e6657d6e914788cd0358eafa832dfa93478",
+			"configUrl": "/assets/flash-cards/gallery-013/card-config.json?v=8b07ed8cbd62"
 		},
 		{
 			"id": "gallery-014",
@@ -158,9 +174,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "53d07600d00a16f46d43cb62e3df444f4e9caf856a47f11bee1aa637780b68d0",
+			"artworkHash": "696c635c5ec0e52256d5fad1842982c3daa553be86a8e94cade5264cabb99fb5",
 			"lineHash": "3ecb7050b1a8c07b879f4ba834cc58d47e42519d9dd0e01f76ae7bc628ae06a8",
-			"configHash": "4d96b182c44cbf62336617e761eb996d3fc401b7826f1bb4c6c1ed8d5649ff06",
-			"configUrl": "/assets/flash-cards/gallery-014/card-config.json?v=4d96b182c44c"
+			"configHash": "b555cfa9f36d03ba74d160750b54f6dd8deeecb29bf0d5be843a7948b3f85851",
+			"configUrl": "/assets/flash-cards/gallery-014/card-config.json?v=b555cfa9f36d"
 		},
 		{
 			"id": "gallery-015",
@@ -168,9 +185,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "dc6a44a70c630c69c61a27ca669d49a36451af26a88c2bdeedaf23131ad89e5a",
+			"artworkHash": "17121e76b80680ab6617c6aa98b1f4bec9035680fea248f1a35b413a9d7068e3",
 			"lineHash": "f378beedf9448a71645dbc393da8491703ccc8263531d000ed04176973d8658a",
-			"configHash": "54040ef216cc90f5a118280a559dfaa2f283113e702522563d5ff2750aae96f3",
-			"configUrl": "/assets/flash-cards/gallery-015/card-config.json?v=54040ef216cc"
+			"configHash": "e61f8b36c1281713032557b8e3fc5cb1143d4c7124078af962988f661de645cd",
+			"configUrl": "/assets/flash-cards/gallery-015/card-config.json?v=e61f8b36c128"
 		},
 		{
 			"id": "gallery-016",
@@ -178,9 +196,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "b27412da2bb1cd0f2ed08bd9bfd19a24387c6eb27b9533ac3ae690e4ff55b07e",
+			"artworkHash": "e911f69f9fd9e5961a8c6879b1ea1425ea3ce12af315aaf7d7cfdc42400ef533",
 			"lineHash": "4a86d33835f6ae02dfb48e40d0478ac7eaae6c63cf40bacf59800c7bb4e26af7",
-			"configHash": "98c367135ade14037fd102468f00b781aa6cff1ed90e156f6a27fb8f7c553acb",
-			"configUrl": "/assets/flash-cards/gallery-016/card-config.json?v=98c367135ade"
+			"configHash": "b832b6bf29b3629ba9161f13b50c2c214f515b2b065000049649c2a4a99991d9",
+			"configUrl": "/assets/flash-cards/gallery-016/card-config.json?v=b832b6bf29b3"
 		},
 		{
 			"id": "gallery-017",
@@ -188,9 +207,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "7b1bb9e69e9071b6b33c8707a09df6b1db28db2e31ed44882d5b8178ed00e10f",
+			"artworkHash": "43d6dde84f1403a764674b07c8adbea0399ef2cace9425c89bcbbfcebc2f5dd0",
 			"lineHash": "0b4414eeaa8d600412530e4c000311dd9273031a605d10deb081672c7b7e5f2b",
-			"configHash": "25488c783abcdf209a8a1cbe12565fd2456f7ccecaa973c84a5fb4e0f7b11ff3",
-			"configUrl": "/assets/flash-cards/gallery-017/card-config.json?v=25488c783abc"
+			"configHash": "b446ee6458476a4e41579ac5fd79fdbf9e60447efa699519e53ce3624d006b04",
+			"configUrl": "/assets/flash-cards/gallery-017/card-config.json?v=b446ee645847"
 		},
 		{
 			"id": "gallery-018",
@@ -198,9 +218,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "d8caccc707f8596d0d816c23009f666853fe9b761c1d4a5c66de8f871e4c6b47",
+			"artworkHash": "9901284033600e348bbe02da3d530d01bf166b809433ac99c9c129e3aead0898",
 			"lineHash": "83efcb268088c00f823391bd5115b76d27087eebb61df8391f8b9b28e70ae618",
-			"configHash": "9c66c111235975570dcb6f3433e1cbd2df3769a0bc30135322e532f6b2fb14a4",
-			"configUrl": "/assets/flash-cards/gallery-018/card-config.json?v=9c66c1112359"
+			"configHash": "e95b2b15d175b027816d7c2a13675fec88bf58ecb2d3199302fb18ebef3ca3ff",
+			"configUrl": "/assets/flash-cards/gallery-018/card-config.json?v=e95b2b15d175"
 		},
 		{
 			"id": "gallery-019",
@@ -208,9 +229,10 @@
 			"width": 1242,
 			"height": 1988,
 			"sourceHash": "0a400b6fcf539d993cb18dd843c80323e7806634af9ba201d47bf124dc648be7",
+			"artworkHash": "e50c91238d076288b77cd675822e2d4d248f6a13d86025de4aca57affb33a632",
 			"lineHash": "3ba080428d3d20f295278b1c55de6239a8f7269b031dcac9dcd7d3434d67e44b",
-			"configHash": "856810d6564b87e44074a56eff1514205c7e51735e2a1b420dbc4cedd9cd629c",
-			"configUrl": "/assets/flash-cards/gallery-019/card-config.json?v=856810d6564b"
+			"configHash": "7ad8a20e3bf7342f2afa28a1edc3bb30a4e805ea3936c2d5e24d611e67ded4b4",
+			"configUrl": "/assets/flash-cards/gallery-019/card-config.json?v=7ad8a20e3bf7"
 		},
 		{
 			"id": "gallery-022",
@@ -218,9 +240,10 @@
 			"width": 1125,
 			"height": 1125,
 			"sourceHash": "6f5073d6749084bc1c59e5085edb4b6199b9ee5aa558820c5d71ce71bd0c2a19",
+			"artworkHash": "214c3174ecc66a479197e036c8bcb0d72cb22891f7f25512636c1f8f6517eef8",
 			"lineHash": "1a7ed1ec0901bc5fa3c7fa1f214d592c673e0b6a5e442bd6448675c2faf1d596",
-			"configHash": "95a9efd4cbee9f7910353bcd5de3b08e1fa94be1b83aaa3dc89ebc8abfbf016d",
-			"configUrl": "/assets/flash-cards/gallery-022/card-config.json?v=95a9efd4cbee"
+			"configHash": "bbb0082b2e20fb26cca1ef19a0ddfbbdf566036f4383725a39119bb605a2d396",
+			"configUrl": "/assets/flash-cards/gallery-022/card-config.json?v=bbb0082b2e20"
 		},
 		{
 			"id": "gallery-023",
@@ -228,9 +251,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "50fef1eb961623a502930cb51e8d3f92f316049dcb0c8e7dd40cb4689c12fa92",
+			"artworkHash": "ca631b5dc610c2379e1ec37bdb6d9c6e53a15ecf221d4a5b3c36e827ab8cdcba",
 			"lineHash": "7b3a7e84e09cd22785b75b63aa662a130c8541b866bec7907b73ff0dd232bfda",
-			"configHash": "dd1a0fa34b6ac67e3ca1e780f7acb84184fc070063d8a4d2a1194d295aecccf4",
-			"configUrl": "/assets/flash-cards/gallery-023/card-config.json?v=dd1a0fa34b6a"
+			"configHash": "f91ce0f9185902e9394039b7bea79cbf1d2b77a2a6ccbbe95359c46a26dbcbe4",
+			"configUrl": "/assets/flash-cards/gallery-023/card-config.json?v=f91ce0f91859"
 		},
 		{
 			"id": "gallery-024",
@@ -238,9 +262,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "3005ae0c08b12492e43f4696005ff14efd118055fa6dba38b97521da91f0de92",
+			"artworkHash": "5b1a49ad73fe49d45eaef16dc6eb19873d188ab7c8df692c9a3eafc6875105df",
 			"lineHash": "7b3a7e84e09cd22785b75b63aa662a130c8541b866bec7907b73ff0dd232bfda",
-			"configHash": "952b930218f85c1d4cb884310267d0cb23d2fb5172e71666771deb74d7b26d9d",
-			"configUrl": "/assets/flash-cards/gallery-024/card-config.json?v=952b930218f8"
+			"configHash": "c6fc0c75474175a575a6047e3a2750ee2a661114f1d9eb13e9aba5f3c4c437dc",
+			"configUrl": "/assets/flash-cards/gallery-024/card-config.json?v=c6fc0c754741"
 		},
 		{
 			"id": "gallery-025",
@@ -248,9 +273,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "de9b2300ce9c16891831f53a7c50e0a48cb8c7db510fc3401b35a0c8935a4a34",
+			"artworkHash": "98d2b765a72413345338001d2ab580310817e6c00796e81800f004ae9d546136",
 			"lineHash": "7b3a7e84e09cd22785b75b63aa662a130c8541b866bec7907b73ff0dd232bfda",
-			"configHash": "d4bd78722029ab40c0cc1422337ad11d495bef17aac12b92001e429aa30d552d",
-			"configUrl": "/assets/flash-cards/gallery-025/card-config.json?v=d4bd78722029"
+			"configHash": "f43fb605f58258c8af00f51e67d3f4cdbf5342b844dee019a0fb21e7b93847ae",
+			"configUrl": "/assets/flash-cards/gallery-025/card-config.json?v=f43fb605f582"
 		},
 		{
 			"id": "gallery-026",
@@ -258,9 +284,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "c133e6e2e1d99d0d38c5db9e4f4183a693d653b022de476e72460f2ad0581f54",
+			"artworkHash": "32d13c5ee3d87113e32f9774f93590e1d0b264fa52668f105ff1fdddcdccec53",
 			"lineHash": "8d05e6e995c1e232d0b3705b72244f8e5f66372f487ddaa5e5cefd16a45a8583",
-			"configHash": "71b7ec42633c01edb0517292ef3a8689dd547fe05ada90c908f486827755988c",
-			"configUrl": "/assets/flash-cards/gallery-026/card-config.json?v=71b7ec42633c"
+			"configHash": "1998114078fd57b0ba921f8d7f0e964300a30dfbad8511a6aedd8e4c87761858",
+			"configUrl": "/assets/flash-cards/gallery-026/card-config.json?v=1998114078fd"
 		},
 		{
 			"id": "gallery-027",
@@ -268,9 +295,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "cc15415c0c19f38ff469fa9c9bb7d97c816e4b4770aa2293d58e4f29af8fec10",
+			"artworkHash": "19eb043dddced41dd657a869b4a69efda2d075a0bbe6ea8d886425c791cfa49e",
 			"lineHash": "e9a924ad9dfede294f4670d5869c81cf515c50c8648df9ac4712be5d31536baf",
-			"configHash": "b404164030d9a3996d77d1fd002f9707bc2588ef92fea1cec7527ee5e7913f73",
-			"configUrl": "/assets/flash-cards/gallery-027/card-config.json?v=b404164030d9"
+			"configHash": "6e94bce8d659d577fe9716d168c9bc4766084754e0c9e433f02bf2feb59a7b12",
+			"configUrl": "/assets/flash-cards/gallery-027/card-config.json?v=6e94bce8d659"
 		},
 		{
 			"id": "gallery-028",
@@ -278,9 +306,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "f26d49ef861a2fed617bec2b94293c9e5222ac7cce4577e57c31c7fbf2668f83",
+			"artworkHash": "964312aa66ee5f597391e17dbad2058b9e4be6e92a2db24e460d94321121448a",
 			"lineHash": "2db7e2fa42448115bfe2120b244efd52e1d9caed0ce98bec720c896f901ad629",
-			"configHash": "02be2b872deca25c7678a32714dae6c2bac243f41098c4ade87b378923c76d48",
-			"configUrl": "/assets/flash-cards/gallery-028/card-config.json?v=02be2b872dec"
+			"configHash": "4606f22bc57559547665cf5414a1f3082d6ac5e150cd3d61512418e52500ca7c",
+			"configUrl": "/assets/flash-cards/gallery-028/card-config.json?v=4606f22bc575"
 		},
 		{
 			"id": "gallery-029",
@@ -288,9 +317,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "498f7d359d3e98bba5f52aa15f3f4448d0e4ef45fa6c93d79ac641f19e80a292",
+			"artworkHash": "53d16a5ec9858cdbccf7866b10f89fc279f78cd8ac5088348bfb33ff205d77b3",
 			"lineHash": "b5ff0a1463ae951cfacd8bea6b0380b0716850871bf104788ae16a9d1dba2cd8",
-			"configHash": "cd437bc9db2ce34c6f0965f4d95de7ec01927ea4bfcd4bbd8113ceb0c915df56",
-			"configUrl": "/assets/flash-cards/gallery-029/card-config.json?v=cd437bc9db2c"
+			"configHash": "fd34119d633afd7283ae2a3c1df93bfaba0c128a37218ea7c9995cf60f0cf44f",
+			"configUrl": "/assets/flash-cards/gallery-029/card-config.json?v=fd34119d633a"
 		},
 		{
 			"id": "gallery-030",
@@ -298,9 +328,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "c54a28e9ca76181ce6f8b30f0c09a257dcc0a420968deddb86f545d8e2585159",
+			"artworkHash": "c3c08abe9a3dd93bca53ebc8faac3a1bdd91a337a3f2561599c4c30c96553e99",
 			"lineHash": "bcf4f4cb3db47b291dd35b64bd98a0f38e2c9708efa259f7e3577b79fbd7c73e",
-			"configHash": "d589a0787a43f9d6941adbfc0d5473b40bce6e54887b79b0e4d52c89d9b280ca",
-			"configUrl": "/assets/flash-cards/gallery-030/card-config.json?v=d589a0787a43"
+			"configHash": "38e6c283f370d85614b0a09bce0a736e1e0a04597cd6caae93872d787920ef46",
+			"configUrl": "/assets/flash-cards/gallery-030/card-config.json?v=38e6c283f370"
 		},
 		{
 			"id": "gallery-031",
@@ -308,9 +339,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "22599fc4b8034830a73c929ed1a1299cae59214ce024220ef4a5ad689faf7866",
+			"artworkHash": "81179703882ae28c34d0aac7ad9a6062c0cb0fbfe565191ff54430ae18f247ca",
 			"lineHash": "90fb5507f561e91512b278e94374348ebb84a2b8c3487c17da331e7d7652478a",
-			"configHash": "f0c4033496be05a82ba8b249f065690394227dd3b1be26d7180d4dd65d14caa9",
-			"configUrl": "/assets/flash-cards/gallery-031/card-config.json?v=f0c4033496be"
+			"configHash": "d21a1a37189c83572552e14ba7e45832e01bc1eb1ef9cecb46f2833e9c82e7f5",
+			"configUrl": "/assets/flash-cards/gallery-031/card-config.json?v=d21a1a37189c"
 		},
 		{
 			"id": "gallery-032",
@@ -318,9 +350,10 @@
 			"width": 1080,
 			"height": 1920,
 			"sourceHash": "01722a0d469dbc9675e2d69cb088f91a1f8c7627b5fec06606637f6a7d04346d",
+			"artworkHash": "bf54dc7d8cbd8f0819245b15eab46884d5ad6d3fe19c1ed4752c923da1e48570",
 			"lineHash": "82a77aaf4e1b0da6e1bec6d8bcedaf37794d0f3520cb46244c375673810973b3",
-			"configHash": "fb5128a0bd7d59f8d2ec40111dfe5e39895a570aa1163ba8ee252ead012d0a38",
-			"configUrl": "/assets/flash-cards/gallery-032/card-config.json?v=fb5128a0bd7d"
+			"configHash": "63c7b0abbc4afefd3e46529e2b3dba034bc533bc592ca2bd831ddf03dae36f18",
+			"configUrl": "/assets/flash-cards/gallery-032/card-config.json?v=63c7b0abbc4a"
 		},
 		{
 			"id": "gallery-033",
@@ -328,9 +361,10 @@
 			"width": 2215,
 			"height": 2953,
 			"sourceHash": "9d6af019b2c8152938cc81aa088b824c03d79b7e5c9283263da91f357226442f",
+			"artworkHash": "47487c6f83529f8c6495b0911010563efe538da172884168f358c4f11c5b7ed7",
 			"lineHash": "91fa644dc0c06b24442a6138d60c950d3c66d59f7a634cfc8ae57823cf9ad39a",
-			"configHash": "409cb7ab962641b4ebce51ea42bc62bf55772ec106f9598dbe35525722a7d8d3",
-			"configUrl": "/assets/flash-cards/gallery-033/card-config.json?v=409cb7ab9626"
+			"configHash": "e975419673c4e449aeb6993c39d8606297ee67bda5df6df709d6bc7bbe98acf4",
+			"configUrl": "/assets/flash-cards/gallery-033/card-config.json?v=e975419673c4"
 		},
 		{
 			"id": "gallery-034",
@@ -338,9 +372,10 @@
 			"width": 750,
 			"height": 1200,
 			"sourceHash": "a545604a79df09194442ead1d1bcea753fba35691b4b2433f80cc1d88389d5b4",
+			"artworkHash": "7460dee49c3d37d4be1ecb5825d59e5a90f8b8ff0630921fe12ab66bce8235ca",
 			"lineHash": "6264c2be9936f2009df60787daf8b05f609112cd2d4e0dca8fcf62512b36e21b",
-			"configHash": "b70179ffad01766357f23e9f37206fdfa343f0bd0eca2da0da7f06341979c7f4",
-			"configUrl": "/assets/flash-cards/gallery-034/card-config.json?v=b70179ffad01"
+			"configHash": "0216ad54e5f08b41c2206cfd7f10bb966f150dfb9ac8d5f84f168722b96f49e4",
+			"configUrl": "/assets/flash-cards/gallery-034/card-config.json?v=0216ad54e5f0"
 		},
 		{
 			"id": "gallery-035",
@@ -348,9 +383,10 @@
 			"width": 750,
 			"height": 1200,
 			"sourceHash": "0f02898d3aa67b8e967bcb6ac86b95d37d5cedf860539d417c3239413b8b4bc3",
+			"artworkHash": "a56574905b31008a37f7e033ab750287d5075324d60c225a46a0aeb84020d4d0",
 			"lineHash": "7e657eea7383b8f5a6ee4a0af7908abf0ab574a59508e360f27a71b1fcefa070",
-			"configHash": "244adbf7afa45a050f1321c122a2c71ed2a55204192fa20e37c30b4b54f7d6cc",
-			"configUrl": "/assets/flash-cards/gallery-035/card-config.json?v=244adbf7afa4"
+			"configHash": "76575ceb6e32d254327087b0649ad09ab1d96b1f72fd7ffb41997e53137750b0",
+			"configUrl": "/assets/flash-cards/gallery-035/card-config.json?v=76575ceb6e32"
 		},
 		{
 			"id": "gallery-036",
@@ -358,9 +394,10 @@
 			"width": 750,
 			"height": 1200,
 			"sourceHash": "a7a1fb1b1a4180b1ee0f886d19ca92e498355413aafcd5e069abd925544feedf",
+			"artworkHash": "34ce43f193f5ca1dd604bc8eb21eb85bfcf0804469d85443c02ee6e5e2ee0c1b",
 			"lineHash": "fb6e88626079fbb7843240a439f90ccc8501f88a9de89135ebf07d96346a6f14",
-			"configHash": "4077d3e99a88d6e851c863037e0c6039d876f293711a8ac30358962cc2e1e93b",
-			"configUrl": "/assets/flash-cards/gallery-036/card-config.json?v=4077d3e99a88"
+			"configHash": "9e7170b21be50c4f3d558e14657f6c2e72587bcb9a99ddc22d2f7b03746cb24a",
+			"configUrl": "/assets/flash-cards/gallery-036/card-config.json?v=9e7170b21be5"
 		},
 		{
 			"id": "gallery-037",
@@ -368,9 +405,10 @@
 			"width": 750,
 			"height": 1200,
 			"sourceHash": "d431f836ea8aa7e23602ecc7575f3d039aa396003a2a6274b2d03973171d172d",
+			"artworkHash": "4069dc99b6fab7387360265c4bae2dd302b526b8faaa07f739b787f9416a9d36",
 			"lineHash": "92e2fae041a6f85125df8d4a7123101d05e1a2275aaf547148834650cc75c579",
-			"configHash": "38e6197020febbeadcf02e648ab846d302cf2f11c3f6d44d0b396f545d2cdad8",
-			"configUrl": "/assets/flash-cards/gallery-037/card-config.json?v=38e6197020fe"
+			"configHash": "fef98c2fdaee28e4bfbad2a6a69a0d3bcfb6dfd34f0114e18d462fb52d0d213e",
+			"configUrl": "/assets/flash-cards/gallery-037/card-config.json?v=fef98c2fdaee"
 		},
 		{
 			"id": "gallery-038",
@@ -378,9 +416,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "47332f211d258a984b4ac0dccd196b2577b80bd76dcf81d76fdae8df28b0f8ac",
+			"artworkHash": "4092c6f680c7f76c8cc82a8b0d222126637a392b0a9719ef684564d660cce822",
 			"lineHash": "55ef89c91a5185602c84db386588b534a6ebe0243284ada98963f4c7d702a114",
-			"configHash": "95e35b64224bd639bfaf6b1567b29030212dec1ebe8b63518783527467cb11dd",
-			"configUrl": "/assets/flash-cards/gallery-038/card-config.json?v=95e35b64224b"
+			"configHash": "dca7593d657e5830993a665d6df8c80aebb7ecef79cbfe1846e813e3c433b5e3",
+			"configUrl": "/assets/flash-cards/gallery-038/card-config.json?v=dca7593d657e"
 		},
 		{
 			"id": "gallery-039",
@@ -388,9 +427,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "a4ec20c7ffebaea5b819da1325261ce31a34cb786d6844562fb2c032e67830ed",
+			"artworkHash": "f132dabedd82d3d1970c9a22bd154605aa73464eb1ac5d30ff1ad4c96d0e1f36",
 			"lineHash": "4b86227be2df9e4eb6841d0b5da781a2528363ae457c97f55f603556e42c34e6",
-			"configHash": "39e63db86ec22c1cfeddc1e78cf62e98fe0e3689443854d1409dc7228073be80",
-			"configUrl": "/assets/flash-cards/gallery-039/card-config.json?v=39e63db86ec2"
+			"configHash": "0b5ec8ef7a425c9bd23291c7090e94e3f03f53b6527f6503688d2aaddbd819f2",
+			"configUrl": "/assets/flash-cards/gallery-039/card-config.json?v=0b5ec8ef7a42"
 		},
 		{
 			"id": "gallery-040",
@@ -398,9 +438,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "e8c5bf37666fb7790c8c814308d181316d5b64f6dc640c46cdd1ea1c2667c44a",
+			"artworkHash": "d3b9cb2d3a3f7122dd7bab289bb5b45463d1c68abf2a1bdace3ebd57288e54bb",
 			"lineHash": "4275caae2cb14106d51d42a9f64805a99bb1a7e3be4ccb7188b5066614ec5783",
-			"configHash": "b0dc4ed15a41162f156aab207ab5c846784579024eb100715ba222464ec81590",
-			"configUrl": "/assets/flash-cards/gallery-040/card-config.json?v=b0dc4ed15a41"
+			"configHash": "018b7b5cba5eaa8ba031b8265034d167b2f133e39bc63e62817ac7deaa711f75",
+			"configUrl": "/assets/flash-cards/gallery-040/card-config.json?v=018b7b5cba5e"
 		},
 		{
 			"id": "gallery-041",
@@ -408,9 +449,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "dcaad22a83492e25cccff1d407250c7980b36a97fe73953c155417e4943a842a",
+			"artworkHash": "672629151f80c17ce309f66a0ffb639ab22a105be8511c218bb54a9dc6a944c2",
 			"lineHash": "63d9a7d7e3ed7b51d8ff1d54fa6910718da20a29f612d19744114b42b5dec495",
-			"configHash": "9ce0f1856584ec6f6ba1e5aa080d60e2c9fb63115f960d9badbd52a4dd3d464d",
-			"configUrl": "/assets/flash-cards/gallery-041/card-config.json?v=9ce0f1856584"
+			"configHash": "4ad05fda046b2ce80c9fce3ac7060a7e814c9e3099ffdd97627ff9f4f734b784",
+			"configUrl": "/assets/flash-cards/gallery-041/card-config.json?v=4ad05fda046b"
 		},
 		{
 			"id": "gallery-042",
@@ -418,9 +460,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "bd619869abc54ce80b2fc0beaad1071ca1c78a0a120dcc0aaaa9e0528aa7d59c",
+			"artworkHash": "59b2ee534afcbc2332bb5995cb9fec7d78ead3b4145632f0a9982ae522e71acd",
 			"lineHash": "6abc7090bf41b16bad966f0d6504aae071e8abab35d50d3aa825bd35b4bbbef6",
-			"configHash": "281354cb3b12a61be063b99485eec7f0c45cb8715a06c47bae3264a4160caa85",
-			"configUrl": "/assets/flash-cards/gallery-042/card-config.json?v=281354cb3b12"
+			"configHash": "9ad6173b23064e5d72eb4d3ff786c9ecfa0f878ba39dac840444e5d5d08239f7",
+			"configUrl": "/assets/flash-cards/gallery-042/card-config.json?v=9ad6173b2306"
 		},
 		{
 			"id": "gallery-043",
@@ -428,9 +471,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "72600b628a16d7c0baa02458fbd689bfc6407e6d4d6d5eeb578c17fe911ae830",
+			"artworkHash": "0d4756d5cc7b0af5fea722f084ce730de4d7a8b237ffec63a747008a673adbec",
 			"lineHash": "55ef89c91a5185602c84db386588b534a6ebe0243284ada98963f4c7d702a114",
-			"configHash": "bd7a22f4129d394e67f05ac212a51681a482924e4e88ae8d1a10eb53f3745a89",
-			"configUrl": "/assets/flash-cards/gallery-043/card-config.json?v=bd7a22f4129d"
+			"configHash": "f1bf0be88e4384f7f9b971357aff53bad675cc4ac0ca63b99374bf7bd277038a",
+			"configUrl": "/assets/flash-cards/gallery-043/card-config.json?v=f1bf0be88e43"
 		},
 		{
 			"id": "gallery-044",
@@ -438,9 +482,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "9992b13493a74cf919de2385a4bd5531b861bd45aa7a6e79a82c18f0d3537fe2",
+			"artworkHash": "4ccda4f1e16ff3549116869b31380ab29a46a23bf30fa5e85fdc83297c0da28e",
 			"lineHash": "2cdca6de7823b7c1ab3e3629b7d68c3522daca90a78db71daf23c89bcbf08f1f",
-			"configHash": "bcd74c69da6d38fbdfe047397c4005855a5780f2720652cb62fec1d0344f1903",
-			"configUrl": "/assets/flash-cards/gallery-044/card-config.json?v=bcd74c69da6d"
+			"configHash": "77c32c5dfed2ee8d16b4c4bc5064659d39c9060119191acb72dd6981772dae00",
+			"configUrl": "/assets/flash-cards/gallery-044/card-config.json?v=77c32c5dfed2"
 		},
 		{
 			"id": "gallery-045",
@@ -448,9 +493,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "e122ed1ce3b54a045ea13ac1df9b0c9f7295f16c567b4604286fa36ee98c39b4",
+			"artworkHash": "c1e41633d44d66f2701a44b3a806a0b5a0fb695cb6590d7c772e003635258ce5",
 			"lineHash": "55ef89c91a5185602c84db386588b534a6ebe0243284ada98963f4c7d702a114",
-			"configHash": "e17e1721576e3e1416dc86bd603f8233027c061d0638958d249bef4d973817d4",
-			"configUrl": "/assets/flash-cards/gallery-045/card-config.json?v=e17e1721576e"
+			"configHash": "96af3906501078db16cb704b764c54fc906698188e9c388dcebc1ff5e236b5c9",
+			"configUrl": "/assets/flash-cards/gallery-045/card-config.json?v=96af39065010"
 		},
 		{
 			"id": "gallery-046",
@@ -458,9 +504,10 @@
 			"width": 1242,
 			"height": 1863,
 			"sourceHash": "5e1e04bde51257ecca6f442faf212da49575b88c862b979e5e2a6cedaad4674d",
+			"artworkHash": "075a698fb9a51e8709b199c4327273452799b228ea82c4c49b52dc4643bcea46",
 			"lineHash": "55ef89c91a5185602c84db386588b534a6ebe0243284ada98963f4c7d702a114",
-			"configHash": "6bba68f35dba47202c7b7fd137373f0ea6f35141f2f09f7c61d57fac327f838f",
-			"configUrl": "/assets/flash-cards/gallery-046/card-config.json?v=6bba68f35dba"
+			"configHash": "9eeb8660dd1100ee3b08fca5fa01a6362f5119baed6f9332a46b4fe9ea060297",
+			"configUrl": "/assets/flash-cards/gallery-046/card-config.json?v=9eeb8660dd11"
 		}
 	]
 }
