@@ -232,6 +232,70 @@ const initialMobileLabel = isGames ? "互动空间" : "首页";
 	];
 	syncThemeVisibility(Math.max(0, homeHashes.indexOf(window.location.hash)));
 
+	const mainNav = document.querySelector(".main-nav");
+	if (mainNav instanceof HTMLElement) {
+		let drag = null;
+		let suppressDragClick = false;
+		const updateDraggable = () => {
+			mainNav.classList.toggle(
+				"is-draggable",
+				mainNav.scrollWidth > mainNav.clientWidth + 1 &&
+					getComputedStyle(mainNav).overflowX === "auto",
+			);
+		};
+		new ResizeObserver(updateDraggable).observe(mainNav);
+		document.fonts.ready.then(updateDraggable);
+		mainNav.addEventListener("pointerdown", (event) => {
+			suppressDragClick = false;
+			if (
+				event.pointerType === "touch" ||
+				event.button !== 0 ||
+				!event.isPrimary ||
+				!mainNav.classList.contains("is-draggable")
+			)
+				return;
+			drag = {
+				id: event.pointerId,
+				x: event.clientX,
+				scrollLeft: mainNav.scrollLeft,
+			};
+		});
+		window.addEventListener("pointermove", (event) => {
+			if (!drag || event.pointerId !== drag.id) return;
+			const distance = event.clientX - drag.x;
+			if (!suppressDragClick && Math.abs(distance) < 6) return;
+			suppressDragClick = true;
+			mainNav.classList.add("is-dragging");
+			mainNav.setPointerCapture(drag.id);
+			event.preventDefault();
+			mainNav.scrollLeft = drag.scrollLeft - distance;
+		});
+		const endNavDrag = () => {
+			const pointerId = drag?.id;
+			drag = null;
+			mainNav.classList.remove("is-dragging");
+			if (pointerId !== undefined && mainNav.hasPointerCapture(pointerId))
+				mainNav.releasePointerCapture(pointerId);
+		};
+		window.addEventListener("pointerup", endNavDrag);
+		window.addEventListener("pointercancel", endNavDrag);
+		window.addEventListener("blur", endNavDrag);
+		mainNav.addEventListener("lostpointercapture", endNavDrag);
+		mainNav.addEventListener("dragstart", (event) =>
+			event.preventDefault(),
+		);
+		mainNav.addEventListener(
+			"click",
+			(event) => {
+				if (!suppressDragClick || event.detail === 0) return;
+				event.preventDefault();
+				event.stopImmediatePropagation();
+				suppressDragClick = false;
+			},
+			true,
+		);
+	}
+
 	const currentNavLink = document.querySelector(
 		".site-header .nav-link.is-active",
 	);

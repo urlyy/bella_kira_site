@@ -1,0 +1,466 @@
+{
+	"version": 1,
+	"modelHash": "927bd48e5e1b9f204ddc0c6b43014152302d82684729f64f3c203bacde711e70",
+	"cards": [
+		{
+			"id": "artwork-b1a0b832",
+			"file": "23生日会.png",
+			"width": 837,
+			"height": 1280,
+			"sourceHash": "f93c74b99a32849b21d71315df048b93c0bddce90a910c90e968a0d31c7fb50d",
+			"lineHash": "e77694e99f9620d50b10bf3ebd9c11f29bad1dfaba4796e041656d8a7d66fdb5",
+			"configHash": "ec8949a50c76a944ce4bbdd5bbfa377786d9056c4c83cbf29963107cef49caf3",
+			"configUrl": "/assets/flash-cards/artwork-b1a0b832/card-config.json?v=ec8949a50c76"
+		},
+		{
+			"id": "artwork-6ed9e6de",
+			"file": "25生日会.png",
+			"width": 2480,
+			"height": 3306,
+			"sourceHash": "40d56c0352a96e990ab3a57a78e5f3e7069ca129c9f265d2f59dc0186358fc51",
+			"lineHash": "8d7e7601ef8acf0a2c75c0f7f322373ee6468c2872b55847905fa62a442dd8ba",
+			"configHash": "f9c67af88a34f9da4529731d6150361d00e38a812329ec7d171049ecab3dbd12",
+			"configUrl": "/assets/flash-cards/artwork-6ed9e6de/card-config.json?v=f9c67af88a34"
+		},
+		{
+			"id": "gallery-000",
+			"file": "gallery-000.jpg",
+			"width": 1080,
+			"height": 1920,
+			"sourceHash": "fc83281ca8886b212b9f0a67ff870ba09f179f0dabad352d7aadfd848ff15aae",
+			"lineHash": "3da652eafce2aeaf94d342963856a0d196486b9ed2a14a4f74b6dde884878a29",
+			"configHash": "0c481c79e315a406db0ffb612075c47b646bee90940a95bd5408ee89487f36f3",
+			"configUrl": "/assets/flash-cards/gallery-000/card-config.json?v=0c481c79e315"
+		},
+		{
+			"id": "gallery-001",
+			"file": "gallery-001.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "2efa6664d1372f50ecf5df192c85d1739c4722b09dd495d8da990eb48fefa421",
+			"lineHash": "bf1b86901a795fa62a09f9cf085dc92ad81574a4bf37a8064a015d5e5398119a",
+			"configHash": "67deefb57f9f1d946650c335ad51acd9985696242c17bbb078d1789166324290",
+			"configUrl": "/assets/flash-cards/gallery-001/card-config.json?v=67deefb57f9f"
+		},
+		{
+			"id": "gallery-002",
+			"file": "gallery-002.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "b54bebb730ed38ebc38fffd0a942fb9c62eae446b46d0fff355099a0ee08111a",
+			"lineHash": "094025b6377d51a6c0a1d32cebcac188d21274c24d6007bf31687f4f92e2b9cf",
+			"configHash": "c78821bb86b216d4d134a0aa5fa94a209aa53dff47dbbc09bdbee0976d5238b3",
+			"configUrl": "/assets/flash-cards/gallery-002/card-config.json?v=c78821bb86b2"
+		},
+		{
+			"id": "gallery-003",
+			"file": "gallery-003.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "e1873be3ffdf6399a3b6e818a418a2393f947f67c20f59287da715f016d9cc23",
+			"lineHash": "e8af84074c073149288e96597ce81a77f59017b9a61a574c0f0b43e8f79beb5b",
+			"configHash": "f4821e7d54da7141811ef7d9db9e9fcb7525ebf09c1d5298abd98da907d83b5f",
+			"configUrl": "/assets/flash-cards/gallery-003/card-config.json?v=f4821e7d54da"
+		},
+		{
+			"id": "gallery-004",
+			"file": "gallery-004.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "8e6979fd5d600eabb55f91dc4bac07dcc2c719b20ca47a862cc8e5ac651a6031",
+			"lineHash": "7eb9bd12dbdffd4dc133f6f0ca0af817f6126554c7d05b28e60c76fa818a4c57",
+			"configHash": "ca87eb4b40c3fd963c7c5bf9b561b430ae2d0045cce575accbc0c67448d65df9",
+			"configUrl": "/assets/flash-cards/gallery-004/card-config.json?v=ca87eb4b40c3"
+		},
+		{
+			"id": "gallery-005",
+			"file": "gallery-005.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "4f8bf1db10ca29da769814da404b1dcd7048dd947e4c1c201316a2643785f616",
+			"lineHash": "c07f47dacde52a2d2813bd7f17c025d222cb617a3ae823144aa67f723de35293",
+			"configHash": "4d9547fbfa9f419566c3d03853a2f451e5218182714a457ad309209a46108190",
+			"configUrl": "/assets/flash-cards/gallery-005/card-config.json?v=4d9547fbfa9f"
+		},
+		{
+			"id": "gallery-006",
+			"file": "gallery-006.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "151f1fca95973de6106156639da95bc15d943844a123502643653b21791783bf",
+			"lineHash": "c25925d723d5c24385c5a681ee060930d6db51ecb25445941355e53fb0edaf81",
+			"configHash": "16fd4d74be3aa8e4edb4b579fa105df11bc708d6d92984bf5e6edc5ef410b141",
+			"configUrl": "/assets/flash-cards/gallery-006/card-config.json?v=16fd4d74be3a"
+		},
+		{
+			"id": "gallery-008",
+			"file": "gallery-008.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "536bb6dab84263be6e26330acb61d8b341bf22d5fd2b285bd524ef6d4c624cd0",
+			"lineHash": "8c604f1dd0f7153a7726232a1fdee213a18022aea123a40ce18cad2deda31778",
+			"configHash": "679bab667568cc82989b36287c39bdaec4e3e4ee93412defcf6d5fe84b68cedd",
+			"configUrl": "/assets/flash-cards/gallery-008/card-config.json?v=679bab667568"
+		},
+		{
+			"id": "gallery-009",
+			"file": "gallery-009.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "734f2452f98f27d0e1f04ff785eea10826e8a9aba1f29753ff731bfc688ebde7",
+			"lineHash": "92a6d2a3ecb69d7fb462e24a80b3d39ec799856eb7aecb3663bfbbd1b0107841",
+			"configHash": "60eb9e712cb00f91e4a8941ee928f8eb3832c9a24929c3b91db6bc904c2da568",
+			"configUrl": "/assets/flash-cards/gallery-009/card-config.json?v=60eb9e712cb0"
+		},
+		{
+			"id": "gallery-010",
+			"file": "gallery-010.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "4ae14b63603342442cf29ffdb149e87585dad02f80246e2b504b03136b444478",
+			"lineHash": "e5386187601639530ca20d2cf479e0bd513435c3f51d5fa224d74075c173ff0e",
+			"configHash": "2964b3fe55cf4e68941d5da0949394ae469f099db1d8072acc663f4fbd202120",
+			"configUrl": "/assets/flash-cards/gallery-010/card-config.json?v=2964b3fe55cf"
+		},
+		{
+			"id": "gallery-011",
+			"file": "gallery-011.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "40ddf89e618e680c15245f716d00b664eefa7e2874ab46dda8b9b85e523f9409",
+			"lineHash": "e499a7a4051f213580436a522af4d35261eaa043a7f13671942d93a795ec5741",
+			"configHash": "5e5e5f44d266722a89edbe4029c5c146192d9d62817ffcf7c77346c087a421eb",
+			"configUrl": "/assets/flash-cards/gallery-011/card-config.json?v=5e5e5f44d266"
+		},
+		{
+			"id": "gallery-012",
+			"file": "gallery-012.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "61b95d6a8bf26d9d5be95a768ef0457bee6fdecdbddde40b96039d0fd3e69614",
+			"lineHash": "483fff357830f435e58269e5349d71b0439fdf4b63ca6406ff90fa23b972258b",
+			"configHash": "59c4559170e3f6341acebe23f177fce780d4b30c2ec21c1c0eefdc41a9806d3b",
+			"configUrl": "/assets/flash-cards/gallery-012/card-config.json?v=59c4559170e3"
+		},
+		{
+			"id": "gallery-013",
+			"file": "gallery-013.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "907a86ab5a17c8091e0b7f03a54c4362f14aa146c1f21e1c0bdadaf3ad19c602",
+			"lineHash": "bbc5a58033285950b1b3d52000b31a901e773f4ba63e232365029758168991ed",
+			"configHash": "bf6801986465c7874d46f6398d58619b3b8e5c807373caaf786a617ff6d17c5d",
+			"configUrl": "/assets/flash-cards/gallery-013/card-config.json?v=bf6801986465"
+		},
+		{
+			"id": "gallery-014",
+			"file": "gallery-014.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "53d07600d00a16f46d43cb62e3df444f4e9caf856a47f11bee1aa637780b68d0",
+			"lineHash": "3ecb7050b1a8c07b879f4ba834cc58d47e42519d9dd0e01f76ae7bc628ae06a8",
+			"configHash": "79581905f162830c2452f48468514965229b2ffe178f96a8bcac9c5ab15828c0",
+			"configUrl": "/assets/flash-cards/gallery-014/card-config.json?v=79581905f162"
+		},
+		{
+			"id": "gallery-015",
+			"file": "gallery-015.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "dc6a44a70c630c69c61a27ca669d49a36451af26a88c2bdeedaf23131ad89e5a",
+			"lineHash": "f378beedf9448a71645dbc393da8491703ccc8263531d000ed04176973d8658a",
+			"configHash": "c0474f1beedb7806221384a715ae1551ec48b957a8ad716fc6d725a363b675e4",
+			"configUrl": "/assets/flash-cards/gallery-015/card-config.json?v=c0474f1beedb"
+		},
+		{
+			"id": "gallery-016",
+			"file": "gallery-016.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "b27412da2bb1cd0f2ed08bd9bfd19a24387c6eb27b9533ac3ae690e4ff55b07e",
+			"lineHash": "4a86d33835f6ae02dfb48e40d0478ac7eaae6c63cf40bacf59800c7bb4e26af7",
+			"configHash": "fa1b61cd503f61eb86d0182a8ad295c147e124a12a1e11589819c72b192cab4e",
+			"configUrl": "/assets/flash-cards/gallery-016/card-config.json?v=fa1b61cd503f"
+		},
+		{
+			"id": "gallery-017",
+			"file": "gallery-017.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "7b1bb9e69e9071b6b33c8707a09df6b1db28db2e31ed44882d5b8178ed00e10f",
+			"lineHash": "0b4414eeaa8d600412530e4c000311dd9273031a605d10deb081672c7b7e5f2b",
+			"configHash": "ae5fe4ee8f8c4510a65d1dabd384be378db0a954818f92fa8e0e8d99a0f06b61",
+			"configUrl": "/assets/flash-cards/gallery-017/card-config.json?v=ae5fe4ee8f8c"
+		},
+		{
+			"id": "gallery-018",
+			"file": "gallery-018.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "d8caccc707f8596d0d816c23009f666853fe9b761c1d4a5c66de8f871e4c6b47",
+			"lineHash": "83efcb268088c00f823391bd5115b76d27087eebb61df8391f8b9b28e70ae618",
+			"configHash": "972bcbf73ac0f5c9364b05d887b85955d7984fc17fb6a17b30061d114712827b",
+			"configUrl": "/assets/flash-cards/gallery-018/card-config.json?v=972bcbf73ac0"
+		},
+		{
+			"id": "gallery-019",
+			"file": "gallery-019.jpg",
+			"width": 1242,
+			"height": 1988,
+			"sourceHash": "0a400b6fcf539d993cb18dd843c80323e7806634af9ba201d47bf124dc648be7",
+			"lineHash": "3ba080428d3d20f295278b1c55de6239a8f7269b031dcac9dcd7d3434d67e44b",
+			"configHash": "b76d00b85decf5faaf6c48238f0205aba01e9e84e2855fcdb36768351b5ad9eb",
+			"configUrl": "/assets/flash-cards/gallery-019/card-config.json?v=b76d00b85dec"
+		},
+		{
+			"id": "gallery-022",
+			"file": "gallery-022.jpg",
+			"width": 1125,
+			"height": 1125,
+			"sourceHash": "6f5073d6749084bc1c59e5085edb4b6199b9ee5aa558820c5d71ce71bd0c2a19",
+			"lineHash": "1a7ed1ec0901bc5fa3c7fa1f214d592c673e0b6a5e442bd6448675c2faf1d596",
+			"configHash": "94e3e6865599d158bee9d1aca80d9fe100bbc899eb0e30cd3530dba997076f1c",
+			"configUrl": "/assets/flash-cards/gallery-022/card-config.json?v=94e3e6865599"
+		},
+		{
+			"id": "gallery-023",
+			"file": "gallery-023.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "50fef1eb961623a502930cb51e8d3f92f316049dcb0c8e7dd40cb4689c12fa92",
+			"lineHash": "7b3a7e84e09cd22785b75b63aa662a130c8541b866bec7907b73ff0dd232bfda",
+			"configHash": "5efb99ce26b362faa27e668aa8cf410fbf9623f661e82b1b3cf4887a4dfbadef",
+			"configUrl": "/assets/flash-cards/gallery-023/card-config.json?v=5efb99ce26b3"
+		},
+		{
+			"id": "gallery-024",
+			"file": "gallery-024.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "3005ae0c08b12492e43f4696005ff14efd118055fa6dba38b97521da91f0de92",
+			"lineHash": "7b3a7e84e09cd22785b75b63aa662a130c8541b866bec7907b73ff0dd232bfda",
+			"configHash": "348d4ed312d856df2099558c63f3801b6f9708e768ddeed37fc65f8465907888",
+			"configUrl": "/assets/flash-cards/gallery-024/card-config.json?v=348d4ed312d8"
+		},
+		{
+			"id": "gallery-025",
+			"file": "gallery-025.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "de9b2300ce9c16891831f53a7c50e0a48cb8c7db510fc3401b35a0c8935a4a34",
+			"lineHash": "7b3a7e84e09cd22785b75b63aa662a130c8541b866bec7907b73ff0dd232bfda",
+			"configHash": "c877bad6d37b58c7269064971b633e85808f55d82e4c7cbe189a8d9902068075",
+			"configUrl": "/assets/flash-cards/gallery-025/card-config.json?v=c877bad6d37b"
+		},
+		{
+			"id": "gallery-026",
+			"file": "gallery-026.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "c133e6e2e1d99d0d38c5db9e4f4183a693d653b022de476e72460f2ad0581f54",
+			"lineHash": "8d05e6e995c1e232d0b3705b72244f8e5f66372f487ddaa5e5cefd16a45a8583",
+			"configHash": "447c4420061eba1cbf9ee818597e70b09dbf567f045a33de10a048b8b94199f3",
+			"configUrl": "/assets/flash-cards/gallery-026/card-config.json?v=447c4420061e"
+		},
+		{
+			"id": "gallery-027",
+			"file": "gallery-027.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "cc15415c0c19f38ff469fa9c9bb7d97c816e4b4770aa2293d58e4f29af8fec10",
+			"lineHash": "e9a924ad9dfede294f4670d5869c81cf515c50c8648df9ac4712be5d31536baf",
+			"configHash": "7d4533a4347dbef468a75cd4908821b9e2d2aca7c7e989f2a66c821916163e8c",
+			"configUrl": "/assets/flash-cards/gallery-027/card-config.json?v=7d4533a4347d"
+		},
+		{
+			"id": "gallery-028",
+			"file": "gallery-028.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "f26d49ef861a2fed617bec2b94293c9e5222ac7cce4577e57c31c7fbf2668f83",
+			"lineHash": "2db7e2fa42448115bfe2120b244efd52e1d9caed0ce98bec720c896f901ad629",
+			"configHash": "94dc50a6561e0a7f676886dc37429a15b28490e16fbeb974d6375ea8c2374793",
+			"configUrl": "/assets/flash-cards/gallery-028/card-config.json?v=94dc50a6561e"
+		},
+		{
+			"id": "gallery-029",
+			"file": "gallery-029.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "498f7d359d3e98bba5f52aa15f3f4448d0e4ef45fa6c93d79ac641f19e80a292",
+			"lineHash": "b5ff0a1463ae951cfacd8bea6b0380b0716850871bf104788ae16a9d1dba2cd8",
+			"configHash": "19f7a1227abdd8f0d1f9086fb53eaff40c5701f5e5bdc5300fc6fab087d19e8b",
+			"configUrl": "/assets/flash-cards/gallery-029/card-config.json?v=19f7a1227abd"
+		},
+		{
+			"id": "gallery-030",
+			"file": "gallery-030.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "c54a28e9ca76181ce6f8b30f0c09a257dcc0a420968deddb86f545d8e2585159",
+			"lineHash": "bcf4f4cb3db47b291dd35b64bd98a0f38e2c9708efa259f7e3577b79fbd7c73e",
+			"configHash": "9acde8858f8fa9e481bc231fe39ac33add890bd948c9765322eaa3bb140a7d91",
+			"configUrl": "/assets/flash-cards/gallery-030/card-config.json?v=9acde8858f8f"
+		},
+		{
+			"id": "gallery-031",
+			"file": "gallery-031.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "22599fc4b8034830a73c929ed1a1299cae59214ce024220ef4a5ad689faf7866",
+			"lineHash": "90fb5507f561e91512b278e94374348ebb84a2b8c3487c17da331e7d7652478a",
+			"configHash": "844faf043924dadd832b261572ffcc9a54a6f1e6980d7eeb6e22d41e0e10f87a",
+			"configUrl": "/assets/flash-cards/gallery-031/card-config.json?v=844faf043924"
+		},
+		{
+			"id": "gallery-032",
+			"file": "gallery-032.jpg",
+			"width": 1080,
+			"height": 1920,
+			"sourceHash": "01722a0d469dbc9675e2d69cb088f91a1f8c7627b5fec06606637f6a7d04346d",
+			"lineHash": "82a77aaf4e1b0da6e1bec6d8bcedaf37794d0f3520cb46244c375673810973b3",
+			"configHash": "2c0670a49405b6c20c9898f2e20f5c227c622479aa772b59624eabfffc615455",
+			"configUrl": "/assets/flash-cards/gallery-032/card-config.json?v=2c0670a49405"
+		},
+		{
+			"id": "gallery-033",
+			"file": "gallery-033.jpg",
+			"width": 2215,
+			"height": 2953,
+			"sourceHash": "9d6af019b2c8152938cc81aa088b824c03d79b7e5c9283263da91f357226442f",
+			"lineHash": "91fa644dc0c06b24442a6138d60c950d3c66d59f7a634cfc8ae57823cf9ad39a",
+			"configHash": "d42fd767f6b1797099af4720e1e5e8bdde776a345f3069dea15d3516eea31c94",
+			"configUrl": "/assets/flash-cards/gallery-033/card-config.json?v=d42fd767f6b1"
+		},
+		{
+			"id": "gallery-034",
+			"file": "gallery-034.png",
+			"width": 750,
+			"height": 1200,
+			"sourceHash": "a545604a79df09194442ead1d1bcea753fba35691b4b2433f80cc1d88389d5b4",
+			"lineHash": "6264c2be9936f2009df60787daf8b05f609112cd2d4e0dca8fcf62512b36e21b",
+			"configHash": "0efa2f24066dee6bb7674a006bf9c4af88783409e5e642fde91d0c541ba0c231",
+			"configUrl": "/assets/flash-cards/gallery-034/card-config.json?v=0efa2f24066d"
+		},
+		{
+			"id": "gallery-035",
+			"file": "gallery-035.png",
+			"width": 750,
+			"height": 1200,
+			"sourceHash": "0f02898d3aa67b8e967bcb6ac86b95d37d5cedf860539d417c3239413b8b4bc3",
+			"lineHash": "7e657eea7383b8f5a6ee4a0af7908abf0ab574a59508e360f27a71b1fcefa070",
+			"configHash": "e949782ac5c6f1a0af6a8b2bdf473cdc4ac6ec19e5dd6a8349272344cc718e47",
+			"configUrl": "/assets/flash-cards/gallery-035/card-config.json?v=e949782ac5c6"
+		},
+		{
+			"id": "gallery-036",
+			"file": "gallery-036.png",
+			"width": 750,
+			"height": 1200,
+			"sourceHash": "a7a1fb1b1a4180b1ee0f886d19ca92e498355413aafcd5e069abd925544feedf",
+			"lineHash": "fb6e88626079fbb7843240a439f90ccc8501f88a9de89135ebf07d96346a6f14",
+			"configHash": "e604b5da17021fad04895b0a2026920cb430f430a6d80dc7a78f2e2fd1f9a76a",
+			"configUrl": "/assets/flash-cards/gallery-036/card-config.json?v=e604b5da1702"
+		},
+		{
+			"id": "gallery-037",
+			"file": "gallery-037.png",
+			"width": 750,
+			"height": 1200,
+			"sourceHash": "d431f836ea8aa7e23602ecc7575f3d039aa396003a2a6274b2d03973171d172d",
+			"lineHash": "92e2fae041a6f85125df8d4a7123101d05e1a2275aaf547148834650cc75c579",
+			"configHash": "49b4625fdc3013fccf7e79fa519b60c7c2be02b57195def8e561d27370a823e6",
+			"configUrl": "/assets/flash-cards/gallery-037/card-config.json?v=49b4625fdc30"
+		},
+		{
+			"id": "gallery-038",
+			"file": "gallery-038.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "47332f211d258a984b4ac0dccd196b2577b80bd76dcf81d76fdae8df28b0f8ac",
+			"lineHash": "55ef89c91a5185602c84db386588b534a6ebe0243284ada98963f4c7d702a114",
+			"configHash": "5c79d95851dc0ac65822d1b019730a349135504f8e303a710882998d26504b68",
+			"configUrl": "/assets/flash-cards/gallery-038/card-config.json?v=5c79d95851dc"
+		},
+		{
+			"id": "gallery-039",
+			"file": "gallery-039.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "a4ec20c7ffebaea5b819da1325261ce31a34cb786d6844562fb2c032e67830ed",
+			"lineHash": "4b86227be2df9e4eb6841d0b5da781a2528363ae457c97f55f603556e42c34e6",
+			"configHash": "9f2825ab6892acf10e5ca6812d410cc18dfdd2e21bc27e97719a76fe1badd75e",
+			"configUrl": "/assets/flash-cards/gallery-039/card-config.json?v=9f2825ab6892"
+		},
+		{
+			"id": "gallery-040",
+			"file": "gallery-040.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "e8c5bf37666fb7790c8c814308d181316d5b64f6dc640c46cdd1ea1c2667c44a",
+			"lineHash": "4275caae2cb14106d51d42a9f64805a99bb1a7e3be4ccb7188b5066614ec5783",
+			"configHash": "448e310e186ea617e18b31665f5c09c61b478928f5c5e819a3b047e5fbf1e270",
+			"configUrl": "/assets/flash-cards/gallery-040/card-config.json?v=448e310e186e"
+		},
+		{
+			"id": "gallery-041",
+			"file": "gallery-041.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "dcaad22a83492e25cccff1d407250c7980b36a97fe73953c155417e4943a842a",
+			"lineHash": "63d9a7d7e3ed7b51d8ff1d54fa6910718da20a29f612d19744114b42b5dec495",
+			"configHash": "4350fe89f331c78382ae9f54096baf810747544612460f21041315d9591629ba",
+			"configUrl": "/assets/flash-cards/gallery-041/card-config.json?v=4350fe89f331"
+		},
+		{
+			"id": "gallery-042",
+			"file": "gallery-042.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "bd619869abc54ce80b2fc0beaad1071ca1c78a0a120dcc0aaaa9e0528aa7d59c",
+			"lineHash": "6abc7090bf41b16bad966f0d6504aae071e8abab35d50d3aa825bd35b4bbbef6",
+			"configHash": "9785faae2ab1fb8186f76abd6ef2a6700238e5e5936db7a0b6196ce90eda93a6",
+			"configUrl": "/assets/flash-cards/gallery-042/card-config.json?v=9785faae2ab1"
+		},
+		{
+			"id": "gallery-043",
+			"file": "gallery-043.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "72600b628a16d7c0baa02458fbd689bfc6407e6d4d6d5eeb578c17fe911ae830",
+			"lineHash": "55ef89c91a5185602c84db386588b534a6ebe0243284ada98963f4c7d702a114",
+			"configHash": "38b8d927bc60a73079c2d558ce4f2ac14d635b24c94579617d7c66ec29b1637a",
+			"configUrl": "/assets/flash-cards/gallery-043/card-config.json?v=38b8d927bc60"
+		},
+		{
+			"id": "gallery-044",
+			"file": "gallery-044.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "9992b13493a74cf919de2385a4bd5531b861bd45aa7a6e79a82c18f0d3537fe2",
+			"lineHash": "2cdca6de7823b7c1ab3e3629b7d68c3522daca90a78db71daf23c89bcbf08f1f",
+			"configHash": "054970e7644f6dbf785162995019abef5e60b02cff0a2ddb5c28b5803ff811a6",
+			"configUrl": "/assets/flash-cards/gallery-044/card-config.json?v=054970e7644f"
+		},
+		{
+			"id": "gallery-045",
+			"file": "gallery-045.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "e122ed1ce3b54a045ea13ac1df9b0c9f7295f16c567b4604286fa36ee98c39b4",
+			"lineHash": "55ef89c91a5185602c84db386588b534a6ebe0243284ada98963f4c7d702a114",
+			"configHash": "fdb35da7a67624dd43bb8c5fa63d04695daba8beec0c852085a83cd824b32021",
+			"configUrl": "/assets/flash-cards/gallery-045/card-config.json?v=fdb35da7a676"
+		},
+		{
+			"id": "gallery-046",
+			"file": "gallery-046.png",
+			"width": 1242,
+			"height": 1863,
+			"sourceHash": "5e1e04bde51257ecca6f442faf212da49575b88c862b979e5e2a6cedaad4674d",
+			"lineHash": "55ef89c91a5185602c84db386588b534a6ebe0243284ada98963f4c7d702a114",
+			"configHash": "63206eb1641614594dff198b947fad6a824a9094de6f43c0a49a1000a38ffd83",
+			"configUrl": "/assets/flash-cards/gallery-046/card-config.json?v=63206eb16416"
+		}
+	]
+}

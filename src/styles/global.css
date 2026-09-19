@@ -587,6 +587,17 @@ img {
 	display: none;
 }
 
+.main-nav.is-draggable {
+	cursor: grab;
+	user-select: none;
+}
+
+.main-nav.is-dragging,
+.main-nav.is-dragging a {
+	cursor: grabbing;
+	scroll-behavior: auto;
+}
+
 .main-nav::before {
 	position: absolute;
 	top: 24px;

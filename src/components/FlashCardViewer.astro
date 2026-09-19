@@ -1,0 +1,92 @@
+---
+import "../styles/flash-card.css";
+
+interface Props {
+	configUrl?: string;
+	previous?: string;
+	next?: string;
+	label?: string;
+}
+const { configUrl, previous, next, label = "" } = Astro.props;
+---
+
+<div class="flash-card-viewer" data-flash-card-viewer data-config={configUrl}>
+	<div
+		class="stage"
+		data-card="stage"
+		tabindex="0"
+		role="group"
+		aria-label="可旋转的闪卡，拖动或方向键旋转，R 重置，空格暂停"
+	>
+		<div data-card="loading" class="loading" role="status">
+			正在载入闪卡
+		</div>
+	</div>
+	<div class="artwork-bar" aria-label="浏览与材质">
+		<div class="card-browse" aria-label="浏览画廊闪卡">
+			<a
+				href={previous || "#gallery"}
+				data-card-previous
+				aria-label="上一张闪卡">←</a
+			>
+			<span data-card-count aria-live="polite">{label}</span>
+			<a href={next || "#gallery"} data-card-next aria-label="下一张闪卡"
+				>→</a
+			>
+		</div>
+		<div class="finish-cluster">
+			<button
+				data-card="motion"
+				class="motion-toggle"
+				type="button"
+				aria-pressed="false"
+				disabled>开启陀螺仪</button
+			>
+			<div class="finish-control">
+				<div class="finish-heading">
+					<span>卡面质感</span>
+					<div class="swatches" role="group" aria-label="卡面材质">
+						{
+							[
+								["pearl", "珠光"],
+								["silver", "银箔"],
+								["gold", "烫金"],
+								["original", "原画"],
+							].map(([value, name]) => (
+								<button
+									class={`swatch ${value}`}
+									type="button"
+									data-finish={value}
+									aria-pressed={
+										value === "pearl" ? "true" : "false"
+									}
+									aria-label={name}
+									title={name}
+									disabled
+								/>
+							))
+						}
+					</div>
+					<span data-card="finish-name">珠光</span>
+				</div>
+				<label class="foil-row">
+					<span>光泽</span>
+					<input
+						data-card="foil"
+						type="range"
+						min="0"
+						max="1"
+						step="0.01"
+						value="0.52"
+						disabled
+					/>
+					<output data-card="foil-value">52%</output>
+				</label>
+			</div>
+		</div>
+	</div>
+	<div data-card="notice" role="status" class="notice" hidden>
+		<img src="/assets/贝极星.png" alt="" draggable="false" />
+		<span data-card="notice-message"></span>
+	</div>
+</div>

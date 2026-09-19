@@ -369,6 +369,8 @@
 	});
 
 	window.addEventListener("keydown", (event) => {
+		if (event.defaultPrevented || document.querySelector("dialog[open]"))
+			return;
 		if (["ArrowDown", "ArrowRight", "PageDown"].includes(event.key))
 			moveForward();
 		if (["ArrowUp", "ArrowLeft", "PageUp"].includes(event.key))

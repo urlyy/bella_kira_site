@@ -18,3 +18,9 @@ upload_dist.sh
 dist.zip
 
 TODO.md
+artifacts/flash-cards/*/web/
+artifacts/flash-cards/*/tools/
+artifacts/flash-cards/*/verification/
+*.blend1
+
+artifacts/flash-cards/verification/

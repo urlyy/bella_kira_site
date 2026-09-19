@@ -1,0 +1,21 @@
+{
+	"title": "贝拉kira",
+	"subtitle": "画廊闪卡",
+	"edition": "6 / 46",
+	"collection": "非官方粉丝收藏",
+	"description": "画廊原图：gallery-003.png。原画及签名完整保留，权利归原权利人。",
+	"sourceMode": "reference",
+	"typography": false,
+	"frame": false,
+	"cardAspect": 0.6666666666666666,
+	"artworkFit": [1, 1],
+	"assets": {
+		"model": "/assets/flash-cards/card.glb?v=927bd48e5e1b",
+		"subject": "/assets/gallery/gallery-003.png?v=e1873be3ffdf",
+		"background": "/assets/gallery/gallery-003.png?v=e1873be3ffdf",
+		"text": "/assets/flash-cards/empty.png",
+		"lineart": "/assets/flash-cards/gallery-003/lineart.png?v=e8af84074c07"
+	},
+	"parameters": { "foil": 0.48 },
+	"safeArea": { "scale": 1, "offset": [0, 0] }
+}

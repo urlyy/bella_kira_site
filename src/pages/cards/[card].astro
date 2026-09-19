@@ -1,0 +1,58 @@
+---
+import FlashCardViewer from "../../components/FlashCardViewer.astro";
+import manifest from "../../../public/assets/flash-cards/manifest.json";
+export function getStaticPaths() {
+	return manifest.cards.map((card, index, cards) => ({
+		params: { card: card.id },
+		props: {
+			card,
+			previous: cards[(index + cards.length - 1) % cards.length].id,
+			next: cards[(index + 1) % cards.length].id,
+		},
+	}));
+}
+const { card, previous, next } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width,initial-scale=1,viewport-fit=cover"
+		/>
+		<meta name="theme-color" content="#fafafa" />
+		<link rel="icon" href="data:," />
+		<link rel="prefetch" href={`/cards/${next}/`} />
+		<title>贝拉kira · 3D 闪卡</title>
+
+		<script is:inline>
+			try {
+				document.documentElement.dataset.theme =
+					localStorage.getItem("bella-kira-theme") || "light";
+			} catch {
+				document.documentElement.dataset.theme = "light";
+			}
+		</script>
+	</head>
+	<body class="flash-card-document">
+		<a class="card-return" href="/#gallery">← 返回画廊</a>
+		<main>
+			<FlashCardViewer
+				configUrl={card.configUrl}
+				previous={`/cards/${previous}/`}
+				next={`/cards/${next}/`}
+				label={card.file}
+			/>
+		</main>
+	</body>
+</html>
+
+<script>
+	import { mountFlashCard } from "../../scripts/flash-card/app.js";
+	const host = document.querySelector<HTMLElement>(
+		"[data-flash-card-viewer]",
+	);
+	if (host) mountFlashCard(host, host.dataset.config);
+</script>

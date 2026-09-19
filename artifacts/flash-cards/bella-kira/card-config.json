@@ -1,0 +1,31 @@
+{
+  "title": "贝拉kira",
+  "subtitle": "画廊闪卡",
+  "edition": "001",
+  "collection": "非官方粉丝收藏",
+  "description": "画廊原图 gallery-005.png，保留完整构图与签名。",
+  "sourceMode": "reference",
+  "typography": false,
+  "frame": false,
+  "artworkFit": [
+    1,
+    1
+  ],
+  "assets": {
+    "subject": "./assets/subject.png",
+    "background": "./assets/background.png",
+    "text": "./assets/text.png",
+    "lineart": "./assets/lineart.png",
+    "model": "./assets/card.glb"
+  },
+  "parameters": {
+    "foil": 0.48
+  },
+  "safeArea": {
+    "scale": 1,
+    "offset": [
+      0,
+      0
+    ]
+  }
+}

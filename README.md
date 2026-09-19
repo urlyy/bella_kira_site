@@ -142,6 +142,42 @@ npm run gallery:optimize
 
 脚本会在 `public/assets/gallery/previews/` 中生成最长边不超过 1200px 的 WebP 预览图，并维护 `manifest.json`。原图、预览图和清单需要一起提交。
 
+### 画廊 3D 闪卡
+
+点击画廊图片会在当前页面的弹层中打开可旋转的闪卡，关闭后保留画廊的滚动位置，也能单独查看原图。`/cards/<id>/` 仍可直接访问或通过新标签页打开。列表继续使用 WebP 预览；打开闪卡时才加载 Three.js 和原图，关闭或切图时释放渲染资源。卡面保留完整原图比例、签名与原有文字，不添加标题或装饰边框。
+
+卡体保持方形轮廓，四角以约 0.6 mm 的微小圆角柔化，暖白纸芯厚约 0.35 mm。原画固定在纸面上，细微纸纹与彩色镭射反光随倾斜显现，不使画面偏移。
+
+支持鼠标跟随、拖动、滚轮缩放、方向键旋转、卡面材质与光泽调整，以及上一张/下一张。R 重置，空格暂停或继续自动转动，Escape 关闭画廊弹层。卡片仅展示正面，默认高度不超过 620px，并在展台内留出边距；顶部只保留关闭或返回画廊。减少动态效果设置会关闭默认自动旋转和鼠标跟随。
+
+手机可点击“开启陀螺仪”。浏览器要求时会弹出系统授权；需要 HTTPS（本机 localhost 除外）及陀螺仪支持。陀螺仪按开启时的姿态校准，手动拖动会停止陀螺仪。拒绝权限、无陀螺仪数据或浏览器不支持时，仍可触摸拖动。
+
+增加或替换画廊图片后运行：
+
+```bash
+npm run gallery:optimize
+npm run cards:generate
+npm run cards:check
+```
+
+网页逻辑位于 `src/scripts/flash-card/`，画廊弹层与 `src/pages/cards/[card].astro` 共用 `src/components/FlashCardViewer.astro`，部署资源位于 `public/assets/flash-cards/`。`manifest.json` 使用内容哈希校验原图、轮廓、配置及共享模型，URL 带哈希用于缓存更新。原画不包含人物分割，原图是一个完整画面层。
+
+`scripts/build-flash-card.py` 在可编辑 RuiC 场景中重建微圆角薄卡、固定 UV 和纸面节点，并导出共享模型。它只使用项目内的 Blender 配置目录。需要本机 Blender；可用 `BLENDER_BIN` 指定路径。更新示例图层及模型：
+
+```bash
+uv run --with pillow python artifacts/flash-cards/bella-kira/prepare.py
+uv run python scripts/build-flash-card.py --render
+npm run cards:generate
+```
+
+源工程为 `artifacts/flash-cards/bella-kira/card.blend`。共用模型携带真实几何和材质角色，浏览器用适配自 RuiC 的 GLSL 实现纸面和镭射反光，两端不保证逐像素一致。授权与来源说明见 `public/assets/flash-cards/SOURCES.md`；RuiC 的 MIT 许可随代码与发布资源保留。部署不需要 Blender、Python 或技能生成的独立 `web/` 目录。
+
+开发服务器启动后可执行：
+
+```bash
+node artifacts/flash-cards/verify-pointer.mjs http://127.0.0.1:4321/cards/gallery-005/ artifacts/flash-cards/verification/pointer
+```
+
 ### 优化图片资源
 
 这些源素材都有对应的 WebP 优化产物与清单：

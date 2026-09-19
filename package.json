@@ -6,8 +6,8 @@
 	"scripts": {
 		"prepare": "husky",
 		"dev": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev",
-		"optimize": "npm run gallery:optimize && npm run clothes:optimize && npm run cloth-bg:optimize && npm run recommended-covers:optimize && npm run stickers:optimize",
-		"optimize:check": "npm run gallery:check && npm run clothes:check && npm run cloth-bg:check && npm run recommended-covers:check && npm run stickers:check",
+		"optimize": "npm run gallery:optimize && npm run clothes:optimize && npm run cloth-bg:optimize && npm run recommended-covers:optimize && npm run stickers:optimize && npm run cards:generate",
+		"optimize:check": "npm run gallery:check && npm run clothes:check && npm run cloth-bg:check && npm run recommended-covers:check && npm run stickers:check && npm run cards:check",
 		"gallery:optimize": "node scripts/generate-gallery-previews.mjs",
 		"gallery:check": "node scripts/generate-gallery-previews.mjs --check",
 		"clothes:optimize": "node scripts/generate-clothes.mjs",
@@ -25,7 +25,9 @@
 		"build": "npm run format && npm run optimize:check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
 		"preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
 		"check": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check",
-		"stop": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev stop"
+		"stop": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro dev stop",
+		"cards:generate": "node scripts/generate-gallery-cards.mjs",
+		"cards:check": "node scripts/generate-gallery-cards.mjs --check"
 	},
 	"dependencies": {
 		"@astrojs/react": "latest",

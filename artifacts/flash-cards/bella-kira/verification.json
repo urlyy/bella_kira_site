@@ -1,0 +1,25 @@
+{
+  "blender": "5.1.2",
+  "vertices": 48,
+  "edges": 72,
+  "faces": 26,
+  "dimensionsCm": [
+    6.3,
+    9.45,
+    0.035
+  ],
+  "thicknessMm": 0.35,
+  "cornerRadiusMm": 0.6,
+  "fixedPrintUV": true,
+  "edgeMetallic": 0,
+  "objectRotationDegrees": [
+    90,
+    0,
+    0
+  ],
+  "materialRoles": [
+    "web_front",
+    "web_edge",
+    "web_back"
+  ]
+}

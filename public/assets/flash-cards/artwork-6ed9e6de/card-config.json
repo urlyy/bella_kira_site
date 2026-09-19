@@ -1,0 +1,21 @@
+{
+	"title": "贝拉kira",
+	"subtitle": "画廊闪卡",
+	"edition": "2 / 46",
+	"collection": "非官方粉丝收藏",
+	"description": "画廊原图：25生日会.png。原画及签名完整保留，权利归原权利人。",
+	"sourceMode": "reference",
+	"typography": false,
+	"frame": false,
+	"cardAspect": 0.7501512401693889,
+	"artworkFit": [1, 1],
+	"assets": {
+		"model": "/assets/flash-cards/card.glb?v=927bd48e5e1b",
+		"subject": "/assets/gallery/25%E7%94%9F%E6%97%A5%E4%BC%9A.png?v=40d56c0352a9",
+		"background": "/assets/gallery/25%E7%94%9F%E6%97%A5%E4%BC%9A.png?v=40d56c0352a9",
+		"text": "/assets/flash-cards/empty.png",
+		"lineart": "/assets/flash-cards/artwork-6ed9e6de/lineart.png?v=8d7e7601ef8a"
+	},
+	"parameters": { "foil": 0.48 },
+	"safeArea": { "scale": 1, "offset": [0, 0] }
+}
