@@ -71,7 +71,6 @@ function createViewer(host, configUrl, retry) {
 		root,
 		uniforms,
 		config,
-		shadow,
 		lastTime = 0,
 		elapsed = 0;
 	let motionActive = false,
@@ -185,35 +184,6 @@ void main() {
 }
 `;
 
-	function canvasTexture(canvas) {
-		const texture = own(new THREE.CanvasTexture(canvas));
-		texture.colorSpace = THREE.NoColorSpace;
-		return texture;
-	}
-	function addShadow() {
-		const c = document.createElement("canvas");
-		c.width = 256;
-		c.height = 256;
-		const ctx = c.getContext("2d");
-		const grad = ctx.createRadialGradient(128, 128, 6, 128, 128, 128);
-		grad.addColorStop(0, "rgba(29,35,25,0.13)");
-		grad.addColorStop(0.4, "rgba(29,35,25,0.055)");
-		grad.addColorStop(1, "rgba(29,35,25,0)");
-		ctx.fillStyle = grad;
-		ctx.fillRect(0, 0, 256, 256);
-		shadow = new THREE.Mesh(
-			own(new THREE.PlaneGeometry(8.8, 11.8)),
-			own(
-				new THREE.MeshBasicMaterial({
-					map: canvasTexture(c),
-					transparent: true,
-					depthWrite: false,
-				}),
-			),
-		);
-		shadow.position.set(0.28, -0.48, -0.5);
-		scene.add(shadow);
-	}
 	// Render a lucide node tree (["svg", attrs, [children]]) into an svg element.
 	function renderIconNode(node) {
 		const [tag, attrs = {}, children = []] = node;
@@ -439,7 +409,6 @@ void main() {
 		if (!faces) throw Error("卡片模型缺少正面材质");
 		root.updateMatrixWorld(true);
 		applyArtworkTransform();
-		addShadow();
 		host.querySelectorAll("button[disabled],input[disabled]").forEach(
 			(el) => (el.disabled = false),
 		);
@@ -498,7 +467,7 @@ void main() {
 			flipper.style.aspectRatio = String(aspect);
 			flipper.style.setProperty(
 				"--stock",
-				`${(width / aspect) * (0.035 / 9.45)}px`,
+				`${(width / aspect) * (0.06 / 9.45)}px`,
 			);
 			flipper.style.setProperty(
 				"--corner",
@@ -917,7 +886,6 @@ void main() {
 		root.rotation.x += (targetX - root.rotation.x) * ease;
 		root.rotation.y += (targetY - root.rotation.y) * ease;
 		root.updateMatrixWorld(true);
-		shadow.scale.x = 1 - Math.abs(Math.sin(root.rotation.y)) * 0.14;
 		renderer.render(scene, camera);
 	}
 	const fail = (message) => {

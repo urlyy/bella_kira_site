@@ -10,7 +10,7 @@
 	"cardAspect": 0.625,
 	"artworkFit": [1, 1],
 	"assets": {
-		"model": "/assets/flash-cards/card.glb?v=927bd48e5e1b",
+		"model": "/assets/flash-cards/card.glb?v=61c35d0496e9",
 		"subject": "/assets/gallery/gallery-037.png?v=d431f836ea8a",
 		"background": "/assets/gallery/gallery-037.png?v=d431f836ea8a",
 		"text": "/assets/flash-cards/empty.png",

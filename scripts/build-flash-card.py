@@ -51,13 +51,13 @@ def rebuild():
     pivot.rotation_euler = (0, 0, 0)
     for key in list(pivot.keys()):
         del pivot[key]
-    pivot["纸芯厚度（毫米）"] = .35
+    pivot["纸芯厚度（毫米）"] = .6
     pivot["使用说明"] = "完整原画固定 UV；旋转观察涂布纸反光。无独立图层景深。"
     for ob in list(collection.objects):
         if ob.type == "MESH" and ob != card:
             bpy.data.objects.remove(ob, do_unlink=True)
 
-    w, h, thickness, radius = 6.3, 9.45, .035, .06
+    w, h, thickness, radius = 6.3, 9.45, .06, .06
     corners = []
     for cx, cy, start in [
         (w/2-radius, h/2-radius, 0), (-w/2+radius, h/2-radius, 90),
@@ -70,7 +70,7 @@ def rebuild():
     vertices = [(x, y, z) for z in (0, -thickness) for x, y in corners]
     faces = [tuple(range(count)), tuple(reversed(range(count, count*2)))]
     faces += [(i, i+count, (i+1) % count+count, (i+1) % count) for i in range(count)]
-    mesh = bpy.data.meshes.new("薄纸卡 · 0.6毫米微圆角")
+    mesh = bpy.data.meshes.new("纸卡 · 0.6毫米微圆角")
     mesh.from_pydata(vertices, [], faces)
     mesh.update()
     old_mesh = card.data
