@@ -3,7 +3,18 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 // Icons are inline data trees (icons.data.js) — zero sub-imports at runtime,
 // so no ad/privacy blocker can kill the page by blocking an icon module.
 import { ICON_TREES } from "./icons.data.js";
+import holoFragment from "./holo-fragment.glsl?raw";
+import { createHoloMotion, holoBackground } from "./holo-motion.mjs";
 const icons = ICON_TREES;
+const finishNames = {
+	pearl: "珠光",
+	silver: "银箔",
+	gold: "烫金",
+	original: "原画",
+	trainer: "Trainer Gallery",
+	fullart: "V Full Art",
+	vmax: "VMax Rainbow",
+};
 
 // A viewer owns its listeners, animation, async loads and GPU resources.
 // The gallery and standalone route use the same disposable instance.
@@ -79,12 +90,56 @@ function createViewer(host, configUrl, retry) {
 	let auto = false,
 		dragging = false,
 		finish = "pearl",
+		signature = false,
 		zoom = 1;
 	let targetX = -0.035,
 		targetY = -0.15,
 		lastPointer = { x: 0, y: 0 },
 		noticeTimer;
 	const settings = [["foil", "uFoil"]];
+	const holo = createHoloMotion();
+	const referenceFinish = () =>
+		["trainer", "fullart", "vmax"].includes(finish);
+	const hoverPitch = 0.75;
+	const hoverYaw = 1.15;
+	function pointerTilt(event) {
+		const bounds = stage.getBoundingClientRect();
+		const viewHeight =
+			2 *
+			camera.position.z *
+			Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+		const cardHeight = root
+			? (9.45 * bounds.height) / viewHeight
+			: fittedHeight() * zoom;
+		const cardWidth = root
+			? (6.3 * root.scale.x * bounds.width) / (viewHeight * camera.aspect)
+			: cardHeight * config.cardAspect;
+		const x = event.clientX - bounds.left - bounds.width / 2;
+		const y = event.clientY - bounds.top - bounds.height / 2;
+		return {
+			x:
+				(THREE.MathUtils.clamp((y / bounds.height) * 0.5, -0.25, 0.25) +
+					THREE.MathUtils.clamp(
+						(y / (cardHeight / 2)) * 0.5,
+						-0.5,
+						0.5,
+					)) /
+				2,
+			y:
+				(THREE.MathUtils.clamp((x / bounds.width) * 0.8, -0.4, 0.4) +
+					THREE.MathUtils.clamp(
+						(x / (cardWidth / 2)) * 0.75,
+						-0.75,
+						0.75,
+					)) /
+				2,
+		};
+	}
+	function followHolo(event) {
+		setAuto(false);
+		const tilt = pointerTilt(event);
+		holo.move(0.5 + tilt.y / hoverYaw, 0.5 + tilt.x / hoverPitch);
+	}
 	const vertex = `
 varying vec2 vUv;
 varying vec3 vPosition, vNormal, vTangent;
@@ -119,12 +174,21 @@ vec3 linearPrint(vec3 color) {
 `;
 	const frontFragment =
 		common +
+		holoFragment +
 		`
-uniform sampler2D tArtwork;
+uniform sampler2D tArtwork, tSignature;
+uniform float uSignature;
 void main() {
   // One print, fixed to the four corners. Viewing angle never changes its UVs.
   vec4 art = texture2D(tArtwork, vUv);
-  vec3 col = linearPrint(mix(vec3(.965,.954,.932),art.rgb,art.a));
+  vec3 ink = mix(vec3(.965,.954,.932),art.rgb,art.a);
+  float signatureHeight = .72*uAspect/(1263./662.);
+  vec2 signatureUv = (vUv-vec2(.055,.08))/vec2(.72,signatureHeight);
+  float signatureBounds = step(0.,signatureUv.x)*step(signatureUv.x,1.)
+                        * step(0.,signatureUv.y)*step(signatureUv.y,1.);
+  vec4 signaturePrint = texture2D(tSignature,clamp(signatureUv,0.,1.));
+  // Finish-specific color passes through the same paper and coating below.
+  vec3 col = uFinish > 3.5 ? referenceFoil(ink) : linearPrint(ink);
   vec3 N = normalize(vNormal);
   vec3 T = normalize(vTangent);
   vec3 B = normalize(cross(N,T));
@@ -155,6 +219,7 @@ void main() {
   col += vec3(1.,.97,.91) * coating * .8;
 
   // Foil changes reflection, not the ink or card perimeter.
+  if (uFinish <= 3.5) {
   float amount = strength();
   float phase = vUv.x*.85 + vUv.y*.55 + localView.x*1.5-localView.y*.9;
   vec3 foil = spectrum(phase);
@@ -167,6 +232,14 @@ void main() {
   vec2 cell = floor(grainUv);
   float flake = step(.986,hash(cell))*pow(.5+.5*sin(hash(cell+8.)*30.+localView.x*20.+localView.y*12.),10.);
   col += foil*flake*amount*.075*grainFilter;
+  }
+  // The autograph is metallic-gold ink printed over the selected finish. It
+  // follows the card lighting, while rainbow reflections do not recolor it.
+  float signatureAlpha = signaturePrint.a*signatureBounds*uSignature;
+  vec3 signatureInk = linearPrint(signaturePrint.rgb)
+                    * (.94 + .06*ndl)
+                    * (1. + fibre*.02 + grain*.012);
+  col = mix(col,signatureInk,signatureAlpha);
   gl_FragColor = vec4(clamp(col,0.,1.),1.);
   #include <colorspace_fragment>
 }
@@ -338,12 +411,7 @@ void main() {
 				return;
 			}
 		}
-		renderer.setClearColor(
-			document.documentElement.dataset.theme === "dark"
-				? "#19121f"
-				: "#fff8f5",
-			1,
-		);
+		renderer.setClearColor("#19121f", 1);
 		renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 		renderer.outputColorSpace = THREE.SRGBColorSpace;
 		renderer.toneMapping = THREE.NoToneMapping;
@@ -359,9 +427,28 @@ void main() {
 			8,
 			renderer.capabilities.getMaxAnisotropy(),
 		);
+		const subjectMask = own(
+			await textureLoader.loadAsync(config.assets.subjectMask),
+		);
+		active();
+		subjectMask.colorSpace = THREE.NoColorSpace;
+		const signatureTexture = own(
+			await textureLoader.loadAsync("/assets/bella-sign.png"),
+		);
+		active();
+		signatureTexture.colorSpace = THREE.NoColorSpace;
+		signatureTexture.anisotropy = Math.min(
+			8,
+			renderer.capabilities.getMaxAnisotropy(),
+		);
 		const p = config.parameters || {};
 		uniforms = {
+			tSubjectMask: { value: subjectMask },
+			uPointer: { value: new THREE.Vector2(0.5, 0.5) },
+			uHover: { value: 0 },
 			tArtwork: { value: artwork },
+			tSignature: { value: signatureTexture },
+			uSignature: { value: 0 },
 			uAspect: { value: config.cardAspect || 2 / 3 },
 			uFoil: { value: p.foil ?? 0.52 },
 			uFinish: { value: 0 },
@@ -438,7 +525,13 @@ void main() {
 			camera,
 			reset,
 			modelSource: config.assets.model,
-			getState: () => ({ auto, finish, zoom, motion: motionActive }),
+			getState: () => ({
+				auto,
+				finish,
+				signature,
+				zoom,
+				motion: motionActive,
+			}),
 		});
 		setFinish(config.appearance?.finish || "pearl");
 		setAuto(!media.matches);
@@ -484,6 +577,13 @@ void main() {
 		img.decoding = "async";
 		img.draggable = false;
 		layer.append(img);
+		const signatureImage = document.createElement("img");
+		signatureImage.className = "signature3d";
+		signatureImage.src = "/assets/bella-sign.png";
+		signatureImage.alt = "";
+		signatureImage.decoding = "async";
+		signatureImage.draggable = false;
+		layer.append(signatureImage);
 		front.append(layer);
 		for (const side of ["left", "right", "top", "bottom"]) {
 			const edge = document.createElement("div");
@@ -496,6 +596,10 @@ void main() {
 		const foil = document.createElement("div");
 		foil.className = "foil3d";
 		front.append(foil);
+		front.style.setProperty(
+			"--subject-mask",
+			`url("${config.assets.backgroundMask}")`,
+		);
 		card.append(front);
 		flipper.append(card);
 		wrap.append(flipper);
@@ -515,6 +619,8 @@ void main() {
 			stopMotion();
 			sway = false;
 			fallbackDragging = true;
+			dragging = true;
+			if (referenceFinish()) followHolo(event);
 			stage.setPointerCapture(event.pointerId);
 		});
 		on(stage, "pointermove", (e) => {
@@ -523,6 +629,11 @@ void main() {
 				(media.matches || e.pointerType !== "mouse" || motionActive)
 			)
 				return;
+			if (referenceFinish()) {
+				sway = false;
+				followHolo(e);
+				return;
+			}
 			const r = stage.getBoundingClientRect();
 			tx = Math.max(
 				-0.5,
@@ -536,18 +647,51 @@ void main() {
 		});
 		on(stage, "pointerleave", () => {
 			lastMove = 0;
+			if (referenceFinish()) holo.leave(performance.now());
 		});
 		for (const type of ["pointerup", "pointercancel", "lostpointercapture"])
 			on(stage, type, () => {
 				fallbackDragging = false;
+				dragging = false;
 			});
 		on(media, "change", () => {
 			if (media.matches) sway = false;
 		});
+		let fallbackTime = performance.now();
 		const frame = (now) => {
 			if (disposed) return;
 			animationFrame = requestAnimationFrame(frame);
+			const dt = Math.min((now - fallbackTime) / 1000, 0.06);
+			fallbackTime = now;
 			if (document.hidden) return;
+			if (referenceFinish()) {
+				if (sway)
+					holo.move(
+						0.5 + Math.sin(now / 1800) * 0.3,
+						0.5 + Math.cos(now / 2200) * 0.2,
+					);
+				if (motionActive)
+					holo.move(
+						0.5 + targetY / hoverYaw,
+						0.5 + targetX / hoverPitch,
+					);
+				const v = holo.step(dt, now, media.matches);
+				curX = -(v.y - 0.5) * hoverPitch;
+				curY = (v.x - 0.5) * hoverYaw;
+				flipper.style.transform = `rotateX(${curX}rad) rotateY(${curY}rad)`;
+				front.style.setProperty("--mx", `${30 - curY * 100}%`);
+				front.style.setProperty("--my", `${25 + curX * 100}%`);
+				const bg = holoBackground(v.x, v.y);
+				front.style.setProperty("--hx", `${v.x * 100}%`);
+				front.style.setProperty("--hy", `${v.y * 100}%`);
+				front.style.setProperty("--bx", `${bg.x * 100}%`);
+				front.style.setProperty("--by", `${bg.y * 100}%`);
+				front.style.setProperty(
+					"--hover",
+					Math.max(0, Math.min(1, v.opacity)),
+				);
+				return;
+			}
 			if (motionActive) {
 				tx = -targetX;
 				ty = targetY;
@@ -566,11 +710,18 @@ void main() {
 
 		// ---- control wiring (mirrors the WebGL controls) ----
 		const fallbackFinish = (value) => {
+			finish = value;
+			sway = false;
+			holo.reset();
+			holo.move(0.5, 0.5);
 			front.classList.remove(
 				"finish-gold",
 				"finish-silver",
 				"finish-pearl",
 				"finish-original",
+				"finish-trainer",
+				"finish-fullart",
+				"finish-vmax",
 			);
 			front.classList.add("finish-" + value);
 			host.querySelectorAll("[data-finish]").forEach((b) =>
@@ -579,12 +730,7 @@ void main() {
 					String(b.dataset.finish === value),
 				),
 			);
-			$("finish-name").textContent = {
-				pearl: "珠光",
-				silver: "银箔",
-				gold: "烫金",
-				original: "原画",
-			}[value];
+			$("finish-name").textContent = finishNames[value];
 			$("foil").disabled = value === "original";
 		};
 		on(stage, "keydown", (event) => {
@@ -611,12 +757,19 @@ void main() {
 			if (event.key.toLowerCase() === "r") {
 				tx = 0;
 				ty = 0;
+				holo.reset();
 				return;
+			}
+			if (referenceFinish()) {
+				tx = curX;
+				ty = curY;
 			}
 			if (event.key === "ArrowLeft") ty -= 0.08;
 			if (event.key === "ArrowRight") ty += 0.08;
 			if (event.key === "ArrowUp") tx += 0.06;
 			if (event.key === "ArrowDown") tx -= 0.06;
+			if (referenceFinish())
+				holo.move(0.5 + ty / hoverYaw, 0.5 - tx / hoverPitch);
 			tx = THREE.MathUtils.clamp(tx, -0.48, 0.48);
 			ty = THREE.MathUtils.clamp(ty, -0.8, 0.8);
 		});
@@ -633,6 +786,12 @@ void main() {
 			b.disabled = false;
 			b.onclick = () => fallbackFinish(b.dataset.finish);
 		});
+		$("signature").disabled = false;
+		$("signature").onclick = () => {
+			signature = !signature;
+			front.classList.toggle("signature-on", signature);
+			$("signature").setAttribute("aria-pressed", String(signature));
+		};
 		bindRange("foil", "foil-value", (v) => {
 			front.style.setProperty("--foil-amount", v);
 		});
@@ -681,18 +840,28 @@ void main() {
 	}
 	function setFinish(value) {
 		finish = value;
+		holo.reset();
+		holo.move(0.5, 0.5);
 		uniforms.uFinish.value =
-			{ pearl: 0, silver: 1, original: 2, gold: 3 }[value] ?? 3;
+			{
+				pearl: 0,
+				silver: 1,
+				original: 2,
+				gold: 3,
+				trainer: 4,
+				fullart: 5,
+				vmax: 6,
+			}[value] ?? 3;
 		host.querySelectorAll("[data-finish]").forEach((b) =>
 			b.setAttribute("aria-pressed", String(b.dataset.finish === value)),
 		);
-		$("finish-name").textContent = {
-			pearl: "珠光",
-			silver: "银箔",
-			gold: "烫金",
-			original: "原画",
-		}[value];
+		$("finish-name").textContent = finishNames[value];
 		$("foil").disabled = value === "original";
+	}
+	function setSignature(value) {
+		signature = value;
+		uniforms.uSignature.value = Number(value);
+		$("signature").setAttribute("aria-pressed", String(value));
 	}
 	function updateInput(id, name) {
 		const input = $(id);
@@ -718,6 +887,7 @@ void main() {
 			updateInput(id, name);
 		});
 		setFinish(config.appearance?.finish || "pearl");
+		setSignature(false);
 		resize();
 	}
 	function setupControls() {
@@ -733,6 +903,7 @@ void main() {
 				notice("已切换为拖动旋转");
 			}
 			dragging = true;
+			if (referenceFinish()) followHolo(e);
 			setAuto(false);
 			lastPointer = { x: e.clientX, y: e.clientY };
 			stage.setPointerCapture(e.pointerId);
@@ -740,47 +911,21 @@ void main() {
 			stage.focus({ preventScroll: true });
 		});
 		on(stage, "pointermove", (e) => {
+			if (referenceFinish()) {
+				if (
+					!motionActive &&
+					(dragging || (e.pointerType === "mouse" && !media.matches))
+				)
+					followHolo(e);
+				return;
+			}
 			if (!dragging) {
 				if (e.pointerType !== "mouse" || media.matches || motionActive)
 					return;
-				const bounds = stage.getBoundingClientRect();
-				const viewHeight =
-					2 *
-					camera.position.z *
-					Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-				const cardWidth =
-					(6.3 * root.scale.x * bounds.width) /
-					(viewHeight * camera.aspect);
-				const cardHeight = (9.45 * bounds.height) / viewHeight;
 				setAuto(false);
-				const offsetX = e.clientX - bounds.left - bounds.width / 2;
-				const offsetY = e.clientY - bounds.top - bounds.height / 2;
-				// The exported front normal is +Z: positive pitch faces down and
-				// positive yaw faces right. Both axes must point toward the cursor.
-				targetX =
-					(THREE.MathUtils.clamp(
-						(offsetY / bounds.height) * 0.5,
-						-0.25,
-						0.25,
-					) +
-						THREE.MathUtils.clamp(
-							(offsetY / (cardHeight / 2)) * 0.5,
-							-0.5,
-							0.5,
-						)) /
-					2;
-				targetY =
-					(THREE.MathUtils.clamp(
-						(offsetX / bounds.width) * 0.8,
-						-0.4,
-						0.4,
-					) +
-						THREE.MathUtils.clamp(
-							(offsetX / (cardWidth / 2)) * 0.75,
-							-0.75,
-							0.75,
-						)) /
-					2;
+				const tilt = pointerTilt(e);
+				targetX = tilt.x;
+				targetY = tilt.y;
 				return;
 			}
 			const base = 0;
@@ -797,6 +942,10 @@ void main() {
 			lastPointer = { x: e.clientX, y: e.clientY };
 		});
 		on(stage, "pointerleave", (event) => {
+			if (referenceFinish()) {
+				if (!dragging && !motionActive) holo.leave(performance.now());
+				return;
+			}
 			if (
 				event.pointerType === "mouse" &&
 				!dragging &&
@@ -853,16 +1002,24 @@ void main() {
 			}
 			setAuto(false);
 			const base = 0;
+			if (referenceFinish()) {
+				targetX = (holo.value.y - 0.5) * hoverPitch;
+				targetY = (holo.value.x - 0.5) * hoverYaw;
+			}
 			if (e.key === "ArrowLeft") targetY -= 0.08;
 			if (e.key === "ArrowRight") targetY += 0.08;
 			if (e.key === "ArrowUp") targetX -= 0.06;
 			if (e.key === "ArrowDown") targetX += 0.06;
+			if (referenceFinish())
+				holo.move(0.5 + targetY / hoverYaw, 0.5 + targetX / hoverPitch);
 			targetY = THREE.MathUtils.clamp(targetY, base - 0.8, base + 0.8);
 			targetX = THREE.MathUtils.clamp(targetX, -0.48, 0.48);
 		});
 		host.querySelectorAll("[data-finish]").forEach(
 			(b) => (b.onclick = () => setFinish(b.dataset.finish)),
 		);
+		$("signature").disabled = false;
+		on($("signature"), "click", () => setSignature(!signature));
 		on(media, "change", () => {
 			if (media.matches) setAuto(false);
 		});
@@ -881,6 +1038,18 @@ void main() {
 		if (auto) {
 			targetY = Math.sin(elapsed * 0.42) * 0.23 - 0.055;
 			targetX = Math.sin(elapsed * 0.53) * 0.055 - 0.018;
+		}
+		if (referenceFinish()) {
+			if (motionActive || auto)
+				holo.move(0.5 + targetY / hoverYaw, 0.5 + targetX / hoverPitch);
+			const v = holo.step(dt, now, media.matches);
+			root.rotation.x = (v.y - 0.5) * hoverPitch;
+			root.rotation.y = (v.x - 0.5) * hoverYaw;
+			uniforms.uPointer.value.set(v.x, v.y);
+			uniforms.uHover.value = v.opacity;
+			root.updateMatrixWorld(true);
+			renderer.render(scene, camera);
+			return;
 		}
 		const ease = media.matches ? 1 : 1 - Math.exp(-dt * 8);
 		root.rotation.x += (targetX - root.rotation.x) * ease;

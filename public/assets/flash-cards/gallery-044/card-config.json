@@ -12,6 +12,8 @@
 	"assets": {
 		"model": "/assets/flash-cards/card.glb?v=61c35d0496e9",
 		"subject": "/assets/gallery/gallery-044.png?v=9992b13493a7",
+		"subjectMask": "/assets/flash-cards/gallery-044/subject-mask.png?v=b2be87e2bda5",
+		"backgroundMask": "/assets/flash-cards/gallery-044/background-mask.png?v=fe99d3dd86b5",
 		"background": "/assets/gallery/gallery-044.png?v=9992b13493a7",
 		"text": "/assets/flash-cards/empty.png",
 		"lineart": "/assets/flash-cards/gallery-044/lineart.png?v=2cdca6de7823"

@@ -333,7 +333,7 @@ const galleryItems = await Promise.all(
 		overflow: hidden;
 		border: 1px solid #c8a5c83b;
 		border-radius: 12px;
-		background: #fff8f5;
+		background: #19121f;
 		box-shadow: 0 24px 90px #08050b66;
 	}
 	.gallery-card-dialog::backdrop {
@@ -350,18 +350,14 @@ const galleryItems = await Promise.all(
 		padding: 0;
 		border: 0;
 		border-radius: 50%;
-		background: #eadce7;
-		color: #49313c;
+		background: #35273e;
+		color: #fff4ee;
 		font: 26px/1 sans-serif;
 		cursor: pointer;
 	}
 	.card-dialog-close:focus-visible {
 		outline: 2px solid #db7d74;
 		outline-offset: 2px;
-	}
-	:global([data-theme="dark"]) .card-dialog-close {
-		color: #fff4ee;
-		background: #35273e;
 	}
 	@media (max-width: 760px) {
 		.gallery-card-dialog {

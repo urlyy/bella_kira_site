@@ -45,6 +45,16 @@ for (const [index, file] of files.entries()) {
 		: `artwork-${hash(file).slice(0, 8)}`;
 	const dest = `${directory}/${id}`;
 	const { width, height } = await sharp(source).metadata();
+	const mask = JSON.parse(await readFile(`${dest}/mask-source.json`, "utf8"));
+	if (
+		mask.sourceHash !== sourceHash ||
+		hash(await readFile(`${dest}/subject-mask.png`)) !== mask.subjectHash ||
+		hash(await readFile(`${dest}/background-mask.png`)) !==
+			mask.backgroundHash
+	)
+		throw Error(
+			`Stale subject mask: ${file}; run scripts/generate-card-masks.py`,
+		);
 	const old = previous.cards.find((card) => card.id === id);
 	let lineHash;
 	try {
@@ -98,6 +108,8 @@ for (const [index, file] of files.entries()) {
 		assets: {
 			model: `/assets/flash-cards/card.glb?v=${modelHash.slice(0, 12)}`,
 			subject: original,
+			subjectMask: `/assets/flash-cards/${id}/subject-mask.png?v=${mask.subjectHash.slice(0, 12)}`,
+			backgroundMask: `/assets/flash-cards/${id}/background-mask.png?v=${mask.backgroundHash.slice(0, 12)}`,
 			background: original,
 			text: "/assets/flash-cards/empty.png",
 			lineart: `/assets/flash-cards/${id}/lineart.png?v=${lineHash.slice(0, 12)}`,

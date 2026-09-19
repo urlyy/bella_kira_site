@@ -22,18 +22,13 @@ const { card, previous, next } = Astro.props;
 			name="viewport"
 			content="width=device-width,initial-scale=1,viewport-fit=cover"
 		/>
-		<meta name="theme-color" content="#fafafa" />
+		<meta name="theme-color" content="#19121f" />
 		<link rel="icon" href="data:," />
 		<link rel="prefetch" href={`/cards/${next}/`} />
 		<title>贝拉kira · 3D 闪卡</title>
 
 		<script is:inline>
-			try {
-				document.documentElement.dataset.theme =
-					localStorage.getItem("bella-kira-theme") || "light";
-			} catch {
-				document.documentElement.dataset.theme = "light";
-			}
+			document.documentElement.dataset.theme = "dark";
 		</script>
 	</head>
 	<body class="flash-card-document">

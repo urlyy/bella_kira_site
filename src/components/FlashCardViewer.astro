@@ -36,6 +36,13 @@ const { configUrl, previous, next, label = "" } = Astro.props;
 		</div>
 		<div class="finish-cluster">
 			<button
+				data-card="signature"
+				class="signature-toggle"
+				type="button"
+				aria-pressed="false"
+				disabled>印签模式</button
+			>
+			<button
 				data-card="motion"
 				class="motion-toggle"
 				type="button"
@@ -51,6 +58,9 @@ const { configUrl, previous, next, label = "" } = Astro.props;
 								["pearl", "珠光"],
 								["silver", "银箔"],
 								["gold", "烫金"],
+								["trainer", "Trainer Gallery"],
+								["fullart", "V Full Art"],
+								["vmax", "VMax Rainbow"],
 								["original", "原画"],
 							].map(([value, name]) => (
 								<button

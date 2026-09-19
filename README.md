@@ -146,9 +146,11 @@ npm run gallery:optimize
 
 点击画廊图片会在当前页面的弹层中打开可旋转的闪卡，关闭后保留画廊的滚动位置，也能单独查看原图。`/cards/<id>/` 仍可直接访问或通过新标签页打开。列表继续使用 WebP 预览；打开闪卡时才加载 Three.js 和原图，关闭或切图时释放渲染资源。卡面保留完整原图比例、签名与原有文字，不添加标题或装饰边框。
 
-卡体保持方形轮廓，四角以约 0.6 mm 的微小圆角柔化，暖白纸芯厚约 0.35 mm。原画固定在纸面上，细微纸纹与彩色镭射反光随倾斜显现，不使画面偏移。
+卡体保持方形轮廓，四角以约 0.6 mm 的微小圆角柔化，暖白纸芯厚约 0.6 mm。原画固定在纸面上，细微纸纹与彩色镭射反光随倾斜显现，不使画面偏移。
 
 支持鼠标跟随、拖动、滚轮缩放、方向键旋转、卡面材质与光泽调整，以及上一张/下一张。R 重置，空格暂停或继续自动转动，Escape 关闭画廊弹层。卡片仅展示正面，默认高度不超过 620px，并在展台内留出边距；顶部只保留关闭或返回画廊。减少动态效果设置会关闭默认自动旋转和鼠标跟随。
+
+新增材质为 Trainer Gallery、V Full Art、VMax Rainbow。它们分别采用背景虹彩、不同速度的双层反光、反向虹彩；保留原有四种材质。悬停在整个展示区域内响应，倾斜范围与原有材质一致，并同步驱动亮斑和反光，使用固定 60 Hz 弹簧积分，离开展示区域 500 ms 后回正；减少动态效果时关闭悬停跟随，拖动和方向键直接更新。`node --test src/scripts/flash-card/holo-motion.test.mjs` 检查位移倍率和缓动行为。
 
 手机可点击“开启陀螺仪”。浏览器要求时会弹出系统授权；需要 HTTPS（本机 localhost 除外）及陀螺仪支持。陀螺仪按开启时的姿态校准，手动拖动会停止陀螺仪。拒绝权限、无陀螺仪数据或浏览器不支持时，仍可触摸拖动。
 
@@ -156,11 +158,12 @@ npm run gallery:optimize
 
 ```bash
 npm run gallery:optimize
+uv run --python 3.11 --with 'rembg[cpu]==2.0.67' python scripts/generate-card-masks.py
 npm run cards:generate
 npm run cards:check
 ```
 
-网页逻辑位于 `src/scripts/flash-card/`，画廊弹层与 `src/pages/cards/[card].astro` 共用 `src/components/FlashCardViewer.astro`，部署资源位于 `public/assets/flash-cards/`。`manifest.json` 使用内容哈希校验原图、轮廓、配置及共享模型，URL 带哈希用于缓存更新。原画不包含人物分割，原图是一个完整画面层。
+网页逻辑位于 `src/scripts/flash-card/`，画廊弹层与 `src/pages/cards/[card].astro` 共用 `src/components/FlashCardViewer.astro`，部署资源位于 `public/assets/flash-cards/`。`manifest.json` 使用内容哈希校验原图、轮廓、配置及共享模型，URL 带哈希用于缓存更新。原图仍是一个完整画面层；Trainer Gallery 用单独的人物保护遮罩限制背景变色，不移动或重绘人物。遮罩由 isnet-anime 自动生成，需要检查人物和复杂发丝边缘。
 
 `scripts/build-flash-card.py` 在可编辑 RuiC 场景中重建微圆角薄卡、固定 UV 和纸面节点，并导出共享模型。它只使用项目内的 Blender 配置目录。需要本机 Blender；可用 `BLENDER_BIN` 指定路径。更新示例图层及模型：
 
