@@ -560,7 +560,7 @@ void main() {
 			flipper.style.aspectRatio = String(aspect);
 			flipper.style.setProperty(
 				"--stock",
-				`${(width / aspect) * (0.06 / 9.45)}px`,
+				`${(width / aspect) * (0.09 / 9.45)}px`,
 			);
 			flipper.style.setProperty(
 				"--corner",

@@ -36,7 +36,6 @@ const galleryItems = await Promise.all(
 			(card) => card.file === entry.name,
 		);
 		return {
-			cardId: card?.id,
 			configUrl: card?.configUrl,
 			originalSrc: `/assets/gallery/${encodeURIComponent(entry.name)}`,
 			previewSrc: `/assets/gallery/previews/${encodeURIComponent(`${entry.name}.webp`)}`,
@@ -79,9 +78,9 @@ const galleryItems = await Promise.all(
 						data-gallery-item
 						data-aspect-ratio={item.width / item.height}
 					>
-						<a
+						<button
+							type="button"
 							class="gallery-card"
-							href={`/cards/${item.cardId}/`}
 							data-card-config={item.configUrl}
 							aria-haspopup="dialog"
 							aria-label={`打开 ${item.alt} 3D 闪卡`}
@@ -96,7 +95,7 @@ const galleryItems = await Promise.all(
 								draggable="false"
 							/>
 							<span class="gallery-card-label">转动闪卡</span>
-						</a>
+						</button>
 						<button
 							class="gallery-original"
 							type="button"
@@ -377,8 +376,12 @@ const galleryItems = await Promise.all(
 		position: relative;
 		width: 100%;
 		height: 100%;
+		padding: 0;
+		border: 0;
+		background: none;
 		color: white;
 		text-decoration: none;
+		cursor: pointer;
 	}
 	.gallery-card-label,
 	.gallery-original {

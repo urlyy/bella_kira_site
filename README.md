@@ -18,15 +18,15 @@
 
 互动空间当前提供 7 个浏览器端体验：
 
-| 路由                       | 内容                       |
-| -------------------------- | -------------------------- |
-| `/games/model-stage/`      | PMX 模型舞台与姿势编辑     |
-| `/games/memory-match/`     | 记忆翻牌                   |
-| `/games/hair-stop/`        | 枝江角色组件拼装           |
-| `/games/stage-puzzle/`     | 滑块拼图                   |
-| `/games/jigsaw-puzzle/`    | 不规则自由拼图             |
-| `/games/link-match/`       | 连连看                     |
-| `/games/pet-pet/`          | 浏览器本地 PetPet GIF 制作 |
+| 路由                    | 内容                       |
+| ----------------------- | -------------------------- |
+| `/games/model-stage/`   | PMX 模型舞台与姿势编辑     |
+| `/games/memory-match/`  | 记忆翻牌                   |
+| `/games/hair-stop/`     | 枝江角色组件拼装           |
+| `/games/stage-puzzle/`  | 滑块拼图                   |
+| `/games/jigsaw-puzzle/` | 不规则自由拼图             |
+| `/games/link-match/`    | 连连看                     |
+| `/games/pet-pet/`       | 浏览器本地 PetPet GIF 制作 |
 
 ## 技术栈
 
@@ -144,9 +144,9 @@ npm run gallery:optimize
 
 ### 画廊 3D 闪卡
 
-点击画廊图片会在当前页面的弹层中打开可旋转的闪卡，关闭后保留画廊的滚动位置，也能单独查看原图。`/cards/<id>/` 仍可直接访问或通过新标签页打开。列表继续使用 WebP 预览；打开闪卡时才加载 Three.js 和原图，关闭或切图时释放渲染资源。卡面保留完整原图比例、签名与原有文字，不添加标题或装饰边框。
+点击画廊图片会在当前页面的弹层中打开可旋转的闪卡，关闭后保留画廊的滚动位置，也能单独查看原图。列表继续使用 WebP 预览；打开闪卡时才加载 Three.js 和原图，关闭或切图时释放渲染资源。卡面保留完整原图比例、签名与原有文字，不添加标题或装饰边框。
 
-卡体保持方形轮廓，四角以约 0.6 mm 的微小圆角柔化，暖白纸芯厚约 0.6 mm。原画固定在纸面上，细微纸纹与彩色镭射反光随倾斜显现，不使画面偏移。
+卡体保持方形轮廓，四角以约 0.6 mm 的微小圆角柔化，暖白纸芯厚约 0.9 mm。原画固定在纸面上，细微纸纹与彩色镭射反光随倾斜显现，不使画面偏移。
 
 支持鼠标跟随、拖动、滚轮缩放、方向键旋转、卡面材质与光泽调整，以及上一张/下一张。R 重置，空格暂停或继续自动转动，Escape 关闭画廊弹层。卡片仅展示正面，默认高度不超过 620px，并在展台内留出边距；顶部只保留关闭或返回画廊。减少动态效果设置会关闭默认自动旋转和鼠标跟随。
 
@@ -163,7 +163,7 @@ npm run cards:generate
 npm run cards:check
 ```
 
-网页逻辑位于 `src/scripts/flash-card/`，画廊弹层与 `src/pages/cards/[card].astro` 共用 `src/components/FlashCardViewer.astro`，部署资源位于 `public/assets/flash-cards/`。`manifest.json` 使用内容哈希校验原图、轮廓、配置及共享模型，URL 带哈希用于缓存更新。原图仍是一个完整画面层；Trainer Gallery 用单独的人物保护遮罩限制背景变色，不移动或重绘人物。遮罩由 isnet-anime 自动生成，需要检查人物和复杂发丝边缘。
+网页逻辑位于 `src/scripts/flash-card/`，画廊弹层使用 `src/components/FlashCardViewer.astro`，部署资源位于 `public/assets/flash-cards/`。`manifest.json` 使用内容哈希校验原图、轮廓、配置及共享模型，URL 带哈希用于缓存更新。原图仍是一个完整画面层；Trainer Gallery 用单独的人物保护遮罩限制背景变色，不移动或重绘人物。遮罩由 isnet-anime 自动生成，需要检查人物和复杂发丝边缘。
 
 `scripts/build-flash-card.py` 在可编辑 RuiC 场景中重建微圆角薄卡、固定 UV 和纸面节点，并导出共享模型。它只使用项目内的 Blender 配置目录。需要本机 Blender；可用 `BLENDER_BIN` 指定路径。更新示例图层及模型：
 
@@ -174,12 +174,6 @@ npm run cards:generate
 ```
 
 源工程为 `artifacts/flash-cards/bella-kira/card.blend`。共用模型携带真实几何和材质角色，浏览器用适配自 RuiC 的 GLSL 实现纸面和镭射反光，两端不保证逐像素一致。授权与来源说明见 `public/assets/flash-cards/SOURCES.md`；RuiC 的 MIT 许可随代码与发布资源保留。部署不需要 Blender、Python 或技能生成的独立 `web/` 目录。
-
-开发服务器启动后可执行：
-
-```bash
-node artifacts/flash-cards/verify-pointer.mjs http://127.0.0.1:4321/cards/gallery-005/ artifacts/flash-cards/verification/pointer
-```
 
 ### 优化图片资源
 

@@ -6,9 +6,9 @@
   "dimensionsCm": [
     6.3,
     9.45,
-    0.06
+    0.09
   ],
-  "thicknessMm": 0.6,
+  "thicknessMm": 0.9,
   "cornerRadiusMm": 0.6,
   "fixedPrintUV": true,
   "edgeMetallic": 0,

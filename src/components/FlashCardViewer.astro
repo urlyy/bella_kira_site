@@ -3,11 +3,9 @@ import "../styles/flash-card.css";
 
 interface Props {
 	configUrl?: string;
-	previous?: string;
-	next?: string;
 	label?: string;
 }
-const { configUrl, previous, next, label = "" } = Astro.props;
+const { configUrl, label = "" } = Astro.props;
 ---
 
 <div class="flash-card-viewer" data-flash-card-viewer data-config={configUrl}>
@@ -24,14 +22,12 @@ const { configUrl, previous, next, label = "" } = Astro.props;
 	</div>
 	<div class="artwork-bar" aria-label="浏览与材质">
 		<div class="card-browse" aria-label="浏览画廊闪卡">
-			<a
-				href={previous || "#gallery"}
-				data-card-previous
-				aria-label="上一张闪卡">←</a
+			<button type="button" data-card-previous aria-label="上一张闪卡"
+				>←</button
 			>
 			<span data-card-count aria-live="polite">{label}</span>
-			<a href={next || "#gallery"} data-card-next aria-label="下一张闪卡"
-				>→</a
+			<button type="button" data-card-next aria-label="下一张闪卡"
+				>→</button
 			>
 		</div>
 		<div class="finish-cluster">

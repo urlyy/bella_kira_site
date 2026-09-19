@@ -10,7 +10,7 @@
 	"cardAspect": 0.6666666666666666,
 	"artworkFit": [1, 1],
 	"assets": {
-		"model": "/assets/flash-cards/card.glb?v=61c35d0496e9",
+		"model": "/assets/flash-cards/card.glb?v=3600cb818511",
 		"subject": "/assets/gallery/gallery-029.png?v=498f7d359d3e",
 		"subjectMask": "/assets/flash-cards/gallery-029/subject-mask.png?v=d8f9dcea9f9e",
 		"backgroundMask": "/assets/flash-cards/gallery-029/background-mask.png?v=ad38987cd96d",

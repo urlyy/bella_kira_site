@@ -199,11 +199,14 @@
 		clip-path: inset(50%);
 	}
 
-	.card-browse a {
+	.card-browse button {
 		display: grid;
 		place-items: center;
 		width: 42px;
 		height: 42px;
+		padding: 0;
+		border: 0;
+		background: none;
 		border: 1px solid var(--line);
 		border-radius: 50%;
 	}
@@ -655,7 +658,7 @@
 			left: 12px;
 		}
 
-		.card-browse a {
+		.card-browse button {
 			width: 40px;
 			height: 40px;
 		}

@@ -4,7 +4,7 @@ export function setupGalleryCards() {
 	);
 	const host = dialog?.querySelector<HTMLElement>("[data-flash-card-viewer]");
 	const links = Array.from(
-		document.querySelectorAll<HTMLAnchorElement>(
+		document.querySelectorAll<HTMLButtonElement>(
 			".gallery-card[data-card-config]",
 		),
 	);
@@ -14,10 +14,10 @@ export function setupGalleryCards() {
 	let request = 0;
 	let dispose: (() => void) | undefined;
 	let trigger: HTMLElement | undefined;
-	const previous = host.querySelector<HTMLAnchorElement>(
+	const previous = host.querySelector<HTMLButtonElement>(
 		"[data-card-previous]",
 	)!;
-	const next = host.querySelector<HTMLAnchorElement>("[data-card-next]")!;
+	const next = host.querySelector<HTMLButtonElement>("[data-card-next]")!;
 	const count = host.querySelector<HTMLElement>("[data-card-count]")!;
 	const loading = host.querySelector<HTMLElement>('[data-card="loading"]')!;
 
@@ -40,8 +40,6 @@ export function setupGalleryCards() {
 			"aria-label",
 			link.getAttribute("aria-label") || "3D 闪卡预览",
 		);
-		previous.href = links[(index + links.length - 1) % links.length].href;
-		next.href = links[(index + 1) % links.length].href;
 		count.textContent = `${index + 1} / ${links.length}`;
 		try {
 			// Three.js and the original artwork load only after a card is opened.
@@ -66,16 +64,8 @@ export function setupGalleryCards() {
 				false;
 		}
 	};
-	const plainClick = (event: MouseEvent) =>
-		event.button === 0 &&
-		!event.metaKey &&
-		!event.ctrlKey &&
-		!event.shiftKey &&
-		!event.altKey;
 	links.forEach((link, target) => {
-		link.addEventListener("click", (event) => {
-			if (!plainClick(event)) return;
-			event.preventDefault();
+		link.addEventListener("click", () => {
 			trigger = link;
 			dialog.showModal();
 			void show(target);
@@ -85,9 +75,7 @@ export function setupGalleryCards() {
 		[previous, -1],
 		[next, 1],
 	] as const) {
-		link.addEventListener("click", (event) => {
-			if (!plainClick(event)) return;
-			event.preventDefault();
+		link.addEventListener("click", () => {
 			void show(index + delta);
 		});
 	}
