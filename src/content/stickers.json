@@ -150,7 +150,54 @@
 		{
 			"name": "匣中惊鸿",
 			"purchaseUrl": "https://www.bilibili.com/blackboard/activity-Mz9T5bO5Q3.html?type=dlc&id=109318&lottery_id=113755",
-			"items": []
+			"items": [
+				"/assets/stickers/official/匣中惊鸿-01.png",
+				"/assets/stickers/official/匣中惊鸿-02.png",
+				"/assets/stickers/official/匣中惊鸿-03.png",
+				"/assets/stickers/official/匣中惊鸿-04.png",
+				"/assets/stickers/official/匣中惊鸿-05.png",
+				"/assets/stickers/official/匣中惊鸿-06.png",
+				"/assets/stickers/official/匣中惊鸿-07.png",
+				"/assets/stickers/official/匣中惊鸿-08.png",
+				"/assets/stickers/official/匣中惊鸿-09.png",
+				"/assets/stickers/official/匣中惊鸿-10.png",
+				"/assets/stickers/official/匣中惊鸿-11.png",
+				"/assets/stickers/official/匣中惊鸿-12.png",
+				"/assets/stickers/official/匣中惊鸿-13.png",
+				"/assets/stickers/official/匣中惊鸿-14.png",
+				"/assets/stickers/official/匣中惊鸿-15.png",
+				"/assets/stickers/official/匣中惊鸿-16.png",
+				"/assets/stickers/official/匣中惊鸿-17.png",
+				"/assets/stickers/official/匣中惊鸿-18.png",
+				"/assets/stickers/official/匣中惊鸿-19.png",
+				"/assets/stickers/official/匣中惊鸿-20.png"
+			]
+		},
+		{
+			"name": "匣中惊鸿-动态图",
+			"purchaseUrl": "https://www.bilibili.com/blackboard/activity-Mz9T5bO5Q3.html?type=dlc&id=109318&lottery_id=113755",
+			"items": [
+				"/assets/stickers/official/匣中惊鸿-动态图-01.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-02.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-03.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-04.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-05.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-06.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-07.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-08.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-09.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-10.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-11.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-12.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-13.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-14.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-15.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-16.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-17.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-18.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-19.gif",
+				"/assets/stickers/official/匣中惊鸿-动态图-20.gif"
+			]
 		}
 	],
 	"fanMadeGroups": [

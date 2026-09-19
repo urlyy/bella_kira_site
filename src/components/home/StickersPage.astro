@@ -711,14 +711,15 @@ const optimizedStickerSrc = (src: string) => {
 		stickerLightboxImageWrap?.setAttribute("data-loading", "true");
 		stickerLightboxImage.alt =
 			sticker.getAttribute("aria-label") ?? "表情包原图";
-		stickerLightboxImage.src = src;
-		stickerLightbox.showModal();
 		const reveal = () => {
 			if (requestId === stickerImageRequestId)
 				stickerLightboxImageWrap?.removeAttribute("data-loading");
 		};
 		stickerLightboxImage.addEventListener("load", reveal, { once: true });
 		stickerLightboxImage.addEventListener("error", reveal, { once: true });
+		stickerLightboxImage.src = src;
+		stickerLightbox.showModal();
+		if (stickerLightboxImage.complete) reveal();
 	};
 
 	stickerPage?.addEventListener("click", (event) => {

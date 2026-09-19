@@ -94,7 +94,7 @@ const galleryItems = await Promise.all(
 								decoding="async"
 								draggable="false"
 							/>
-							<span class="gallery-card-label">转动闪卡</span>
+							<span class="gallery-card-label">查看3D闪卡</span>
 						</button>
 						<button
 							class="gallery-original"
@@ -143,7 +143,20 @@ const galleryItems = await Promise.all(
 			aria-label="查看上一张图片">←</button
 		>
 		<div class="lightbox-image-wrap" data-lightbox-image-wrap>
-			<img data-lightbox-image alt="" draggable="false" />
+			<img
+				data-lightbox-image
+				alt=""
+				decoding="async"
+				draggable="false"
+				hidden
+			/>
+			<img
+				data-lightbox-image
+				alt=""
+				decoding="async"
+				draggable="false"
+				hidden
+			/>
 			<span class="lightbox-loading" role="status">正在载入原图</span>
 		</div>
 		<button
@@ -223,8 +236,9 @@ const galleryItems = await Promise.all(
 	const lightbox = document.querySelector<HTMLDialogElement>(
 		"[data-gallery-lightbox]",
 	);
-	const lightboxImage = lightbox?.querySelector<HTMLImageElement>(
-		"[data-lightbox-image]",
+	const lightboxImages = Array.from(
+		lightbox?.querySelectorAll<HTMLImageElement>("[data-lightbox-image]") ??
+			[],
 	);
 	const lightboxImageWrap = lightbox?.querySelector<HTMLElement>(
 		"[data-lightbox-image-wrap]",
@@ -237,9 +251,10 @@ const galleryItems = await Promise.all(
 	);
 	let activeImageIndex = 0;
 	let imageRequestId = 0;
+	let activeLightboxImage: HTMLImageElement | null = null;
 
 	const showLightboxImage = (index: number) => {
-		if (!lightboxImage || galleryItems.length === 0) return;
+		if (lightboxImages.length < 2 || galleryItems.length === 0) return;
 		activeImageIndex = (index + galleryItems.length) % galleryItems.length;
 		const sourceImage =
 			galleryItems[activeImageIndex]?.querySelector<HTMLImageElement>(
@@ -251,33 +266,39 @@ const galleryItems = await Promise.all(
 		const originalSrc = openButton?.dataset.originalSrc;
 		if (!sourceImage || !originalSrc) return;
 		const requestId = ++imageRequestId;
-		lightboxImage.src =
-			sourceImage.currentSrc ||
-			sourceImage.src ||
-			sourceImage.dataset.src ||
-			"";
-		lightboxImage.alt = sourceImage.alt;
+		const incomingImage =
+			lightboxImages.find((image) => image !== activeLightboxImage) ??
+			lightboxImages[0];
+		incomingImage.hidden = true;
+		incomingImage.removeAttribute("src");
+		incomingImage.alt = sourceImage.alt;
 		lightboxImageWrap?.setAttribute("data-loading", "true");
 		if (lightboxCount)
 			lightboxCount.textContent = `${activeImageIndex + 1} / ${galleryItems.length}`;
 
-		const originalImage = new Image();
-		originalImage.decoding = "async";
-		originalImage.src = originalSrc;
-		originalImage
+		incomingImage.src = originalSrc;
+		incomingImage
 			.decode()
 			.then(() => {
 				if (
 					requestId !== imageRequestId ||
-					!originalImage.complete ||
-					originalImage.naturalWidth === 0
+					!incomingImage.complete ||
+					incomingImage.naturalWidth === 0
 				)
 					return;
-				lightboxImage.src = originalSrc;
+				const outgoingImage = activeLightboxImage;
+				incomingImage.hidden = false;
+				activeLightboxImage = incomingImage;
+				if (outgoingImage) {
+					outgoingImage.hidden = true;
+					outgoingImage.removeAttribute("src");
+				}
 				lightboxImageWrap?.removeAttribute("data-loading");
 			})
 			.catch(() => {
 				if (requestId !== imageRequestId) return;
+				incomingImage.hidden = true;
+				incomingImage.removeAttribute("src");
 				lightboxImageWrap?.removeAttribute("data-loading");
 			});
 	};
@@ -317,7 +338,11 @@ const galleryItems = await Promise.all(
 	lightbox?.addEventListener("close", () => {
 		imageRequestId += 1;
 		lightboxImageWrap?.removeAttribute("data-loading");
-		lightboxImage?.removeAttribute("src");
+		lightboxImages.forEach((image) => {
+			image.removeAttribute("src");
+			image.hidden = true;
+		});
+		activeLightboxImage = null;
 	});
 </script>
 
@@ -534,7 +559,7 @@ const galleryItems = await Promise.all(
 	}
 	.waterfall {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 		grid-auto-rows: 4px;
 		gap: 12px 16px;
 		max-width: 1200px;
@@ -596,6 +621,8 @@ const galleryItems = await Promise.all(
 		overflow: hidden;
 	}
 	.lightbox-image-wrap img {
+		position: absolute;
+		inset: 50% auto auto 50%;
 		display: block;
 		max-width: 100%;
 		max-height: calc(100dvh - 5rem);
@@ -603,6 +630,7 @@ const galleryItems = await Promise.all(
 		height: auto;
 		object-fit: contain;
 		filter: drop-shadow(0 20px 55px #000a);
+		transform: translate(-50%, -50%);
 	}
 	.lightbox-loading {
 		position: absolute;
@@ -671,7 +699,7 @@ const galleryItems = await Promise.all(
 	}
 	@media (max-width: 900px) {
 		.waterfall {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-template-columns: repeat(3, minmax(0, 1fr));
 		}
 	}
 	@media (max-width: 600px) {
