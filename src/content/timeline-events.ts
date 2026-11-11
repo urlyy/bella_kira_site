@@ -532,4 +532,16 @@ SC数量 ： 845｜ 金额：¥72772
 			},
 		],
 	},
+	{
+		id: "rainy-season-starlight",
+		date: "2026-10-22",
+		title: "个人单曲《雨季后的星光》正式发布",
+		description: "",
+		links: [
+			{
+				label: "查看动态",
+				url: "https://www.bilibili.com/opus/1261859675775696917",
+			},
+		],
+	},
 ];

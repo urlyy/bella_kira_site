@@ -41,6 +41,12 @@
 			"title": "歌舞",
 			"items": [
 				{
+					"cover": "/assets/recommended-videos/covers/雨季后的星光.png",
+					"title": "遥远闪烁的，是《雨季后的星光》| 贝拉个人单曲试听",
+					"url": "https://www.bilibili.com/video/BV1Hw4m1r7dp",
+					"publishedAt": "2026-10-16"
+				},
+				{
 					"cover": "/assets/recommended-videos/covers/除夕.png",
 					"title": "除夕人间一岁除，烟花绽后是春初",
 					"url": "https://www.bilibili.com/video/BV1StFpzaEXX",
